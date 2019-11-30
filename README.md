@@ -14,3 +14,9 @@ A web project in partial fulfillment of the requirements of the 4th semester of 
 ## Documentation
 
 This project's documentation is kept up-to-date in the [Wiki](../../wiki) section.
+
+## Color Palette
+
+- `#403F4C`
+- `#E84855`
+- `#F9DC5C`
