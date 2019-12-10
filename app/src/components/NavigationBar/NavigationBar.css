@@ -1,0 +1,44 @@
+:root {
+	--accent1: rgb(206, 0, 79);
+	--accent2: rgb(83, 0, 151);
+	--gradient: linear-gradient(45deg, var(--accent1), var(--accent2))
+}
+
+.NavigationBar {
+	background: black;
+	width: 100%;
+	display: flex;
+	font-size: 1.2em;
+}
+
+div#logo {
+	color: var(--accent1);
+	padding: 1em;
+	font-size: 1.3em;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: var(--gradient);
+}
+
+ul a,
+ul a:hover,
+ul a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+ul a li {
+	padding: 1em;
+	display: inline-block;
+	background: rgba(0, 0, 0, 0.74);
+	transition: all 500ms ease;
+}
+
+ul a li:hover {
+	background: transparent;
+	transition: all 500ms ease;
+}
