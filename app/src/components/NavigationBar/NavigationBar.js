@@ -26,7 +26,8 @@ class NavigationBar extends React.Component {
 	render() {
 		return (
 			<div className="NavigationBar">
-				<a onClick={this.toggle}><img src={logo} alt="Instagram Logo"/></a>
+				<a href="/"><img src={logo} alt="Instagram Logo"/></a>
+				<span id="linkToggle" onClick={this.toggle}>&#9776;</span>
 				<ul id="links" className="hidden">
 					{
 						this.state.links.map((x) => {
