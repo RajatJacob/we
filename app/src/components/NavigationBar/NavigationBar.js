@@ -1,15 +1,17 @@
 import React from 'react';
 import './NavigationBar.css';
-import '../../resources/WE.png';
+import logo from '../../resources/WE.png';
 
 class NavigationBar extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			links: (this.props.links === undefined) ? [
-				{name: "Home", url: "/"},
 				{name: "Who We Are", url: "/"},
-				{name: "Opportunities", url: "/"}
+				{name: "Opportunities", url: "/"},
+				{name: "Join Us", url: "/"},
+				{name: "Support", url: "/"},
+				{name: "Community", url: "/"}
 			] : this.props.links
 		}
 	}

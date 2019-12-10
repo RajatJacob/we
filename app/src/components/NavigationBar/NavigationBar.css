@@ -1,6 +1,6 @@
 :root {
 	--accent1: rgb(206, 0, 79);
-	--accent2: rgb(83, 0, 151);
+	--accent2: rgb(3, 0, 151);
 	--gradient: linear-gradient(45deg, var(--accent1), var(--accent2))
 }
 
@@ -9,12 +9,6 @@
 	width: 100%;
 	display: flex;
 	font-size: 1.2em;
-}
-
-div#logo {
-	color: var(--accent1);
-	padding: 1em;
-	font-size: 1.3em;
 }
 
 ul {
@@ -32,8 +26,8 @@ ul a:visited {
 }
 
 ul a li {
+	display: inline-flex;
 	padding: 1em;
-	display: inline-block;
 	background: rgba(0, 0, 0, 0.74);
 	transition: all 500ms ease;
 }
@@ -41,4 +35,8 @@ ul a li {
 ul a li:hover {
 	background: transparent;
 	transition: all 500ms ease;
+}
+
+ul a li#logo img {
+	height: 1.75vh;
 }
