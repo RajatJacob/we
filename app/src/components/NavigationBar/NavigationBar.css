@@ -1,11 +1,21 @@
 :root {
 	--accent1: rgb(95, 0, 133);
 	--accent2: rgb(255, 115, 0);
-	--gradient: linear-gradient(45deg, var(--accent1), var(--accent2))
+	--accent1: rgb(133, 0, 93);
+	--accent2: rgb(255, 8, 0);
+	--gradient: linear-gradient(45deg, var(--accent1), var(--accent2));
+}
+
+.App {
+	margin-top: 15vh;
 }
 
 .NavigationBar {
+	font-family: 'Gochi Hand';
 	font-size: 1.25em;
+	position: fixed;
+	top: 0;
+	width: 100%;
 	background: var(--gradient);
 	box-shadow: 0 0 1em 0.25em #00000055;
 	z-index: 5;
@@ -14,12 +24,12 @@
 img {
 	height: 5vh;
 	padding: 1em;
+	padding-bottom: 0.25em;
 }
 
 ul {
-	padding: 0;
-	margin: 0;
-	background: #00000022;
+	padding: 0 2.5em;
+	margin: 0 0 0 auto;
 }
 
 ul a,
@@ -31,7 +41,7 @@ ul a:visited {
 
 ul a li {
 	display: inline-flex;
-	padding: 1em;
+	font-weight: 500;
 	border-top: 0.1em solid transparent;
 	transition: all 500ms ease;
 }
@@ -43,9 +53,34 @@ ul a li.active {
 }
 
 @media screen and (orientation: landscape) {
-	
+	.NavigationBar {
+		display: flex;
+	}
+
+	ul {
+		background: transparent;
+	}
+
+	ul a li {
+		padding: 1.75em 1em;
+	}
 }
 
 @media screen and (orientation: portrait) {
+	.NavigationBar {
+		display: block;
+	}
 
+	ul {
+		background: #00000033;
+		display: block;
+	}
+
+	ul.hidden {
+		display: none;
+	}
+
+	ul a li {
+		padding: 1em;
+	}
 }

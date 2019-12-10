@@ -16,11 +16,18 @@ class NavigationBar extends React.Component {
 		}
 	}
 
+	toggle() {
+		let ul = document.querySelector(".NavigationBar ul#links")
+		if(ul.classList.contains("hidden"))
+		ul.classList.remove("hidden")
+		else ul.classList.add("hidden")
+	}
+
 	render() {
 		return (
 			<div className="NavigationBar">
-				<a href="/"><img src={logo} alt="Instagram Logo"/></a>
-				<ul id="links">
+				<a onClick={this.toggle}><img src={logo} alt="Instagram Logo"/></a>
+				<ul id="links" className="hidden">
 					{
 						this.state.links.map((x) => {
 							return (
