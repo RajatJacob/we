@@ -1,6 +1,6 @@
 import React from 'react';
 import './NavigationBar.css';
-import logo from '../../resources/WE.png';
+import logo from '../../resources/WE.png'
 
 class NavigationBar extends React.Component {
 	constructor(props) {
@@ -19,6 +19,7 @@ class NavigationBar extends React.Component {
 	render() {
 		return (
 			<div className="NavigationBar">
+				<img src={logo} />
 				<ul id="links">
 					{
 						this.state.links.map((x) => {
