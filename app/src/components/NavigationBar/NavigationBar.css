@@ -6,8 +6,6 @@
 
 .NavigationBar {
 	font-size: 1.25em;
-	display: flex;
-	display: block;
 	background: var(--gradient);
 	box-shadow: 0 0 1em 0.25em #00000055;
 	z-index: 5;
@@ -34,12 +32,14 @@ ul a:visited {
 ul a li {
 	display: inline-flex;
 	padding: 1em;
+	border-top: 0.1em solid transparent;
 	transition: all 500ms ease;
 }
 
-ul a li:hover {
+ul a li:hover,
+ul a li.active {
+	border-color: white;
 	transition: all 500ms ease;
-	background: #00000055;
 }
 
 @media screen and (orientation: landscape) {

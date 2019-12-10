@@ -19,7 +19,7 @@ class NavigationBar extends React.Component {
 	render() {
 		return (
 			<div className="NavigationBar">
-				<img src={logo} />
+				<img src={logo} alt="Instagram Logo"/>
 				<ul id="links">
 					{
 						this.state.links.map((x) => {
