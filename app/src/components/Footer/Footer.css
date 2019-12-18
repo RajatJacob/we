@@ -1,0 +1,26 @@
+.Footer {
+    background: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.Footer ul {
+    padding: 1em;
+}
+
+.Footer ul li {
+    display: inline;
+    padding: 1em;
+}
+
+.Footer ul a,
+.Footer ul a:hover,
+.Footer ul a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.Footer ul a li:hover {
+    text-decoration: underline;
+}
