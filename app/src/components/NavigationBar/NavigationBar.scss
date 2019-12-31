@@ -6,8 +6,6 @@
 	--gradient: linear-gradient(45deg, var(--accent1), var(--accent2));
 }
 
-$background: blue;
-
 .App {
 	margin-top: 15vh;
 }
@@ -19,7 +17,6 @@ $background: blue;
 	top: 0;
 	width: 100%;
 	background: var(--gradient);
-	background: $background;
 	box-shadow: 0 0 1em 0.25em #00000055;
 	z-index: 5;
 }
