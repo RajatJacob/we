@@ -1,7 +1,5 @@
-$accent1: rgb(95, 0, 133);
-$accent2: rgb(255, 115, 0);
-$accent1: rgb(133, 0, 93);
-$accent2: rgb(255, 8, 0);
+@import '../../global/index.scss';
+
 $gradient: linear-gradient(45deg, $accent1, $accent2);
 
 .App {
