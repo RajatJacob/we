@@ -103,16 +103,12 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 					letter-spacing: 0.25em;
 					border-right: 0.25em solid transparent;
 					transition: all 500ms ease;
+				}
 
-					&:hover {
-						border-color: white;
-						transition: all 500ms ease;
-					}
-
-					&.active {
-						background: #FFFFFF33;
-						transition: all 500ms ease;
-					}
+				&.active li,
+				li:hover {
+					border-color: white;
+					transition: all 500ms ease;
 				}
 			}
 		}
