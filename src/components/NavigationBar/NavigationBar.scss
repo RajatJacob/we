@@ -21,7 +21,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		div#toggle {
 			position: fixed;
 			padding: 0.5*$iconWidth;
-			margin: 0.5*$iconWidth;
+			margin: 0.75*$iconWidth 0.5*$iconWidth;
 			font-size: 2*$iconWidth;
 			font-weight: 900;
 			top: 0; left: 0;
