@@ -16,29 +16,29 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		left: -100vw;
 		z-index: 5;
 		transition: all 500ms ease;
-		$hamburgerWidth: 0.25em;
+		$iconWidth: 1em;
 
 		div#toggle {
 			position: fixed;
-			padding: 0.5em;
-			margin: 0.5em;
-			font-size: 2em;
+			padding: 0.5*$iconWidth;
+			margin: 0.5*$iconWidth;
+			font-size: 2*$iconWidth;
 			font-weight: 900;
 			top: 0; left: 0;
 			cursor: pointer;
 			display: inline-block;
 			transition: all 500ms ease;
 
-			span {
+			& > span {
 				display: block;
-				width: 1em;
-				height: 0.125em;
-				margin-bottom: 0.125em;
+				width: $iconWidth;
+				height: 0.125*$iconWidth;
+				margin-bottom: 0.125*$iconWidth;
 				background: black;
 				position: relative;
-				border-radius: 3px;
+				border-radius: 0.125*$iconWidth;
 				z-index: 1;
-				transform-origin: 0.25em 0;
+				transform-origin: 0.25$iconWidth 0;
 				transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 					background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 					opacity 0.55s ease;
@@ -63,11 +63,11 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 				transition: all 500ms ease;
 				transition-delay: 500ms;
 
-				span {
+				& > span {
 					background: white;
 
 					&#a {
-						transform: rotate(45deg) translate(-0.25em, -0.13em);
+						transform: rotate(45deg) translate(-0.25*$iconWidth, -0.13*$iconWidth);
 					}
 
 					&#b {
@@ -76,7 +76,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 					}
 
 					&#c {
-						transform: rotate(-45deg) translate(0, -0.13em);
+						transform: rotate(-45deg) translate(0, -0.13*$iconWidth);
 					}
 				}
 			}
