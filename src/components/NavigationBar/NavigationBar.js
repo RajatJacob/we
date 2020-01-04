@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavigationBar.scss';
-import logo from '../../resources/WE.png';
 
 class NavigationBar extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			active: false,
 			links: (this.props.links === undefined) ? [
 				{name: "Who We Are", url: "/who-we-are"},
 				{name: "Opportunities", url: "/opportunities"},
@@ -17,19 +17,25 @@ class NavigationBar extends React.Component {
 		}
 	}
 
+	show() {
+		this.setState('active', true);
+		this.classList.add('active');
+	}
+
+	hide() {
+		this.setState('active', false);
+		this.classList.remove('active');
+	}
+
 	toggle() {
-		let ul = document.querySelector(".NavigationBar ul#links")
-		if(ul.classList.contains("hidden"))
-		ul.classList.remove("hidden")
-		else ul.classList.add("hidden")
+		if(this.state.active) this.hide();
+		else this.show();
 	}
 
 	render() {
 		return (
 			<div className="NavigationBar">
-				<a href="/"><img src={logo} alt="Instagram Logo"/></a>
-				<span id="linkToggle" onClick={this.toggle}>&#9776;</span>
-				<ul id="links" className="hidden">
+				<ul id="links">
 					{
 						this.state.links.map((x) => {
 							return (
