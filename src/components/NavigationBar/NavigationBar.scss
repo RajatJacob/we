@@ -18,6 +18,11 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		transition: all 500ms ease;
 		$iconWidth: 1em;
 
+		@media screen and (orientation: portrait) {
+			opacity: 1;
+			width: 100vw;
+		}
+
 		div#toggle {
 			position: fixed;
 			padding: 0.5*$iconWidth;
@@ -27,13 +32,14 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 			top: 0; left: 0;
 			cursor: pointer;
 			display: inline-block;
+			transform: rotate(-45deg);
 			transition: all 500ms ease;
 
 			& > span {
 				display: block;
 				width: $iconWidth;
 				height: 0.125*$iconWidth;
-				margin-bottom: 0.125*$iconWidth;
+				margin-bottom: 0.25*$iconWidth;
 				background: black;
 				position: relative;
 				border-radius: 0.125*$iconWidth;
@@ -60,11 +66,13 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 			transition: all 500ms ease;
 
 			div#toggle {
+				transform: rotate(0deg);
 				transition: all 500ms ease;
 				transition-delay: 500ms;
 
 				& > span {
 					background: white;
+					margin-bottom: 0.125*$iconWidth;
 
 					&#a {
 						transform: rotate(45deg) translate(-0.25*$iconWidth, -0.13*$iconWidth);
