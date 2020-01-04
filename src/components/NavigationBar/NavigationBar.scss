@@ -11,7 +11,6 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		top: 0;
 		height: 100vh;
 		background: $gradient;
-		box-shadow: 0 0 1em 0.25em #00000055;
 		opacity: 90%;
 		left: -100vw;
 		z-index: 5;
@@ -63,6 +62,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 
 		&.active {
 			left: 0;
+			box-shadow: 0 0 1em 0.25em #00000055;
 			transition: all 500ms ease;
 
 			div#toggle {
