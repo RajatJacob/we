@@ -13,6 +13,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		background: $gradient;
 		opacity: 90%;
 		left: -100vw;
+		border-radius: 0 2em 2em 0;
 		z-index: 5;
 		transition: all 500ms ease;
 		$iconWidth: 1em;
@@ -20,6 +21,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		@media screen and (orientation: portrait) {
 			opacity: 1;
 			width: 100vw;
+			border-radius: 0;
 		}
 
 		div#toggle {
