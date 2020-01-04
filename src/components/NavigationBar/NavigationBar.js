@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './NavigationBar.scss';
 
 class NavigationBar extends React.Component {
@@ -44,11 +44,11 @@ class NavigationBar extends React.Component {
 					{
 						this.state.links.map((x) => {
 							return (
-								<Link to={x.url} onClick={ this.hide }>
+								<NavLink to={x.url} onClick={ this.hide } activeClassName="active">
 									<li>
 										{x.name}
 									</li>
-								</Link>
+								</NavLink>
 							)
 						})
 					}
