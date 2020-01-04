@@ -17,29 +17,34 @@ class NavigationBar extends React.Component {
 		}
 	}
 
-	show() {
-		this.setState('active', true);
-		this.classList.add('active');
+	show = () => {
+		this.setState({'active': true});
 	}
 
-	hide() {
-		this.setState('active', false);
-		this.classList.remove('active');
+	hide = () => {
+		this.setState({'active': false});
 	}
 
-	toggle() {
-		if(this.state.active) this.hide();
-		else this.show();
+	toggle = () => {
+		if(this.state.active) this.hide()
+		else this.show()
 	}
 
 	render() {
+		let className = "NavigationBar"
+		if(this.state.active) className += " active"
 		return (
-			<div className="NavigationBar">
+			<div className={ className }>
+				<div id="toggle" onClick={ this.toggle }>
+					<span id="a"></span>
+					<span id="b"></span>
+					<span id="c"></span>
+				</div>
 				<ul id="links">
 					{
 						this.state.links.map((x) => {
 							return (
-								<Link to={x.url}>
+								<Link to={x.url} onClick={ this.hide }>
 									<li>
 										{x.name}
 									</li>
