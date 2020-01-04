@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './NavigationBar.scss';
-import logo from '../../resources/WE.png'
+import logo from '../../resources/WE.png';
 
 class NavigationBar extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			links: (this.props.links === undefined) ? [
-				{name: "Who We Are", url: "/"},
-				{name: "Opportunities", url: "/"},
-				{name: "Join Us", url: "/"},
-				{name: "Support", url: "/"},
-				{name: "Community", url: "/"}
+				{name: "Who We Are", url: "/who-we-are"},
+				{name: "Opportunities", url: "/opportunities"},
+				{name: "Join Us", url: "/join-us"},
+				{name: "Support", url: "/support"},
+				{name: "Community", url: "/community"}
 			] : this.props.links
 		}
 	}
@@ -32,11 +33,11 @@ class NavigationBar extends React.Component {
 					{
 						this.state.links.map((x) => {
 							return (
-								<a href={x.url}>
+								<Link to={x.url}>
 									<li>
 										{x.name}
 									</li>
-								</a>
+								</Link>
 							)
 						})
 					}
