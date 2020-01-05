@@ -26,8 +26,7 @@ class NavigationBar extends React.Component {
 	}
 
 	toggle = () => {
-		if(this.state.active) this.hide()
-		else this.show()
+		this.setState({'active': !this.state.active});
 	}
 
 	render() {
