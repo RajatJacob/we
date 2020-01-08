@@ -2,13 +2,10 @@
     font-family: 'Courier Prime';
     font-size: 1.35vw;
     background: black;
-    position: absolute;
-    bottom: 0;
+    padding: 0.5em 0;
     width: 100%;
 
     ul {
-        padding: 1em;
-
         a,
         a:visited {
             color: white;
@@ -20,7 +17,7 @@
 
             li {
                 display: inline;
-                padding: 1em;
+                padding: 0.5em 1em;
             }
         }
     }

@@ -7,7 +7,7 @@ class Footer extends React.Component {
         super(props)
         this.state= 
         {
-            links: this.props.links==undefined ?
+            links: this.props.links === undefined ?
         [
             {name:"Code Of Conduct",url:"/"},
             {name:"Privacy Policy",url:"/"},
