@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Footer.scss';
 
 class Footer extends React.Component {
@@ -25,11 +26,11 @@ class Footer extends React.Component {
             {
                 this.state.links.map((f) => {
                    return(
-                    <a href={f.url}>
+                    <NavLink to={f.url} activeClassName="active">
                         <li>
                             {f.name}  
                         </li>
-                    </a>
+                    </NavLink>
                     )
                 })
             }
