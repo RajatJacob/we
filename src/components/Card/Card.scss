@@ -3,6 +3,15 @@ div.Card {
 	padding: 2em 1em;
 	border-radius: 1em;
 	box-shadow:
-		-1em -1em 1em 0 #FFFFFF55,
+		-0.5em -0.5em 1em 0 #FFFFFF99,
 		1em 1em 1em 0 #00000055;
+	transition: all 250ms ease;
+	
+	&:hover {
+		transform: scale(110%);
+		box-shadow:
+		-1em -1em 2em 0 #FFFFFF99,
+		2em 2em 2em 0 #00000055;
+		transition: all 250ms ease;
+	}
 }

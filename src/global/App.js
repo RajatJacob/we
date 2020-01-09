@@ -13,6 +13,9 @@ function App() {
 				<Switch>
 					<Route exact path="/">
 						Home
+						<Card>
+							<h1>Card</h1>
+						</Card>
 					</Route>
 					<Route exact path="/who-we-are">
 						Who We Are
