@@ -17,22 +17,35 @@
 
 		.Card {
 			top: 3em;
-			transition: all 500ms ease;
+			transform: rotateX(0deg) perspective(5000em);
+			transition: all 1000ms ease;
 		}
 	}
 
 	.Card {
 		position: fixed;
+		transform: rotateX(90deg) perspective(5000em);
+		transform-origin: top;
 		top: -100vh;
-		left: 0;
 		right: 0;
+		left: 0;
+		transition: all 1000ms ease;
 
 		#toggle {
+			line-height: 0.75em;
+			border-radius: 1em;
 			font-size: 1.25em;
 			font-weight: 900;
-			padding: 0.5em;
-			z-index: 5;
+			padding: 0.35em 0.5em 0.55em 0.5em;
+			margin: 0.5em;
+			float: right;
 			cursor: pointer;
+			transition: all 500ms ease;
+
+			&:hover {
+				background: #00000022;
+				transition: all 500ms ease;
+			}
 		}
 	}
 }

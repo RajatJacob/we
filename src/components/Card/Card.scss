@@ -1,11 +1,14 @@
 div.Card {
 	background: white;
-	padding: 2em 1em;
 	border-radius: 1em;
 	box-shadow:
 		-0.5em -0.5em 1em 0 #FFFFFF99,
 		1em 1em 1em 0 #00000055;
 	transition: all 250ms ease;
+
+	& > .container {
+		padding: 2em;
+	}
 	
 	&:hover {
 		transform: scale(110%);

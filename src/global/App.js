@@ -23,14 +23,18 @@ export default class App extends React.Component {
 			<div className="App">
 				<NavigationBar />
 				<Modal active={this.state.modalActive} toggle={this.toggleModal}>
-					This is a Modal
+					<div className="container">
+						This is a modal.
+					</div>
 				</Modal>
 				<div className="Content">
 					<Switch>
 						<Route exact path="/">
 							Home
 							<Card>
-								<h1>Card</h1>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
 							</Card>
 						</Route>
 						<Route exact path="/who-we-are">
