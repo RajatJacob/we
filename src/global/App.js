@@ -22,11 +22,6 @@ export default class App extends React.Component {
 			<Router>
 			<div className="App">
 				<NavigationBar />
-				<Modal active={this.state.modalActive} toggle={this.toggleModal}>
-					<div className="container">
-						This is a modal.
-					</div>
-				</Modal>
 				<div className="Content">
 					<Switch>
 						<Route exact path="/">
@@ -39,6 +34,11 @@ export default class App extends React.Component {
 						</Route>
 						<Route exact path="/who-we-are">
 							Who We Are
+							<Modal active={this.state.modalActive} toggle={this.toggleModal}>
+								<div className="container">
+									This is a modal.
+								</div>
+							</Modal>
 						</Route>
 						<Route exact path="/opportunities">
 							Opportunities
