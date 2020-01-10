@@ -18,7 +18,7 @@
 		.Card {
 			top: 3em;
 			transform: rotateX(0deg) perspective(5000em);
-			transition: all 1000ms ease;
+			transition: all 500ms ease;
 		}
 	}
 
@@ -26,10 +26,10 @@
 		position: fixed;
 		transform: rotateX(90deg) perspective(5000em);
 		transform-origin: top;
-		top: -100vh;
+		top: -1em;
 		right: 0;
 		left: 0;
-		transition: all 1000ms ease;
+		transition: all 500ms ease;
 
 		#toggle {
 			line-height: 0.75em;
