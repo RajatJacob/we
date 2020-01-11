@@ -10,10 +10,10 @@ class Footer extends React.Component {
         {
             links: this.props.links === undefined ?
         [
-            {name:"Code Of Conduct",url:"/"},
-            {name:"Privacy Policy",url:"/"},
-            {name:"Feedback",url:"/"},
-            {name:"Contact",url:"/"}
+            {name:"Code Of Conduct",url:"/code-of-conduct"},
+            {name:"Privacy Policy",url:"/privacy-policy"},
+            {name:"Feedback",url:"/feedback"},
+            {name:"Contact",url:"/contact"}
         ] : this.props.links
         }
 
