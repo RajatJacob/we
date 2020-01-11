@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavigationBar.scss';
+import HamburgerMenuToggle from '../HamburgerMenuToggle';
 
 class NavigationBar extends React.Component {
 	constructor(props) {
@@ -34,11 +35,7 @@ class NavigationBar extends React.Component {
 		if(this.state.active) className += " active"
 		return (
 			<div className={ className }>
-				<div id="toggle" onClick={ this.toggle }>
-					<span id="a"></span>
-					<span id="b"></span>
-					<span id="c"></span>
-				</div>
+				<HamburgerMenuToggle active={this.state.active} onClick={this.toggle} activeColor="white" inactiveColor="black"/>
 				<ul id="links">
 					{
 						this.state.links.map((x) => {
