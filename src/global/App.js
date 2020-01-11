@@ -30,6 +30,30 @@ export default class App extends React.Component {
 								<div className="container">
 									<h1>Card</h1>
 								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
+							</Card><Card>
+								<div className="container">
+									<h1>Card</h1>
+								</div>
 							</Card>
 						</Route>
 						<Route exact path="/who-we-are">
@@ -53,9 +77,8 @@ export default class App extends React.Component {
 							Community
 						</Route>
 					</Switch>
-					
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 			</Router>
 		);
