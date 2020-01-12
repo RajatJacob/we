@@ -26,7 +26,7 @@ export default class App extends React.Component {
 					<Switch>
 						<Route exact path="/">
 							Home
-						<Route>
+						</Route>
 						<Route exact path="/who-we-are">
 							Who We Are
 							<Modal active={this.state.modalActive} toggle={this.toggleModal}>
