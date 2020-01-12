@@ -1,6 +1,4 @@
-@import '../../global/index.scss';
-
-$gradient: linear-gradient(45deg, $accent1, $accent2);
+@import '../../global/colors.scss';
 
 .App {
 	margin-top: 15vh;
@@ -9,8 +7,7 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		position: fixed;
 		top: 0;
 		height: 100vh;
-		background: $gradient;
-		opacity: 90%;
+		background: #000000DD;
 		left: -100vw;
 		border-radius: 0 2em 2em 0;
 		z-index: 5;
@@ -18,7 +15,6 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 		$iconWidth: 1em;
 
 		@media screen and (orientation: portrait) {
-			opacity: 1;
 			width: 100vw;
 			border-radius: 0;
 		}
