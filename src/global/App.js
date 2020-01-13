@@ -26,11 +26,6 @@ export default class App extends React.Component {
 					<Switch>
 						<Route exact path="/">
 							Home
-							<Card>
-								<div className="container">
-									<h1>Card</h1>
-								</div>
-							</Card>
 						</Route>
 						<Route exact path="/who-we-are">
 							Who We Are
@@ -52,10 +47,21 @@ export default class App extends React.Component {
 						<Route exact path="/community">
 							Community
 						</Route>
+						<Route exact path="/code-of-conduct">
+							Code Of Conduct
+						</Route>
+						<Route exact path="/privacy-policy">
+							Privacy Policy
+						</Route>
+						<Route exact path="/feedback">
+							Feedback
+						</Route>
+						<Route exact path="/contact">
+							Contact
+						</Route>
 					</Switch>
-					
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 			</Router>
 		);

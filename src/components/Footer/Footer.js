@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Footer.scss';
 
 class Footer extends React.Component {
@@ -7,12 +8,12 @@ class Footer extends React.Component {
         super(props)
         this.state= 
         {
-            links: this.props.links==undefined ?
+            links: this.props.links === undefined ?
         [
-            {name:"Code Of Conduct",url:"/"},
-            {name:"Privacy Policy",url:"/"},
-            {name:"Feedback",url:"/"},
-            {name:"Contact",url:"/"}
+            {name:"Code Of Conduct",url:"/code-of-conduct"},
+            {name:"Privacy Policy",url:"/privacy-policy"},
+            {name:"Feedback",url:"/feedback"},
+            {name:"Contact",url:"/contact"}
         ] : this.props.links
         }
 
@@ -25,11 +26,11 @@ class Footer extends React.Component {
             {
                 this.state.links.map((f) => {
                    return(
-                    <a href={f.url}>
+                    <NavLink to={f.url} activeClassName="active">
                         <li>
                             {f.name}  
                         </li>
-                    </a>
+                    </NavLink>
                     )
                 })
             }

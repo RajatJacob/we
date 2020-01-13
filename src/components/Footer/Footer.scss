@@ -2,12 +2,15 @@
     font-family: 'Courier Prime';
     font-size: 1.35vw;
     background: black;
-    position: absolute;
+    position: relative;
     bottom: 0;
+    height: 10vh;
+    margin-top: -10vh;
+    padding: 0.5em 0;
     width: 100%;
 
     ul {
-        padding: 1em;
+        padding: 0.5em;
 
         a,
         a:visited {
