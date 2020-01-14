@@ -4,6 +4,7 @@ import NavigationBar from '../components/NavigationBar/NavigationBar';
 import Card from '../components/Card/Card';
 import Footer from '../components/Footer/Footer';
 import Modal from '../components/Modal/Modal';
+import Header from '../components/Header/Header';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -21,6 +22,7 @@ export default class App extends React.Component {
 		return (
 			<Router>
 			<div className="App">
+				<Header/>
 				<NavigationBar />
 				<div className="Content">
 					<Switch>
