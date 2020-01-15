@@ -28,6 +28,11 @@ $gradient: linear-gradient(45deg, $accent1, $accent2);
 			transition: all 500ms ease;
 		}
 
+		.HamburgerMenuToggle {
+			position: fixed;
+			top: 0; left: 0;
+		}
+
 		ul {
 			list-style: none;
 			text-transform: uppercase;

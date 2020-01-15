@@ -9,6 +9,7 @@ export default class HamburgerMenuToggle extends React.Component {
 		}
 		this.style["--activeColor"] = (props.activeColor === undefined) ? this.style["--color"] : props.activeColor
 		this.style["--inactiveColor"] = (props.inactiveColor === undefined) ? this.style["--activeColor"] : props.inactiveColor
+		this.style["--width"] = (props.width === undefined) ? "1em" : props.width
 	}
 
 	render() {
