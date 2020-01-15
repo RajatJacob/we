@@ -1,0 +1,58 @@
+.HamburgerMenuToggle {
+	padding: calc(0.75*var(--width));
+	font-size: calc(2*var(--width));
+	font-weight: 900;
+	cursor: pointer;
+	display: inline-block;
+	transition: all 500ms ease;
+	--color: black;
+	--activeColor: var(--color);
+	--inactiveColor: var(--color);
+
+	&.active {
+		& > span {
+			background: var(--activeColor);
+			margin-bottom: calc(0.125*var(--width));
+
+			&#a {
+				transform: rotate(45deg) translate(0, calc(-0.125*var(--width)));
+			}
+
+			&#b {
+				opacity: 0;
+				transform: rotate(0deg) scale(0.2, 0.2);
+			}
+
+			&#c {
+				transform: rotate(-45deg) translate(0, calc(0.125*var(--width)));
+			}
+		}
+	}
+
+	& > span {
+		display: block;
+		width: var(--width);
+		height: calc(0.125*var(--width));
+		margin-bottom: calc(0.25*var(--width));
+		background: var(--inactiveColor);
+		position: relative;
+		border-radius: calc(0.125*var(--width));
+		z-index: 1;
+		transform-origin: calc(0.25*var(--width)) 0;
+		transition: 
+			transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+			background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+			opacity 0.55s ease;
+		transition: all 500ms ease;
+		
+
+		&#a {
+			transform-origin: 0% 0%;
+		}
+
+		&#c {
+			margin-bottom: 0;
+			transform-origin: 0% 100%;
+		}
+	}
+}
