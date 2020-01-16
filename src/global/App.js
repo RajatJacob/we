@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from '../components/NavigationBar/NavigationBar';
 import Modal from '../components/Modal/Modal';
+import Header from '../components/Header/Header';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -19,6 +20,7 @@ export default class App extends React.Component {
 		return (
 			<Router>
 			<div className="App">
+				<Header/>
 				<NavigationBar />
 				<div className="Content">
 					<Switch>
@@ -59,6 +61,7 @@ export default class App extends React.Component {
 						</Route>
 					</Switch>
 				</div>
+				<Footer />
 			</div>
 			</Router>
 		);

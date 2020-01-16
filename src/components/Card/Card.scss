@@ -1,8 +1,9 @@
 div.Card {
+	color: black;
 	background: white;
 	border-radius: 1em;
 	box-shadow:
-		-0.25em -0.5em 1em 0 #FFFFFF99,
+		-0.25em -0.5em 1em 0 #FFFFFF55,
 		0.5em 1em 1em 0 #00000055;
 	transition: all 250ms ease;
 
@@ -13,7 +14,7 @@ div.Card {
 	&:hover {
 		transform: scale(110%);
 		box-shadow:
-		-0.5em -1em 2em 0 #FFFFFF99,
+		-0.5em -1em 2em 0 #FFFFFF55,
 		1em 2em 2em 0 #00000055;
 		transition: all 250ms ease;
 	}
