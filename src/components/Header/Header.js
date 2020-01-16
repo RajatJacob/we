@@ -9,13 +9,13 @@ class Header extends React.Component {
         this.state= 
         {
             links: this.props.links === undefined ?
-        [
-            {name: "Who We Are", url: "/who-we-are"},
-			{name: "Opportunities", url: "/opportunities"},
-			{name: "Join Us", url: "/join-us"},
-			{name: "Support", url: "/support"},
-			{name: "Community", url: "/community"}
-        ] : this.props.links
+            [
+                {name: "Who We Are", url: "/who-we-are"},
+                {name: "Opportunities", url: "/opportunities"},
+                {name: "Join Us", url: "/join-us"},
+                {name: "Support", url: "/support"},
+                {name: "Community", url: "/community"}
+            ] : this.props.links
         }
 
     }
