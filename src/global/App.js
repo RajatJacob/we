@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from '../components/NavigationBar/NavigationBar';
-import Card from '../components/Card/Card';
-import Footer from '../components/Footer/Footer';
 import Modal from '../components/Modal/Modal';
 
 export default class App extends React.Component {
@@ -61,7 +59,6 @@ export default class App extends React.Component {
 						</Route>
 					</Switch>
 				</div>
-				<Footer />
 			</div>
 			</Router>
 		);
