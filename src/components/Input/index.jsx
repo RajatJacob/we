@@ -22,9 +22,9 @@ export default class Input extends React.Component {
 	
 	render() {
 		return (
-			<div className={ "Input" + (this.props.icon ? "" : " noIcon") }>
+			<div className={ "Input" + (this.props.icon ? "" : " noIcon") + (this.props.type === "submit" ? " submit" : "") }>
 				<span className="icon">{ this.props.icon || null }</span>
-				<input placeholder={ this.props.label || ""  } type={ this.state.type || "text" } />
+				<input onChange={ this.props.onChange } placeholder={ this.props.label || ""  } type={ this.state.type || "text" } />
 				{
 					this.props.type === "password"
 					? <span className="icon" id="visibleToggle" onClick={ this.toggleVisible }>

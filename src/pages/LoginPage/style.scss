@@ -4,8 +4,6 @@ $twitterColor: rgb(85, 172, 238);
 $linkedInColor: rgb(0, 119, 181);
 
 .LoginPage {
-	transform: translateY(50%);
-
 	.grid-container {
 		display: grid;
 		
@@ -17,8 +15,10 @@ $linkedInColor: rgb(0, 119, 181);
 			grid-template-rows: 1fr 1fr;
 		}
 
-		h1 {
-			transform: translateY(50%);
+		& > * {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 		}
 	}
 }

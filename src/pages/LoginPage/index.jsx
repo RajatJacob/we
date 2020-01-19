@@ -5,6 +5,19 @@ import Container from '../../components/Container';
 import Input from '../../components/Input';
 
 export default class LoginPage extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			email: "",
+			password: ""
+		}
+	}
+
+	submit = e => {
+		e.preventDefault()
+		alert(this.state.email)
+	}
+
 	render() {
 		return (
 			<div className="LoginPage">
@@ -14,9 +27,12 @@ export default class LoginPage extends React.Component {
 							<h1>Login</h1>
 						</Container>
 						<Container>
-							<Input label="E-mail" icon="@"/>
-							<Input label="Password" type="password"
-							icon="*"/>
+							<form onSubmit={ this.submit }>
+								<Input label="E-mail" icon="@" onChange={ e => this.setState({email: e.target.value }) }/>
+								<Input label="Password" type="password"
+								icon="*" onChange={ e => this.setState({password: e.target.value }) }/>
+								<Input label="Login" type="submit"/>
+							</form>
 						</Container>
 					</div>
 				</Card>
