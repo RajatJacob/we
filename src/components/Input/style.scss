@@ -1,0 +1,38 @@
+.Input {
+	border-radius: 2em;
+	background: #EEEEEE;
+	padding: 0.5em 1em;
+	margin: 0.5em;
+	transition: all 500ms ease;
+	display: grid;
+	grid-template-columns: 2fr auto 2fr;
+
+	&.noIcon {
+		display: block;
+
+		.icon {
+			display: none;
+		}
+	}
+
+	.icon {
+		font-weight: 900;
+		padding: 0.5em 1em;
+		cursor: default;
+
+		&:first-child {
+			border-right: 0.05em solid #00000055;
+		}
+
+		&#visibleToggle {
+			cursor: pointer;
+			padding: 0.5em;
+		}
+	}
+
+	input {
+		background: transparent;
+		border: 0;
+		padding: 0.5em 1em;
+	}
+}

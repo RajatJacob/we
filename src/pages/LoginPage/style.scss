@@ -1,0 +1,24 @@
+$facebookColor: rgb(60, 90, 154);
+$googleColor: rgb(220, 74, 61);
+$twitterColor: rgb(85, 172, 238);
+$linkedInColor: rgb(0, 119, 181);
+
+.LoginPage {
+	transform: translateY(50%);
+
+	.grid-container {
+		display: grid;
+		
+		@media screen and (orientation: landscape) {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@media screen and (orientation: portrait) {
+			grid-template-rows: 1fr 1fr;
+		}
+
+		h1 {
+			transform: translateY(50%);
+		}
+	}
+}
