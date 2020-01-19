@@ -15,7 +15,9 @@ export default class LoginPage extends React.Component {
 
 	submit = e => {
 		e.preventDefault()
-		alert(this.state.email)
+		alert("Welcome, "+this.state.email)
+		e.target.reset()
+		this.setState({email: "", password: ""})
 	}
 
 	render() {
