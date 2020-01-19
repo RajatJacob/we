@@ -4,7 +4,7 @@ import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
 
-export default class Login extends React.Component {
+export default class LoginPage extends React.Component {
 	render() {
 		return (
 			<div className="LoginPage">
