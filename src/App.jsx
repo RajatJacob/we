@@ -1,11 +1,27 @@
 import React from 'react';
 import './App.scss';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Container from './components/Container';
 
 export default class App extends React.Component {
   render() {
 	return (
 		<div className="App">
-			<h1>WE</h1>
+			<Router>
+				<Switch>
+					<Route exact path="/">
+						<Container>
+							<h1>Home</h1>
+						</Container>
+					</Route>
+					<Route path="*">
+						<Container>
+							<h1>404</h1>
+							Page Not Found!
+						</Container>
+					</Route>
+				</Switch>
+			</Router>
 		</div>
 	);
   }
