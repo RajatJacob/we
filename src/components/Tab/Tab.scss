@@ -8,10 +8,27 @@
 
     ul {
         padding: 0;
+        text-transform: uppercase;
 
-        li{
-            display: inline;
-            padding: 1em;
+        a,
+        a:hover,
+        a:visited {
+            text-decoration: none;
+            color: white;
+
+            &.active li,
+            li:hover {
+                background: rgb(150, 237, 248);
+                color: black;
+            }
+
+            li{
+                display: inline;
+                padding: 1em;
+                background: black;
+                transition: background 500ms ease;
+
+            }
         }
     }
 }

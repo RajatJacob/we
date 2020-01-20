@@ -25,11 +25,11 @@ class Tab extends React.Component {
                     {
                         this.state.links.map((h) => {
                             return (
-                                <li>
-                                    <NavLink to={h.url} activeClassName="active">
+                                <NavLink to={h.url} activeClassName="active">
+                                    <li>
                                         {h.name}
-                                    </NavLink>
-                                </li>
+                                    </li>
+                                </NavLink>
                             )
                         })
                     }

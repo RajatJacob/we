@@ -28,7 +28,7 @@ export default class App extends React.Component {
 						</Route>
 					</Switch>
 				</Router>
-			</div>
+			</div >
 		);
 	}
 }
