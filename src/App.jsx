@@ -17,6 +17,10 @@ export default class App extends React.Component {
 								<h1>Home</h1>
 							</Container>
 						</Route>
+						<Route exact path="/feed">
+						</Route>
+						<Route exact path="/search">
+						</Route>
 						<Route exact path="/login">
 							<LoginPage />
 						</Route>

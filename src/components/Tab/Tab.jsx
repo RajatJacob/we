@@ -10,8 +10,7 @@ class Tab extends React.Component {
             links: this.props.links === undefined ?
                 [
                     { name: "Home", url: "/" },
-                    { name: "Followers Post", url: "/followers-post" },
-                    { name: "Community Post", url: "/community-post" },
+                    { name: "Feed", url: "/feed" },
                     { name: "Search", url: "/search" },
                     { name: "Login", url: "/login" },
                 ] : this.props.links
