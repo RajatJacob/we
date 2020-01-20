@@ -9,10 +9,11 @@ class Tab extends React.Component {
         {
             links: this.props.links === undefined ?
                 [
+                    { name: "Home", url: "/" },
                     { name: "Followers Post", url: "/followers-post" },
                     { name: "Community Post", url: "/community-post" },
                     { name: "Search", url: "/search" },
-                    { name: "User Profile", url: "/user-profile" },
+                    { name: "Login", url: "/login" },
                 ] : this.props.links
         }
 
@@ -25,7 +26,7 @@ class Tab extends React.Component {
                         this.state.links.map((h) => {
                             return (
                                 <li>
-                                    <NavLink to={h.url}>
+                                    <NavLink to={h.url} activeClassName="active">
                                         {h.name}
                                     </NavLink>
                                 </li>

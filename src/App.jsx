@@ -9,8 +9,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Tab />
 				<Router>
+					<Tab />
 					<Switch>
 						<Route exact path="/">
 							<Container>
@@ -24,7 +24,7 @@ export default class App extends React.Component {
 							<Container>
 								<h1>404</h1>
 								Page Not Found!
-						</Container>
+							</Container>
 						</Route>
 					</Switch>
 				</Router>
