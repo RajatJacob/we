@@ -1,7 +1,11 @@
 .App {
-	text-align: center;
+    text-align: center;
 
-	*:focus {
-		outline: none;
-	}
+    *:focus {
+        outline: none;
+    }
+
+    @media screen and (orientation: portrait) {
+        padding-bottom: 10vh;
+    }
 }
