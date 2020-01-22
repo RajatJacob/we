@@ -24,9 +24,11 @@ export default class App extends React.Component {
 						</Route>
 						<Route exact path="/followers">
 							Followers
+							<Feed />
 						</Route>
 						<Route exact path="/community">
 							Community
+							<Feed />
 						</Route>
 						<Route path="/*">
 							<Container>
