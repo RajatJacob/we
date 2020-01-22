@@ -24,6 +24,10 @@ export default class LoginPage extends React.Component {
 	}
 
 	render() {
+		const { user } = this.context;
+		if (user) return (
+			<h1>Welcome, {user.email}</h1>
+		)
 		return (
 			<div className="LoginPage">
 				<Card noContainer>
