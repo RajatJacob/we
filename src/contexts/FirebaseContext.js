@@ -23,7 +23,17 @@ export default class FirebaseContextProvider extends React.Component {
 			auth: firebase.auth()
 		}
 		this.state.auth.onAuthStateChanged((user) => {
-			this.setState({ user: user });
+			if (user)
+				this.setState({
+					user: {
+						displayName: user.displayName,
+						email: user.email,
+						photoURL: user.photoURL,
+						emailVerified: user.emailVerified,
+						uid: user.uid
+					}
+				});
+			else this.setState({ user: null })
 		});
 	}
 
