@@ -3,7 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
-import Tab from './components/Tab/Tab';
+import Tab from './components/Tab';
 
 export default class App extends React.Component {
 	render() {
