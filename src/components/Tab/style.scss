@@ -1,0 +1,42 @@
+@import '../../global/colors.scss';
+
+.Tab {
+    position: fixed;
+    display: grid;
+    bottom: 0;
+    right: 0;
+    background: #222222;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: bold;
+
+    a {
+
+        &,
+        &:hover,
+        &:visited {
+            text-decoration: none;
+            padding: 1em;
+
+            &:hover,
+            &.active {
+                background: $primaryColor;
+            }
+        }
+
+        color: white;
+
+        @media screen and (orientation: landscape) {
+            writing-mode: vertical-rl;
+        }
+    }
+
+    @media screen and (orientation:landscape) {
+        height: 100%;
+    }
+
+    @media screen and (orientation: portrait) {
+        width: 100%;
+        grid-auto-flow: column;
+    }
+}

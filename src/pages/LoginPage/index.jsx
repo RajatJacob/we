@@ -15,9 +15,9 @@ export default class LoginPage extends React.Component {
 
 	submit = e => {
 		e.preventDefault()
-		alert("Welcome, "+this.state.email)
+		alert("Welcome, " + this.state.email)
 		e.target.reset()
-		this.setState({email: "", password: ""})
+		this.setState({ email: "", password: "" })
 	}
 
 	render() {
@@ -29,11 +29,11 @@ export default class LoginPage extends React.Component {
 							<h1>Login</h1>
 						</Container>
 						<Container>
-							<form onSubmit={ this.submit }>
-								<Input label="E-mail" icon="@" onChange={ e => this.setState({email: e.target.value }) }/>
+							<form onSubmit={this.submit}>
+								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} />
 								<Input label="Password" type="password"
-								icon="*" onChange={ e => this.setState({password: e.target.value }) }/>
-								<Input label="Login" type="submit"/>
+									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+								<Input label="Login" type="submit" />
 							</form>
 						</Container>
 					</div>
