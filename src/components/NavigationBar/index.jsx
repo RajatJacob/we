@@ -23,7 +23,7 @@ class Tab extends React.Component {
 				{
 					this.state.links.map((h) => {
 						return (
-							<NavLink to={h.url} activeClassName="active">
+							<NavLink className="center" to={h.url} activeClassName="active">
 								{h.name}
 							</NavLink>
 						)

@@ -7,6 +7,12 @@
         outline: none;
     }
 
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     .Content {
         @media screen and (orientation: landscape) {
             margin-right: $navSize;
