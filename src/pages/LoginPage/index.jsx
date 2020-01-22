@@ -3,8 +3,10 @@ import './style.scss';
 import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
+import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 export default class LoginPage extends React.Component {
+	static contextType = FirebaseContext;
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -14,8 +16,9 @@ export default class LoginPage extends React.Component {
 	}
 
 	submit = e => {
+		const { auth } = this.context;
 		e.preventDefault()
-		alert("Welcome, " + this.state.email)
+		auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(() => { console.log("Error") })
 		e.target.reset()
 		this.setState({ email: "", password: "" })
 	}
