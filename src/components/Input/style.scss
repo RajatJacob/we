@@ -1,60 +1,62 @@
+@import '../../global/colors.scss';
+
 .Input {
-	border-radius: 2em;
-	background: #EEEEEE;
-	padding: 0.5em 1em;
-	margin: 1em;
-	border: 0.05em solid #00000055;
-	transition: all 500ms ease;
-	display: grid;
-	grid-template-columns: 2fr auto 2fr;
+    border-radius: 2em;
+    background: #EEEEEE;
+    padding: 0.5em 1em;
+    margin: 1em;
+    border: 0.05em solid #00000055;
+    transition: all 500ms ease;
+    display: grid;
+    grid-template-columns: 2fr auto 2fr;
 
-	&.noIcon {
-		display: block;
+    &.noIcon {
+        display: block;
 
-		.icon {
-			display: none;
-		}
-	}
+        .icon {
+            display: none;
+        }
+    }
 
-	&.submit {
-		background: rgb(0, 200, 0);
-		box-shadow: 0 0.5em 0.75em 0 #00000055;
-		transition: all 500ms ease;
+    &.submit {
+        background: $primaryColor;
+        box-shadow: 0 0.5em 0.75em 0 #00000055;
+        transition: all 500ms ease;
 
-		&:hover {
-			background: rgb(0, 200, 200);
+        &:hover {
+            background: rgb(0, 200, 200);
 
-			input {
-				letter-spacing: 0.5em;
-			}
-		}
-		
-		input {
-			color: white;
-			font-weight: 900;
-			text-transform: uppercase;
-			transition: all 500ms ease;
-		}
-	}
+            input {
+                letter-spacing: 0.5em;
+            }
+        }
 
-	.icon {
-		font-weight: 900;
-		padding: 0.5em 1em;
-		cursor: default;
+        input {
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 500ms ease;
+        }
+    }
 
-		&:first-child {
-			border-right: 0.05em solid #00000055;
-		}
+    .icon {
+        font-weight: 900;
+        padding: 0.5em 1em;
+        cursor: default;
 
-		&#visibleToggle {
-			cursor: pointer;
-			padding: 0.5em;
-		}
-	}
+        &:first-child {
+            border-right: 0.05em solid #00000055;
+        }
 
-	input {
-		background: transparent;
-		border: 0;
-		padding: 0.5em 1em;
-	}
+        &#visibleToggle {
+            cursor: pointer;
+            padding: 0.5em;
+        }
+    }
+
+    input {
+        background: transparent;
+        border: 0;
+        padding: 0.5em 1em;
+    }
 }

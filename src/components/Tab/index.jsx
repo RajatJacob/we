@@ -20,19 +20,15 @@ class Tab extends React.Component {
 	render() {
 		return (
 			<div className="Tab">
-				<ul id="links" >
-					{
-						this.state.links.map((h) => {
-							return (
-								<NavLink to={h.url} activeClassName="active">
-									<li>
-										{h.name}
-									</li>
-								</NavLink>
-							)
-						})
-					}
-				</ul>
+				{
+					this.state.links.map((h) => {
+						return (
+							<NavLink to={h.url} activeClassName="active">
+								{h.name}
+							</NavLink>
+						)
+					})
+				}
 			</div>
 		);
 	}
