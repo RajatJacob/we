@@ -12,7 +12,7 @@ export default class App extends React.Component {
 				<Router>
 					<Tab />
 					<Switch>
-						<Route exact path="/">
+						<Route exact path="/root">
 							<Container>
 								<h1>Home</h1>
 							</Container>
