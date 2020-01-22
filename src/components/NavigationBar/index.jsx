@@ -7,13 +7,13 @@ class Tab extends React.Component {
 		super(props)
 		this.state =
 		{
-			links: this.props.links === undefined ?
+			links: this.props.links ||
 				[
 					{ name: "Home", url: "/" },
 					{ name: "Feed", url: "/feed" },
 					{ name: "Search", url: "/search" },
 					{ name: "Login", url: "/login" },
-				] : this.props.links
+				]
 		}
 
 	}
