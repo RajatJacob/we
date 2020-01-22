@@ -3,14 +3,14 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
-import Tab from './components/Tab';
+import NavigationBar from './components/NavigationBar';
 
 export default class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
 				<Router>
-					<Tab />
+					<NavigationBar />
 					<Switch>
 						<Route exact path="/">
 							<Container>
