@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
 import NavigationBar from './components/NavigationBar';
-
+import UserProfile from './pages/UserProfile';
 export default class App extends React.Component {
 	render() {
 		return (
@@ -23,6 +23,9 @@ export default class App extends React.Component {
 						</Route>
 						<Route exact path="/login">
 							<LoginPage />
+						</Route>
+						<Route exact path="/userprofile">
+							<UserProfile />
 						</Route>
 						<Route path="*">
 							<Container>
