@@ -57,15 +57,15 @@ export default class LoginPage extends React.Component {
 								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} />
 								<Input label="Password" type="password"
 									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+								{
+									this.state.alert ?
+										<Alert type={this.state.alert.type} title={this.state.alert.title}>
+											{this.state.alert.message}
+										</Alert> :
+										null
+								}
 								<Input label="Login" type="submit" />
 							</form>
-							{
-								this.state.alert ?
-									<Alert type={this.state.alert.type} title={this.state.alert.title}>
-										{this.state.alert.message}
-									</Alert> :
-									null
-							}
 						</Container>
 					</GridContainer>
 				</Card>
