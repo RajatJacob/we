@@ -3,6 +3,7 @@ import './style.scss';
 import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
+import GridContainer from '../../components/GridContainer';
 
 export default class LoginPage extends React.Component {
 	constructor(props) {
@@ -24,7 +25,7 @@ export default class LoginPage extends React.Component {
 		return (
 			<div className="LoginPage">
 				<Card noContainer>
-					<div className="grid-container">
+					<GridContainer>
 						<Container>
 							<h1>Login</h1>
 						</Container>
@@ -36,7 +37,7 @@ export default class LoginPage extends React.Component {
 								<Input label="Login" type="submit" />
 							</form>
 						</Container>
-					</div>
+					</GridContainer>
 				</Card>
 			</div>
 		)
