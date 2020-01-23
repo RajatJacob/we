@@ -26,8 +26,16 @@ export default class LoginPage extends React.Component {
 			}
 		})
 		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => { this.setState({ error: null }) })
-			.catch((error) => { this.setState({ error: error }) })
+			.then(() => { this.setState({ alert: null }) })
+			.catch((error) => {
+				this.setState({
+					alert: {
+						type: "danger",
+						title: error.code,
+						message: error.message
+					}
+				})
+			})
 			.finally(() => {
 				this.setState({ email: "", password: "" })
 			})
