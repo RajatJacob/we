@@ -5,26 +5,24 @@ import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 class Tab extends React.Component {
 	static contextType = FirebaseContext;
-	constructor(props) {
-		super(props)
-		this.state =
-		{
-			links: this.props.links ||
-				[
-					{ name: "Home", url: "/" },
-					{ name: "Feed", url: "/feed" },
-					{ name: "Search", url: "/search" },
-					{ name: "Login", url: "/login" },
-				]
-		}
 
-	}
 	render() {
 		const { user, auth } = this.context;
+		const links = (user) ?
+			[
+				{ name: "Home", url: "/" },
+				{ name: "User Profile", url: "/userprofile" },
+				{ name: "Feed", url: "/feed" },
+				{ name: "Search", url: "/search" },
+			] : [
+				{ name: "Home", url: "/" },
+				{ name: "Login", url: "/login" }
+			];
+		links.forEach((x) => console.log(x.name))
 		return (
 			<div className="NavigationBar">
 				{
-					this.state.links.map((h) => {
+					links.map((h) => {
 						return (
 							<NavLink className="center" to={h.url} activeClassName="active">
 								{h.name}
