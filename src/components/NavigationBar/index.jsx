@@ -22,8 +22,15 @@ class Tab extends React.Component {
 			<div className="NavigationBar">
 				{
 					links.map((h) => {
+						var checkActive = null;
+						if (h.url === "/") checkActive = (match, location) => {
+							if (!location) return false;
+							const { pathname } = location;
+							console.log(pathname);
+							return pathname === "/";
+						}
 						return (
-							<NavLink className="center" to={h.url} activeClassName="active">
+							<NavLink className="center" to={h.url} activeClassName="active" isActive={checkActive}>
 								{h.name}
 							</NavLink>
 						)
