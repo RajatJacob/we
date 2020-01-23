@@ -21,8 +21,9 @@ export default class LoginPage extends React.Component {
 		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
 			.then(() => { this.setState({ error: null }) })
 			.catch((error) => { this.setState({ error: error }) })
-		e.target.reset()
-		this.setState({ email: "", password: "" })
+			.finally(() => {
+				this.setState({ email: "", password: "" })
+			})
 	}
 
 	render() {
@@ -39,9 +40,9 @@ export default class LoginPage extends React.Component {
 						</Container>
 						<Container>
 							<form onSubmit={this.submit}>
-								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} />
+								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
 								<Input label="Password" type="password"
-									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+									icon="*" onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
 								{
 									this.state.error ?
 										<Card>
