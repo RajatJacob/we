@@ -1,6 +1,7 @@
 @import '../../global/colors.scss';
+@import '../../global/variables.scss';
 
-.Tab {
+.NavigationBar {
     position: fixed;
     display: grid;
     bottom: 0;
@@ -33,9 +34,11 @@
 
     @media screen and (orientation:landscape) {
         height: 100%;
+        width: $navSize;
     }
 
     @media screen and (orientation: portrait) {
+        height: $navSize;
         width: 100%;
         grid-auto-flow: column;
     }

@@ -1,3 +1,5 @@
+@import './global/variables.scss';
+
 .App {
     text-align: center;
 
@@ -5,7 +7,19 @@
         outline: none;
     }
 
-    @media screen and (orientation: portrait) {
-        padding-bottom: 10vh;
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .Content {
+        @media screen and (orientation: landscape) {
+            margin-right: $navSize;
+        }
+
+        @media screen and (orientation: landscape) {
+            margin-bottom: $navSize;
+        }
     }
 }

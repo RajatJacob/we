@@ -1,0 +1,17 @@
+.GridContainer {
+    display: grid;
+
+    @media screen and (orientation: landscape) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (orientation: portrait) {
+        grid-template-rows: 1fr 1fr;
+    }
+
+    &>* {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './style.scss';
+import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 class Tab extends React.Component {
+	static contextType = FirebaseContext;
 	constructor(props) {
 		super(props)
 		this.state =
@@ -18,16 +20,20 @@ class Tab extends React.Component {
 
 	}
 	render() {
+		const { user, auth } = this.context;
 		return (
-			<div className="Tab">
+			<div className="NavigationBar">
 				{
 					this.state.links.map((h) => {
 						return (
-							<NavLink to={h.url} activeClassName="active">
+							<NavLink className="center" to={h.url} activeClassName="active">
 								{h.name}
 							</NavLink>
 						)
 					})
+				}
+				{
+					user ? <button onClick={() => { auth.signOut() }}>Logout</button> : null
 				}
 			</div>
 		);
