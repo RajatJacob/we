@@ -1,6 +1,6 @@
 .Alert {
     width: 100%;
-    margin: auto;
+    margin: 0.25em;
     padding: 0.5em;
     border: 0.2em solid transparent;
     border-radius: 1em;
@@ -10,9 +10,9 @@
     }
 
     &.default {
-        background-color: #22222255;
-        color: #222222;
-        border-color: #222222;
+        background-color: #55555555;
+        color: #555555;
+        border-color: #555555;
     }
 
     &.success {
@@ -29,8 +29,8 @@
 
     &.warning {
         background-color: #FFBB0033;
-        color: #FFBB00;
-        border-color: #FFBB00;
+        color: #DD9900;
+        border-color: #DD9900;
     }
 
     &.danger {
