@@ -1,0 +1,41 @@
+.Alert {
+    width: 100%;
+    margin: auto;
+    padding: 0.5em;
+    border: 0.2em solid transparent;
+    border-radius: 1em;
+
+    div.title {
+        font-weight: 900;
+    }
+
+    &.default {
+        background-color: #22222255;
+        color: #222222;
+        border-color: #222222;
+    }
+
+    &.success {
+        background-color: #00994455;
+        color: #009944;
+        border-color: #009944;
+    }
+
+    &.info {
+        background-color: #0099FF55;
+        color: #0099FF;
+        border-color: #0099FF;
+    }
+
+    &.warning {
+        background-color: #FFBB0033;
+        color: #FFBB00;
+        border-color: #FFBB00;
+    }
+
+    &.danger {
+        background-color: #DD000055;
+        color: #DD0000;
+        border-color: #DD0000;
+    }
+}
