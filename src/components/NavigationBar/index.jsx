@@ -7,13 +7,12 @@ class Tab extends React.Component {
 	static contextType = FirebaseContext;
 
 	render() {
-		const { user, auth } = this.context;
+		const { user } = this.context;
 		const links = (user) ?
 			[
-				{ name: "Home", url: "/" },
-				{ name: "User Profile", url: "/userprofile" },
 				{ name: "Feed", url: "/feed" },
 				{ name: "Search", url: "/search" },
+				{ name: "My Profile", url: "/user" },
 			] : [
 				{ name: "Home", url: "/" },
 				{ name: "Login", url: "/login" }
@@ -29,9 +28,6 @@ class Tab extends React.Component {
 							</NavLink>
 						)
 					})
-				}
-				{
-					user ? <button onClick={() => { auth.signOut() }}>Logout</button> : null
 				}
 			</div>
 		);

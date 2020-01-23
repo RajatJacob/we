@@ -5,6 +5,7 @@ import Input from '../../components/Input';
 import GridContainer from '../../components/GridContainer';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
+import { Redirect } from 'react-router-dom';
 
 export default class LoginPage extends React.Component {
 	static contextType = FirebaseContext;
@@ -12,7 +13,8 @@ export default class LoginPage extends React.Component {
 		super(props)
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
+			alert: null
 		}
 	}
 
@@ -26,9 +28,16 @@ export default class LoginPage extends React.Component {
 			}
 		})
 		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => { this.setState({ alert: null }) })
+			.then(() => {
+				this.setState({
+					email: "",
+					password: "",
+					alert: null
+				})
+			})
 			.catch((error) => {
 				this.setState({
+					password: "",
 					alert: {
 						type: "danger",
 						title: error.code,
@@ -36,15 +45,12 @@ export default class LoginPage extends React.Component {
 					}
 				})
 			})
-			.finally(() => {
-				this.setState({ email: "", password: "" })
-			})
 	}
 
 	render() {
 		const { user } = this.context;
 		if (user) return (
-			<h1>Welcome, {user.email}</h1>
+			<Redirect to="/user" />
 		)
 		return (
 			<div className="LoginPage">
@@ -57,7 +63,7 @@ export default class LoginPage extends React.Component {
 							<form onSubmit={this.submit}>
 								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
 								<Input label="Password" type="password"
-									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+									icon="*" onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
 								{
 									this.state.alert ?
 										<Alert type={this.state.alert.type} title={this.state.alert.title}>
