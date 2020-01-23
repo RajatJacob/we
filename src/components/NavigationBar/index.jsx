@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSearch, faFile, faKey } from '@fortawesome/free-solid-svg-icons';
 
 class Tab extends React.Component {
 	static contextType = FirebaseContext;
@@ -11,10 +13,10 @@ class Tab extends React.Component {
 		{
 			links: this.props.links ||
 				[
-					{ name: "Home", url: "/" },
-					{ name: "Feed", url: "/feed" },
-					{ name: "Search", url: "/search" },
-					{ name: "Login", url: "/login" },
+					{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
+					{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faFile} /> },
+					{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
+					{ name: "Login", url: "/login", icon: < FontAwesomeIcon icon={faKey} /> }
 				]
 		}
 
@@ -33,8 +35,11 @@ class Tab extends React.Component {
 							return pathname === "/";
 						}
 						return (
-							<NavLink className="center" to={h.url} activeClassName="active" isActive={checkActive}>
-								{h.name}
+							<NavLink to={h.url} className="center" activeClassName="active" isActive={checkActive}>
+								<div>
+									<span className="icon">{h.icon || h.name}</span>
+									<span className="name">{h.name}</span>
+								</div>
 							</NavLink>
 						)
 					})

@@ -3,6 +3,8 @@ import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
 import GridContainer from '../../components/GridContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 export default class LoginPage extends React.Component {
@@ -39,9 +41,9 @@ export default class LoginPage extends React.Component {
 						</Container>
 						<Container>
 							<form onSubmit={this.submit}>
-								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} />
+								<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} />
 								<Input label="Password" type="password"
-									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} />
 								{
 									this.state.error ?
 										<Card>
