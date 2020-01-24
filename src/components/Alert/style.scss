@@ -1,12 +1,20 @@
 .Alert {
     width: 85%;
     margin: 0.25em auto;
-    padding: 0.5em 0;
+    padding: 0.5em;
     border: 0.2em solid transparent;
     border-radius: 1em;
+    display: grid;
+    grid-template-columns: 2em auto;
 
-    div.title {
-        font-weight: 900;
+    .icon {
+        padding: 1em;
+    }
+
+    .content {
+        .title {
+            font-weight: 900;
+        }
     }
 
     &.default {
