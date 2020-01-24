@@ -5,7 +5,7 @@ import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSearch, faFile, faKey } from '@fortawesome/free-solid-svg-icons';
 
-class Tab extends React.Component {
+class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
 	constructor(props) {
 		super(props)
@@ -19,10 +19,21 @@ class Tab extends React.Component {
 					{ name: "Login", url: "/login", icon: < FontAwesomeIcon icon={faKey} /> }
 				]
 		}
-
 	}
+
 	render() {
 		const { user, auth } = this.context;
+		const links = (user) ?
+			[
+				{ name: "Home", url: "/" },
+				{ name: "User Profile", url: "/userprofile" },
+				{ name: "Feed", url: "/feed" },
+				{ name: "Search", url: "/search" },
+			] : [
+				{ name: "Home", url: "/" },
+				{ name: "Login", url: "/login" }
+			];
+		links.forEach((x) => console.log(x.name))
 		return (
 			<div className="NavigationBar">
 				{
@@ -52,4 +63,5 @@ class Tab extends React.Component {
 	}
 
 }
-export default Tab;
+
+export default NavigationBar;
