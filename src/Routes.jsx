@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
+import SignUp from './pages/SignUp';
 
 export default class Routes extends React.Component {
 	render() {
@@ -20,11 +21,14 @@ export default class Routes extends React.Component {
 					<Route exact path="/login">
 						<LoginPage />
 					</Route>
+					<Route exact path="/signup">
+						<SignUp />
+					</Route>
 					<Route path="*">
 						<Container>
 							<h1>404</h1>
 							Page Not Found!
-							</Container>
+						</Container>
 					</Route>
 				</Switch>
 			</div>
