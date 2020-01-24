@@ -39,9 +39,8 @@
         }
     }
 
-    .icon {
-        font-weight: 900;
-        padding: 0.5em 1em;
+    .iconContainer {
+        padding: 0.5em;
         cursor: default;
 
         &:first-child {
@@ -50,7 +49,6 @@
 
         &#visibleToggle {
             cursor: pointer;
-            padding: 0.5em;
         }
     }
 

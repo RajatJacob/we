@@ -12,23 +12,40 @@
     font-weight: bold;
 
     a {
+        color: white;
+        transition: all 500ms ease;
 
         &,
         &:hover,
         &:visited {
             text-decoration: none;
             padding: 1em;
-
-            &:hover,
-            &.active {
-                background: $primaryColor;
-            }
         }
 
-        color: white;
+        &:hover,
+        &.active {
+            background: $primaryColor;
+        }
 
         @media screen and (orientation: landscape) {
             writing-mode: vertical-rl;
+        }
+
+        span {
+
+            &.icon {
+                @media screen and (orientation: portrait) {
+                    font-size: 1.5em;
+                }
+            }
+
+            &.name {
+                padding: 1em;
+
+                @media screen and (orientation: portrait) {
+                    display: none;
+                }
+            }
         }
     }
 
