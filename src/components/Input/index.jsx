@@ -14,23 +14,23 @@ export default class Input extends React.Component {
 			{
 				type:
 					this.state.type === "password"
-					? "text"
-					: this.props.type
+						? "text"
+						: this.props.type
 			}
 		)
 	}
-	
+
 	render() {
 		return (
-			<div className={ "Input" + (this.props.icon ? "" : " noIcon") + (this.props.type === "submit" ? " submit" : "") }>
-				<span className="icon">{ this.props.icon || null }</span>
-				<input onChange={ this.props.onChange } placeholder={ this.props.label || ""  } type={ this.state.type || "text" } />
+			<div className={"Input" + (this.props.icon ? "" : " noIcon") + (this.props.type === "submit" ? " submit" : "")}>
+				<span className="icon">{this.props.icon || null}</span>
+				<input onChange={this.props.onChange} placeholder={this.props.label || ""} type={this.state.type || "text"} />
 				{
 					this.props.type === "password"
-					? <span className="icon" id="visibleToggle" onClick={ this.toggleVisible }>
-						{ this.state.type === "password" ? "show" : "hide" }
-					</span>
-					: ""
+						? <span className="icon" id="visibleToggle" onClick={this.toggleVisible}>
+							{this.state.type === "password" ? "show" : "hide"}
+						</span>
+						: ""
 				}
 			</div>
 		)
