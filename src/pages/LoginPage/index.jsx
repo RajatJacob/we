@@ -3,7 +3,10 @@ import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
 import GridContainer from '../../components/GridContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faSync } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import Alert from '../../components/Alert';
 
 export default class LoginPage extends React.Component {
 	static contextType = FirebaseContext;
@@ -18,11 +21,27 @@ export default class LoginPage extends React.Component {
 	submit = e => {
 		const { auth } = this.context;
 		e.preventDefault()
+		this.setState({
+			alert: {
+				type: "success",
+				icon: <FontAwesomeIcon icon={faSync} spin />,
+				message: "Logging in..."
+			}
+		})
 		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => { this.setState({ error: null }) })
-			.catch((error) => { this.setState({ error: error }) })
-		e.target.reset()
-		this.setState({ email: "", password: "" })
+			.then(() => { this.setState({ alert: null }) })
+			.catch((error) => {
+				this.setState({
+					alert: {
+						type: "danger",
+						title: error.code,
+						message: error.message
+					}
+				})
+			})
+			.finally(() => {
+				this.setState({ email: "", password: "" })
+			})
 	}
 
 	render() {
@@ -39,15 +58,14 @@ export default class LoginPage extends React.Component {
 						</Container>
 						<Container>
 							<form onSubmit={this.submit}>
-								<Input label="E-mail" icon="@" onChange={e => this.setState({ email: e.target.value })} />
+								<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} />
 								<Input label="Password" type="password"
-									icon="*" onChange={e => this.setState({ password: e.target.value })} />
+									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} />
 								{
-									this.state.error ?
-										<Card>
-											<strong>{this.state.error.code}</strong>
-											<p>{this.state.error.message}</p>
-										</Card> :
+									this.state.alert ?
+										<Alert type={this.state.alert.type} title={this.state.alert.title} icon={this.state.alert.icon}>
+											{this.state.alert.message}
+										</Alert> :
 										null
 								}
 								<Input label="Login" type="submit" />
