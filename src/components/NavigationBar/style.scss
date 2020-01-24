@@ -13,17 +13,18 @@
 
     a {
         color: white;
+        transition: all 500ms ease;
 
         &,
         &:hover,
         &:visited {
             text-decoration: none;
             padding: 1em;
+        }
 
-            &:hover,
-            &.active {
-                background: $primaryColor;
-            }
+        &:hover,
+        &.active {
+            background: $primaryColor;
         }
 
         @media screen and (orientation: landscape) {
