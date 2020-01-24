@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
+import OrganisationForm from './pages/OrganisationForm';
 
 export default class Routes extends React.Component {
 	render() {
@@ -20,6 +21,10 @@ export default class Routes extends React.Component {
 					<Route exact path="/login">
 						<LoginPage />
 					</Route>
+					<Route exact path="/OrganisationForm">
+						<OrganisationForm />
+					</Route>
+
 					<Route path="*">
 						<Container>
 							<h1>404</h1>
