@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
+import UserProfile from './pages/UserProfile';
 import SignUp from './pages/SignUp';
 
 export default class Routes extends React.Component {
@@ -23,6 +24,9 @@ export default class Routes extends React.Component {
 					</Route>
 					<Route exact path="/signup">
 						<SignUp />
+					</Route>
+					<Route exact path="/user">
+						<UserProfile />
 					</Route>
 					<Route path="*">
 						<Container>

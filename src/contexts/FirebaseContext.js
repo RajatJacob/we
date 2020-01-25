@@ -18,9 +18,16 @@ export default class FirebaseContextProvider extends React.Component {
 			appId: "1:897210199343:web:ed8d27bf2fa36cdeacc5da",
 			measurementId: "G-8MZE3VCFP9"
 		});
+		firebase.firestore().enablePersistence()
+			.catch(function (err) {
+				console.log(err.code + ": " + err.message)
+			})
 		this.state = {
 			firestore: firebase.firestore(),
-			auth: firebase.auth()
+			auth: firebase.auth(),
+			getUserRefByUsername: (username) => this.state.firestore
+				.collection("users")
+				.where("username", "==", username.toLowerCase())
 		}
 		this.state.auth.onAuthStateChanged((user) => {
 			if (user)
