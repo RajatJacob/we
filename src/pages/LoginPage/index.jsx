@@ -4,7 +4,7 @@ import Container from '../../components/Container';
 import Input from '../../components/Input';
 import GridContainer from '../../components/GridContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faSync } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
 
@@ -24,6 +24,7 @@ export default class LoginPage extends React.Component {
 		this.setState({
 			alert: {
 				type: "success",
+				icon: <FontAwesomeIcon icon={faSync} spin />,
 				message: "Logging in..."
 			}
 		})
@@ -62,7 +63,7 @@ export default class LoginPage extends React.Component {
 									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} />
 								{
 									this.state.alert ?
-										<Alert type={this.state.alert.type} title={this.state.alert.title}>
+										<Alert type={this.state.alert.type} title={this.state.alert.title} icon={this.state.alert.icon}>
 											{this.state.alert.message}
 										</Alert> :
 										null

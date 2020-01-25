@@ -3,41 +3,29 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faFile, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 
 class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
-	constructor(props) {
-		super(props)
-		this.state =
-		{
-			links: this.props.links ||
-				[
-					{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
-					{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faFile} /> },
-					{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
-					{ name: "Login", url: "/login", icon: < FontAwesomeIcon icon={faKey} /> }
-				]
-		}
-	}
 
 	render() {
 		const { user, auth } = this.context;
 		const links = (user) ?
 			[
-				{ name: "Home", url: "/" },
-				{ name: "User Profile", url: "/userprofile" },
-				{ name: "Feed", url: "/feed" },
-				{ name: "Search", url: "/search" },
+				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
+				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
+				{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faBuffer} /> },
+				{ name: "User", url: "/user", icon: <FontAwesomeIcon icon={faUser} /> }
 			] : [
-				{ name: "Home", url: "/" },
-				{ name: "Login", url: "/login" }
+				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
+				{ name: "Login", url: "/login", icon: <FontAwesomeIcon icon={faKey} /> }
 			];
 		links.forEach((x) => console.log(x.name))
 		return (
 			<div className="NavigationBar">
 				{
-					this.state.links.map((h) => {
+					links.map((h) => {
 						var checkActive = null;
 						if (h.url === "/") checkActive = (match, location) => {
 							if (!location) return false;
