@@ -1,0 +1,9 @@
+.UserProfile {
+    .grid-container {
+        display: grid;
+
+        &#topbar {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}

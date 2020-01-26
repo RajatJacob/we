@@ -21,9 +21,7 @@ export default class Routes extends React.Component {
 					<Route exact path="/login">
 						<LoginPage />
 					</Route>
-					<Route exact path="/user">
-						<UserProfile />
-					</Route>
+					<Route exact path="/user/:username" component={UserProfile} />
 					<Route path="*">
 						<Container>
 							<h1>404</h1>

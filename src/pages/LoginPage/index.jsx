@@ -29,18 +29,16 @@ export default class LoginPage extends React.Component {
 			}
 		})
 		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => { this.setState({ alert: null }) })
+			.then(() => { this.setState({ alert: null, email: "", password: "" }) })
 			.catch((error) => {
 				this.setState({
 					alert: {
 						type: "danger",
 						title: error.code,
 						message: error.message
-					}
+					},
+					password: ""
 				})
-			})
-			.finally(() => {
-				this.setState({ email: "", password: "" })
 			})
 	}
 
@@ -58,9 +56,9 @@ export default class LoginPage extends React.Component {
 						</Container>
 						<Container>
 							<form onSubmit={this.submit}>
-								<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} />
+								<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
 								<Input label="Password" type="password"
-									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} />
+									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
 								{
 									this.state.alert ?
 										<Alert type={this.state.alert.type} title={this.state.alert.title} icon={this.state.alert.icon}>

@@ -16,12 +16,11 @@ class NavigationBar extends React.Component {
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
 				{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faBuffer} /> },
-				{ name: "User", url: "/user", icon: <FontAwesomeIcon icon={faUser} /> }
+				{ name: "User", url: "/user/" + user.displayName, icon: <FontAwesomeIcon icon={faUser} /> }
 			] : [
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Login", url: "/login", icon: <FontAwesomeIcon icon={faKey} /> }
 			];
-		links.forEach((x) => console.log(x.name))
 		return (
 			<div className="NavigationBar">
 				{
@@ -30,7 +29,6 @@ class NavigationBar extends React.Component {
 						if (h.url === "/") checkActive = (match, location) => {
 							if (!location) return false;
 							const { pathname } = location;
-							console.log(pathname);
 							return pathname === "/";
 						}
 						return (

@@ -1,24 +1,58 @@
 import React from 'react';
-import Card from '../../components/Card';
-import Container from '../../components/Container';
 import './style.scss';
-import GridContainer from '../../components/GridContainer';
+import { FirebaseContext } from '../../contexts/FirebaseContext';
+import Card from '../../components/Card';
+import Alert from '../../components/Alert';
 
 export default class UserProfile extends React.Component {
-    render() {
-        return (
-            <div className="UserProfile">
-                <Card noContainer>
-                    <GridContainer>
-                        <Container>
-                            <h1>User Profile</h1>
-                        </Container>
-                        <Container>
-                            <h3>Followers</h3>
-                        </Container>
-                    </GridContainer>
-                </Card>
-            </div>
-        )
-    }
+	static contextType = FirebaseContext;
+	state = {
+		user: {
+			username: undefined
+		}
+	}
+
+	render() {
+		const { firestore } = this.context
+		firestore.collection("users").where("username", "==", this.props.match.params.username.toLowerCase())
+			.get()
+			.then(
+				snapshot => {
+					if (snapshot.size === 0) this.setState({
+						alert: "noUser"
+					})
+					snapshot.forEach(doc => {
+						this.setState({ user: doc.data() })
+					})
+				}
+			);
+
+		return (
+			<div className="UserProfile">
+				<Card>
+					<h1>
+						{
+							this.state.alert === "noUser" ?
+								<Alert type="danger" title="Invalid user!" /> :
+								this.state.user.name
+						}
+					</h1>
+					<div className="grid-container" id="topbar">
+						<div>
+							<h3>Posts</h3>
+							0
+						</div>
+						<div>
+							<h3>Followers</h3>
+							0
+						</div>
+						<div>
+							<h3>Following</h3>
+							0
+						</div>
+					</div>
+				</Card>
+			</div>
+		)
+	}
 }
