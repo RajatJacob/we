@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
+import VocationalCourses from './pages/VocationalCourses';
 
 export default class Routes extends React.Component {
 	render() {
@@ -19,6 +20,9 @@ export default class Routes extends React.Component {
 					</Route>
 					<Route exact path="/login">
 						<LoginPage />
+					</Route>
+					<Route exact path="/VocationalCourses">
+						<VocationalCourses />
 					</Route>
 					<Route path="*">
 						<Container>
