@@ -52,8 +52,9 @@ export default class LoginPage extends React.Component {
 		this.login(auth.signInWithEmailAndPassword(this.state.email, this.state.password))
 	}
 
-	logInWithGoogle = () => {
+	logInWithGoogle = e => {
 		const { firebase, auth } = this.context;
+		e.preventDefault()
 		const provider = new firebase.auth.GoogleAuthProvider()
 		this.login(auth.signInWithPopup(provider))
 	}
@@ -84,7 +85,13 @@ export default class LoginPage extends React.Component {
 								}
 								<Input label="Login" type="submit" />
 							</form>
-							<button type="submit" onClick={this.logInWithGoogle}>Login with Google</button>
+							<form onSubmit={this.logInWithGoogle}>
+								<Input label="Login with Google" type="submit" style={
+									{
+										background: "#eeeeee"
+									}
+								} />
+							</form>
 						</Container>
 					</GridContainer>
 				</Card>
