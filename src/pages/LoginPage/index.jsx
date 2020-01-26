@@ -20,23 +20,14 @@ export default class LoginPage extends React.Component {
 		}
 	}
 
-	submit = e => {
-		const { auth } = this.context;
-		e.preventDefault()
-		this.setState({
-			alert: {
-				type: "success",
-				message: "Logging in..."
-			}
-		})
-		auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => {
-				this.setState({
-					email: "",
-					password: "",
-					alert: null
-				})
+	login = p => {
+		p.then(() => {
+			this.setState({
+				email: "",
+				password: "",
+				alert: null
 			})
+		})
 			.catch((error) => {
 				this.setState({
 					password: "",
@@ -47,6 +38,24 @@ export default class LoginPage extends React.Component {
 					}
 				})
 			})
+	}
+
+	submit = e => {
+		const { auth } = this.context;
+		e.preventDefault()
+		this.setState({
+			alert: {
+				type: "success",
+				message: "Logging in..."
+			}
+		})
+		this.login(auth.signInWithEmailAndPassword(this.state.email, this.state.password))
+	}
+
+	logInWithGoogle = () => {
+		const { firebase, auth } = this.context;
+		const provider = new firebase.auth.GoogleAuthProvider()
+		this.login(auth.signInWithPopup(provider))
 	}
 
 	render() {
@@ -75,6 +84,7 @@ export default class LoginPage extends React.Component {
 								}
 								<Input label="Login" type="submit" />
 							</form>
+							<button type="submit" onClick={this.logInWithGoogle}>Login with Google</button>
 						</Container>
 					</GridContainer>
 				</Card>

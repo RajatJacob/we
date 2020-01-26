@@ -24,11 +24,14 @@ class Tab extends React.Component {
 	render() {
 		const { user } = this.context;
 		const links = (user) ?
+			// Logged in
 			[
 				{ name: "Feed", url: "/feed" },
 				{ name: "Search", url: "/search" },
 				{ name: "My Profile", url: "/user" },
-			] : [
+			] :
+			// Logged Out
+			[
 				{ name: "Home", url: "/" },
 				{ name: "Login", url: "/login" }
 			];

@@ -19,6 +19,7 @@ export default class FirebaseContextProvider extends React.Component {
 			measurementId: "G-8MZE3VCFP9"
 		});
 		this.state = {
+			firebase: firebase,
 			firestore: firebase.firestore(),
 			auth: firebase.auth()
 		}
