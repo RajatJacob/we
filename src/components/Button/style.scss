@@ -1,0 +1,23 @@
+@import '../../global/colors.scss';
+
+.Button {
+    padding: 0.5em;
+    margin: 1em;
+    background: $primaryColor;
+    border: 0.25em solid ($primaryColor/2);
+    border-radius: 1em;
+    cursor: pointer;
+    transition: all 500ms ease;
+
+    &:hover {
+        background: $primaryColor/1.25;
+    }
+
+    &,
+    * {
+        color: white;
+        font-weight: bolder;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+}

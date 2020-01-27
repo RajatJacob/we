@@ -1,4 +1,5 @@
 @import '../../global/colors.scss';
+@import '../Button/style.scss';
 
 .Input {
     border-radius: 2em;
@@ -15,27 +16,6 @@
 
         .icon {
             display: none;
-        }
-    }
-
-    &.submit {
-        background: $primaryColor;
-        box-shadow: 0 0.5em 0.75em 0 #00000055;
-        transition: all 500ms ease;
-
-        &:hover {
-            background: rgb(0, 200, 200);
-
-            input {
-                letter-spacing: 0.5em;
-            }
-        }
-
-        input {
-            color: white;
-            font-weight: 900;
-            text-transform: uppercase;
-            transition: all 500ms ease;
         }
     }
 
@@ -56,5 +36,9 @@
         background: transparent;
         border: 0;
         padding: 0.5em 1em;
+    }
+
+    &.submit {
+        @extend .Button;
     }
 }
