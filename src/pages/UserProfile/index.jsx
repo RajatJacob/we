@@ -109,17 +109,23 @@ export default class UserProfile extends React.Component {
 						}
 					</h1>
 					<div className="grid-container" id="topbar">
-						<div>
+						<div className="grid-item">
 							<h3>Posts</h3>
-							{this.state.posts ? this.state.posts.length : 0}
+							<span className="number">
+								{this.state.posts ? this.state.posts.length : 0}
+							</span>
 						</div>
-						<div>
+						<div className="grid-item">
 							<h3>Followers</h3>
-							{this.state.followers ? this.state.followers.length : 0}
+							<span className="number">
+								{this.state.followers ? this.state.followers.length : 0}
+							</span>
 						</div>
-						<div>
+						<div className="grid-item">
 							<h3>Following</h3>
-							{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+							<span className="number">
+								{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+							</span>
 						</div>
 					</div>
 					<Container>

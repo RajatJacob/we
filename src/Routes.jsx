@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
+import Card from './components/Card';
 
 export default class Routes extends React.Component {
 	render() {
@@ -10,23 +10,19 @@ export default class Routes extends React.Component {
 			<div className="Content">
 				<Switch>
 					<Route exact path="/">
-						<Container>
+						<Card>
 							<h1>Home</h1>
-						</Container>
-					</Route>
-					<Route exact path="/feed">
-					</Route>
-					<Route exact path="/search">
+						</Card>
 					</Route>
 					<Route exact path="/login">
 						<LoginPage />
 					</Route>
 					<Route exact path="/user/:username" component={UserProfile} />
 					<Route path="*">
-						<Container>
+						<Card>
 							<h1>404</h1>
 							Page Not Found!
-							</Container>
+						</Card>
 					</Route>
 				</Switch>
 			</div>

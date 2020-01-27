@@ -1,13 +1,13 @@
 .Container {
-	width: auto;
-	padding: 0.5em;
-	margin: 2em auto;
+    width: auto;
+    padding: 1em;
+    margin: 2em auto;
 
-	@media screen and (orientation: landscape) {
-		width: 75%;
-	}
+    @media screen and (orientation: landscape) {
+        width: 75%;
+    }
 
-	@media screen and (orientation: portrait) {
-		width: 90%;
-	}
+    @media screen and (orientation: portrait) {
+        width: 90%;
+    }
 }
