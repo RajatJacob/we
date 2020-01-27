@@ -12,9 +12,44 @@ export default class UserProfile extends React.Component {
 		}
 	}
 
-	render() {
+	getPosts = () => {
 		const { firestore } = this.context
-		firestore.collection("users").where("username", "==", this.props.match.params.username.toLowerCase())
+		var posts = []
+		firestore.collection("users/" + this.state.userDocID + "/posts")
+			.get()
+			.then(
+				snapshot => {
+					snapshot.forEach(
+						doc => {
+							posts.push(doc.data())
+						}
+					)
+					this.setState({ posts: posts })
+				}
+			)
+	}
+
+	getFollowers = () => {
+		const { firestore } = this.context
+		var followers = []
+		firestore.collection("users").where("following", "array-contains", firestore.collection("users").doc(this.state.userDocID))
+			.get()
+			.then(
+				snapshot => {
+					snapshot.forEach(
+						doc => {
+							followers.push(doc.id)
+						}
+					)
+					this.setState({ followers: followers })
+				}
+			)
+	}
+
+	componentDidMount() {
+		const { firestore } = this.context
+		const userRef = firestore.collection("users").where("username", "==", this.props.match.params.username.toLowerCase())
+		userRef
 			.get()
 			.then(
 				snapshot => {
@@ -22,11 +57,20 @@ export default class UserProfile extends React.Component {
 						alert: "noUser"
 					})
 					snapshot.forEach(doc => {
-						this.setState({ user: doc.data() })
+						this.setState(
+							{
+								user: doc.data(),
+								userDocID: doc.id
+							}
+						)
+						this.getPosts()
+						this.getFollowers()
 					})
 				}
 			);
+	}
 
+	render() {
 		return (
 			<div className="UserProfile">
 				<Card>
@@ -40,15 +84,15 @@ export default class UserProfile extends React.Component {
 					<div className="grid-container" id="topbar">
 						<div>
 							<h3>Posts</h3>
-							0
+							{this.state.posts ? this.state.posts.length : 0}
 						</div>
 						<div>
 							<h3>Followers</h3>
-							0
+							{this.state.followers ? this.state.followers.length : 0}
 						</div>
 						<div>
 							<h3>Following</h3>
-							0
+							{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
 						</div>
 					</div>
 				</Card>
