@@ -3,13 +3,15 @@ import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
 import GridContainer from '../../components/GridContainer';
+import Button from '../../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
-export default class LoginPage extends React.Component {
+export default class Login extends React.Component {
 	static contextType = FirebaseContext;
 	constructor(props) {
 		super(props)
@@ -40,6 +42,13 @@ export default class LoginPage extends React.Component {
 			})
 	}
 
+	loginWithGoogle = e => {
+		const { auth, firebase } = this.context
+		e.preventDefault()
+		const provider = new firebase.auth.GoogleAuthProvider()
+		this.login(auth.signInWithPopup(provider))
+	}
+
 	submit = e => {
 		const { auth } = this.context;
 		e.preventDefault()
@@ -62,13 +71,6 @@ export default class LoginPage extends React.Component {
 					password: ""
 				})
 			})
-	}
-
-	logInWithGoogle = e => {
-		const { firebase, auth } = this.context;
-		e.preventDefault()
-		const provider = new firebase.auth.GoogleAuthProvider()
-		this.login(auth.signInWithPopup(provider))
 	}
 
 	render() {
@@ -97,13 +99,10 @@ export default class LoginPage extends React.Component {
 								}
 								<Input label="Login" type="submit" />
 							</form>
-							<form onSubmit={this.logInWithGoogle}>
-								<Input label="Login with Google" type="submit" style={
-									{
-										background: "#eeeeee"
-									}
-								} />
-							</form>
+							<Button onClick={this.loginWithGoogle} icon={<FontAwesomeIcon icon={faGoogle} />}>
+								Login with Google
+							</Button>
+							<Link to="/signup">Don't have an account yet? Sign up</Link>
 						</Container>
 					</GridContainer>
 				</Card>

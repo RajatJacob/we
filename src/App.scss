@@ -24,4 +24,11 @@
             margin-bottom: $navSize;
         }
     }
+
+    a,
+    a:hover,
+    a:visited {
+        color: rgb(5, 113, 202);
+        font-weight: bold;
+    }
 }

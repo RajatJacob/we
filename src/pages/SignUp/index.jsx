@@ -2,11 +2,14 @@ import React from 'react';
 import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 import GridContainer from '../../components/GridContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faGhost, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class SignUp extends React.Component {
 	static contextType = FirebaseContext;
@@ -19,6 +22,33 @@ export default class SignUp extends React.Component {
 			password: "",
 			confirmPassword: ""
 		}
+	}
+
+	login = p => {
+		p.then(() => {
+			this.setState({
+				email: "",
+				password: "",
+				alert: null
+			})
+		})
+			.catch((error) => {
+				this.setState({
+					password: "",
+					alert: {
+						type: "danger",
+						title: error.code,
+						message: error.message
+					}
+				})
+			})
+	}
+
+	loginWithGoogle = e => {
+		const { auth, firebase } = this.context
+		e.preventDefault()
+		const provider = new firebase.auth.GoogleAuthProvider()
+		this.login(auth.signInWithPopup(provider))
 	}
 
 	submit = e => {
@@ -68,7 +98,7 @@ export default class SignUp extends React.Component {
 	render() {
 		const { user } = this.context;
 		if (user) return (
-			<h1>Welcome, {user.email}</h1>
+			<Redirect to="/login" />
 		)
 		return (
 			<div className="SignUp">
@@ -95,6 +125,10 @@ export default class SignUp extends React.Component {
 								}
 								<Input label="SignUp" type="submit" />
 							</form>
+							<Button onClick={this.loginWithGoogle} icon={<FontAwesomeIcon icon={faGoogle} />}>
+								Sign Up with Google
+							</Button>
+							<Link to="/login">Already have an account? Login</Link>
 						</Container>
 					</GridContainer>
 				</Card>

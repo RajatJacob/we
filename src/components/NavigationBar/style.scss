@@ -12,17 +12,20 @@
     font-weight: bold;
 
     a {
-        color: white;
         transition: all 500ms ease;
 
         &,
         &:hover,
         &:visited {
+            color: white;
             text-decoration: none;
             padding: 1em;
         }
 
-        &:hover,
+        &:hover {
+            background: darken($primaryColor, 10%);
+        }
+
         &.active {
             background: $primaryColor;
         }

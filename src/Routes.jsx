@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { FirebaseContext } from './contexts/FirebaseContext';
-import Alert from './components/Alert';
-import LoginPage from './pages/LoginPage';
+import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import Card from './components/Card';
+import Button from './components/Button';
 import SignUp from './pages/SignUp';
+import Logout from './pages/Logout';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -23,21 +24,16 @@ export default class Routes extends React.Component {
 						{
 							!user ?
 								<Redirect to="/login" /> :
-								<Alert type="success" title="Login successful!">
+								<Card>
 									Welcome, {user.email || user.displayName}!
-									<div>
-										<button onClick={() => { auth.signOut() }}>Sign Out</button>
-									</div>
-								</Alert>
+									<Button onClick={() => { auth.signOut() }}>Sign Out</Button>
+								</Card>
 						}
 					</Route>
-					<Route exact path="/login">
-						<LoginPage />
-					</Route>
+					<Route exact path="/signup" component={SignUp} />
+					<Route exact path="/login" component={Login} />
 					<Route exact path="/user/:username" component={UserProfile} />
-					<Route exact path="/signup">
-						<SignUp />
-					</Route>
+					<Route exact path="/logout" component={Logout} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

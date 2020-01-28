@@ -81,7 +81,7 @@ export default class UserProfile extends React.Component {
 					snapshot.forEach(doc => {
 						this.setState({ uid: doc.id })
 					})
-					if(this.state.alert !== "noUser") this.listen()
+					if (this.state.alert !== "noUser") this.listen()
 				}
 			);
 	}
