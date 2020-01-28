@@ -1,5 +1,9 @@
 @import '../../global/colors.scss';
 
+a.ButtonLink {
+    text-decoration: none;
+}
+
 .Button {
     padding: 0.5em;
     margin: 1em;

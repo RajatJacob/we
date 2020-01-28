@@ -24,35 +24,8 @@ export default class SignUp extends React.Component {
 		}
 	}
 
-	login = p => {
-		p.then(() => {
-			this.setState({
-				email: "",
-				password: "",
-				alert: null
-			})
-		})
-			.catch((error) => {
-				this.setState({
-					password: "",
-					alert: {
-						type: "danger",
-						title: error.code,
-						message: error.message
-					}
-				})
-			})
-	}
-
-	loginWithGoogle = e => {
-		const { auth, firebase } = this.context
-		e.preventDefault()
-		const provider = new firebase.auth.GoogleAuthProvider()
-		this.login(auth.signInWithPopup(provider))
-	}
-
 	submit = e => {
-		const { auth, getUserRefByUsername } = this.context;
+		const { auth, getUserRefByUsername, firestore } = this.context;
 		e.preventDefault()
 		this.setState({
 			alert: {
@@ -74,6 +47,25 @@ export default class SignUp extends React.Component {
 								},
 								username: ""
 							})
+							console.log("user exists")
+						}
+						else {
+							auth.currentUser.updateProfile(
+								{
+									displayName: this.state.username,
+									name: this.state.name
+								}
+							)
+							firestore.collection("users").doc(auth.currentUser.uid).set(
+								{
+									username: this.state.username,
+									name: this.state.name
+								}
+							).then(
+								() => this.setState({ done: true })
+							).catch(
+								err => console.log(err)
+							)
 						}
 					}
 				)
@@ -90,15 +82,16 @@ export default class SignUp extends React.Component {
 			.finally(() => {
 				this.setState({
 					password: "",
-					confirmPassword: ""
+					confirmPassword: "",
+					done: true
 				})
 			})
 	}
 
 	render() {
-		const { user } = this.context;
-		if (user) return (
-			<Redirect to="/login" />
+		const { isLoggedIn, loginWithGoogle } = this.context;
+		if (isLoggedIn && this.state.done) return (
+			<Redirect to={"/user/" + this.state.username} />
 		)
 		return (
 			<div className="SignUp">
@@ -125,7 +118,7 @@ export default class SignUp extends React.Component {
 								}
 								<Input label="SignUp" type="submit" />
 							</form>
-							<Button onClick={this.loginWithGoogle} icon={<FontAwesomeIcon icon={faGoogle} />}>
+							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
 								Sign Up with Google
 							</Button>
 							<Link to="/login">Already have an account? Login</Link>

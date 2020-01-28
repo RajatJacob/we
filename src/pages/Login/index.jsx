@@ -22,33 +22,6 @@ export default class Login extends React.Component {
 		}
 	}
 
-	login = p => {
-		p.then(() => {
-			this.setState({
-				email: "",
-				password: "",
-				alert: null
-			})
-		})
-			.catch((error) => {
-				this.setState({
-					password: "",
-					alert: {
-						type: "danger",
-						title: error.code,
-						message: error.message
-					}
-				})
-			})
-	}
-
-	loginWithGoogle = e => {
-		const { auth, firebase } = this.context
-		e.preventDefault()
-		const provider = new firebase.auth.GoogleAuthProvider()
-		this.login(auth.signInWithPopup(provider))
-	}
-
 	submit = e => {
 		const { auth } = this.context;
 		e.preventDefault()
@@ -74,9 +47,9 @@ export default class Login extends React.Component {
 	}
 
 	render() {
-		const { user } = this.context;
-		if (user) return (
-			<Redirect to="/user" />
+		const { auth, isLoggedIn, loginWithGoogle } = this.context;
+		if (isLoggedIn) return (
+			<Redirect to={"/user/" + auth.currentUser.displayName} />
 		)
 		return (
 			<div className="LoginPage">
@@ -99,7 +72,7 @@ export default class Login extends React.Component {
 								}
 								<Input label="Login" type="submit" />
 							</form>
-							<Button onClick={this.loginWithGoogle} icon={<FontAwesomeIcon icon={faGoogle} />}>
+							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
 								Login with Google
 							</Button>
 							<Link to="/signup">Don't have an account yet? Sign up</Link>

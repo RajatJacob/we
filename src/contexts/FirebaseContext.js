@@ -26,23 +26,84 @@ export default class FirebaseContextProvider extends React.Component {
 			firebase: firebase,
 			firestore: firebase.firestore(),
 			auth: firebase.auth(),
+			isLoggedIn: false,
 			getUserRefByUsername: (username) => this.state.firestore
 				.collection("users")
-				.where("username", "==", username.toLowerCase())
-		}
-		this.state.auth.onAuthStateChanged((user) => {
-			if (user)
-				this.setState({
-					user: {
-						displayName: user.displayName,
-						email: user.email,
-						photoURL: user.photoURL,
-						emailVerified: user.emailVerified,
-						uid: user.uid
+				.where("username", "==", username.toLowerCase()),
+			login: (p, ob) => {
+				p
+					.then(() => {
+						ob.setState({
+							email: "",
+							password: "",
+							alert: null
+						})
+					})
+					.catch((error) => {
+						ob.setState({
+							password: "",
+							alert: {
+								type: "danger",
+								title: error.code,
+								message: error.message
+							}
+						})
+					})
+				return p
+			},
+			loginWithGoogle: (ob) => {
+				const provider = new firebase.auth.GoogleAuthProvider()
+				this.state.login(this.state.auth.signInWithPopup(provider), ob).then(
+					() => {
+						let u = this.state.auth.currentUser
+						let dbu = {}
+						this.state.firestore.collection("users").doc(u.uid).get().then(
+							doc => {
+								dbu = doc.data()
+								u.providerData.forEach(
+									p => [
+										u.updateProfile({
+											providerId: u.providerId || p.providerId,
+											uid: u.uid || p.uid,
+											displayName: dbu.username || u.displayName || p.displayName,
+											name: dbu.name || u.name || p.name,
+											email: u.email || p.email,
+											photoURL: u.photoURL || p.photoURL
+										})
+									]
+								)
+							}
+						)
 					}
-				});
-			else this.setState({ user: null })
-		});
+				)
+			}
+		}
+
+		this.state.auth.onAuthStateChanged(
+			u => {
+				this.setState({ isLoggedIn: (u) ? true : false })
+				if (u) {
+					let dbu = {}
+					this.state.firestore.collection("users").doc(u.uid).get().then(
+						doc => {
+							dbu = doc.data()
+						}
+					)
+					u.updateProfile({
+						displayName: dbu.displayName || u.displayName.toLowerCase().replace(" ", "-")
+					}).then(
+						() => {
+							this.state.firestore.collection("users").doc(u.uid).update(
+								{
+									username: dbu.displayName || u.displayName || "",
+									name: dbu.name || dbu.displayName || u.name || u.displayName || ""
+								}
+							)
+						}
+					)
+				}
+			}
+		)
 	}
 
 	render() {

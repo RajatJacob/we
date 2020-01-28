@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Card from '../../components/Card';
 import Alert from '../../components/Alert';
 import Button from '../../components/Button';
@@ -17,15 +17,18 @@ export default class UserProfile extends React.Component {
 
 	listen = () => {
 		const { firestore } = this.context
-		firestore.collection("users").doc(this.state.uid).onSnapshot(
-			snapshot => {
-				this.setState({
-					user: snapshot.data()
-				})
-				this.getPosts()
-				this.getFollowers()
-			}
-		)
+		firestore.collection("users")
+			.doc(this.state.uid)
+			.onSnapshot(
+				snapshot => {
+					this.setState({
+						user: snapshot.data(),
+						alert: null
+					})
+					this.getPosts()
+					this.getFollowers()
+				}
+			)
 	}
 
 	getPosts = () => {
@@ -63,33 +66,42 @@ export default class UserProfile extends React.Component {
 	}
 
 	componentDidMount() {
-		const { firestore } = this.context
-		firestore
-			.collection("users")
-			.where(
-				"username",
-				"==",
-				this.props.match.params.username.toLowerCase()
-			)
+		const { getUserRefByUsername, auth } = this.context
+		getUserRefByUsername(
+			this.props.match.params.username
+		).limit(1)
 			.get()
 			.then(
 				snapshot => {
-					if (snapshot.size === 0)
+					if (snapshot.size === 0) {
 						this.setState({
 							alert: "noUser"
 						})
-					snapshot.forEach(doc => {
-						this.setState({ uid: doc.id })
-					})
-					if (this.state.alert !== "noUser") this.listen()
+					}
+					else {
+						snapshot.forEach(
+							doc => {
+								this.setState({
+									uid: doc.id,
+									self: (
+										auth.currentUser.uid
+										===
+										doc.id
+									)
+								})
+								this.listen()
+							}
+						)
+					}
 				}
 			);
 	}
 
 	render() {
-		const { user } = this.context
-		console.log(this.state)
-		if (!user) {
+		const { isLoggedIn } = this.context
+		if (this.props.match.params.username !== this.props.match.params.username.toLowerCase())
+			return <Redirect to={"/user/" + this.props.match.params.username.toLowerCase()} />
+		if (!isLoggedIn) {
 			return (
 				<Container>
 					<Alert type="danger" title="Not logged in!">
@@ -129,9 +141,17 @@ export default class UserProfile extends React.Component {
 						</div>
 					</div>
 					<Container>
-						<Button>
-							Follow
-						</Button>
+						{
+							this.state.self ?
+								<Button to={
+									"/user/" + this.props.match.params.username + "/settings"
+								}>
+									Settings
+								</Button> :
+								<Button>
+									Follow
+								</Button>
+						}
 					</Container>
 				</Card>
 			</div>
