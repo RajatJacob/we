@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
 import Card from './components/Card';
+import SignUp from './pages/SignUp';
 
 export default class Routes extends React.Component {
 	render() {
@@ -18,6 +19,9 @@ export default class Routes extends React.Component {
 						<LoginPage />
 					</Route>
 					<Route exact path="/user/:username" component={UserProfile} />
+					<Route exact path="/signup">
+						<SignUp />
+					</Route>
 					<Route path="*">
 						<Card>
 							<h1>404</h1>
