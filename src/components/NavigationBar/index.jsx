@@ -10,7 +10,7 @@ class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
 
 	render() {
-		const { user, auth } = this.context;
+		const { user } = this.context;
 		const links = (user) ?
 			[
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
@@ -40,9 +40,6 @@ class NavigationBar extends React.Component {
 							</NavLink>
 						)
 					})
-				}
-				{
-					user ? <button onClick={() => { auth.signOut() }}>Logout</button> : null
 				}
 			</div>
 		);

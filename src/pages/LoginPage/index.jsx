@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faSync } from '@fortawesome/free-solid-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
+import { Redirect } from 'react-router-dom';
 
 export default class LoginPage extends React.Component {
 	static contextType = FirebaseContext;
@@ -14,8 +15,29 @@ export default class LoginPage extends React.Component {
 		super(props)
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
+			alert: null
 		}
+	}
+
+	login = p => {
+		p.then(() => {
+			this.setState({
+				email: "",
+				password: "",
+				alert: null
+			})
+		})
+			.catch((error) => {
+				this.setState({
+					password: "",
+					alert: {
+						type: "danger",
+						title: error.code,
+						message: error.message
+					}
+				})
+			})
 	}
 
 	submit = e => {
@@ -42,10 +64,17 @@ export default class LoginPage extends React.Component {
 			})
 	}
 
+	logInWithGoogle = e => {
+		const { firebase, auth } = this.context;
+		e.preventDefault()
+		const provider = new firebase.auth.GoogleAuthProvider()
+		this.login(auth.signInWithPopup(provider))
+	}
+
 	render() {
 		const { user } = this.context;
 		if (user) return (
-			<h1>Welcome, {user.email}</h1>
+			<Redirect to="/user" />
 		)
 		return (
 			<div className="LoginPage">
@@ -67,6 +96,13 @@ export default class LoginPage extends React.Component {
 										null
 								}
 								<Input label="Login" type="submit" />
+							</form>
+							<form onSubmit={this.logInWithGoogle}>
+								<Input label="Login with Google" type="submit" style={
+									{
+										background: "#eeeeee"
+									}
+								} />
 							</form>
 						</Container>
 					</GridContainer>

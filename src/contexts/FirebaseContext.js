@@ -23,6 +23,7 @@ export default class FirebaseContextProvider extends React.Component {
 				console.log(err.code + ": " + err.message)
 			})
 		this.state = {
+			firebase: firebase,
 			firestore: firebase.firestore(),
 			auth: firebase.auth(),
 			getUserRefByUsername: (username) => this.state.firestore
