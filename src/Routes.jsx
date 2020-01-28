@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
+import Donation from './pages/Donation';
 
 export default class Routes extends React.Component {
 	render() {
@@ -13,6 +14,9 @@ export default class Routes extends React.Component {
 						<Container>
 							<h1>Home</h1>
 						</Container>
+					</Route>
+					<Route exact path="/donation">
+						<Donation />
 					</Route>
 					<Route exact path="/feed">
 					</Route>
