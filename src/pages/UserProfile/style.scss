@@ -15,6 +15,11 @@
         }
     }
 
+    h2 {
+        padding: 1em;
+        border-bottom: 0.025em solid #555555;
+    }
+
     .grid-container {
         display: grid;
 
@@ -40,12 +45,12 @@
                     text-decoration: none;
 
                     &:hover {
-                        background: #eeeeee;
+                        background: #00000011;
                         color: $primaryColor;
                     }
 
                     &.active {
-                        background: #dddddd;
+                        background: #00000022;
                         color: lighten($primaryColor, 1.1);
                     }
                 }

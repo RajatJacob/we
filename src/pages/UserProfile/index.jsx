@@ -7,7 +7,7 @@ import Alert from '../../components/Alert';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -101,7 +101,7 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn } = this.context
+		const { isLoggedIn, auth } = this.context
 		if (this.username !== this.username.toLowerCase())
 			return <Redirect to={"/user/" + this.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -164,19 +164,29 @@ export default class UserProfile extends React.Component {
 				<Card>
 					<Switch>
 						<Route exact path={this.props.match.path} >
-							Main
+							<h2>Main</h2>
 						</Route>
 						<Route exact path={this.props.match.path + "/posts"} >
-							Posts
+							<h2>Posts</h2>
 						</Route>
 						<Route exact path={this.props.match.path + "/followers"} >
-							Followers
+							<h2>Followers</h2>
 						</Route>
 						<Route exact path={this.props.match.path + "/following"} >
-							Following
+							<h2>Followers</h2>
 						</Route>
 						<Route exact path={this.props.match.path + "/settings"} >
-							Settings
+							{
+								this.username === auth.currentUser.displayName ?
+									<>
+										<h2>Settings</h2>
+										<Container>
+											<Button to="/logout" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>Logout</Button>
+										</Container>
+									</>
+									:
+									null
+							}
 						</Route>
 					</Switch>
 				</Card>
