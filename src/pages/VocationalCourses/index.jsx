@@ -10,7 +10,6 @@ import img6 from '../../images/childcare.jpg';
 import img7 from '../../images/dress.jpg';
 import img8 from '../../images/computer.jpg';
 import img9 from '../../images/ayurveda.jpg';
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import img10 from '../../images/calendar.png';
 import './style.scss';
 import Card from '../../components/Card';

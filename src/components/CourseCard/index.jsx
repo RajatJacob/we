@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Input from '../../components/Input';
 import './style.scss';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCalendar} from '@fortawesome/free-solid-svg-icons';
 import Container from '../../components/Container';
 import img10 from '../../images/calendar.png';
 
