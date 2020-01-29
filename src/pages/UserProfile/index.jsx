@@ -98,7 +98,8 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn } = this.context
+		const { isLoggedIn, isFollowing } = this.context
+		if (this.state.uid) console.log("isFollowing: " + isFollowing(this.state.uid))
 		if (this.props.match.params.username !== this.props.match.params.username.toLowerCase())
 			return <Redirect to={"/user/" + this.props.match.params.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -120,27 +121,27 @@ export default class UserProfile extends React.Component {
 								this.state.user.name
 						}
 					</h1>
-					<div className="grid-container" id="topbar">
-						<div className="grid-item">
-							<h3>Posts</h3>
-							<span className="number">
-								{this.state.posts ? this.state.posts.length : 0}
-							</span>
-						</div>
-						<div className="grid-item">
-							<h3>Followers</h3>
-							<span className="number">
-								{this.state.followers ? this.state.followers.length : 0}
-							</span>
-						</div>
-						<div className="grid-item">
-							<h3>Following</h3>
-							<span className="number">
-								{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
-							</span>
-						</div>
-					</div>
 					<Container>
+						<div className="grid-container" id="topbar">
+							<div className="grid-item">
+								<h3>Posts</h3>
+								<span className="number">
+									{this.state.posts ? this.state.posts.length : 0}
+								</span>
+							</div>
+							<div className="grid-item">
+								<h3>Followers</h3>
+								<span className="number">
+									{this.state.followers ? this.state.followers.length : 0}
+								</span>
+							</div>
+							<div className="grid-item">
+								<h3>Following</h3>
+								<span className="number">
+									{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+								</span>
+							</div>
+						</div>
 						{
 							this.state.self ?
 								<Button to={
@@ -148,9 +149,13 @@ export default class UserProfile extends React.Component {
 								}>
 									Settings
 								</Button> :
-								<Button>
-									Follow
-								</Button>
+								this.state.uid && isFollowing(this.state.uid) ?
+									<Button>
+										Unfollow
+									</Button> :
+									<Button>
+										Follow
+									</Button>
 						}
 					</Container>
 				</Card>
