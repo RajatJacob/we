@@ -14,9 +14,20 @@
 	 }
 }
 
+@media (max-width: 1200px) {
+	.postsContainer{
+		grid-template-columns: 1fr 1fr; 
+	}
+}
+
+@media (max-width: 900px) {
+	.postsContainer{
+		grid-template-columns: 1fr ; 
+	}
+}
+
 .row{
 	display: inline-grid;
-
 	grid-template-rows: 3;
 }
 

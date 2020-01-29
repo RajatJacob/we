@@ -7,8 +7,8 @@
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
-  width: 22rem;
-  height: 20rem;
+  width: 23rem;
+  height: 23rem;
   margin-right: 5px;
   margin-left: 5px;
   margin-bottom: 5px !important;
@@ -96,13 +96,36 @@ weeks.relative {
   bottom: 10px;
   border: 3px solid #8AC007;
 } 
-.weeks{
-	/*text-orientation: upright;*/
-	font-family: times;
 
-	text-align: left;
+.weeks {
+	display: flex;
+	justify-content: flex-start;
+	text-align: center;
+	padding-left: 20px;
+}
 
-	font-size: 1em;
-	padding-bottom: 5px;
-	margin-bottom: 1em;
+
+
+.weekimage{
+	size: 30px;
+	height: 40px;
+	width: 40px;
+
+
+	/*position: absolute;
+left: 0px;
+bottom:60px;
+  padding: 10px;
+  float:left;*/
+
+
+	
+}
+
+p .weeklabel{
+	font-size: 12px;				
+	left:0px;
+	right: 60px;
+	text-align: left; 
+
 }
