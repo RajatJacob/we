@@ -26,7 +26,7 @@ export default class VocationalCourses extends React.Component
 		return(
 			<div>
 			<div>
-			<h1>WE OFFER</h1>
+			<h1>WE Offer</h1>
 			</div>
 
 			<div className='postsContainer'>
