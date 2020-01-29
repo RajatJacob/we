@@ -1,6 +1,20 @@
 @import '../../global/colors.scss';
 
 .UserProfile {
+    a {
+
+        &,
+        &:hover,
+        &:visited {
+            color: #222222;
+            text-decoration: none;
+
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
+
     .grid-container {
         display: grid;
 
@@ -13,11 +27,28 @@
                 grid-template-rows: repeat(3, 1fr);
             }
 
-            .grid-item {
+            a.grid-item {
                 margin: 1em;
                 padding: 1em;
                 border-radius: 1em;
                 transition: all 500ms ease;
+
+                &,
+                &:hover,
+                &:visited {
+                    color: #222;
+                    text-decoration: none;
+
+                    &:hover {
+                        background: #eeeeee;
+                        color: $primaryColor;
+                    }
+
+                    &.active {
+                        background: #dddddd;
+                        color: lighten($primaryColor, 1.1);
+                    }
+                }
 
                 h3 {
                     margin: 0;
@@ -28,11 +59,6 @@
                     padding: 0.5em;
                     font-size: 1.75em;
                     font-weight: bolder;
-                }
-
-                &:hover {
-                    background: #eeeeee;
-                    color: $primaryColor;
                 }
             }
         }

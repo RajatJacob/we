@@ -76,34 +76,6 @@ export default class FirebaseContextProvider extends React.Component {
 						)
 					}
 				)
-			},
-			isFollowing: (uid) => {
-				let following = []
-				let isFollowing = false
-				console.info("Bleh")
-				if (this.state.auth.currentUser.uid)
-					this.state.firestore
-						.collection("users")
-						.doc(this.state.auth.currentUser.uid.toString())
-						.get()
-						.then(
-							doc => {
-								if (doc.exists) {
-									following = doc.data().following
-									following.forEach(
-										x => {
-											if (uid === x.id) {
-												console.log(isFollowing)
-												isFollowing = true
-												return
-											}
-										}
-									)
-								}
-								else isFollowing = false
-							}
-						)
-				return isFollowing
 			}
 		}
 

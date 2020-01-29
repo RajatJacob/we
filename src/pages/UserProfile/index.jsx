@@ -1,11 +1,13 @@
 import React from 'react';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, NavLink, Redirect, Switch, Route } from 'react-router-dom';
 import Card from '../../components/Card';
 import Alert from '../../components/Alert';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -14,6 +16,7 @@ export default class UserProfile extends React.Component {
 			username: undefined
 		}
 	}
+	username = this.props.match.params.username
 
 	listen = () => {
 		const { firestore } = this.context
@@ -68,7 +71,7 @@ export default class UserProfile extends React.Component {
 	componentDidMount() {
 		const { getUserRefByUsername, auth } = this.context
 		getUserRefByUsername(
-			this.props.match.params.username
+			this.username
 		).limit(1)
 			.get()
 			.then(
@@ -98,10 +101,9 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn, isFollowing } = this.context
-		if (this.state.uid) console.log("isFollowing: " + isFollowing(this.state.uid))
-		if (this.props.match.params.username !== this.props.match.params.username.toLowerCase())
-			return <Redirect to={"/user/" + this.props.match.params.username.toLowerCase()} />
+		const { isLoggedIn } = this.context
+		if (this.username !== this.username.toLowerCase())
+			return <Redirect to={"/user/" + this.username.toLowerCase()} />
 		if (!isLoggedIn) {
 			return (
 				<Container>
@@ -114,50 +116,69 @@ export default class UserProfile extends React.Component {
 		return (
 			<div className="UserProfile">
 				<Card>
-					<h1>
-						{
-							this.state.alert === "noUser" ?
-								<Alert type="danger" title="Invalid user!" /> :
-								this.state.user.name
-						}
-					</h1>
+					{
+						this.state.alert === "noUser" ?
+							<Alert type="danger" title="Invalid user!" /> :
+							<Link to={"/user/" + this.username}>
+								<h1>
+									{
+										this.state.user.name
+									}
+								</h1>
+							</Link>
+					}
 					<Container>
 						<div className="grid-container" id="topbar">
-							<div className="grid-item">
+							<NavLink to={"/user/" + this.username + "/posts"} className="grid-item" activeClassName="active">
 								<h3>Posts</h3>
 								<span className="number">
 									{this.state.posts ? this.state.posts.length : 0}
 								</span>
-							</div>
-							<div className="grid-item">
+							</NavLink>
+							<NavLink to={"/user/" + this.username + "/followers"} className="grid-item" activeClassName="active">
 								<h3>Followers</h3>
 								<span className="number">
 									{this.state.followers ? this.state.followers.length : 0}
 								</span>
-							</div>
-							<div className="grid-item">
+							</NavLink>
+							<NavLink to={"/user/" + this.username + "/following"} className="grid-item" activeClassName="active">
 								<h3>Following</h3>
 								<span className="number">
 									{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
 								</span>
-							</div>
+							</NavLink>
 						</div>
 						{
 							this.state.self ?
 								<Button to={
-									"/user/" + this.props.match.params.username + "/settings"
-								}>
+									"/user/" + this.username + "/settings"
+								} icon={<FontAwesomeIcon icon={faCog} />}>
 									Settings
 								</Button> :
-								this.state.uid && isFollowing(this.state.uid) ?
-									<Button>
-										Unfollow
-									</Button> :
-									<Button>
-										Follow
-									</Button>
+								<Button>
+									Follow
+								</Button>
 						}
 					</Container>
+				</Card>
+				<Card>
+					<Switch>
+						<Route exact path={this.props.match.path} >
+							Main
+						</Route>
+						<Route exact path={this.props.match.path + "/posts"} >
+							Posts
+						</Route>
+						<Route exact path={this.props.match.path + "/followers"} >
+							Followers
+						</Route>
+						<Route exact path={this.props.match.path + "/following"} >
+							Following
+						</Route>
+						<Route exact path={this.props.match.path + "/settings"} >
+							Settings
+						</Route>
+					</Switch>
 				</Card>
 			</div>
 		)
