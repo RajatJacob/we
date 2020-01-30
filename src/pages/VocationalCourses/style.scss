@@ -1,73 +1,65 @@
-.postsContainer{
-	display: grid;
-	width: 100%;
-	
-	 padding: 20px;
-	 grid-gap: 1em;
+.postsContainer {
+    display: grid;
+    width: 100%;
 
-	 @media screen and (orientation:landscape) {
-	 	grid-template-columns: 1fr 1fr 1fr;
-	 }
+    padding: 20px;
+    grid-gap: 1em;
 
-	 @media screen and (orientation:portrait) {
-	 	grid-template-columns: auto;
-	 }
+    @media screen and (orientation:landscape) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media screen and (orientation:portrait) {
+        grid-template-columns: auto;
+    }
 }
 
 @media (max-width: 1200px) {
-	.postsContainer{
-		grid-template-columns: 1fr 1fr; 
-	}
+    .postsContainer {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 900px) {
-	.postsContainer{
-		grid-template-columns: 1fr ; 
-	}
+    .postsContainer {
+        grid-template-columns: 1fr;
+    }
 }
 
-h1{
-	font-family:  Marker Felt, fantasy ;
-	font-style: bold;
-	font-size: 40px;
-}
-.row{
-	display: inline-grid;
-	grid-template-rows: 3;
+h1 {
+    font-family: Marker Felt, fantasy;
+    font-style: bold;
+    font-size: 40px;
 }
 
-.Cards{
-  background-color: rgba(255, 255, 255, 0.8);
-  background: green;
-size: 100%;
-margin-right: 50px;
-padding: 20px;
-display: square;
-border-radius: 5px;
-
+.row {
+    display: inline-grid;
+    grid-template-rows: 3;
 }
-.Card{
-  background-color: white;
- 
-  height: 400px;
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-padding: 50px;
+
+.Cards {
+    background-color: rgba(255, 255, 255, 0.8);
+    background: green;
+    size: 100%;
+    margin-right: 50px;
+    padding: 20px;
+    display: square;
+    border-radius: 5px;
 
 }
 
-.image{
-height:100%;
-width: 100%
+.Card {
+    background-color: white;
+
+    height: 400px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+
 }
 
-
-
-
-
-
-
-
-
-
+.image {
+    height: 100%;
+    width: 100%
+}
