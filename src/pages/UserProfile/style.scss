@@ -1,0 +1,51 @@
+@import '../../global/colors.scss';
+
+.UserProfile {
+    a {
+
+        &,
+        &:hover,
+        &:visited {
+            color: #222222;
+            text-decoration: none;
+
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
+
+    h2 {
+        padding: 0.5em;
+    }
+
+    .tab-container {
+        display: flex;
+        width: 100%;
+
+        .tab {
+            margin: 0.5em;
+            padding: 1em;
+            border-radius: 1em;
+            width: 33.33%;
+
+            @media screen and (orientation: portrait) {
+                padding: 1em 0.25em;
+            }
+
+            &:hover {
+                background: #00000022;
+                color: $primaryColor;
+            }
+
+            &.active {
+                background: #00000033;
+                color: darken($primaryColor, 1.1);
+            }
+
+            .number {
+                font-size: 1.5em;
+            }
+        }
+    }
+}

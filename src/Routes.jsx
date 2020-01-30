@@ -1,34 +1,44 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Container from './components/Container';
-import LoginPage from './pages/LoginPage';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { FirebaseContext } from './contexts/FirebaseContext';
+import Login from './pages/Login';
+import UserProfile from './pages/UserProfile';
+import Card from './components/Card';
+import SignUp from './pages/SignUp';
+import Logout from './pages/Logout';
 import VocationalCourses from './pages/VocationalCourses';
 
+
 export default class Routes extends React.Component {
+	static contextType = FirebaseContext
 	render() {
+		const { auth } = this.context
 		return (
 			<div className="Content">
 				<Switch>
 					<Route exact path="/">
-						<Container>
+						<Card>
 							<h1>Home</h1>
-						</Container>
+						</Card>
 					</Route>
-					<Route exact path="/feed">
+					<Route exact path="/user">
+						{
+							auth.currentUser ?
+								<Redirect to={"/user/" + auth.currentUser.displayName} /> :
+								<Redirect to="/login" />
+
+						}
 					</Route>
-					<Route exact path="/search">
-					</Route>
-					<Route exact path="/login">
-						<LoginPage />
-					</Route>
-					<Route exact path="/VocationalCourses">
-						<VocationalCourses />
-					</Route>
+					<Route exact path="/signup" component={SignUp} />
+					<Route exact path="/login" component={Login} />
+					<Route path="/user/:username" component={UserProfile} />
+					<Route exact path="/logout" component={Logout} />
+          <Route exact path="/VocationalCourses" component={VocationalCourses} />
 					<Route path="*">
-						<Container>
+						<Card>
 							<h1>404</h1>
 							Page Not Found!
-							</Container>
+						</Card>
 					</Route>
 				</Switch>
 			</div>

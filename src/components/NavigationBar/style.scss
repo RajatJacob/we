@@ -5,29 +5,35 @@
     position: fixed;
     display: grid;
     bottom: 0;
-    right: 0;
+    left: 0;
     background: #222222;
     text-transform: uppercase;
     letter-spacing: 0.25em;
     font-weight: bold;
+    z-index: 3;
 
     a {
-        color: white;
+        transition: all 500ms ease;
 
         &,
         &:hover,
         &:visited {
+            color: white;
             text-decoration: none;
             padding: 1em;
+        }
 
-            &:hover,
-            &.active {
-                background: $primaryColor;
-            }
+        &:hover {
+            background: darken($primaryColor, 10%);
+        }
+
+        &.active {
+            background: $primaryColor;
         }
 
         @media screen and (orientation: landscape) {
-            writing-mode: vertical-rl;
+            writing-mode: vertical-lr;
+            text-orientation: sideways;
         }
 
         span {
