@@ -16,55 +16,35 @@
     }
 
     h2 {
-        padding: 1em;
-        border-bottom: 0.025em solid #555555;
+        padding: 0.5em;
     }
 
-    .grid-container {
-        display: grid;
+    .tab-container {
+        display: flex;
+        width: 100%;
 
-        &#topbar {
-            @media screen and (orientation: landscape) {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .tab {
+            margin: 0.5em;
+            padding: 1em;
+            border-radius: 1em;
+            width: 33.33%;
 
             @media screen and (orientation: portrait) {
-                grid-template-rows: repeat(3, 1fr);
+                padding: 1em 0.25em;
             }
 
-            a.grid-item {
-                margin: 1em;
-                padding: 1em;
-                border-radius: 1em;
-                transition: all 500ms ease;
+            &:hover {
+                background: #00000022;
+                color: $primaryColor;
+            }
 
-                &,
-                &:hover,
-                &:visited {
-                    color: #222;
-                    text-decoration: none;
+            &.active {
+                background: #00000033;
+                color: darken($primaryColor, 1.1);
+            }
 
-                    &:hover {
-                        background: #00000011;
-                        color: $primaryColor;
-                    }
-
-                    &.active {
-                        background: #00000022;
-                        color: lighten($primaryColor, 1.1);
-                    }
-                }
-
-                h3 {
-                    margin: 0;
-                    padding: 0.5em;
-                }
-
-                span.number {
-                    padding: 0.5em;
-                    font-size: 1.75em;
-                    font-weight: bolder;
-                }
+            .number {
+                font-size: 1.5em;
             }
         }
     }

@@ -128,30 +128,40 @@ export default class UserProfile extends React.Component {
 							</Link>
 					}
 					<Container>
-						<div className="grid-container" id="topbar">
-							<NavLink to={"/user/" + this.username + "/posts"} className="grid-item" activeClassName="active">
-								<h3>Posts</h3>
-								<span className="number">
+						<div className="tab-container">
+							<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
+								<div className="number">
 									{this.state.posts ? this.state.posts.length : 0}
-								</span>
+								</div>
+								<div className="title">
+									{
+										this.state.posts ? this.state.posts.length === 1 ? "Post" :
+											"Posts" : "Posts"
+									}
+								</div>
 							</NavLink>
-							<NavLink to={"/user/" + this.username + "/followers"} className="grid-item" activeClassName="active">
-								<h3>Followers</h3>
-								<span className="number">
+							<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
+								<div className="number">
 									{this.state.followers ? this.state.followers.length : 0}
-								</span>
+								</div>
+								<div className="title">
+									{
+										this.state.followers ? this.state.followers.length === 1 ? "Follower" :
+											"Followers" : "Followers"
+									}
+								</div>
 							</NavLink>
-							<NavLink to={"/user/" + this.username + "/following"} className="grid-item" activeClassName="active">
-								<h3>Following</h3>
-								<span className="number">
+							<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
+								<div className="number">
 									{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
-								</span>
+								</div>
+								<div className="title">Following</div>
 							</NavLink>
 						</div>
 						{
 							this.state.self ?
 								<Button to={
-									"/user/" + this.username + "/settings"
+									this.props.match.url + "/settings"
 								} icon={<FontAwesomeIcon icon={faCog} />}>
 									Settings
 								</Button> :
