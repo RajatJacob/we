@@ -15,7 +15,7 @@ import './style.scss';
 export default class VocationalCourses extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className="VocationalCourses">
 				<div>
 					<h1>WE Offer</h1>
 				</div>
