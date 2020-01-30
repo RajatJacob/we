@@ -7,6 +7,7 @@ import Card from './components/Card';
 import Button from './components/Button';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
+import ForgotPassword from './pages/ForgotPassword';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -34,6 +35,7 @@ export default class Routes extends React.Component {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/user/:username" component={UserProfile} />
 					<Route exact path="/logout" component={Logout} />
+					<Route exact path="/forgotpassword" component={ForgotPassword} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>
