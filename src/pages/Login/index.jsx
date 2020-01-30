@@ -54,7 +54,7 @@ export default class Login extends React.Component {
 		return (
 			<div className="LoginPage">
 				<Card noContainer>
-					<GridContainer>
+					<GridContainer split>
 						<Container>
 							<h1>Login</h1>
 						</Container>
@@ -72,14 +72,13 @@ export default class Login extends React.Component {
 								}
 								<GridContainer>
 									<Link to="/forgotpassword" align="left">Forgot Password</Link>
-									<Link to="/signup" align="right" left="5px"> signup </Link>
+									<Link to="/signup" align="right">Signup</Link>
 								</GridContainer>
 								<Input label="Login" type="submit" />
 							</form>
 							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
 								Login with Google
 							</Button>
-
 						</Container>
 					</GridContainer>
 				</Card>

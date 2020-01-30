@@ -4,7 +4,6 @@ import { FirebaseContext } from './contexts/FirebaseContext';
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import Card from './components/Card';
-import Button from './components/Button';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
@@ -12,7 +11,7 @@ import ForgotPassword from './pages/ForgotPassword';
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
 	render() {
-		const { user, auth } = this.context
+		const { auth } = this.context
 		return (
 			<div className="Content">
 				<Switch>
@@ -23,17 +22,15 @@ export default class Routes extends React.Component {
 					</Route>
 					<Route exact path="/user">
 						{
-							!user ?
-								<Redirect to="/login" /> :
-								<Card>
-									Welcome, {user.email || user.displayName}!
-									<Button onClick={() => { auth.signOut() }}>Sign Out</Button>
-								</Card>
+							auth.currentUser ?
+								<Redirect to={"/user/" + auth.currentUser.displayName} /> :
+								<Redirect to="/login" />
+
 						}
 					</Route>
 					<Route exact path="/signup" component={SignUp} />
 					<Route exact path="/login" component={Login} />
-					<Route exact path="/user/:username" component={UserProfile} />
+					<Route path="/user/:username" component={UserProfile} />
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
 					<Route path="*">

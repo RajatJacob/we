@@ -5,11 +5,12 @@
     position: fixed;
     display: grid;
     bottom: 0;
-    right: 0;
+    left: 0;
     background: #222222;
     text-transform: uppercase;
     letter-spacing: 0.25em;
     font-weight: bold;
+    z-index: 3;
 
     a {
         transition: all 500ms ease;
@@ -31,7 +32,8 @@
         }
 
         @media screen and (orientation: landscape) {
-            writing-mode: vertical-rl;
+            writing-mode: vertical-lr;
+            text-orientation: sideways;
         }
 
         span {

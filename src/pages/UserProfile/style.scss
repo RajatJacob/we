@@ -1,33 +1,50 @@
 @import '../../global/colors.scss';
 
 .UserProfile {
-    .grid-container {
-        display: grid;
+    a {
 
-        &#topbar {
-			grid-template-columns: repeat(3, 1fr);
+        &,
+        &:hover,
+        &:visited {
+            color: #222222;
+            text-decoration: none;
 
-            .grid-item {
-                margin: 1em;
-                padding: 1em;
-                border-radius: 1em;
-                transition: all 500ms ease;
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
 
-                h3 {
-                    margin: 0;
-                    padding: 0.5em;
-                }
+    h2 {
+        padding: 0.5em;
+    }
 
-                span.number {
-                    padding: 0.5em;
-                    font-size: 1.75em;
-                    font-weight: bolder;
-                }
+    .tab-container {
+        display: flex;
+        width: 100%;
 
-                &:hover {
-                    background: #eeeeee;
-                    color: $primaryColor;
-                }
+        .tab {
+            margin: 0.5em;
+            padding: 1em;
+            border-radius: 1em;
+            width: 33.33%;
+
+            @media screen and (orientation: portrait) {
+                padding: 1em 0.25em;
+            }
+
+            &:hover {
+                background: #00000022;
+                color: $primaryColor;
+            }
+
+            &.active {
+                background: #00000033;
+                color: darken($primaryColor, 1.1);
+            }
+
+            .number {
+                font-size: 1.5em;
             }
         }
     }

@@ -5,7 +5,7 @@
     border-radius: 2em;
     background: #EEEEEE;
     padding: 0.5em 1em;
-    margin: 1em;
+    margin: 0.5em;
     border: 0.05em solid #00000055;
     transition: all 500ms ease;
     display: grid;
@@ -40,5 +40,9 @@
 
     &.submit {
         @extend .Button;
+
+        input {
+            padding: 0;
+        }
     }
 }

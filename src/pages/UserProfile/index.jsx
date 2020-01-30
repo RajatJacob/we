@@ -1,11 +1,13 @@
 import React from 'react';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, NavLink, Redirect, Switch, Route } from 'react-router-dom';
 import Card from '../../components/Card';
 import Alert from '../../components/Alert';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -14,6 +16,7 @@ export default class UserProfile extends React.Component {
 			username: undefined
 		}
 	}
+	username = this.props.match.params.username
 
 	listen = () => {
 		const { firestore } = this.context
@@ -68,7 +71,7 @@ export default class UserProfile extends React.Component {
 	componentDidMount() {
 		const { getUserRefByUsername, auth } = this.context
 		getUserRefByUsername(
-			this.props.match.params.username
+			this.username
 		).limit(1)
 			.get()
 			.then(
@@ -98,9 +101,9 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn } = this.context
-		if (this.props.match.params.username !== this.props.match.params.username.toLowerCase())
-			return <Redirect to={"/user/" + this.props.match.params.username.toLowerCase()} />
+		const { isLoggedIn, auth } = this.context
+		if (this.username !== this.username.toLowerCase())
+			return <Redirect to={"/user/" + this.username.toLowerCase()} />
 		if (!isLoggedIn) {
 			return (
 				<Container>
@@ -113,39 +116,53 @@ export default class UserProfile extends React.Component {
 		return (
 			<div className="UserProfile">
 				<Card>
-					<h1>
-						{
-							this.state.alert === "noUser" ?
-								<Alert type="danger" title="Invalid user!" /> :
-								this.state.user.name
-						}
-					</h1>
-					<div className="grid-container" id="topbar">
-						<div className="grid-item">
-							<h3>Posts</h3>
-							<span className="number">
-								{this.state.posts ? this.state.posts.length : 0}
-							</span>
-						</div>
-						<div className="grid-item">
-							<h3>Followers</h3>
-							<span className="number">
-								{this.state.followers ? this.state.followers.length : 0}
-							</span>
-						</div>
-						<div className="grid-item">
-							<h3>Following</h3>
-							<span className="number">
-								{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
-							</span>
-						</div>
-					</div>
+					{
+						this.state.alert === "noUser" ?
+							<Alert type="danger" title="Invalid user!" /> :
+							<Link to={"/user/" + this.username}>
+								<h1>
+									{
+										this.state.user.name
+									}
+								</h1>
+							</Link>
+					}
 					<Container>
+						<div className="tab-container">
+							<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
+								<div className="number">
+									{this.state.posts ? this.state.posts.length : 0}
+								</div>
+								<div className="title">
+									{
+										this.state.posts ? this.state.posts.length === 1 ? "Post" :
+											"Posts" : "Posts"
+									}
+								</div>
+							</NavLink>
+							<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
+								<div className="number">
+									{this.state.followers ? this.state.followers.length : 0}
+								</div>
+								<div className="title">
+									{
+										this.state.followers ? this.state.followers.length === 1 ? "Follower" :
+											"Followers" : "Followers"
+									}
+								</div>
+							</NavLink>
+							<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
+								<div className="number">
+									{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+								</div>
+								<div className="title">Following</div>
+							</NavLink>
+						</div>
 						{
 							this.state.self ?
 								<Button to={
-									"/user/" + this.props.match.params.username + "/settings"
-								}>
+									this.props.match.url + "/settings"
+								} icon={<FontAwesomeIcon icon={faCog} />}>
 									Settings
 								</Button> :
 								<Button>
@@ -153,6 +170,35 @@ export default class UserProfile extends React.Component {
 								</Button>
 						}
 					</Container>
+				</Card>
+				<Card>
+					<Switch>
+						<Route exact path={this.props.match.path} >
+							<h2>Main</h2>
+						</Route>
+						<Route exact path={this.props.match.path + "/posts"} >
+							<h2>Posts</h2>
+						</Route>
+						<Route exact path={this.props.match.path + "/followers"} >
+							<h2>Followers</h2>
+						</Route>
+						<Route exact path={this.props.match.path + "/following"} >
+							<h2>Followers</h2>
+						</Route>
+						<Route exact path={this.props.match.path + "/settings"} >
+							{
+								this.username === auth.currentUser.displayName ?
+									<>
+										<h2>Settings</h2>
+										<Container>
+											<Button to="/logout" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>Logout</Button>
+										</Container>
+									</>
+									:
+									null
+							}
+						</Route>
+					</Switch>
 				</Card>
 			</div>
 		)

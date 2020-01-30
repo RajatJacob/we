@@ -95,8 +95,7 @@ export default class FirebaseContextProvider extends React.Component {
 						() => {
 							this.state.firestore.collection("users").doc(u.uid).update(
 								{
-									username: dbu.displayName || u.displayName || "",
-									name: dbu.name || dbu.displayName || u.name || u.displayName || ""
+									username: dbu.displayName || u.displayName || ""
 								}
 							)
 						}
