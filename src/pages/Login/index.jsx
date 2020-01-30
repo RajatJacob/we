@@ -70,14 +70,19 @@ export default class Login extends React.Component {
 										</Alert> :
 										null
 								}
-								<GridContainer>
-									<Input label="Login" type="submit" />
-									<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
-										Login with Google
-									</Button>
-								</GridContainer>
+								<Input label="Login" type="submit" />
+								<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
+									Login with Google
+								</Button>
 							</form>
-							<Link to="/signup">Don't have an account yet? Sign up</Link>
+							<GridContainer>
+								<Container>
+									<Link to="/forgotpassword" align="left">Forgot Password</Link>
+								</Container>
+								<Container>
+									<Link to="/signup" align="right">Signup</Link>
+								</Container>
+							</GridContainer>
 						</Container>
 					</GridContainer>
 				</Card>
