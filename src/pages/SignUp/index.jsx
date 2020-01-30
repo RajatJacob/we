@@ -116,14 +116,14 @@ export default class SignUp extends React.Component {
 										</Alert> :
 										null
 								}
-								<GridContainer>
-									<Input label="SignUp" type="submit" />
-									<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
-										Sign Up with Google
-									</Button>
-								</GridContainer>
+								<Input label="SignUp" type="submit" />
 							</form>
-							<Link to="/login">Already have an account? Login</Link>
+							<Container>
+								<Link to="/login">Already have an account? Login</Link>
+							</Container>
+							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
+								Sign Up with Google
+							</Button>
 						</Container>
 					</GridContainer>
 				</Card>

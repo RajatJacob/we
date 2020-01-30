@@ -70,12 +70,7 @@ export default class Login extends React.Component {
 										</Alert> :
 										null
 								}
-								<GridContainer>
-									<Input label="Login" type="submit" />
-									<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
-										Login with Google
-								</Button>
-								</GridContainer>
+								<Input label="Login" type="submit" />
 							</form>
 							<GridContainer>
 								<Container>
@@ -85,6 +80,9 @@ export default class Login extends React.Component {
 									<Link to="/signup" align="right">Signup</Link>
 								</Container>
 							</GridContainer>
+							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
+								Login with Google
+							</Button>
 						</Container>
 					</GridContainer>
 				</Card>
