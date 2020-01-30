@@ -1,0 +1,38 @@
+@import '../../global/colors.scss';
+
+a.ButtonLink {
+    text-decoration: none;
+}
+
+.Button {
+    padding: 0.5em;
+    margin: 0.5em;
+    background: darken($primaryColor, 10%);
+    border: 0.25em solid darken($primaryColor, 25%);
+    border-radius: 5em;
+    box-shadow: 0 0.25em 0.25em 0 #00000022;
+    cursor: pointer;
+    transition: all 500ms ease;
+
+    &:hover {
+        background: $primaryColor;
+        box-shadow: 0 0.5em 0.25em 0.05em #00000022;
+    }
+
+    &,
+    * {
+        color: white;
+        font-weight: bolder;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+
+    .icon {
+        padding: 0 1em;
+        border-right: 0.025em solid white;
+    }
+
+    .message {
+        padding: 0 1em;
+    }
+}

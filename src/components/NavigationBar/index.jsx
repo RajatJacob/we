@@ -10,8 +10,8 @@ class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
 
 	render() {
-		const { user, auth } = this.context;
-		const links = (user) ?
+		const { isLoggedIn } = this.context;
+		const links = (isLoggedIn) ?
 			[
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
@@ -21,7 +21,6 @@ class NavigationBar extends React.Component {
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Login", url: "/login", icon: <FontAwesomeIcon icon={faKey} /> }
 			];
-		links.forEach((x) => console.log(x.name))
 		return (
 			<div className="NavigationBar">
 				{
@@ -30,7 +29,6 @@ class NavigationBar extends React.Component {
 						if (h.url === "/") checkActive = (match, location) => {
 							if (!location) return false;
 							const { pathname } = location;
-							console.log(pathname);
 							return pathname === "/";
 						}
 						return (
@@ -42,9 +40,6 @@ class NavigationBar extends React.Component {
 							</NavLink>
 						)
 					})
-				}
-				{
-					user ? <button onClick={() => { auth.signOut() }}>Logout</button> : null
 				}
 			</div>
 		);

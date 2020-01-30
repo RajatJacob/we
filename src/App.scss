@@ -14,12 +14,29 @@
     }
 
     .Content {
+        padding: 3em 0;
+
         @media screen and (orientation: landscape) {
-            margin-right: $navSize;
+            margin-left: $navSize;
         }
 
         @media screen and (orientation: landscape) {
             margin-bottom: $navSize;
+        }
+    }
+
+    a {
+        $color: rgb(5, 113, 202);
+        font-weight: bold;
+        transition: all 500ms ease;
+
+        &,
+        &:visited {
+            color: $color;
+        }
+
+        &:hover {
+            color: darken($color, 20%);
         }
     }
 }
