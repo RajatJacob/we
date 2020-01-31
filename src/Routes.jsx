@@ -8,7 +8,16 @@ import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
 import VocationalCourses from './pages/VocationalCourses';
-
+import Computer from './pages/VocationalCourses/BasicComputer';
+import Sanitation from './pages/VocationalCourses/Sanitation';
+import Bakery from './pages/VocationalCourses/Bakery';
+import Elderly from './pages/VocationalCourses/Elderly';
+import Haircare from './pages/VocationalCourses/Haircare';
+import Childhood from './pages/VocationalCourses/Childhood';
+import Ayurveda from './pages/VocationalCourses/Ayurveda';
+import English from './pages/VocationalCourses/English';
+import Design from './pages/VocationalCourses/Design';
+ 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
 	render() {
@@ -35,6 +44,22 @@ export default class Routes extends React.Component {
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
 					<Route exact path="/VocationalCourses" component={VocationalCourses} />
+					<Route exact path="/Computer" component={Computer} />
+					<Route exact path="/Sanitation" component={Sanitation} />
+					<Route exact path="/Bakery" 
+					component={Bakery} />
+					<Route exact path="/Elderly" 
+					component={Elderly} />
+					<Route exact path="/Haircare" 
+					component={Haircare} />
+					<Route exact path="/Childhood" 
+					component={Childhood} />
+					<Route exact path="/Design" 
+					component={Design} />
+					<Route exact path="/Ayurveda" 
+					component={Ayurveda} />
+					<Route exact path="/English" 
+					component={English} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

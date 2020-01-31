@@ -1,11 +1,12 @@
 import React from 'react';
 import './style.scss';
 import img10 from '../../images/calendar.png';
+import Button from '../../components/Button';
 
 const Cards = props => {
 	return (
 		<container>
-			<div>
+			
 
 				<div className="card">
 					<div className='card-flow'>
@@ -25,14 +26,14 @@ const Cards = props => {
 								<p className="weeklabel">{props.label}</p>
 							</div>
 							<footer>
-								<p><button type="button">Learn</button></p>
+								<Button to={props.link}>Learn</Button>
 							</footer>
 						</div>
 					</div>
 				</div>
 				<br />
 				<br />
-			</div>
+			
 		</container>
 	);
 }

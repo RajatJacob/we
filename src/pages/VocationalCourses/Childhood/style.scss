@@ -1,0 +1,25 @@
+.Childhood{
+	background-image: url('../../../images/childhoodback.jpeg');
+	background-attachment: fixed;
+	background-size: cover;
+	
+	.img{opacity: 0.5;}
+}
+.Child{
+	margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); 
+  color: black;
+}
+.Child p {
+ /* margin: 5%;*/
+  font-weight: bold;
+  color: black;
+}
+
+.Child{
+  font-weight: bold;
+  color: #000000;
+}

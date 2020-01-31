@@ -7,12 +7,19 @@
     padding-left: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
-    width: 23rem;
+    width: 20.75rem;
     height: 23rem;
     margin-right: 5px;
     margin-left: 5px;
     margin-bottom: 5px !important;
 
+}
+
+footer {
+	bottom: 0;
+	right: 0;
+	left: 0;
+	position: absolute;
 }
 
 button {
@@ -45,11 +52,14 @@ a:hover {
     transition: transform 0.2s;
     transform-style: preserve-3d;
 }
-
+.content{
+    color: black;
+}
 p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     font-style: normal;
+    color:black;
 }
 
 .card-img {
@@ -115,10 +125,13 @@ weeks.relative {
     width: 40px;
 }
 
-p .weeklabel {
+ .weeklabel {
     font-size: 12px;
     left: 0px;
     right: 60px;
     text-align: left;
+    color: black;
+    padding: 5px;
+    font-size: 15px;
 
 }
