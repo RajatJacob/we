@@ -81,21 +81,23 @@ export default class FirebaseContextProvider extends React.Component {
 
 		this.state.auth.onAuthStateChanged(
 			u => {
+				var data = {}
+				var username, name
 				this.setState({ isLoggedIn: (u) ? true : false })
 				if (u) {
 					let dbu = {}
 					this.state.firestore.collection("users").doc(u.uid).get().then(
 						doc => {
 							dbu = doc.data()
-						}
-					)
-					u.updateProfile({
-						displayName: dbu.displayName || u.displayName.toLowerCase().replace(" ", "-")
-					}).then(
-						() => {
-							this.state.firestore.collection("users").doc(u.uid).update(
-								{
-									username: dbu.displayName || u.displayName || ""
+							u.updateProfile({
+								displayName: dbu.displayName || u.displayName.toLowerCase().replace(" ", "-")
+							}).then(
+								() => {
+									username = dbu.username || u.displayName || ""
+									name = dbu.name || username
+									if (username) data["username"] = username
+									if (name) data["name"] = name
+									this.state.firestore.collection("users").doc(u.uid).update(data)
 								}
 							)
 						}

@@ -7,7 +7,8 @@ import Alert from '../../components/Alert';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import UserProfileSettings from '../../components/UserProfileSettings';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -170,12 +171,7 @@ export default class UserProfile extends React.Component {
 								</Button>
 						}
 					</Container>
-				</Card>
-				<Card>
 					<Switch>
-						<Route exact path={this.props.match.path} >
-							<h2>Main</h2>
-						</Route>
 						<Route exact path={this.props.match.path + "/posts"} >
 							<h2>Posts</h2>
 						</Route>
@@ -188,12 +184,8 @@ export default class UserProfile extends React.Component {
 						<Route exact path={this.props.match.path + "/settings"} >
 							{
 								this.username === auth.currentUser.displayName ?
-									<>
-										<h2>Settings</h2>
-										<Container>
-											<Button to="/logout" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>Logout</Button>
-										</Container>
-									</>
+									this.state.uid ?
+										<UserProfileSettings uid={this.state.uid} /> : null
 									:
 									null
 							}
