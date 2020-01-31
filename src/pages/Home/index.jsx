@@ -53,12 +53,7 @@ class Home extends React.Component {
                         and cultivates rich dialogue in communities around the globe.
 					</Container>
 				</div>
-				<div className="background center" id="top">
-					<Card>
-						<h1>WE</h1>
-						A web and database management project in partial fulfilment of the fourth semester of the Bachelor of Computer Applications programme of Christ (Deemed to be University).
-					</Card>
-				</div>
+				<div className="background center" id="top" />
 			</div>
 		);
 	}
