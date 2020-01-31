@@ -48,7 +48,9 @@ class Home extends React.Component {
 				<div className="content">
 					<Container>
 						<h1>Our Mission</h1>
-						To provide a safe place to allow women to express their views.
+						This website will serve as an anchor for all women by remaining steadfast in publishing premium,
+                        multimedia content so that it uplifts deeper understanding and connection,
+                        and cultivates rich dialogue in communities around the globe.
 					</Container>
 				</div>
 			</div>
