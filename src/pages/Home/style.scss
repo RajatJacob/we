@@ -1,15 +1,17 @@
 @import '../../global/colors.scss';
 
 .Home {
+    background-color: black;
+
     .background {
         height: 100vh;
-        background-image: url('../../images/background.jpg');
+        background: #555555;
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
     }
 
-    .banner{
+    .banner {
         color: $primaryColor;
         padding: 0.5em;
         text-align: right;
@@ -17,8 +19,15 @@
         font-weight: 900;
     }
 
-    .content{
-        background-color: black;
+    #top {
+        background-image: url('../../images/background.jpg');
+    }
+
+    #rural {
+        background-image: url('../../images/rural.jpg');
+    }
+
+    .content {
         color: white;
         padding: 2em;
     }
