@@ -170,8 +170,6 @@ export default class UserProfile extends React.Component {
 								</Button>
 						}
 					</Container>
-				</Card>
-				<Card>
 					<Switch>
 						<Route exact path={this.props.match.path} >
 							<h2>Main</h2>
