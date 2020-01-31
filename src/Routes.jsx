@@ -31,7 +31,7 @@ export default class Routes extends React.Component {
 					<Route path="/user/:username" component={UserProfile} />
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
-					<Route exact path="/VocationalCourses" component={VocationalCourses} />
+					<Route exact path="/courses" component={VocationalCourses} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>
