@@ -1,0 +1,25 @@
+@import '../../global/colors.scss';
+
+.Home {
+    .background {
+        height: 100vh;
+        background-image: url('../../images/background.jpg');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .banner{
+        color: $primaryColor;
+        padding: 0.5em;
+        text-align: right;
+        font-size: 7em;
+        font-weight: 900;
+    }
+
+    .content{
+        background-color: black;
+        color: white;
+        padding: 2em;
+    }
+}

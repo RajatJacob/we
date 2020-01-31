@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
 import VocationalCourses from './pages/VocationalCourses';
+import Home from './pages/Home';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -16,11 +17,7 @@ export default class Routes extends React.Component {
 		return (
 			<div className="Content">
 				<Switch>
-					<Route exact path="/">
-						<Card>
-							<h1>Home</h1>
-						</Card>
-					</Route>
+					<Route exact path="/" component={Home} />
 					<Route exact path="/user">
 						{
 							auth.currentUser ?
