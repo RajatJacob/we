@@ -106,11 +106,11 @@ export default class UserProfile extends React.Component {
 			return <Redirect to={"/user/" + this.username.toLowerCase()} />
 		if (!isLoggedIn) {
 			return (
-				<Container>
+				<Card>
 					<Alert type="danger" title="Not logged in!">
 						Please <Link to="/login">Login</Link> to see this page.
 					</Alert>
-				</Container>
+				</Card>
 			)
 		}
 		return (
