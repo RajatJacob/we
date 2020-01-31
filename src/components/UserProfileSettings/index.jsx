@@ -5,6 +5,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import Alert from '../Alert';
 
 export default class UserProfileSettings extends React.Component {
 	static contextType = FirebaseContext;
@@ -12,14 +13,33 @@ export default class UserProfileSettings extends React.Component {
 		user: {
 			username: "",
 			name: ""
-		}
+		},
+		alert: null
 	}
 
 	save = e => {
 		e.preventDefault()
-		const { firestore } = this.context
-		firestore.collection("users").doc(this.props.uid).update(
-			this.state.user
+		const { firestore, auth } = this.context
+		auth.currentUser.updateProfile(
+			{
+				displayName: this.state.user.username
+			}
+		).then(
+			() => firestore.collection("users").doc(this.props.uid).update(
+				this.state.user
+			)
+		).then(
+			() => {
+				this.setState({
+					alert: <Alert type="success">Updated!</Alert>
+				})
+			}
+		).catch(
+			err => {
+				this.setState({
+					alert: <Alert type="danger">{err.message}</Alert>
+				})
+			}
 		)
 	}
 

@@ -172,9 +172,6 @@ export default class UserProfile extends React.Component {
 						}
 					</Container>
 					<Switch>
-						<Route exact path={this.props.match.path} >
-							<h2>Main</h2>
-						</Route>
 						<Route exact path={this.props.match.path + "/posts"} >
 							<h2>Posts</h2>
 						</Route>
