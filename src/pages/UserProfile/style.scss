@@ -19,16 +19,19 @@
         img.profilePicture {
             background-color: #ccc;
             border-radius: 100%;
-            box-shadow: 0 0 1.5em -0.25em #00000022;
+            box-shadow:
+                0 0 0.5em -0.25em #00000044,
+                0 0 1.5em -0.25em #00000022;
             height: 25vh;
             width: 25vh;
             margin: 1em;
             transition: all 500ms ease;
 
             &:hover {
+                transform: scale(1.05);
                 box-shadow:
-                    0 0 1.5em -0.5em $primaryColor,
-                    0 0 2em 0 #00000022;
+                    0 0 2.5em 0 #00000044,
+                    0 0 0.5em 0 $primaryColor;
             }
         }
     }
