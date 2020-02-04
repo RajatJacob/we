@@ -120,7 +120,9 @@ export default class UserProfile extends React.Component {
 				<Card noContainer>
 					{
 						this.state.alert === "noUser" ?
-							<Alert type="danger" title="Invalid user!" /> :
+							<Container>
+								<Alert type="danger" title="Invalid user!" />
+							</Container> :
 							<Banner>
 								{
 									this.state.user.photoURL ?
@@ -132,7 +134,7 @@ export default class UserProfile extends React.Component {
 								<h1>
 									{this.state.user.name}
 								</h1>
-								<Link to={"/user/" + this.username}>
+								<Link className="username" to={"/user/" + this.username}>
 									{
 										"@" + (this.state.user.username || "")
 									}
