@@ -82,7 +82,7 @@ export default class FirebaseContextProvider extends React.Component {
 		this.state.auth.onAuthStateChanged(
 			u => {
 				var data = {}
-				var username, name
+				var username, name, photoURL
 				this.setState({ isLoggedIn: (u) ? true : false })
 				if (u) {
 					let dbu = {}
@@ -95,8 +95,10 @@ export default class FirebaseContextProvider extends React.Component {
 								() => {
 									username = dbu.username || u.displayName || ""
 									name = dbu.name || username
+									photoURL = u.photoURL
 									if (username) data["username"] = username
 									if (name) data["name"] = name
+									if (photoURL) data["photoURL"] = photoURL
 									this.state.firestore.collection("users").doc(u.uid).update(data)
 								}
 							)
