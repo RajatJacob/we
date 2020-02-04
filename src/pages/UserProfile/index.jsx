@@ -120,13 +120,16 @@ export default class UserProfile extends React.Component {
 					{
 						this.state.alert === "noUser" ?
 							<Alert type="danger" title="Invalid user!" /> :
-							<Link to={"/user/" + this.username}>
-								<h1>
-									{
-										this.state.user.name
-									}
-								</h1>
-							</Link>
+							<div className="user">
+								<img src={this.state.user.photoURL} alt="" className="profilePicture" />
+								<Link to={"/user/" + this.username}>
+									<h1>
+										{
+											this.state.user.name
+										}
+									</h1>
+								</Link>
+							</div>
 					}
 					<Container>
 						<div className="tab-container">

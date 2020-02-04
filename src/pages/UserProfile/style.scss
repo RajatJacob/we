@@ -15,6 +15,24 @@
         }
     }
 
+    .user {
+        img.profilePicture {
+            background-color: #ccc;
+            border-radius: 100%;
+            box-shadow: 0 0 1.5em -0.25em #00000022;
+            height: 25vh;
+            width: 25vh;
+            margin: 1em;
+            transition: all 500ms ease;
+
+            &:hover {
+                box-shadow:
+                    0 0 1.5em -0.5em $primaryColor,
+                    0 0 2em 0 #00000022;
+            }
+        }
+    }
+
     h2 {
         padding: 0.5em;
     }
@@ -24,8 +42,8 @@
         width: 100%;
 
         .tab {
-            margin: 0.5em;
-            padding: 1em;
+            margin: 0.25em;
+            padding: 1em 0.5em;
             border-radius: 1em;
             width: 33.33%;
 
@@ -40,7 +58,7 @@
 
             &.active {
                 background: #00000033;
-                color: darken($primaryColor, 1.1);
+                color: $primaryColor;
             }
 
             .number {

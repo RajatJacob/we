@@ -10,13 +10,13 @@ class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
 
 	render() {
-		const { isLoggedIn } = this.context;
+		const { isLoggedIn, auth } = this.context;
 		const links = (isLoggedIn) ?
 			[
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
 				{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faBuffer} /> },
-				{ name: "User", url: "/user", icon: <FontAwesomeIcon icon={faUser} /> }
+				{ name: "User", url: "/user/" + auth.currentUser.displayName, icon: <FontAwesomeIcon icon={faUser} /> }
 			] : [
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Login", url: "/login", icon: <FontAwesomeIcon icon={faKey} /> }
