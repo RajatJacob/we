@@ -5,9 +5,10 @@ import { Link, NavLink, Redirect, Switch, Route } from 'react-router-dom';
 import Card from '../../components/Card';
 import Alert from '../../components/Alert';
 import Button from '../../components/Button';
+import Banner from '../../components/Banner';
 import Container from '../../components/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import UserProfileSettings from '../../components/UserProfileSettings';
 
 export default class UserProfile extends React.Component {
@@ -116,84 +117,93 @@ export default class UserProfile extends React.Component {
 		}
 		return (
 			<div className="UserProfile">
-				<Card>
+				<Card noContainer>
 					{
 						this.state.alert === "noUser" ?
 							<Alert type="danger" title="Invalid user!" /> :
-							<div className="user">
-								<img src={this.state.user.photoURL} alt="" className="profilePicture" />
+							<Banner>
+								{
+									this.state.user.photoURL ?
+										<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
+										<div className="profilePicture">
+											<FontAwesomeIcon icon={faUser} />
+										</div>
+								}
+								<h1>
+									{this.state.user.name}
+								</h1>
 								<Link to={"/user/" + this.username}>
-									<h1>
-										{
-											this.state.user.name
-										}
-									</h1>
+									{
+										"@" + (this.state.user.username || "")
+									}
 								</Link>
-							</div>
+							</Banner>
 					}
 					<Container>
-						<div className="tab-container">
-							<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
-								<div className="number">
-									{this.state.posts ? this.state.posts.length : 0}
-								</div>
-								<div className="title">
-									{
-										this.state.posts ? this.state.posts.length === 1 ? "Post" :
-											"Posts" : "Posts"
-									}
-								</div>
-							</NavLink>
-							<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
-								<div className="number">
-									{this.state.followers ? this.state.followers.length : 0}
-								</div>
-								<div className="title">
-									{
-										this.state.followers ? this.state.followers.length === 1 ? "Follower" :
-											"Followers" : "Followers"
-									}
-								</div>
-							</NavLink>
-							<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
-								<div className="number">
-									{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
-								</div>
-								<div className="title">Following</div>
-							</NavLink>
-						</div>
-						{
-							this.state.self ?
-								<Button to={
-									this.props.match.url + "/settings"
-								} icon={<FontAwesomeIcon icon={faCog} />}>
-									Settings
-								</Button> :
-								<Button>
-									Follow
-								</Button>
-						}
-					</Container>
-					<Switch>
-						<Route exact path={this.props.match.path + "/posts"} >
-							<h2>Posts</h2>
-						</Route>
-						<Route exact path={this.props.match.path + "/followers"} >
-							<h2>Followers</h2>
-						</Route>
-						<Route exact path={this.props.match.path + "/following"} >
-							<h2>Followers</h2>
-						</Route>
-						<Route exact path={this.props.match.path + "/settings"} >
+						<Container>
+							<div className="tab-container">
+								<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
+									<div className="number">
+										{this.state.posts ? this.state.posts.length : 0}
+									</div>
+									<div className="title">
+										{
+											this.state.posts ? this.state.posts.length === 1 ? "Post" :
+												"Posts" : "Posts"
+										}
+									</div>
+								</NavLink>
+								<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
+									<div className="number">
+										{this.state.followers ? this.state.followers.length : 0}
+									</div>
+									<div className="title">
+										{
+											this.state.followers ? this.state.followers.length === 1 ? "Follower" :
+												"Followers" : "Followers"
+										}
+									</div>
+								</NavLink>
+								<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
+									<div className="number">
+										{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+									</div>
+									<div className="title">Following</div>
+								</NavLink>
+							</div>
 							{
-								this.username === auth.currentUser.displayName ?
-									this.state.uid ?
-										<UserProfileSettings uid={this.state.uid} /> : null
-									:
-									null
+								this.state.self ?
+									<Button to={
+										this.props.match.url + "/settings"
+									} icon={<FontAwesomeIcon icon={faCog} />}>
+										Settings
+								</Button> :
+									<Button>
+										Follow
+								</Button>
 							}
-						</Route>
-					</Switch>
+						</Container>
+						<Switch>
+							<Route exact path={this.props.match.path + "/posts"} >
+								<h2>Posts</h2>
+							</Route>
+							<Route exact path={this.props.match.path + "/followers"} >
+								<h2>Followers</h2>
+							</Route>
+							<Route exact path={this.props.match.path + "/following"} >
+								<h2>Followers</h2>
+							</Route>
+							<Route exact path={this.props.match.path + "/settings"} >
+								{
+									this.username === auth.currentUser.displayName ?
+										this.state.uid ?
+											<UserProfileSettings uid={this.state.uid} /> : null
+										:
+										null
+								}
+							</Route>
+						</Switch>
+					</Container>
 				</Card>
 			</div>
 		)

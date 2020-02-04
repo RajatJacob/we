@@ -1,0 +1,8 @@
+@import '../../global/colors.scss';
+
+.Banner {
+    background: linear-gradient(135deg, mix($primaryColor, #555), mix($primaryColor, #000));
+    border-radius: 1em 1em 100% 100%;
+    color: white;
+    padding: 2em;
+}

@@ -1,6 +1,10 @@
 @import '../../global/colors.scss';
 
 .UserProfile {
+    $size: 2em;
+    padding: 0;
+    margin-top: $size * 2.5;
+
     a {
 
         &,
@@ -15,24 +19,35 @@
         }
     }
 
-    .user {
-        img.profilePicture {
-            background-color: #ccc;
-            border-radius: 100%;
-            box-shadow:
-                0 0 0.5em -0.25em #00000044,
-                0 0 1.5em -0.25em #00000022;
-            height: 25vh;
-            width: 25vh;
-            margin: 1em;
-            transition: all 500ms ease;
+    .Banner {
+        a {
+            color: white;
+            text-decoration: underline;
 
             &:hover {
-                transform: scale(1.05);
-                box-shadow:
-                    0 0 2.5em 0 #00000044,
-                    0 0 0.5em 0 $primaryColor;
+                color: white;
+                color: mix($primaryColor, white, 25%);
             }
+        }
+    }
+
+    .profilePicture {
+        font-size: $size*2;
+        color: #eee;
+        background: #222;
+        border-radius: 100%;
+        box-shadow: 0 0 2.5em -0.25em #00000099;
+        height: $size;
+        width: $size;
+        line-height: $size;
+        margin: auto;
+        margin-top: $size / -2;
+        padding: $size / 15;
+        transition: all 500ms ease;
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 1em 0 #00000099;
         }
     }
 
