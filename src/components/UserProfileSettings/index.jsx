@@ -4,7 +4,7 @@ import Container from '../Container';
 import Button from '../Button';
 import Input from '../Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faUser, faAt } from '@fortawesome/free-solid-svg-icons';
 import Alert from '../Alert';
 
 export default class UserProfileSettings extends React.Component {
@@ -76,7 +76,7 @@ export default class UserProfileSettings extends React.Component {
 								}
 							)} />
 
-						<Input icon={<FontAwesomeIcon icon={faUser} />} label="Username" value={this.state.user.username} onChange={
+						<Input icon={<FontAwesomeIcon icon={faAt} />} label="Username" value={this.state.user.username} onChange={
 							e => this.setState(
 								{
 									user: {
