@@ -85,7 +85,7 @@ export default class UserProfileSettings extends React.Component {
 								}
 							)
 						} />
-						<Input label="Save" type="submit" />
+						<Input label="Save" type="submit" onClick={this.save} />
 					</form>
 					<Button to="/logout" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>Logout</Button>
 				</Container>
