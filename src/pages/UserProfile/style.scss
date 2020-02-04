@@ -20,13 +20,18 @@
     }
 
     .Banner {
-        a {
+        .username {
+            background: #FFFFFF22;
             color: white;
-            text-decoration: underline;
+            border-radius: 0.5em;
+            padding: 0.5em;
+            margin: 0.25em auto;
+            border: 0.125em solid transparent;
+            cursor: pointer;
 
             &:hover {
-                color: white;
-                color: mix($primaryColor, white, 25%);
+                border-color: white;
+                color: inherit;
             }
         }
     }
