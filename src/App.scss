@@ -20,7 +20,7 @@
             margin-left: $navSize;
         }
 
-        @media screen and (orientation: landscape) {
+        @media screen and (orientation: portrait) {
             margin-bottom: $navSize;
         }
     }
