@@ -8,7 +8,6 @@
     left: 0;
     background: #222222;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
     font-weight: bold;
     z-index: 3;
 
@@ -31,23 +30,19 @@
             background: $primaryColor;
         }
 
-        @media screen and (orientation: landscape) {
-            writing-mode: vertical-lr;
-            text-orientation: sideways;
-        }
-
         span {
+            display: block;
 
             &.icon {
-                @media screen and (orientation: portrait) {
-                    font-size: 1.5em;
-                }
+                font-size: 1.5em;
             }
 
             &.name {
-                padding: 1em;
+                padding: 1em 0;
+                font-size: 0.5em;
 
                 @media screen and (orientation: portrait) {
+                    padding: 0;
                     display: none;
                 }
             }
