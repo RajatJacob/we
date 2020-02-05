@@ -143,6 +143,17 @@ export default class UserProfile extends React.Component {
 					}
 					<Container>
 						<Container>
+							{
+								this.state.self ?
+									<Button to={
+										this.props.match.url + "/settings"
+									} icon={<FontAwesomeIcon icon={faCog} />}>
+										Settings
+								</Button> :
+									<Button>
+										Follow
+								</Button>
+							}
 							<div className="tab-container">
 								<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
 									<div className="number">
@@ -173,17 +184,6 @@ export default class UserProfile extends React.Component {
 									<div className="title">Following</div>
 								</NavLink>
 							</div>
-							{
-								this.state.self ?
-									<Button to={
-										this.props.match.url + "/settings"
-									} icon={<FontAwesomeIcon icon={faCog} />}>
-										Settings
-								</Button> :
-									<Button>
-										Follow
-								</Button>
-							}
 						</Container>
 						<Switch>
 							<Route exact path={this.props.match.path + "/posts"} >
