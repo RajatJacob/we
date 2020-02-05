@@ -1,0 +1,24 @@
+.Donation {
+  background: black;
+  .background {
+    height: 100vh;
+    background: #555555;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
+    p {
+      color: white;
+    }
+    &#donate {
+      background-image: url("../../images/donate.jpg");
+    }
+    .Card {
+      background: #000000bb;
+    }
+    label {
+      color: white;
+      margin: 5px;
+    }
+  }
+}
