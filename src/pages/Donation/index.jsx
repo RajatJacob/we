@@ -22,6 +22,7 @@ class Donation extends React.Component {
                             </Container>
                             <Container>
                                 <form>
+                                    <h4>Support WE</h4>
                                     <Input label="Name" icon={<FontAwesomeIcon icon={faUser} />} />
                                     <label>
                                         <input type="radio" value="Individual" name="category" />
