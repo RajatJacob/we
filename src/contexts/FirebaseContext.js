@@ -76,6 +76,9 @@ export default class FirebaseContextProvider extends React.Component {
 						)
 					}
 				)
+			},
+			isFollowing: uid => {
+				return true;
 			}
 		}
 

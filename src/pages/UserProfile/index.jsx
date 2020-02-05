@@ -10,6 +10,7 @@ import Container from '../../components/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import UserProfileSettings from '../../components/UserProfileSettings';
+import UserList from '../../components/UserList';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -62,7 +63,7 @@ export default class UserProfile extends React.Component {
 				snapshot => {
 					snapshot.forEach(
 						doc => {
-							followers.push(doc.id)
+							followers.push(firestore.collection("users").doc(doc.id))
 						}
 					)
 					this.setState({ followers: followers })
@@ -149,10 +150,10 @@ export default class UserProfile extends React.Component {
 										this.props.match.url + "/settings"
 									} icon={<FontAwesomeIcon icon={faCog} />}>
 										Settings
-								</Button> :
+									</Button> :
 									<Button>
 										Follow
-								</Button>
+									</Button>
 							}
 							<div className="tab-container">
 								<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
@@ -191,9 +192,19 @@ export default class UserProfile extends React.Component {
 							</Route>
 							<Route exact path={this.props.match.path + "/followers"} >
 								<h2>Followers</h2>
+								{
+									this.state.followers ?
+										<UserList users={this.state.followers} /> :
+										null
+								}
 							</Route>
 							<Route exact path={this.props.match.path + "/following"} >
-								<h2>Followers</h2>
+								<h2>Following</h2>
+								{
+									this.state.user.following ?
+										<UserList users={this.state.user.following} /> :
+										null
+								}
 							</Route>
 							<Route exact path={this.props.match.path + "/settings"} >
 								{
