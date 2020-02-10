@@ -1,28 +1,27 @@
 .Donation {
-  background: black;
   .background {
-    height: 100vh;
-    background: #555555;
+    background: black;
+    background-image: url("../../images/v.jpg");
     background-attachment: fixed;
     background-size: cover;
-    background-position: center;
-
-    p {
-      color: white;
-    }
-    h4 {
-      color: white;
-    }
-
-    &#donate {
-      background-image: url("../../images/donate.jpg");
-    }
-    .Card {
-      background: #000000bb;
-    }
-    label {
-      color: white;
-      margin: 5px;
-    }
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  p {
+    color: white;
+  }
+  h4 {
+    color: white;
+  }
+  .Card {
+    background: #000000bb;
+  }
+  label {
+    color: white;
+    margin: 5px;
   }
 }
