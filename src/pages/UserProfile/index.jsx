@@ -14,67 +14,84 @@ import UserList from '../../components/UserList';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
-	state = {
-		user: {
-			username: undefined
-		}
-	}
-	username = this.props.match.params.username
-
-	listen = () => {
-		const { firestore } = this.context
-		firestore.collection("users")
-			.doc(this.state.uid)
-			.onSnapshot(
-				snapshot => {
-					this.setState({
-						user: snapshot.data(),
-						alert: null
-					})
-					this.getPosts()
-					this.getFollowers()
+	constructor(props) {
+		super(props)
+		this.state = (
+			{
+				user: {
+					username: "undefined"
 				}
-			)
+			}
+		)
+	}
+
+	getUserData = () => {
+		const { firestore } = this.context
+		if (this.state.uid)
+			return firestore.collection("users")
+				.doc(this.state.uid)
+				.get()
+				.then(
+					doc => {
+						this.setState({
+							user: doc.data(),
+							alert: null
+						})
+					}
+				)
 	}
 
 	getPosts = () => {
 		const { firestore } = this.context
 		var posts = []
-		firestore.collection("users/" + this.state.uid + "/posts")
-			.get()
-			.then(
-				snapshot => {
-					snapshot.forEach(
-						doc => {
-							posts.push(doc.data())
-						}
-					)
-					this.setState({ posts: posts })
-				}
-			)
+		if (this.state.uid)
+			return firestore
+				.collection("users")
+				.doc(this.state.uid)
+				.collection("posts")
+				.get()
+				.then(
+					snapshot => {
+						snapshot.forEach(
+							doc => {
+								posts.push(doc.data())
+							}
+						)
+						this.setState({ posts: posts })
+					}
+				)
 	}
 
 	getFollowers = () => {
 		const { firestore } = this.context
 		var followers = []
-		firestore.collection("users").where("following", "array-contains", firestore.collection("users").doc(this.state.uid))
-			.get()
-			.then(
-				snapshot => {
-					snapshot.forEach(
-						doc => {
-							followers.push(firestore.collection("users").doc(doc.id))
-						}
-					)
-					this.setState({ followers: followers })
-				}
-			)
+		if (this.state.uid)
+			return firestore
+				.collection("users")
+				.where(
+					"following",
+					"array-contains",
+					firestore
+						.collection("users")
+						.doc(this.state.uid)
+				)
+				.get()
+				.then(
+					snapshot => {
+						snapshot.forEach(
+							doc => {
+								followers.push(firestore.collection("users").doc(doc.id))
+							}
+						)
+						this.setState({ followers: followers })
+					}
+				)
 	}
 
-	componentDidMount() {
+	setUID = () => {
 		const { getUserRefByUsername, auth } = this.context
-		getUserRefByUsername(
-			this.username
+		return getUserRefByUsername(
+			this.props.match.params.username
 		).limit(1)
 			.get()
 			.then(
@@ -95,18 +112,26 @@ export default class UserProfile extends React.Component {
 										doc.id
 									)
 								})
-								this.listen()
 							}
 						)
 					}
 				}
-			);
+			)
+	}
+
+	componentDidUpdate() {
+		if (this.state.user.username !== this.props.match.params.username) {
+			this.setUID()
+				.then(this.getUserData)
+				.then(this.getFollowers)
+				.then(this.getPosts)
+		}
 	}
 
 	render() {
 		const { isLoggedIn, auth } = this.context
-		if (this.username !== this.username.toLowerCase())
-			return <Redirect to={"/user/" + this.username.toLowerCase()} />
+		if (this.state.user.username !== this.state.user.username.toLowerCase())
+			return <Redirect to={"/user/" + this.state.user.username.toLowerCase()} />
 		if (!isLoggedIn) {
 			return (
 				<Card>
@@ -135,7 +160,7 @@ export default class UserProfile extends React.Component {
 								<h1>
 									{this.state.user.name}
 								</h1>
-								<Link className="username" to={"/user/" + this.username}>
+								<Link className="username" to={"/user/" + this.state.user.username}>
 									{
 										"@" + (this.state.user.username || "")
 									}
@@ -156,7 +181,7 @@ export default class UserProfile extends React.Component {
 									</Button>
 							}
 							<div className="tab-container">
-								<NavLink to={"/user/" + this.username + "/posts"} className="tab" activeClassName="active">
+								<NavLink to={"/user/" + this.state.user.username + "/posts"} className="tab" activeClassName="active">
 									<div className="number">
 										{this.state.posts ? this.state.posts.length : 0}
 									</div>
@@ -208,7 +233,7 @@ export default class UserProfile extends React.Component {
 							</Route>
 							<Route exact path={this.props.match.path + "/settings"} >
 								{
-									this.username === auth.currentUser.displayName ?
+									this.state.user.username === auth.currentUser.displayName ?
 										this.state.uid ?
 											<UserProfileSettings uid={this.state.uid} /> : null
 										:
