@@ -77,8 +77,81 @@ export default class FirebaseContextProvider extends React.Component {
 					}
 				)
 			},
+			getFollowers: (uid) => {
+				var followers = []
+				if (uid)
+					this.state.firestore
+						.collection("users")
+						.where(
+							"following",
+							"array-contains",
+							this.state.firestore
+								.collection("users")
+								.doc(uid)
+						)
+						.get()
+						.then(
+							snapshot => {
+								snapshot.forEach(
+									doc => {
+										followers
+											.push(
+												this.state.firestore.collection("users").doc(doc.id)
+											)
+									}
+								)
+							}
+						)
+				return followers
+			},
+			getFollowing: uid => {
+				var following = []
+				this.state.firestore
+					.collection("users")
+					.doc(this.state.auth.currentUser.uid)
+					.get()
+					.then(
+						doc => {
+							following = doc.data().following
+						}
+					)
+				return following
+			},
 			isFollowing: uid => {
-				return true;
+				if (!uid || !this.state.auth.currentUser) return false
+				const following = this.state.getFollowing(this.state.auth.currentUser.uid)
+				return following.includes(
+					this.state.firestore.collection("users").doc(uid)
+				)
+			},
+			follow: uid => {
+				if (this.state.isFollowing(uid)) return;
+				var following
+				this.state.firestore
+					.collection("users")
+					.doc(this.state.auth.currentUser.uid)
+					.get()
+					.then(
+						doc => {
+							following = doc.data().following
+							if (!following) following = []
+							following.push(
+								this.state.firestore
+									.collection("users")
+									.doc(uid)
+							)
+							this.state.firestore
+								.collection("users")
+								.doc(this.state.auth.currentUser.uid)
+								.update(
+									{
+										following: following
+									}
+								).then(
+									() => alert("Followed: " + uid)
+								)
+						}
+					)
 			}
 		}
 

@@ -41,6 +41,15 @@ export default class UserProfile extends React.Component {
 				)
 	}
 
+	getFollowers = () => {
+		const { getFollowers } = this.context
+		this.setState(
+			{
+				followers: getFollowers(this.state.uid)
+			}
+		)
+	}
+
 	getPosts = () => {
 		const { firestore } = this.context
 		var posts = []
@@ -58,32 +67,6 @@ export default class UserProfile extends React.Component {
 							}
 						)
 						this.setState({ posts: posts })
-					}
-				)
-	}
-
-	getFollowers = () => {
-		const { firestore } = this.context
-		var followers = []
-		if (this.state.uid)
-			return firestore
-				.collection("users")
-				.where(
-					"following",
-					"array-contains",
-					firestore
-						.collection("users")
-						.doc(this.state.uid)
-				)
-				.get()
-				.then(
-					snapshot => {
-						snapshot.forEach(
-							doc => {
-								followers.push(firestore.collection("users").doc(doc.id))
-							}
-						)
-						this.setState({ followers: followers })
 					}
 				)
 	}
@@ -129,7 +112,7 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn, auth } = this.context
+		const { isLoggedIn, auth, follow, isFollowing } = this.context
 		if (this.state.user.username !== this.state.user.username.toLowerCase())
 			return <Redirect to={"/user/" + this.state.user.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -176,8 +159,12 @@ export default class UserProfile extends React.Component {
 									} icon={<FontAwesomeIcon icon={faCog} />}>
 										Settings
 									</Button> :
-									<Button>
-										Follow
+									<Button onClick={() => follow(this.state.uid)} >
+										{
+											isFollowing(this.state.uid) ?
+												"Follow" :
+												"Unfollow"
+										}
 									</Button>
 							}
 							<div className="tab-container">
@@ -243,7 +230,7 @@ export default class UserProfile extends React.Component {
 						</Switch>
 					</Container>
 				</Card>
-			</div>
+			</div >
 		)
 	}
 }
