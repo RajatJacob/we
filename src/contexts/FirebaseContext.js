@@ -117,6 +117,12 @@ export default class FirebaseContextProvider extends React.Component {
 			getFollowing: uid => {
 				return new Promise(
 					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
 						this.state.firestore
 							.collection("users")
 							.doc(this.state.auth.currentUser.uid)
@@ -135,9 +141,14 @@ export default class FirebaseContextProvider extends React.Component {
 				)
 			},
 			isFollowing: uid => {
-				if (!uid || !this.state.auth.currentUser) return false
 				return new Promise(
 					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
 						this.state.getFollowing(this.state.auth.currentUser.uid)
 							.then(
 								following => {
@@ -160,33 +171,22 @@ export default class FirebaseContextProvider extends React.Component {
 				)
 			},
 			follow: uid => {
-				if (console.log(this.state.isFollowing(uid))) return;
-				var following
-				this.state.firestore
-					.collection("users")
-					.doc(this.state.auth.currentUser.uid)
-					.get()
-					.then(
-						doc => {
-							following = doc.data().following
-							if (!following) following = []
-							following.push(
-								this.state.firestore
-									.collection("users")
-									.doc(uid)
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
 							)
-							this.state.firestore
-								.collection("users")
-								.doc(this.state.auth.currentUser.uid)
-								.update(
-									{
-										following: following
-									}
-								).then(
-									() => alert("Followed: " + uid)
-								)
-						}
-					)
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+
+								}
+							)
+					}
+				)
 			}
 		}
 

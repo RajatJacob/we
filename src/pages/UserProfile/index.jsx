@@ -30,8 +30,7 @@ export default class UserProfile extends React.Component {
 		if (this.state.uid)
 			return firestore.collection("users")
 				.doc(this.state.uid)
-				.get()
-				.then(
+				.onSnapshot(
 					doc => {
 						this.setState({
 							user: doc.data(),
@@ -160,6 +159,15 @@ export default class UserProfile extends React.Component {
 							</Banner>
 					}
 					<Container>
+						{
+							this.state.user.bio ?
+								<div className="bio">
+									{
+										this.state.user.bio
+									}
+								</div> :
+								null
+						}
 						<Container>
 							{
 								this.state.self ?
