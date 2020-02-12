@@ -10,6 +10,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
 import { Redirect, Link } from 'react-router-dom';
+import './style.scss';
 
 export default class Login extends React.Component {
 	static contextType = FirebaseContext;
@@ -52,39 +53,41 @@ export default class Login extends React.Component {
 			<Redirect to={"/user/" + auth.currentUser.displayName} />
 		)
 		return (
-			<div className="LoginPage">
+			<div className="LoginPage" id="hi">
 				<Card noContainer>
-					<GridContainer split>
-						<Container>
-							<h1>Login</h1>
-						</Container>
-						<Container>
-							<form onSubmit={this.submit}>
-								<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
-								<Input label="Password" type="password"
-									icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
-								{
-									this.state.alert ?
-										<Alert type={this.state.alert.type} title={this.state.alert.title} icon={this.state.alert.icon}>
-											{this.state.alert.message}
-										</Alert> :
-										null
-								}
-								<Input label="Login" type="submit" />
-							</form>
-							<GridContainer>
-								<Container>
-									<Link to="/forgotpassword" align="left">Forgot Password</Link>
-								</Container>
-								<Container>
-									<Link to="/signup" align="right">Signup</Link>
-								</Container>
-							</GridContainer>
-							<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
-								Login with Google
+					<div className="background" id="pic">
+						<GridContainer split>
+							<Container>
+								<h1>Login</h1>
+							</Container>
+							<Container>
+								<form onSubmit={this.submit}>
+									<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
+									<Input label="Password" type="password"
+										icon={<FontAwesomeIcon icon={faLock} />} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
+									{
+										this.state.alert ?
+											<Alert type={this.state.alert.type} title={this.state.alert.title} icon={this.state.alert.icon}>
+												{this.state.alert.message}
+											</Alert> :
+											null
+									}
+									<Input label="Login" type="submit" />
+								</form>
+								<GridContainer>
+									<Container>
+										<Link to="/forgotpassword" align="left">Forgot Password</Link>
+									</Container>
+									<Container>
+										<Link to="/signup" align="right">Signup</Link>
+									</Container>
+								</GridContainer>
+								<Button onClick={() => loginWithGoogle(this)} icon={<FontAwesomeIcon icon={faGoogle} />}>
+									Login with Google
 							</Button>
-						</Container>
-					</GridContainer>
+							</Container>
+						</GridContainer>
+					</div>
 				</Card>
 			</div >
 		)
