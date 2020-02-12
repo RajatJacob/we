@@ -43,11 +43,20 @@ export default class UserProfile extends React.Component {
 
 	getFollowers = () => {
 		const { getFollowers } = this.context
-		this.setState(
-			{
-				followers: getFollowers(this.state.uid)
+		getFollowers(this.state.uid).then(
+			f => {
+				this.setState(
+					{
+						followers: f
+					}
+				)
 			}
 		)
+			.catch(
+				err => {
+					console.log(err)
+				}
+			)
 	}
 
 	getPosts = () => {

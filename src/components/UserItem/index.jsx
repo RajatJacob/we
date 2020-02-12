@@ -31,7 +31,7 @@ export default class UserItem extends React.Component {
 			<div className="UserItem">
 				{
 					this.state.user.photoURL ?
-						<img src={this.state.user.photoURL} alt={this.state.user.username} className="profilePicture" /> :
+						<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
 						<div className="profilePicture">
 							<FontAwesomeIcon icon={faUser} />
 						</div>

@@ -78,54 +78,89 @@ export default class FirebaseContextProvider extends React.Component {
 				)
 			},
 			getFollowers: (uid) => {
-				var followers = []
 				if (uid)
-					this.state.firestore
-						.collection("users")
-						.where(
-							"following",
-							"array-contains",
+					return new Promise(
+						(resolve, reject) => {
+
 							this.state.firestore
 								.collection("users")
-								.doc(uid)
-						)
-						.get()
-						.then(
-							snapshot => {
-								snapshot.forEach(
-									doc => {
-										followers
-											.push(
-												this.state.firestore.collection("users").doc(doc.id)
-											)
+								.where(
+									"following",
+									"array-contains",
+									this.state.firestore
+										.collection("users")
+										.doc(uid)
+								)
+								.get()
+								.then(
+									snapshot => {
+										var followers = []
+										snapshot.forEach(
+											doc => {
+												followers
+													.push(
+														this.state.firestore.collection("users").doc(doc.id)
+													)
+											}
+										)
+										resolve(followers)
 									}
 								)
-							}
-						)
-				return followers
-			},
-			getFollowing: uid => {
-				var following = []
-				this.state.firestore
-					.collection("users")
-					.doc(this.state.auth.currentUser.uid)
-					.get()
-					.then(
-						doc => {
-							following = doc.data().following
+								.catch(
+									err => {
+										reject(err)
+									}
+								)
 						}
 					)
-				return following
+			},
+			getFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						this.state.firestore
+							.collection("users")
+							.doc(this.state.auth.currentUser.uid)
+							.get()
+							.then(
+								doc => {
+									resolve(doc.data().following)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
 			},
 			isFollowing: uid => {
 				if (!uid || !this.state.auth.currentUser) return false
-				const following = this.state.getFollowing(this.state.auth.currentUser.uid)
-				return following.includes(
-					this.state.firestore.collection("users").doc(uid)
+				return new Promise(
+					(resolve, reject) => {
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+									resolve(
+										following
+											.includes(
+												this.state.firestore
+													.collection("users")
+													.doc(uid)
+											)
+									)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
 				)
 			},
 			follow: uid => {
-				if (this.state.isFollowing(uid)) return;
+				if (console.log(this.state.isFollowing(uid))) return;
 				var following
 				this.state.firestore
 					.collection("users")
