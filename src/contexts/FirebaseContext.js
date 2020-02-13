@@ -1,7 +1,10 @@
-import React, { createContext } from 'react';
+import React, {
+	createContext
+} from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 export const FirebaseContext = createContext();
 
@@ -20,7 +23,8 @@ export default class FirebaseContextProvider extends React.Component {
 		});
 		this.state = {
 			firestore: firebase.firestore(),
-			auth: firebase.auth()
+			auth: firebase.auth(),
+			storage: firebase.storage()
 		}
 		this.state.auth.onAuthStateChanged((user) => {
 			if (user)
@@ -33,17 +37,21 @@ export default class FirebaseContextProvider extends React.Component {
 						uid: user.uid
 					}
 				});
-			else this.setState({ user: null })
+			else this.setState({
+				user: null
+			})
 		});
 	}
 
 	render() {
-		return (
-			<FirebaseContext.Provider value={
-				{ ...this.state }
-			}>
-				{this.props.children}
-			</FirebaseContext.Provider>
+		return ( <
+			FirebaseContext.Provider value = {
+				{
+					...this.state
+				}
+			} > {
+				this.props.children
+			} < /FirebaseContext.Provider>
 		)
 	}
 }
