@@ -100,6 +100,7 @@ this.baseState = this.state;
          <label>
          Education
          <select class="dropdown" name="education" required="required"  onChange={this.handleChange}>
+            <option >Select</option>
             <option >Secondary School</option>
       <option >Higher Secondary School</option>
       <option>Associate Degree in Administration of Justice</option>
@@ -490,7 +491,7 @@ this.baseState = this.state;
     <label>
          Skills
          <select class="dropdown" name="skills" required="required" value={this.state.skills} onChange={this.handleChange}>
-            
+      <option >Select</option>      
       <option>Effective communication</option>
       <option>Teamwork</option>
       <option>Responsibility</option>
@@ -682,7 +683,7 @@ this.baseState = this.state;
          <label>
          Jobs Interested in 
          <select class="dropdown" name="jbin" required="required" onChange={this.handleChange}>
-            
+       <option >Select</option>     
       <option>Account Collectors</option>
       <option>Accountants</option>
       <option>Accounting Clerks</option>
@@ -1495,7 +1496,7 @@ this.baseState = this.state;
     <br/>
     <label>
          Upload Your Passport size Picture
-         <input type="file" onChange={this.fileSelectedHandler}/>
+         <input type="file" name="photo" onChange={this.fileSelectedHandler}/>
          </label>
          <br/>
          </div>
@@ -1505,6 +1506,7 @@ this.baseState = this.state;
          <label>
          Reference Person
          <select class="dropdown" name="contactpersontitle"   onChange={this.handleChange}>
+            <option >Select</option>
             <option value="Mr.">Mr</option><br/>
             <option value="Mrs.">Mrs</option><br/>
             <option value="Miss">Miss</option><br/>
