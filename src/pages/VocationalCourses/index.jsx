@@ -10,12 +10,43 @@ import img7 from '../../images/dress.jpg';
 import img8 from '../../images/computer.jpg';
 import img9 from '../../images/ayurveda.jpg';
 import Container from '../../components/Container';
+import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 
 //import img10 from '../../images/calendar.png';
 import './style.scss';
 
 export default class VocationalCourses extends React.Component {
+	static contextType = FirebaseContext;
+
+	constructor(props){
+		super(props);
+		this.state={
+			courses: []
+		}
+	}
+
+	getCourseData = () => {
+		const { firestore } = this.context;
+		var courses = []
+		firestore.collection("courses").get().then(
+			snapshot => {
+				snapshot.forEach(
+					doc => {
+						courses.push(doc.data())
+					}
+				)
+				this.setState({
+					courses: courses
+				})
+			}
+		)
+	}
+
+	componentDidMount() {
+		this.getCourseData()
+	}
+
 	render() {
 		return (
 			<Container>
@@ -24,86 +55,25 @@ export default class VocationalCourses extends React.Component {
 					<h1>WE Offer</h1>
 				</div>
 
-				<div className='postsContainer'>
-					<Cards imgsrc={img8}
-							title="Basic Computer Training"
-							content="The goal of an online basic computer course is to equip women with basic computer skills. Additional advanced courses may be taken to strengthen knowledge in a particular area.The curriculum will include Basic Computer Skills, Keyboarding, Microsoft Office, Internet Navigation, etc."
-							label="10 Weeks"
-							link='/Computer'>
-							
-							card1
-			</Cards>
-						
+				{
+					this.state.courses.map(
+					x => {
+						return (
+							<div className='postsContainer'>
+							<Cards imgsrc={x.imgsrc}
+							title={x.title}
+							content={x.content}
+							label={x.label}
+							link={x.link} />
+								</div>
+						)
+					}
+				)
+			}
 
-						<Cards imgsrc={img2}
-							title="Community Health and Sanitation"
-							content="The goal is to aware them with safe water access, sanitation, and hygiene which are the most basic building blocks for empowering women everywhere. It requires a toilet with dignity,hand washing facility, safe water source and Menstruation Hygiene Management Training."
-							label="4 Weeks"
-							link='/Sanitation'
-							>
-							card1
-					</Cards>
-
-						<Cards imgsrc={img3}
-							title="Bakery and Confectionery"
-							content="Introductory baking classes provide women with an understanding of the ingredients and methods used in creating breads, pastries, cookies and other desserts. They will learn how dairy, fruits, flour and chocolate come into play with pastry and baking."
-							label="6 Weeks"
-							link='/Bakery'>
-							card1
-					</Cards>
+				
 					
-						<Cards imgsrc={img4}
-							title="Elderly Ethics"
-							content="Elderly care emphasizes the social and personal requirements of senior citizens who need some assistance with daily activities and health care, but who desire to age with dignity. It is important in the design of housing and services that should be truly customer-centered."
-							label="3 Weeks"
-							link='/Elderly'>
-							card1
-					</Cards>
-
-						<Cards imgsrc={img5}
-							title="Haircare and Style"
-							content="Haircare and Style is to learn the basics of hair style and hair care be it straight or curls, bob or pixie, ponytail or braids. A trendy hairstyle requires healthy hair. The curriculum includes topics like shampooing and conditioning techniques, oil massages, basic touch ups, and hair spa."
-							label="8 Weeks"
-							link='/Haircare'>
-							card1
-					</Cards>
-
-						<Cards imgsrc={img6}
-							title="Early Childhood Care and Education"
-							content="Early childhood care and education aims at the holistic development of a child’s social, emotional, cognitive and physical needs in order to build a solid and broad foundation for lifelong learning and wellbeing. It has the possibility to nurture caring, capable and responsible future citizens."
-							label="6 Weeks"
-							link='/Childhood'>
-							card1
-			</Cards>
-					
-					<Cards imgsrc={img1}
-							title="Spoken English"
-							content="This course will help you enhance your english speaking skills. It will help mprove your pronunciation and fluency, increase your English vocabulary, identify how culture influences your speech and help you know questions and responses for different settings and situations."
-							label="6 Weeks"
-							link='/English'
-
-						>
-							card1
-					</Cards>
-
-						<Cards imgsrc={img7}
-							title="Footwear and Dress Design"
-							content="Footwear and Dress design offers a focused approach to fashion design concepts, to create and showcase shoe and dress designs for a variety of markets. Many designers specialize and design for particular ages and genders in corporate sector or in boutiques."
-							label="8 Weeks"
-							link='/Design'>
-							card1
-			</Cards>
-						
-
-						<Cards imgsrc={img9}
-							title="Ayurveda Assistant"
-							content="Ayurveda is the science of Life. It is a skill based course, designed for proper practical understanding and sound guidance for developing a practice as an Ayurvedic Assistant. The course enables you to acquire and hone your skills in authentic massages and healing therapies."
-							label="8 Weeks"
-							link='/Ayurveda'>
-							card1
-			</Cards>
-					
-				</div>
+			
 
 			</div>
 			</Container>
