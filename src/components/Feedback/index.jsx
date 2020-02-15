@@ -1,42 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styleform.css';
+import {FirebaseContext} from '../../contexts/FirebaseContext';
 
-export default class OrganisationForm extends React.Component
+import { storage } from '../../contexts/FirebaseContext';
+
+export default class Feedback extends React.Component
 {
-	constructor(props)
-	{
-		super(props);
-		this.state={
-			fname:'',
-         feedback:''
-			
+	static contextType = FirebaseContext;
+	constructor(props){
+	super(props);
+      this.state = {
+         form: {
 
-		};
+         }
+
+
+      };
 		
 this.handleSubmit=this.handleSubmit.bind(this);
-this.onResetClick=this.onResetClick.bind(this);
+this.baseState = this.state;
 	}
 	fileSelectedHandler=event=>{
 		this.setState({selectedFile: event.target.files[0]})
 	};
-	handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });};
-	handleSubmit(event)
-	{
-		alert('Submitted');
-		event.preventDefault();
-	}
-	 onResetClick(event) {
-	 	alert('Reset Done');
-        event.preventDefault();
-        this.setState={
-			fname:'',
-         feedback:''
-			
-
-		};
-    }
+	handleChange = ({
+      target
+   }) => {
+      console.log(this.state)
+      var f = {
+         form: this.state.form
+      }
+      f.form[target.name] = target.value;
+      this.setState(f);
+   };
+	handleSubmit(event){
+	const {
+         firestore
+      } = this.context;
+      alert('Submitted');
+      firestore.collection("Feedback").add(
+         this.state.form
+      )
+      event.preventDefault();
+   };
 	render()
 	{
 		return(
@@ -46,14 +53,14 @@ this.onResetClick=this.onResetClick.bind(this);
 			<div class="inner-wrap">
 			<label>
 			First Name 
-			<input  value="input" name="fname" type="text" value={this.state.fname} onChange={this.handleChange}/>
+			<input   name="fname" type="text" onChange={this.handleChange}/>
 			</label>
 			
          </div><br/>
 			<div class="inner-wrap">
 			<label>
 			Feedback
-			<textArea name="feedback" class="input1" rows="10" columns="40" required="required" value={this.state.feedback} onChange={this.handleChange} />
+			<textArea name="feedback" class="input1" rows="10" columns="40" required="required"onChange={this.handleChange} />
 			</label>
 			<br/>
 			
@@ -61,10 +68,7 @@ this.onResetClick=this.onResetClick.bind(this);
 			</div>
 			
 
-			<input type="submit" value="Submit"/>
-		
-			<button class="button" type="button" onClick={this.onResetClick} >Reset</button>
-			<br/>
+			<input type="submit" value="Submit" onClick={this.handleSubmit}/>
 			</form>
 			);
 	

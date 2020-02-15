@@ -51,6 +51,7 @@
 .form-style input[type="number"],
 .form-style input[type="search"],
 .form-style input[type="time"],
+.form-style input[type="tel"],
 .form-style input[type="url"],
 .form-style input[type="password"],
 .form-style textarea,
