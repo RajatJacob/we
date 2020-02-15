@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import UserProfileSettings from '../../components/UserProfileSettings';
 import UserList from '../../components/UserList';
+import Feed from '../../components/Feed';
 
 export default class UserProfile extends React.Component {
 	static contextType = FirebaseContext;
@@ -61,11 +62,14 @@ export default class UserProfile extends React.Component {
 	getPosts = () => {
 		const { firestore } = this.context
 		var posts = []
-		if (this.state.uid)
-			return firestore
+		this.setState({
+			feedQuery: firestore
 				.collection("users")
 				.doc(this.state.uid)
 				.collection("posts")
+		})
+		if (this.state.uid)
+			return this.state.feedQuery
 				.get()
 				.then(
 					snapshot => {
@@ -218,6 +222,7 @@ export default class UserProfile extends React.Component {
 						<Switch>
 							<Route exact path={this.props.match.path + "/posts"} >
 								<h2>Posts</h2>
+								<Feed query={this.state.feedQuery} />
 							</Route>
 							<Route exact path={this.props.match.path + "/followers"} >
 								<h2>Followers</h2>
