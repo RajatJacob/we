@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Redirect} from 'react-router-dom';
 import './formstyle.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 
@@ -28,6 +29,7 @@ this.baseState = this.state;
    handleChange = ({
       target
    }) => {
+      
       console.log(this.state)
       var f = {
          form: this.state.form
@@ -37,14 +39,17 @@ this.baseState = this.state;
    };
    handleSubmit(event){
    const {
-         firestore
+         firestore, auth
       } = this.context;
+      window.open("https://www.naukri.com/"+this.state.form.jbin.replace(' ','-')+"-jobs")
+      console.log(this.state.form)
       alert('Submitted');
-      firestore.collection("Resume").add(
+      firestore.collection("users").doc(auth.currentUser.uid).update(
          this.state.form
       )
-      
-         //window.location.href("www.google.com");
+         
+
+        // window.location.href("www.google.com");
       
       event.preventDefault();
    };
@@ -297,8 +302,71 @@ this.baseState = this.state;
       <option>Bachelor of Music in Theory</option>
       <option>Bachelor of Music in Music Education</option>
       <option>Bachelor of Science in Veterinary Technology</option>
+      <option >BBA- Bachelor of Business Administration</option>
+      <option >BMS- Bachelor of Management Science</option>
+      <option >BFA- Bachelor of Fine Arts</option>
+      <option >BEM- Bachelor of Event Management</option>
+      <option >Integrated Law Course- BA + LL.B</option>
+      <option >BJMC- Bachelor of Journalism and Mass Communication</option>
+      <option >BFD- Bachelor of Fashion Designing</option>
+      <option >BSW- Bachelor of Social Work</option>
+      <option >BBS- Bachelor of Business Studies</option>
+      <option >BTTM- Bachelor of Travel and Tourism Management</option>
+      <option >Aviation Courses</option>
+      <option >B.Sc- Interior Design</option>
+      <option >B.Sc.- Hospitality and Hotel Administration</option>
+      <option >BVA- Bachelor of Visual Arts</option>
+      <option >Bachelor of Performing Arts</option>
+      <option >BA in History</option>
+      <option >BE/B.Tech- Bachelor of Technology</option>
+      <option >B.Arch- Bachelor of Architecture</option>
+      <option >BCA- Bachelor of Computer Applications</option>
+      <option >B.Sc.- Information Technology</option>
+      <option >B.Sc- Nursing</option>
+      <option >BPharma- Bachelor of Pharmacy</option>
+      <option >B.Sc- Interior Design</option>
+      <option >BDS- Bachelor of Dental Surgery</option>
+      <option >Animation, Graphics and Multimedia</option>
+      <option >B.Sc. – Nutrition &amp; Dietetics</option>
+      <option >BPT- Bachelor of Physiotherapy</option>
+      <option >B.Sc- Applied Geology</option>
+      <option >BA/B.Sc. Liberal Arts</option>
+      <option >B.Sc.- Physics</option>
+      <option >B.Sc. Chemistry</option>
+      <option >B.Sc. Mathematics</option>
+      <option >Aeronautical Engineering</option>
+      <option >Automobile Engineering</option>
+      <option >Civil Engineering</option>
+      <option >Computer Science and Engineering</option>
+      <option >Biotechnology Engineering</option>
+      <option >Electrical and Electronics Engineering</option>
+      <option >Electronics and Communication Engineering</option>
+      <option >Automation and Robotics</option>
+      <option >Petroleum Engineering</option>
+      <option >Instrumentation Engineering</option>
+      <option >Ceramic Engineering</option>
+      <option >Chemical Engineering</option>
+      <option >Structural Engineering</option>
+      <option >Transportation Engineering</option>
+      <option >Construction Engineering</option>
+      <option >Power Engineering</option>
+      <option >Robotics Engineering</option>
+      <option >Textile Engineering</option>
+      <option >Smart Manufacturing &amp; Automation</option>
+      <option >B.Com- Bachelor of Commerce</option>
+      <option >BBA- Bachelor of Business Administration</option>
+      <option >B.Com (Hons.)</option>
+      <option >BA (Hons.) in Economics</option>
+      <option >Integrated Law Program- B.Com LL.B.</option>
+      <option >Integarted Law Program- BBA LL.B</option>
+      <option >CA- Chartered Accountancy</option>
+      <option >CS- Company Secretary</option>
+      <option >Bachelor of Design in Accessory Design, fashion Design, Ceramic Design, Leather Design, Graphic Design, Industrial Design, Jewellery Design</option>
+      <option >Bachelor in Foreign Language</option>
+      <option >Diploma Courses</option>
+      <option >Advanced Diploma Courses</option>
+      <option >Certificate Courses</option>
       <option>Master degrees</option>
-      <option>For a more comprehensive list, see List of master's degrees.</option>
       <option>Master of Accountancy</option>
       <option>Master of Accounting and Information Systems</option>
       <option>Master of Advanced Study</option>
