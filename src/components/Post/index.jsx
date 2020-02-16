@@ -79,7 +79,7 @@ export default class Post extends React.Component {
 		)
 	}
 
-	componentDidUpdate() {
+	componentDidMount() {
 		if (this.props.post !== this.prevProp) {
 			this.prevProp = this.props.post
 			this.getPostData()

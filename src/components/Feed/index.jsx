@@ -68,9 +68,11 @@ export default class Feed extends React.Component {
 			<div className="Feed">
 				{
 					this.state.done ?
-						this.state.posts.map(
-							x => <Post post={x} />
-						) :
+						this.state.posts.length === 0 ?
+							"No posts" :
+							this.state.posts.map(
+								x => <Post post={x} />
+							) :
 						<Loader />
 				}
 			</div>

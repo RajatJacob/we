@@ -114,18 +114,14 @@ export default class UserProfile extends React.Component {
 		this.init()
 	}
 
-	componentDidUpdate() {
-		this.init()
+	componentDidUpdate(prevProps) {
+		if (prevProps.match.params.username !== this.props.match.params.username)
+			this.init()
 	}
 
 	init = () => {
-		if (
-			this.props.match.params.username !== this.state.user.username &&
-			this.state.done
-		) {
-			this.setState({ done: false })
-			this.state.unsubscribe()
-		}
+		this.state.unsubscribe()
+		this.setState({ done: false })
 		this.getUID()
 			.then(
 				uid => {

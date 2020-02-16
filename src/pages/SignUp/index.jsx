@@ -91,7 +91,7 @@ export default class SignUp extends React.Component {
 	render() {
 		const { isLoggedIn, loginWithGoogle } = this.context;
 		if (isLoggedIn && this.state.done) return (
-			<Redirect to={"/user/" + this.state.username} />
+			<Redirect to="/feed" />
 		)
 		return (
 			<div className="SignUp">

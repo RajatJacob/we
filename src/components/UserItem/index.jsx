@@ -22,25 +22,22 @@ export default class UserItem extends React.Component {
 		this.init()
 	}
 
-	componentDidUpdate() {
-		this.init()
-	}
-
 	init = () => {
-		this.props.user
-			.get()
-			.then(
-				doc => {
-					if (doc.exists) {
-						this.setState(
-							{ user: doc.data() }
-						)
+		if (!this.state.done)
+			this.props.user
+				.get()
+				.then(
+					doc => {
+						if (doc.exists) {
+							this.setState(
+								{ user: doc.data(), done: true }
+							)
+						}
 					}
-				}
-			)
-			.finally(
-				() => this.setState({ done: true })
-			)
+				)
+				.finally(
+					() => this.setState({ done: true })
+				)
 	}
 
 	render() {
