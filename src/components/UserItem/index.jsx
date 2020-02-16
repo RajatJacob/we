@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import Loader from '../Loader';
 
 export default class UserItem extends React.Component {
 	static contextType = FirebaseContext;
@@ -12,40 +13,65 @@ export default class UserItem extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			user: {}
+			user: {},
+			done: false
 		}
+	}
+
+	componentDidMount() {
+		this.init()
+	}
+
+	componentDidUpdate() {
+		this.init()
+	}
+
+	init = () => {
+		this.props.user
+			.get()
+			.then(
+				doc => {
+					if (doc.exists) {
+						this.setState(
+							{ user: doc.data() }
+						)
+					}
+				}
+			)
+			.finally(
+				() => this.setState({ done: true })
+			)
 	}
 
 	render() {
 		const { isFollowing } = this.context;
-		this.props.user.get().then(
-			doc => {
-				if (doc.exists) {
-					this.setState(
-						{ user: doc.data() }
-					)
-				}
-			}
-		)
 		return (
 			<div className="UserItem">
 				{
-					this.state.user.photoURL ?
-						<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
-						<div className="profilePicture">
-							<FontAwesomeIcon icon={faUser} />
-						</div>
+					this.state.done ?
+						<>
+							<div className="photo">
+								{
+									this.state.user.photoURL ?
+										<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
+										<div className="profilePicture">
+											<FontAwesomeIcon icon={faUser} />
+										</div>
+								}
+							</div>
+							<Link to={("/user/" + this.state.user.username) || null} >
+								{
+									"@" + this.state.user.username
+								}
+							</Link>
+							<Button>
+								{
+									isFollowing(this.state.user.uid) ? "Unfollow" : "Follow"
+								}
+							</Button>
+						</> :
+						<Loader />
 				}
-				<Link to={("/user/" + this.state.user.username) || null} >
-					{
-						"@" + this.state.user.username
-					}
-				</Link>
-				<Button>
-					{
-						isFollowing(this.state.user.uid) ? "Unfollow" : "Follow"
-					}
-				</Button>
 			</div>
 		)
 	}

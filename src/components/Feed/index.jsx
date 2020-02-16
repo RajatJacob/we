@@ -2,6 +2,7 @@ import React from 'react';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import './style.scss';
 import Post from '../Post';
+import Loader from '../Loader';
 
 export default class Feed extends React.Component {
 	static contextType = FirebaseContext
@@ -16,17 +17,20 @@ export default class Feed extends React.Component {
 
 	getPostList = () => {
 		if (this.props.query)
-			this.props.query.orderBy('timestamp', 'desc').get().then(
-				snapshot => {
-					var p = []
-					snapshot.forEach(
-						x => {
-							p.push(x.ref.path)
-						}
-					)
-					this.setState({ posts: p, done: true })
-				}
-			)
+			this.props.query
+				.orderBy('timestamp', 'desc')
+				.get()
+				.then(
+					snapshot => {
+						var p = []
+						snapshot.forEach(
+							x => {
+								p.push(x.ref.path)
+							}
+						)
+						this.setState({ posts: p, done: true })
+					}
+				)
 		else {
 			const { auth, getFollowing } = this.context
 			getFollowing(auth.currentUser.uid).then(
@@ -37,7 +41,8 @@ export default class Feed extends React.Component {
 							f
 								.collection("posts")
 								.orderBy("timestamp", "desc")
-								.onSnapshot(
+								.get()
+								.then(
 									snapshot => {
 										snapshot.forEach(
 											x => {
@@ -55,19 +60,18 @@ export default class Feed extends React.Component {
 		}
 	}
 
-	componentDidUpdate() {
+	render() {
 		const { auth } = this.context
 		if (auth.currentUser && !this.state.done)
 			this.getPostList()
-	}
-
-	render() {
 		return (
 			<div className="Feed">
 				{
-					this.state.posts.map(
-						x => <Post post={x} />
-					)
+					this.state.done ?
+						this.state.posts.map(
+							x => <Post post={x} />
+						) :
+						<Loader />
 				}
 			</div>
 		)

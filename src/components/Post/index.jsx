@@ -3,6 +3,8 @@ import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import Container from '../Container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
 
 export default class Post extends React.Component {
 	static contextType = FirebaseContext
@@ -128,6 +130,26 @@ export default class Post extends React.Component {
 							{this.state.post.content}
 						</Container> : null
 				}
+				<div className="reactions">
+					<div>
+						<span class="icon">
+							<FontAwesomeIcon icon={faHeart} />
+						</span>
+						Like
+					</div>
+					<div>
+						<span class="icon">
+							<FontAwesomeIcon icon={faComment} />
+						</span>
+						Comment
+					</div>
+					<div>
+						<span class="icon">
+							<FontAwesomeIcon icon={faShare} />
+						</span>
+						Share
+					</div>
+				</div>
 			</div >
 		)
 	}
