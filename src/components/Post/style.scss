@@ -1,11 +1,54 @@
+@import "../../global/colors.scss";
+
 .Post {
+    position: relative;
     border-radius: 1em;
     background: #eee;
     width: 100%;
-    margin: 1em 0;
 
-    & * {
-        border-radius: 1em;
+    .info {
+        $size: 1em;
+        width: 100%;
+        background: mix(#222, $primaryColor, 80%);
+        color: white;
+        line-height: $size;
+        vertical-align: baseline;
+        display: grid;
+        margin: 0.25em auto;
+        border-radius: 1em 1em 0 0;
+        grid-template-columns: auto $size+2em;
+
+        .author {
+            padding: 0.5em;
+            display: grid;
+            grid-template-columns: $size+1.5em auto;
+            color: white;
+
+            &:hover {
+                color: mix($primaryColor, white, 90%);
+            }
+
+            .profilePicture {
+                width: $size;
+                height: $size;
+                line-height: $size;
+                font-size: $size*2;
+                margin: 0;
+            }
+
+            .username {
+                height: $size;
+                text-align: left;
+                margin: 0.5em;
+            }
+        }
+
+        .timeSince {
+            padding: 0.75em;
+            height: 100%;
+            font-weight: 300;
+            transition: all 500ms ease;
+        }
     }
 
     .picture {
@@ -15,9 +58,15 @@
         }
 
         .caption {
-            background: #00000055;
+            background: $primaryColor;
             color: white;
-            padding: 0.1em 0;
+            padding: 0.5em 0;
+            font-weight: bold;
+            border-radius: 0 0 1em 1em;
         }
+    }
+
+    .Container {
+        padding-top: 0;
     }
 }

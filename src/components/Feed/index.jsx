@@ -13,7 +13,7 @@ export default class Feed extends React.Component {
 
 	getPostList = () => {
 		if (this.props.query)
-			this.props.query.orderBy('timestamp').get().then(
+			this.props.query.orderBy('timestamp', 'desc').get().then(
 				snapshot => {
 					var p = []
 					snapshot.forEach(

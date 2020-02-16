@@ -1,5 +1,6 @@
 import React from 'react';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import { Link } from 'react-router-dom';
 import './style.scss';
 import Container from '../Container';
 
@@ -9,7 +10,8 @@ export default class Post extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			post: {}
+			post: {},
+			authorId: this.props.post.split('/')[1]
 		}
 		this.prevProp = null
 	}
@@ -18,19 +20,61 @@ export default class Post extends React.Component {
 		const { firestore } = this.context
 		firestore
 			.doc(this.props.post)
-			.get()
-			.then(
-				doc => {
-					console.log(doc)
-					if (doc.exists) {
-						this.setState(
-							{
-								post: doc.data()
-							}
-						)
-					}
+			.onSnapshot(
+				snapshot => {
+					this.setState(
+						{
+							post: snapshot.data()
+						}
+					)
+					this.getAuthorData()
+					this.getTimeSincePost()
 				}
 			)
+	}
+
+	getAuthorData = () => {
+		const { firestore } = this.context
+		firestore
+			.collection("users")
+			.doc(this.state.authorId)
+			.onSnapshot(
+				snapshot => {
+					this.setState(
+						{
+							author: snapshot.data()
+						}
+					)
+				}
+			)
+	}
+
+	getTimeSincePost = () => {
+		var t = this.state.post.timestamp ? (Math.floor(Date.now()) / 1000 - this.state.post.timestamp.seconds) : 0
+		var time = {}
+		time.s = t
+		time.m = Math.floor(time.s / 60)
+		time.h = Math.floor(time.m / 60)
+		time.d = Math.floor(time.h / 24)
+		time.w = Math.floor(time.d / 7)
+		time.mo = Math.floor(time.d / 30)
+		time.y = Math.floor(time.d / 365)
+		time.m %= 60
+		time.h %= 24
+		time.d %= 7
+		time.w %= 4
+		time.mo %= 12
+		var timeStr = ""
+		Object.keys(time).forEach(
+			x => {
+				timeStr = time[x] === 0 ? timeStr : time[x] + x
+			}
+		)
+		this.setState(
+			{
+				timeSince: timeStr
+			}
+		)
 	}
 
 	componentDidUpdate() {
@@ -43,6 +87,24 @@ export default class Post extends React.Component {
 	render() {
 		return (
 			<div className="Post">
+				<div className="info">
+					{
+						this.state.author ?
+							<Link to={"/user/" + this.state.author.username} className="author">
+								<img src={this.state.author.photoURL} alt={this.state.author.username} className="profilePicture" />
+								<div className="username">
+									{"@" + this.state.author.username}
+								</div>
+							</Link> :
+							null
+					}
+					{
+						this.state.timeSince ?
+							<div className="timeSince">
+								{this.state.timeSince}
+							</div> : null
+					}
+				</div>
 				{
 					this.state.post.img ?
 						<div className="picture">
@@ -66,7 +128,7 @@ export default class Post extends React.Component {
 							{this.state.post.content}
 						</Container> : null
 				}
-			</div>
+			</div >
 		)
 	}
 }
