@@ -84,6 +84,11 @@ export default class UserProfile extends React.Component {
 		)
 	}
 
+	isSelf = uid => {
+		const { auth } = this.context
+		this.setState({ self: uid === auth.currentUser.uid })
+	}
+
 	getUID = () => {
 		const { getUserRefByUsername } = this.context
 		return new Promise(
@@ -125,10 +130,11 @@ export default class UserProfile extends React.Component {
 		this.getUID()
 			.then(
 				uid => {
+					this.isSelf(uid)
 					this.getUserData(uid)
 						.then(
 							user => {
-								this.setState({ user: user, done: true })
+								this.setState({ uid: uid, user: user, done: true })
 							}
 						)
 					const fq = this.getFeedQuery(uid)
@@ -145,7 +151,7 @@ export default class UserProfile extends React.Component {
 	}
 
 	render() {
-		const { isLoggedIn, auth, follow, isFollowing } = this.context
+		const { isLoggedIn, follow, isFollowing } = this.context
 		if (this.state.user.username !== this.state.user.username.toLowerCase())
 			return <Redirect to={"/user/" + this.state.user.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -265,7 +271,7 @@ export default class UserProfile extends React.Component {
 									</Route>
 									<Route exact path={this.props.match.path + "/settings"} >
 										{
-											this.state.user.username === auth.currentUser.displayName ?
+											this.state.self ?
 												this.state.uid ?
 													<UserProfileSettings uid={this.state.uid} /> : null
 												:
