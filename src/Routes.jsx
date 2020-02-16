@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { FirebaseContext } from './contexts/FirebaseContext';
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
+import Feed from './components/Feed';
 import Card from './components/Card';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
@@ -19,6 +20,12 @@ export default class Routes extends React.Component {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/signup" component={SignUp} />
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/feed">
+						<Card>
+							<h1>Feed</h1>
+							<Feed />
+						</Card>
+					</Route>
 					<Route path="/user/:username" component={UserProfile} />
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
