@@ -1,0 +1,97 @@
+@import "../../global/colors.scss";
+
+.Post {
+    position: relative;
+    border-radius: 1em;
+    background: white;
+    box-shadow: 0 0.5em 1em 0 #00000055;
+    width: 100%;
+
+    .info {
+        $size: 1em;
+        width: 100%;
+        background: mix(#222, $primaryColor, 80%);
+        color: white;
+        line-height: $size;
+        vertical-align: baseline;
+        display: grid;
+        margin: 0 auto;
+        border-radius: 1em 1em 0 0;
+        grid-template-columns: auto $size+2em;
+
+        .author {
+            padding: 0.5em;
+            display: grid;
+            grid-template-columns: $size+1.5em auto;
+            color: white;
+
+            &:hover {
+                color: mix($primaryColor, white, 90%);
+            }
+
+            .profilePicture {
+                width: $size;
+                height: $size;
+                line-height: $size;
+                font-size: $size*2;
+                margin: 0;
+            }
+
+            .username {
+                height: $size;
+                text-align: left;
+                margin: 0.5em;
+            }
+        }
+
+        .timeSince {
+            padding: 0.75em;
+            height: 100%;
+            font-weight: 300;
+            transition: all 500ms ease;
+        }
+    }
+
+    .picture {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img {
+            width: 100%;
+        }
+
+        .caption {
+            background: $primaryColor;
+            background: mix(#00000088, $primaryColor, 80%);
+            color: white;
+            padding: 0.5em 0;
+            font-weight: bold;
+        }
+    }
+
+    .Container {
+        padding-top: 0;
+    }
+
+    .reactions {
+        border-top: 0.05em solid #00000022;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        div {
+            padding: 0.5em;
+            font-weight: 600;
+            transition: all 500ms ease;
+            cursor: pointer;
+
+            &:hover {
+                color: mix($primaryColor, #00000022, 80%);
+            }
+
+            .icon {
+                padding: 0.25em;
+            }
+        }
+    }
+}

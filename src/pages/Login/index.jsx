@@ -48,9 +48,9 @@ export default class Login extends React.Component {
 	}
 
 	render() {
-		const { auth, isLoggedIn, loginWithGoogle } = this.context;
+		const { isLoggedIn, loginWithGoogle } = this.context;
 		if (isLoggedIn) return (
-			<Redirect to={"/user/" + auth.currentUser.displayName} />
+			<Redirect to="/feed" />
 		)
 		return (
 			<div className="LoginPage" id="hi">

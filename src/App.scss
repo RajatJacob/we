@@ -1,7 +1,9 @@
 @import './global/variables.scss';
+@import './global/colors.scss';
 
 .App {
     text-align: center;
+    $size: 1em;
 
     *:focus {
         outline: none;
@@ -25,8 +27,28 @@
         }
     }
 
+    .profilePicture {
+        font-size: $size*2;
+        color: #eee;
+        background: #222;
+        border-radius: 100%;
+        box-shadow: 0 0 0.25em 0 #00000099;
+        height: $size;
+        width: $size;
+        line-height: $size;
+        margin: auto;
+        margin-top: $size / -2;
+        padding: $size / 15;
+        transition: all 500ms ease;
+
+        &:hover {
+            transform: scale(1.005);
+            box-shadow: 0 0 0.5em 0 #00000099;
+        }
+    }
+
     a {
-        $color: rgb(5, 113, 202);
+        $color: $primaryColor;
         font-weight: bold;
         transition: all 500ms ease;
 

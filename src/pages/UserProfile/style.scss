@@ -60,14 +60,24 @@
         padding: 0.5em;
     }
 
+    .bio {
+        background: #eee;
+        padding: 0.25em;
+        border-radius: 0.4em;
+        font-weight: 500;
+    }
+
     .tab-container {
         display: flex;
         width: 100%;
+        margin: 0;
+        margin-top: 2em;
 
         .tab {
-            margin: 0.25em;
-            padding: 1em 0.5em;
-            border-radius: 1em;
+            margin: 0;
+            padding: 0.5em;
+            border-radius: 0.5em 0.5em 0 0;
+            border-bottom: 0.25em solid #eee;
             width: 33.33%;
 
             @media screen and (orientation: portrait) {
@@ -75,13 +85,12 @@
             }
 
             &:hover {
-                background: #00000022;
                 color: $primaryColor;
             }
 
             &.active {
-                background: #00000033;
                 color: $primaryColor;
+                border-color: $primaryColor;
             }
 
             .number {

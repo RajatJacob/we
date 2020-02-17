@@ -76,6 +76,117 @@ export default class FirebaseContextProvider extends React.Component {
 						)
 					}
 				)
+			},
+			getFollowers: (uid) => {
+				if (uid)
+					return new Promise(
+						(resolve, reject) => {
+
+							this.state.firestore
+								.collection("users")
+								.where(
+									"following",
+									"array-contains",
+									this.state.firestore
+										.collection("users")
+										.doc(uid)
+								)
+								.get()
+								.then(
+									snapshot => {
+										var followers = []
+										snapshot.forEach(
+											doc => {
+												followers
+													.push(
+														this.state.firestore.collection("users").doc(doc.id)
+													)
+											}
+										)
+										resolve(followers)
+									}
+								)
+								.catch(
+									err => {
+										reject(err)
+									}
+								)
+						}
+					)
+			},
+			getFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.firestore
+							.collection("users")
+							.doc(this.state.auth.currentUser.uid)
+							.get()
+							.then(
+								doc => {
+									resolve(doc.data().following)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			isFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+									resolve(
+										following
+											.includes(
+												this.state.firestore
+													.collection("users")
+													.doc(uid)
+											)
+									)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			follow: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+
+								}
+							)
+					}
+				)
 			}
 		}
 
