@@ -77,9 +77,9 @@ class Donation extends React.Component {
                 <Card>
                     <h4>DONOR PRIVACY POLICY</h4>
                     <p>
-                        WE is committed to respecting and protecting the privacy of donors. All information concerning donors, including their names, contact information, the amount of their gift, etc., shall be kept strictly confidential by Women’s Empowerment staff, Board of Directors, and select
-                        development volunteers unless permission is obtained from donors to release such information. WE will not sell, share or trade our donors’ names or personal
-                        information with any other entity, nor send mailings to our donors on behalf of other organizations.The donor will be mailed an appreciation certificate for theit donation.
+                        WE are committed to respecting and protecting the privacy of donors. All information concerning donors, including their names, contact information, the amount of their gift, etc., shall be kept strictly confidential by the Board of Directors
+                        unless permission is obtained from donors to release such information. WE will not sell, share or trade our donors’ names or personal
+                        information with any other entity, nor send mailings to our donors on behalf of other organizations. We trust you on your donation since it is a QR scan code.
                         </p>
                 </Card>
             </div>
