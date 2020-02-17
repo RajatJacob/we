@@ -25,7 +25,7 @@ class Donation extends React.Component {
         this.setState({
             alert: {
                 type: "info",
-                message: "Mailing..."
+                message: "Loading..."
             },
             proceed: true
         })

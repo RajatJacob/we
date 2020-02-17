@@ -1,7 +1,7 @@
 @import "../../global/colors.scss";
 
 .Payment {
-  background-color: $primaryColor;
+  background-image: url("../../images/bg.jpg");
   @media screen and (orientation: portrait) {
     margin-top: 5em;
   }
