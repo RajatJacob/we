@@ -60,7 +60,7 @@ class Donation extends React.Component {
                                     </label>
                                 <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
                                 <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} pattern="[6789][0-9]{9}" required />
-                                <Input label="Amount" icon={<FontAwesomeIcon icon={faWallet} />} required />
+                                <Input label="Amount" type="number" icon={<FontAwesomeIcon icon={faWallet} />} required />
                                 <Input label="Pay" type="submit" onClick={this.submit} />
                             </form>
                             {
