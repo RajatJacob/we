@@ -20,7 +20,6 @@ class Donation extends React.Component {
         }
     }
     submit = e => {
-        const { auth } = this.context;
         this.setState({
             alert: {
                 type: "info",
@@ -45,18 +44,18 @@ class Donation extends React.Component {
                         <Container>
                             <form onSubmit={this.submit}>
                                 <h4>Support WE</h4>
-                                <Input label="Name" icon={<FontAwesomeIcon icon={faUser} />} />
+                                <Input label="Name" icon={<FontAwesomeIcon icon={faUser} />} required />
                                 <label>
-                                    <input type="radio" value="Individual" name="category" />
+                                    <input type="radio" value="Individual" name="category" required />
                                     Individual
                                     </label>
                                 <label>
                                     <input type="radio" value="Organisation" name="category" />
                                     Organisation
                                     </label>
-                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} />
-                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} />
-                                <Input label="Amount" icon={<FontAwesomeIcon icon={faWallet} />} />
+                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} required />
+                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} required />
+                                <Input label="Amount" icon={<FontAwesomeIcon icon={faWallet} />} required />
                                 <Input label="Pay" type="submit" />
                             </form>
                             {
