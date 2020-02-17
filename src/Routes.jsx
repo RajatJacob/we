@@ -24,7 +24,7 @@ export default class Routes extends React.Component {
 					<Route path="/feed">
 						<Container>
 							<h1>Feed</h1>
-							<Feed />
+							<Feed query="feed" />
 						</Container>
 					</Route>
 					<Route path="/user/:username" component={UserProfile} />

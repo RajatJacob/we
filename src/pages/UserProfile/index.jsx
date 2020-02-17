@@ -218,7 +218,7 @@ export default class UserProfile extends React.Component {
 											</Button>
 									}
 									<div className="tab-container">
-										<NavLink to={"/user/" + this.state.user.username + "/posts"} className="tab" activeClassName="active">
+										<NavLink to={"/user/" + this.state.user.username} className="tab" activeClassName="active">
 											<div className="number">
 												{this.state.posts ? this.state.posts.length : 0}
 											</div>
@@ -249,7 +249,7 @@ export default class UserProfile extends React.Component {
 									</div>
 								</Container>
 								<Switch>
-									<Route exact path={this.props.match.path + "/posts"} >
+									<Route exact path={this.props.match.path} >
 										<h2>Posts</h2>
 										<Feed query={this.state.feedQuery} />
 									</Route>
