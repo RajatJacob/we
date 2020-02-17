@@ -1,15 +1,20 @@
 @import "../../global/colors.scss";
 
 .Payment {
+  background-color: $primaryColor;
   @media screen and (orientation: portrait) {
     margin-top: 5em;
   }
 
   .Card {
     @media screen and (orientation: landscape) {
-      width: 50%;
+      width: 40%;
       margin: auto;
     }
+  }
+
+  img#coins {
+    width: 30%;
   }
 
   img#qr {
