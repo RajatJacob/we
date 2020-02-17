@@ -11,6 +11,7 @@ import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
 import VocationalCourses from './pages/VocationalCourses';
 import Donation from './pages/Donation';
+import Payment from './pages/Payment';
 import Home from './pages/Home';
 
 export default class Routes extends React.Component {
@@ -33,6 +34,7 @@ export default class Routes extends React.Component {
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route exact path="/courses" component={VocationalCourses} />
 					<Route exact path="/donation" component={Donation} />
+					<Route exact path="/payment" component={Payment} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

@@ -8,6 +8,7 @@ import GridContainer from '../../components/GridContainer';
 import Container from '../../components/Container';
 import Alert from '../../components/Alert';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import { Redirect } from 'react-router-dom';
 
 
 class Donation extends React.Component {
@@ -16,7 +17,8 @@ class Donation extends React.Component {
         super(props)
         this.state = {
             email: "",
-            alert: null
+            alert: null,
+            proceed: false
         }
     }
     submit = e => {
@@ -24,13 +26,16 @@ class Donation extends React.Component {
             alert: {
                 type: "info",
                 message: "Mailing..."
-            }
+            },
+            proceed: true
         })
 
         e.preventDefault()
 
     }
     render() {
+        if (this.state.proceed)
+            return (<Redirect to="/payment" />)
         return (
             <div className="Donation">
                 <div className="background" id="donate" />
@@ -39,7 +44,7 @@ class Donation extends React.Component {
                         <Container>
                             <p> Here at WE ,you are showing support for a long-term solution to ending homelessness. You are providing the
                                 support homeless women need to achieve their dreams, earn success and provide for their children.Your
-                                    donation is a smart investment in the future, an open door of opportunity and a path to self-sufficiency.  </p>
+                                donation is a smart investment in the future, an open door of opportunity and a path to self-sufficiency.  </p>
                         </Container>
                         <Container>
                             <form onSubmit={this.submit}>
@@ -53,10 +58,10 @@ class Donation extends React.Component {
                                     <input type="radio" value="Organisation" name="category" />
                                     Organisation
                                     </label>
-                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} required />
-                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} required />
+                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} pattern="[6789][0-9]{9}" required />
                                 <Input label="Amount" icon={<FontAwesomeIcon icon={faWallet} />} required />
-                                <Input label="Pay" type="submit" />
+                                <Input label="Pay" type="submit" onClick={this.submit} />
                             </form>
                             {
                                 this.state.alert ?
