@@ -25,6 +25,7 @@ export default class UserProfile extends React.Component {
 			},
 			done: false,
 			isFollowing: false,
+			followChange: false,
 			unsubscribe: () => { }
 		}
 	}
@@ -47,13 +48,7 @@ export default class UserProfile extends React.Component {
 
 	getFollowers = uid => {
 		const { getFollowers } = this.context
-		return new Promise(
-			(resolve, reject) => {
-				getFollowers(uid)
-					.then(f => resolve(f))
-					.catch(err => reject(err))
-			}
-		)
+		return getFollowers(uid)
 	}
 
 	getFeedQuery = uid => {
@@ -128,16 +123,36 @@ export default class UserProfile extends React.Component {
 	}
 
 	follow = () => {
+		const uid = this.state.uid
+		console.log(uid)
+		this.setState({ followChange: true })
 		const { follow } = this.context
-		follow(this.state.uid)
+		follow(uid)
+			.then(
+				() =>
+					this.getFollowData(uid)
+			)
 	}
 
 	getFollowData = uid => {
+		this.getIsFollowing(uid)
 		this.getFollowers(uid)
 			.then(
-				followers => this.setState({ followers: followers })
+				followers => {
+					console.log(followers)
+					this.setState(
+						{
+							followers: followers,
+							followChange: false
+						}
+					)
+				}
 			)
-		this.getIsFollowing(uid)
+			.catch(
+				err => [
+					console.log(err)
+				]
+			)
 	}
 
 	componentDidMount() {
@@ -233,7 +248,7 @@ export default class UserProfile extends React.Component {
 											} icon={<FontAwesomeIcon icon={faCog} />}>
 												Settings
 									</Button> :
-											<Button onClick={
+											<Button active={this.state.followChange} onClick={
 												this.follow
 											} >
 												{

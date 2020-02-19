@@ -80,7 +80,7 @@ export default class FirebaseContextProvider extends React.Component {
 			getFollowers: (uid) => {
 				return new Promise(
 					(resolve, reject) => {
-						if (uid) reject({ message: "Invalid UID" })
+						if (!uid) reject({ message: "Invalid UID" })
 						this.state.firestore
 							.collection("users")
 							.where(
@@ -172,10 +172,10 @@ export default class FirebaseContextProvider extends React.Component {
 			},
 			follow: uid => {
 				var f = []
-				return this.state.isFollowing(uid).then(
-					isFollowing => {
-						return new Promise(
-							(resolve, reject) => {
+				return new Promise(
+					(resolve, reject) => {
+						this.state.isFollowing(uid).then(
+							isFollowing => {
 								if (!uid || !this.state.auth.currentUser)
 									reject(
 										{
