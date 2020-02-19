@@ -188,13 +188,17 @@ export default class Post extends React.Component {
 				}
 				<div className="reactions">
 					<div onClick={this.like} className={this.doesLike() ? "liked" : undefined}>
-						<span className="icon">
-							<FontAwesomeIcon icon={this.doesLike() ? faHeart : farHeart} />
-						</span>
 						<span className="number">
 							{
 								this.state.post.likedBy ? this.state.post.likedBy.length : 0
 							}
+						</span>
+						<span className="icon">
+							<FontAwesomeIcon icon={
+								this.doesLike() ?
+									faHeart :
+									farHeart
+							} />
 						</span>
 					</div>
 					{/*<div>
