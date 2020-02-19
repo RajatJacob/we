@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 export const FirebaseContext = createContext();
 
@@ -25,6 +26,7 @@ export default class FirebaseContextProvider extends React.Component {
 		this.state = {
 			firebase: firebase,
 			firestore: firebase.firestore(),
+			storage: firebase.storage(),
 			auth: firebase.auth(),
 			isLoggedIn: false,
 			getUserRefByUsername: (username) => this.state.firestore

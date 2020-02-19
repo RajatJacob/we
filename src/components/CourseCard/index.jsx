@@ -11,7 +11,7 @@ const Cards = props => {
 				<div className="card">
 					<div className='card-flow'>
 						<div className='card-flow-front'>
-							<img src={props.imgsrc} alt="props.name" className="card-img" />
+							<img src={props.image} alt={props.name} className="card-img" />
 
 							<h5 className="title">{props.title}</h5>
 

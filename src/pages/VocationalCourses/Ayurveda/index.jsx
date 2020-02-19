@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Courses from '../../../components/Courses';
 import './style.scss';
  class Ayurveda extends React.Component{
 	render()
 	{
+		
 		return(
 			<div className="Ayurveda">
 				<Courses className='heading' name="Ayurveda Assistant"/>

@@ -27,25 +27,37 @@ export default class VocationalCourses extends React.Component {
 	}
 
 	getCourseData = () => {
-		const { firestore } = this.context;
+		const { firestore, storage } = this.context;
 		var courses = []
 		firestore.collection("courses").get().then(
 			snapshot => {
 				snapshot.forEach(
 					doc => {
-						courses.push(doc.data())
+						var c = doc.data()
+						storage.refFromURL(c.image).getDownloadURL().then(
+							url => {
+								c.image = url
+								//console.log(c)
+								courses.push(c)
+								this.setState({
+									courses: courses
+								}
+								)
+							}
+						)
 					}
 				)
-				this.setState({
-					courses: courses
-				})
 			}
 		)
+
+		
+		
 	}
+	
 
 	componentDidMount() {
-		this.getCourseData()
-	}
+		 this.getCourseData()
+		}
 
 	render() {
 		return (
@@ -54,13 +66,13 @@ export default class VocationalCourses extends React.Component {
 				<div>
 					<h1>WE Offer</h1>
 				</div>
-
+<div className="postsContainer">
 				{
 					this.state.courses.map(
 					x => {
 						return (
-							<div className='postsContainer'>
-							<Cards imgsrc={x.imgsrc}
+							<div >
+							<Cards image={x.image}
 							title={x.title}
 							content={x.content}
 							label={x.label}
@@ -70,6 +82,8 @@ export default class VocationalCourses extends React.Component {
 					}
 				)
 			}
+			
+			</div>
 
 				
 					

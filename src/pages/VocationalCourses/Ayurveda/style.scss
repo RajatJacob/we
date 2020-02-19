@@ -1,12 +1,18 @@
 .Ayurveda{
-	background-image: url('../../../images/ayurvedaback.jpeg');
+  background-image: url('../../../images/ayurvedaback.jpeg');
 	background-attachment: fixed;
-	background-size: cover;
-	
+	 background-size: cover;
 	.img{opacity: 0.5;}
 }
+.App .Content {
+  padding: 0em 0;
+}
+
+.App .Content {
+    margin-bottom: 0em;
+}
 .Ayur{
-	margin: 30px;
+	// margin: 30px;
   background-color: #ffffff;
   border: 1px solid black;
   opacity: 0.6;
@@ -14,7 +20,7 @@
   color: black;
 }
 .Ayur p {
- /* margin: 5%;*/
+ 
   font-weight: bold;
   color: #000000;
 }
