@@ -24,6 +24,7 @@ export default class UserProfile extends React.Component {
 				username: ""
 			},
 			done: false,
+			isFollowing: false,
 			unsubscribe: () => { }
 		}
 	}
@@ -115,12 +116,38 @@ export default class UserProfile extends React.Component {
 		)
 	}
 
+	getIsFollowing = uid => {
+		const { isFollowing } = this.context
+		isFollowing(uid).then(
+			f => {
+				this.setState({
+					isFollowing: f
+				})
+			}
+		)
+	}
+
+	follow = () => {
+		const { follow } = this.context
+		follow(this.state.uid)
+	}
+
+	getFollowData = uid => {
+		this.getFollowers(uid)
+			.then(
+				followers => this.setState({ followers: followers })
+			)
+		this.getIsFollowing(uid)
+	}
+
 	componentDidMount() {
 		this.init()
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.match.params.username !== this.props.match.params.username)
+		if (
+			prevProps.match.params.username !== this.props.match.params.username
+		)
 			this.init()
 	}
 
@@ -142,16 +169,13 @@ export default class UserProfile extends React.Component {
 						.then(
 							posts => this.setState({ posts: posts, feedQuery: fq })
 						)
-					this.getFollowers(uid)
-						.then(
-							followers => this.setState({ followers: followers })
-						)
+					this.getFollowData(uid)
 				}
 			)
 	}
 
 	render() {
-		const { isLoggedIn, follow, isFollowing } = this.context
+		const { isLoggedIn } = this.context
 		if (this.state.user.username !== this.state.user.username.toLowerCase())
 			return <Redirect to={"/user/" + this.state.user.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -209,11 +233,13 @@ export default class UserProfile extends React.Component {
 											} icon={<FontAwesomeIcon icon={faCog} />}>
 												Settings
 									</Button> :
-											<Button onClick={() => follow(this.state.uid)} >
+											<Button onClick={
+												this.follow
+											} >
 												{
-													isFollowing(this.state.uid) ?
-														"Follow" :
-														"Unfollow"
+													this.state.isFollowing ?
+														"Unfollow" :
+														"Follow"
 												}
 											</Button>
 									}
