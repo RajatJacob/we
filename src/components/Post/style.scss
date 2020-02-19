@@ -81,10 +81,14 @@
 
         div {
             padding: 0.5em;
+            font-size: 1.5em;
             font-weight: 600;
             transition: all 500ms ease;
             color: #555;
             cursor: pointer;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 0.5em;
 
             &:hover {
                 color: mix($primaryColor, #00000022, 80%);
@@ -94,10 +98,12 @@
                 color: rgb(199, 0, 93);
             }
 
-            .icon,
+            .icon {
+                text-align: right;
+            }
+
             .number {
-                padding: 0.25em;
-                font-size: 1.5em;
+                text-align: left;
             }
         }
     }
