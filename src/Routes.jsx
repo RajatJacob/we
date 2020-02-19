@@ -12,6 +12,8 @@ import VocationalCourses from './pages/VocationalCourses';
 import Home from './pages/Home';
 import Feedback from './components/Feedback';
 import Resume from './components/Resume';
+import View from './components/View';
+
 
 
 export default class Routes extends React.Component {
@@ -27,6 +29,9 @@ export default class Routes extends React.Component {
 					<Route exact path="/logout" component={Logout} />
 						<Route exact path="/Resume">
 						<Resume />
+					</Route>
+					<Route exact path="/View">
+						<View />
 					</Route>
 					<Route exact path="/Feedback">
 						<Feedback />

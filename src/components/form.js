@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './formstyle.css';
+import { storage } from '../../contexts/FirebaseContext';
+import { FirebaseContext } from '../../contexts/FirebaseContext';
+
 
 export default class OrganisationForm extends React.Component
 {
