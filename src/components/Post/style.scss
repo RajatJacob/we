@@ -89,7 +89,12 @@
                 color: mix($primaryColor, #00000022, 80%);
             }
 
-            .icon {
+            &.liked {
+                color: rgb(199, 0, 93);
+            }
+
+            .icon,
+            .number {
                 padding: 0.25em;
             }
         }

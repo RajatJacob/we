@@ -79,6 +79,61 @@ export default class Post extends React.Component {
 		)
 	}
 
+	doesLike = () => {
+		const { auth, firestore } = this.context
+		const u = firestore
+			.collection("users")
+			.doc(
+				auth.currentUser.uid
+			)
+		var l = false
+		if (this.state.post.likedBy)
+			this.state.post.likedBy.forEach(
+				x => l = l || x.id === u.id
+			)
+		return l
+	}
+
+	unlike = () => {
+		const { firestore, auth } = this.context
+		const u = firestore.collection("users").doc(auth.currentUser.uid)
+		var l = this.state.post.likedBy || []
+		var i
+		if (this.state.post.likedBy)
+			do {
+				i = l.indexOf(u)
+				l.splice(i, 1)
+			} while (i !== -1)
+		firestore
+			.doc(this.props.post)
+			.update(
+				{
+					likedBy: l
+				}
+			)
+
+	}
+
+	like = () => {
+		if (this.doesLike()) this.unlike()
+		else {
+			const { firestore, auth } = this.context
+			var l = this.state.post.likedBy || []
+			l.push(
+				firestore
+					.collection("users")
+					.doc(auth.currentUser.uid)
+			)
+			firestore
+				.doc(this.props.post)
+				.update(
+					{
+						likedBy: l
+					}
+				)
+		}
+	}
+
 	componentDidMount() {
 		if (this.props.post !== this.prevProp) {
 			this.prevProp = this.props.post
@@ -131,11 +186,22 @@ export default class Post extends React.Component {
 						</Container> : null
 				}
 				<div className="reactions">
-					<div>
-						<span class="icon">
+					<div onClick={this.like} className={this.doesLike() ? "liked" : undefined}>
+						<span className="icon">
 							<FontAwesomeIcon icon={faHeart} />
 						</span>
-						Like
+						<span className="number">
+							{
+								this.state.post.likedBy ? this.state.post.likedBy.length : 0
+							}
+						</span>
+						{
+							this.state.post.likedBy ?
+								this.state.post.likedBy.length === 1 ?
+									"Like" :
+									"Likes" :
+								"Likes"
+						}
 					</div>
 					<div>
 						<span class="icon">
