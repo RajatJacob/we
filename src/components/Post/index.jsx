@@ -5,6 +5,7 @@ import './style.scss';
 import Container from '../Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 
 export default class Post extends React.Component {
 	static contextType = FirebaseContext
@@ -188,7 +189,7 @@ export default class Post extends React.Component {
 				<div className="reactions">
 					<div onClick={this.like} className={this.doesLike() ? "liked" : undefined}>
 						<span className="icon">
-							<FontAwesomeIcon icon={faHeart} />
+							<FontAwesomeIcon icon={this.doesLike() ? faHeart : farHeart} />
 						</span>
 						<span className="number">
 							{
