@@ -77,7 +77,7 @@
     .reactions {
         border-top: 0.05em solid #00000022;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(1, 1fr);
 
         div {
             padding: 0.5em;
@@ -96,6 +96,7 @@
             .icon,
             .number {
                 padding: 0.25em;
+                font-size: 1.5em;
             }
         }
     }
