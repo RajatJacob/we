@@ -95,16 +95,9 @@ export default class Post extends React.Component {
 		return l
 	}
 
-	unlike = () => {
+	/*unlike = () => {
 		const { firestore, auth } = this.context
-		const u = firestore.collection("users").doc(auth.currentUser.uid)
-		var l = this.state.post.likedBy || []
-		var i
-		if (this.state.post.likedBy)
-			do {
-				i = l.indexOf(u)
-				l.splice(i, 1)
-			} while (i !== -1)
+
 		firestore
 			.doc(this.props.post)
 			.update(
@@ -113,26 +106,33 @@ export default class Post extends React.Component {
 				}
 			)
 
-	}
+	}*/
 
 	like = () => {
-		if (this.doesLike()) this.unlike()
-		else {
-			const { firestore, auth } = this.context
-			var l = this.state.post.likedBy || []
+		const { firestore, auth } = this.context
+		const u = firestore.collection("users").doc(auth.currentUser.uid)
+		var l = this.state.post.likedBy || []
+		var i
+		if (this.doesLike()) { //unlike
+			if (this.state.post.likedBy)
+				do {
+					i = l.indexOf(u)
+					l.splice(i, 1)
+				} while (i !== -1)
+		}
+		else // like
 			l.push(
 				firestore
 					.collection("users")
 					.doc(auth.currentUser.uid)
 			)
-			firestore
-				.doc(this.props.post)
-				.update(
-					{
-						likedBy: l
-					}
-				)
-		}
+		firestore
+			.doc(this.props.post)
+			.update(
+				{
+					likedBy: l
+				}
+			)
 	}
 
 	componentDidMount() {
