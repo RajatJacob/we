@@ -144,7 +144,7 @@ export default class Post extends React.Component {
 
 	render() {
 		return (
-			<div className="Post">
+			<div className="Post" onDoubleClick={this.like}>
 				<div className="info">
 					{
 						this.state.author ?
