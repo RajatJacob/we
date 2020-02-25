@@ -64,7 +64,10 @@ export default class UserItem extends React.Component {
 					}
 				)
 				.finally(
-					() => this.setState({ done: true })
+					() => {
+						this.getIsFollowing()
+						this.setState({ done: true })
+					}
 				)
 	}
 

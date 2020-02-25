@@ -95,19 +95,6 @@ export default class Post extends React.Component {
 		return l
 	}
 
-	/*unlike = () => {
-		const { firestore, auth } = this.context
-
-		firestore
-			.doc(this.props.post)
-			.update(
-				{
-					likedBy: l
-				}
-			)
-
-	}*/
-
 	like = () => {
 		const { firestore, auth } = this.context
 		const u = firestore.collection("users").doc(auth.currentUser.uid)
@@ -158,7 +145,7 @@ export default class Post extends React.Component {
 					}
 					{
 						this.state.timeSince ?
-							<div className="timeSince">
+							<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
 								{this.state.timeSince}
 							</div> : null
 					}
