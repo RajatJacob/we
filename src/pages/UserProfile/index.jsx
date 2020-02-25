@@ -298,7 +298,7 @@ export default class UserProfile extends React.Component {
 										<h2>Followers</h2>
 										{
 											this.state.followers ?
-												<UserList users={this.state.followers} /> :
+												<UserList users={this.state.followers.reverse()} /> :
 												null
 										}
 									</Route>
@@ -306,7 +306,7 @@ export default class UserProfile extends React.Component {
 										<h2>Following</h2>
 										{
 											this.state.user.following ?
-												<UserList users={this.state.user.following} /> :
+												<UserList users={this.state.user.following.reverse()} /> :
 												null
 										}
 									</Route>
