@@ -1,22 +1,59 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Courses from '../../../components/Courses';
-import './style.scss';
+import img from '../../../images/sanitationmain.jpeg';
+import vid1 from '../../../images/ethics.mp4';
+import '../all.scss';
  class Sanitation extends React.Component{
 	render()
 	{
 		return(
 			<div className="Sanitation">
-				<Courses className='heading' name="Community Health and Sanitation"/>
-				<div className="community">
+				<Courses className='heading' name="Community Health and Sanitation" imgsrc={img}/>
+				<div className="start">
+				<div class="sidebar">
+			
+				<div class="sidebar_item">
+			   <h3 >Facts</h3>
+			   <p align="justify" className="side">
+			   At least 10% of the world’s population is thought to consume food irrigated by wastewater.</p> 
+			<p align="justify" className="side">Poor sanitation reduces human well-being, social and economic development due to impacts such as anxiety, risk of sexual assault, and lost educational opportunities.</p></div>
+		   </div>
+		   <br/><br/>
+		   <div className="para">
 				<p className="info">Adequate sanitation, together with good hygiene and safe water, are fundamental to good health and to social and economic development. Improvements in one or more of these three components of good health can substantially reduce the rates of morbidity and the severity of various diseases and improve the quality of life of huge number of people, particularly children, in developing countries. Although linked and often mutually supporting, these three components have different public health characteristics. This course focuses on spreading awareness to women about community health and sanitation. It seeks to present the latest evidence on the provision of adequate sanitation, to analyse why more progress has not been made, and to suggest strategies to improve the impact of sanitation. </p>
-			<h3>Why Sanitation for Women Matters</h3>
+			<p className="info">Community Health and Sanitation is a community-sensitive approach to the developing world’s water supply for students, trainers, and engineers alike. Deals with disease and problems of water in the house and at the source, waste disposal, and education and training.</p>
+			</div>
+			
+			<div class="sidebar">
+		
+		 <div class="sidebar_item">
+		   <h3>Useful Links</h3>
+		   <ul className="sidelist">
+			<li className="list"> <a className="ref" href="https://www.who.int/news-room/fact-sheets/detail/sanitation">World Health Organisation</a></li>
+			<li  className="list"><a href=" http://aiihph.gov.in/courses/" >Government Initiative Program</a></li>
+		
+			</ul>
+		 </div>
+		
+	   </div>
+	   <br/><br/>
+	   <div>
+	   <video width="50%" height="30%"  className="video" controls >
+	   <source src={vid1} type="video/mp4"></source>
+	   <source src="images/ethics.ogg" type="video/ogg"></source>
+	   Your browser does not support the video tag.
+	 </video>
+	   </div>
+
+<br/><br/>
+<div className="Modules">
+				<h2>Why Sanitation for Women Matters</h2>
 			<p className="info">The Sustainable Development Goals to drastically improve the livelihood of people and the planet is very important to ensure the availability and sustainable management of water and sanitation for everybody in the community.
  There are schools which lacks basic drinking water, sanitation and hygiene services, affecting the education of millions of school children, but particularly girls managing menstruation, and one in four health-care facilities worldwide lacked basic water services, affecting more than 2 billion people.
 For women delivering a child in these health facilities, a lack of safe water can be fatal for mother and child. Safe water and hygiene for women can reduce the risk of infections and death for infants and mothers by up to 25 percent. Sanitation for women, safe water access, and improved hygiene saves their lives and the lives of their infants, reducing maternal and infant deaths drastically.
 Other challenges, such as absenteeism during menstruation and the spread of disease, are also critical problems mitigated by access to basic sanitation. For girls, menstruation can mean an end to their education simply because their schools lack basic female hygiene and sanitation resources. There’s a lack of privacy when urinating or defecating, so many women and girls without a toilet will wait until it’s dark outside to relieve themselves or bathe, which exposes them to attacks.</p>
 
-<h3>Solving the Sanitation Problem for Women</h3>
+<h2>Solving the Sanitation Problem for Women</h2>
 <p className="info">Safe water access, sanitation, and hygiene (WASH) are the most basic building blocks for empowering women everywhere. The three go hand in hand; to truly solve the sanitation problem for women, you need all three.
 <br/>At the most basic level, here’s what it takes to provide proper sanitation for women<br/>
 <ol>
@@ -44,8 +81,11 @@ Following is the suggested Online Refernce to Learn more about menstrual hygiene
 </p>
 
 </ol>
-</p>
+</p></div>
 			</div>
+			<div id="footer">
+			<p>Copyright © 2020 Women Empowerment. All Rights Reserved.</p>
+		  </div>
 			</div>
 			);
 	}
