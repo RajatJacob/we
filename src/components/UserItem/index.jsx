@@ -24,6 +24,7 @@ export default class UserItem extends React.Component {
 		const { isFollowing } = this.context
 		isFollowing(uid).then(
 			f => {
+				console.log(f)
 				this.setState({
 					isFollowing: f
 				})

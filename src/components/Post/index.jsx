@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import Container from '../Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 
 export default class Post extends React.Component {
@@ -14,9 +14,14 @@ export default class Post extends React.Component {
 		super(props)
 		this.state = {
 			post: {},
-			authorId: this.props.post.split('/')[1]
+			authorId: this.props.post.split('/')[1],
+			menu: false
 		}
 		this.prevProp = null
+	}
+
+	toggleMenu = e => {
+		this.setState({ menu: !this.state.menu })
 	}
 
 	getPostData = () => {
@@ -37,7 +42,7 @@ export default class Post extends React.Component {
 	}
 
 	getAuthorData = () => {
-		const { firestore } = this.context
+		const { firestore, auth } = this.context
 		firestore
 			.collection("users")
 			.doc(this.state.authorId)
@@ -45,7 +50,8 @@ export default class Post extends React.Component {
 				snapshot => {
 					this.setState(
 						{
-							author: snapshot.data()
+							author: snapshot.data(),
+							self: this.state.authorId === auth.currentUser.uid
 						}
 					)
 				}
@@ -143,13 +149,31 @@ export default class Post extends React.Component {
 							</Link> :
 							null
 					}
-					{
-						this.state.timeSince ?
-							<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
-								{this.state.timeSince}
-							</div> : null
-					}
+					<div className="action">
+						{
+							this.state.timeSince ?
+								<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
+									{this.state.timeSince}
+								</div> : null
+						}
+						{
+							this.state.self ?
+								<span className="toggleMenu" onClick={this.toggleMenu}>
+									<FontAwesomeIcon icon={faEllipsisV} />
+								</span> : null
+						}
+					</div>
 				</div>
+				{
+					this.state.self ?
+						<div className={this.state.menu ? "active menu" : "menu"}>
+							<ul>
+								<li>Edit</li>
+								<li>Delete</li>
+							</ul>
+						</div> :
+						null
+				}
 				{
 					this.state.post.img ?
 						<div className="picture">
