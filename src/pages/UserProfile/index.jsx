@@ -24,6 +24,8 @@ export default class UserProfile extends React.Component {
 				username: ""
 			},
 			done: false,
+			isFollowing: false,
+			followChange: false,
 			unsubscribe: () => { }
 		}
 	}
@@ -46,15 +48,8 @@ export default class UserProfile extends React.Component {
 
 	getFollowers = uid => {
 		const { getFollowers } = this.context
-		return new Promise(
-			(resolve, reject) => {
-				getFollowers(uid)
-					.then(f => resolve(f))
-					.catch(err => reject(err))
-			}
-		)
+		return getFollowers(uid)
 	}
-
 	getFeedQuery = uid => {
 		const { firestore } = this.context
 		return firestore
@@ -115,12 +110,58 @@ export default class UserProfile extends React.Component {
 		)
 	}
 
+	getIsFollowing = uid => {
+		const { isFollowing } = this.context
+		isFollowing(uid).then(
+			f => {
+				this.setState({
+					isFollowing: f
+				})
+			}
+		)
+	}
+
+	follow = () => {
+		const uid = this.state.uid
+		console.log(uid)
+		this.setState({ followChange: true })
+		const { follow } = this.context
+		follow(uid)
+			.then(
+				() =>
+					this.getFollowData(uid)
+			)
+	}
+
+	getFollowData = uid => {
+		this.getIsFollowing(uid)
+		this.getFollowers(uid)
+			.then(
+				followers => {
+					console.log(followers)
+					this.setState(
+						{
+							followers: followers,
+							followChange: false
+						}
+					)
+				}
+			)
+			.catch(
+				err => [
+					console.log(err)
+				]
+			)
+	}
+
 	componentDidMount() {
 		this.init()
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.match.params.username !== this.props.match.params.username)
+		if (
+			prevProps.match.params.username !== this.props.match.params.username
+		)
 			this.init()
 	}
 
@@ -142,16 +183,13 @@ export default class UserProfile extends React.Component {
 						.then(
 							posts => this.setState({ posts: posts, feedQuery: fq })
 						)
-					this.getFollowers(uid)
-						.then(
-							followers => this.setState({ followers: followers })
-						)
+					this.getFollowData(uid)
 				}
 			)
 	}
 
 	render() {
-		const { isLoggedIn, follow, isFollowing } = this.context
+		const { isLoggedIn } = this.context
 		if (this.state.user.username !== this.state.user.username.toLowerCase())
 			return <Redirect to={"/user/" + this.state.user.username.toLowerCase()} />
 		if (!isLoggedIn) {
@@ -209,16 +247,18 @@ export default class UserProfile extends React.Component {
 											} icon={<FontAwesomeIcon icon={faCog} />}>
 												Settings
 									</Button> :
-											<Button onClick={() => follow(this.state.uid)} >
+											<Button active={this.state.followChange} onClick={
+												this.follow
+											} >
 												{
-													isFollowing(this.state.uid) ?
-														"Follow" :
-														"Unfollow"
+													this.state.isFollowing ?
+														"Unfollow" :
+														"Follow"
 												}
 											</Button>
 									}
 									<div className="tab-container">
-										<NavLink to={"/user/" + this.state.user.username + "/posts"} className="tab" activeClassName="active">
+										<NavLink to={"/user/" + this.state.user.username} className="tab" activeClassName="active">
 											<div className="number">
 												{this.state.posts ? this.state.posts.length : 0}
 											</div>
@@ -249,7 +289,7 @@ export default class UserProfile extends React.Component {
 									</div>
 								</Container>
 								<Switch>
-									<Route exact path={this.props.match.path + "/posts"} >
+									<Route exact path={this.props.match.path} >
 										<h2>Posts</h2>
 										<Feed query={this.state.feedQuery} />
 									</Route>
@@ -257,7 +297,7 @@ export default class UserProfile extends React.Component {
 										<h2>Followers</h2>
 										{
 											this.state.followers ?
-												<UserList users={this.state.followers} /> :
+												<UserList users={this.state.followers.reverse()} /> :
 												null
 										}
 									</Route>
@@ -265,7 +305,7 @@ export default class UserProfile extends React.Component {
 										<h2>Following</h2>
 										{
 											this.state.user.following ?
-												<UserList users={this.state.user.following} /> :
+												<UserList users={this.state.user.following.reverse()} /> :
 												null
 										}
 									</Route>

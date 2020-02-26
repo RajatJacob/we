@@ -14,15 +14,43 @@ export default class UserItem extends React.Component {
 		super(props)
 		this.state = {
 			user: {},
-			done: false
+			done: false,
+			followChange: false,
+			isFollowing: false
 		}
 	}
 
+	getIsFollowing = uid => {
+		const { isFollowing } = this.context
+		isFollowing(uid).then(
+			f => {
+				console.log(f)
+				this.setState({
+					isFollowing: f
+				})
+			}
+		)
+	}
+
+	follow = () => {
+		const uid = this.state.uid
+		console.log(uid)
+		this.setState({ followChange: true })
+		const { follow } = this.context
+		follow(uid)
+			.then(
+				() => {
+					this.getIsFollowing(uid)
+					this.setState({ followChange: false })
+				}
+			)
+	}
 	componentDidMount() {
 		this.init()
 	}
 
 	init = () => {
+		const { auth } = this.context
 		if (!this.state.done)
 			this.props.user
 				.get()
@@ -30,18 +58,20 @@ export default class UserItem extends React.Component {
 					doc => {
 						if (doc.exists) {
 							this.setState(
-								{ user: doc.data(), done: true }
+								{ uid: doc.id, user: doc.data(), done: true, self: auth.currentUser.uid === doc.id }
 							)
 						}
 					}
 				)
 				.finally(
-					() => this.setState({ done: true })
+					() => {
+						this.getIsFollowing()
+						this.setState({ done: true })
+					}
 				)
 	}
 
 	render() {
-		const { isFollowing } = this.context;
 		return (
 			<div className="UserItem">
 				{
@@ -61,11 +91,17 @@ export default class UserItem extends React.Component {
 									"@" + this.state.user.username
 								}
 							</Link>
-							<Button>
-								{
-									isFollowing(this.state.user.uid) ? "Unfollow" : "Follow"
-								}
-							</Button>
+							{
+								this.state.self ?
+									<Button to={"/user/" + this.state.user.username}>View</Button> :
+									<Button active={this.state.followChange} onClick={this.follow}>
+										{
+											this.state.isFollowing ?
+												"Unfollow" :
+												"Follow"
+										}
+									</Button>
+							}
 						</> :
 						<Loader />
 				}

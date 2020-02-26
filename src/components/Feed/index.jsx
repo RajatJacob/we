@@ -16,22 +16,7 @@ export default class Feed extends React.Component {
 	}
 
 	getPostList = () => {
-		if (this.props.query)
-			this.props.query
-				.orderBy('timestamp', 'desc')
-				.get()
-				.then(
-					snapshot => {
-						var p = []
-						snapshot.forEach(
-							x => {
-								p.push(x.ref.path)
-							}
-						)
-						this.setState({ posts: p, done: true })
-					}
-				)
-		else {
+		if (this.props.query === "feed") {
 			const { auth, getFollowing } = this.context
 			getFollowing(auth.currentUser.uid).then(
 				following => {
@@ -58,6 +43,21 @@ export default class Feed extends React.Component {
 				}
 			)
 		}
+		else if (this.props.query)
+			this.props.query
+				.orderBy('timestamp', 'desc')
+				.get()
+				.then(
+					snapshot => {
+						var p = []
+						snapshot.forEach(
+							x => {
+								p.push(x.ref.path)
+							}
+						)
+						this.setState({ posts: p, done: true })
+					}
+				)
 	}
 
 	render() {
