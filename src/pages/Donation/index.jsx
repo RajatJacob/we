@@ -16,7 +16,6 @@ class Donation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
             name: "",
             email: "",
             phone: "",
@@ -35,7 +34,15 @@ class Donation extends React.Component {
             },
             proceed: true
         })
-        firestore.collection("donation").add()
+        firestore.collection("donation").add(
+            {
+                name: this.state.name,
+                email: this.state.email,
+                phone: this.state.phone,
+                role: this.state.role,
+                amount: this.state.amount
+            }
+        )
         e.preventDefault()
     }
 
@@ -67,7 +74,7 @@ class Donation extends React.Component {
                                     </label>
                                 <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
                                 <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} onChange={e => this.setState({ phone: e.target.value })} value={this.state.phone} pattern="[6789][0-9]{9}" required />
-                                <Input label="Amount" type="number" min="1" icon={<FontAwesomeIcon icon={faWallet} />} required />
+                                <Input label="Amount" type="number" min="1" icon={<FontAwesomeIcon icon={faWallet} />} onChange={e => this.setState({ amount: e.target.value })} value={this.state.amount} required />
                                 <h5>(Amount in terms of INR)</h5>
                                 <Input label="Pay" type="submit" onClick={this.submit} />
                             </form>
