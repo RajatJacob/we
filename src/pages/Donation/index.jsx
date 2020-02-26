@@ -97,6 +97,14 @@ class Donation extends React.Component {
                         information with any other entity, nor send mails to our donors on behalf of other organizations. We trust you on your donation since it is a QR scan code.
                     </p>
                 </Card>
+
+                <Card>
+                    <h4>HELP US. HELP THEM</h4>
+                    <p>
+                        Once the donation is made, the amount is verified by the developers and then the money is donated to AWAKE – Association of Women Entrepreneurs of Karnataka is a not-for-profit, Non-Governmental Organization (NGO) based in Bangalore, India,
+                        which is working towards ' Empowerment of women through entrepreneurship development to improve their economic condition '. It is a non-profit Organisation.
+                    </p>
+                </Card>
             </div>
         )
     }
