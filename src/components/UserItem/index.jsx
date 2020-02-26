@@ -2,7 +2,6 @@ import React from 'react';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { Link } from 'react-router-dom';
-import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Loader from '../Loader';
@@ -14,37 +13,10 @@ export default class UserItem extends React.Component {
 		super(props)
 		this.state = {
 			user: {},
-			done: false,
-			followChange: false,
-			isFollowing: false
+			done: false
 		}
 	}
 
-	getIsFollowing = uid => {
-		const { isFollowing } = this.context
-		isFollowing(uid).then(
-			f => {
-				console.log(f)
-				this.setState({
-					isFollowing: f
-				})
-			}
-		)
-	}
-
-	follow = () => {
-		const uid = this.state.uid
-		console.log(uid)
-		this.setState({ followChange: true })
-		const { follow } = this.context
-		follow(uid)
-			.then(
-				() => {
-					this.getIsFollowing(uid)
-					this.setState({ followChange: false })
-				}
-			)
-	}
 	componentDidMount() {
 		this.init()
 	}
@@ -65,7 +37,6 @@ export default class UserItem extends React.Component {
 				)
 				.finally(
 					() => {
-						this.getIsFollowing()
 						this.setState({ done: true })
 					}
 				)
@@ -76,7 +47,7 @@ export default class UserItem extends React.Component {
 			<div className="UserItem">
 				{
 					this.state.done ?
-						<>
+						<Link to={("/user/" + this.state.user.username) || null} >
 							<div className="photo">
 								{
 									this.state.user.photoURL ?
@@ -86,23 +57,11 @@ export default class UserItem extends React.Component {
 										</div>
 								}
 							</div>
-							<Link to={("/user/" + this.state.user.username) || null} >
-								{
-									"@" + this.state.user.username
-								}
-							</Link>
 							{
-								this.state.self ?
-									<Button to={"/user/" + this.state.user.username}>View</Button> :
-									<Button active={this.state.followChange} onClick={this.follow}>
-										{
-											this.state.isFollowing ?
-												"Unfollow" :
-												"Follow"
-										}
-									</Button>
+								"@" + this.state.user.username
 							}
-						</> :
+						</Link>
+						:
 						<Loader />
 				}
 			</div>
