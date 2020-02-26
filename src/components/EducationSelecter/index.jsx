@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.scss';
 
-export default class EducationSelector extends React.Component {
-	countries = ["Select","Secondary School",
+export default class EducationSelecter extends React.Component {
+	education = ["Select","Secondary School",
       "Higher Secondary School",
       "Associate Degree in Administration of Justice",
       "Associate Degree in Advertising",
@@ -442,11 +442,11 @@ export default class EducationSelector extends React.Component {
       "Doctor of Science",
       "Doctor of Theology",
       "Doctor of Veterinary Medicine",
-      "Doctor of Radio oncology",];
+      "Doctor of Radio oncology"];
 
 	render() {
 		return (
-			<select name={this.props.name} className="EducationSelector" required={this.props.required} onChange={this.props.onChange}>
+			<select name={this.props.name} className="EducationSelecter" required={this.props.required} onChange={this.props.onChange}>
 				{
 					this.education.map((x) => {
 						return (
