@@ -43,7 +43,6 @@ export default class Feed extends React.Component {
 				}
 			)
 		}
-
 		else if (this.props.query)
 			this.props.query
 				.orderBy('timestamp', 'desc')

@@ -50,7 +50,6 @@ export default class UserProfile extends React.Component {
 		const { getFollowers } = this.context
 		return getFollowers(uid)
 	}
-
 	getFeedQuery = uid => {
 		const { firestore } = this.context
 		return firestore

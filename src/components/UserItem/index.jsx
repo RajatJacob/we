@@ -45,7 +45,6 @@ export default class UserItem extends React.Component {
 				}
 			)
 	}
-
 	componentDidMount() {
 		this.init()
 	}
