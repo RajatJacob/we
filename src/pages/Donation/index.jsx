@@ -16,12 +16,18 @@ class Donation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+
+            name: "",
             email: "",
+            phone: "",
+            role: "",
+            amount: "",
             alert: null,
             proceed: false
         }
     }
     submit = e => {
+        const { firestore } = this.context
         this.setState({
             alert: {
                 type: "info",
@@ -29,11 +35,12 @@ class Donation extends React.Component {
             },
             proceed: true
         })
-
+        firestore.collection("donation").add()
         e.preventDefault()
-
     }
+
     render() {
+        console.log(this.state)
         if (this.state.proceed)
             return (<Redirect to="/payment" />)
         return (
@@ -49,17 +56,17 @@ class Donation extends React.Component {
                         <Container>
                             <form onSubmit={this.submit}>
                                 <h4>Support WE</h4>
-                                <Input label="Name" icon={<FontAwesomeIcon icon={faUser} />} required />
+                                <Input label="Name" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ name: e.target.value })} value={this.state.name} required />
                                 <label>
-                                    <input type="radio" value="Individual" name="category" required />
+                                    <input type="radio" value="Individual" name="category" onChange={e => this.setState({ role: e.target.value })} checked={this.state.role === "Individual"} required />
                                     Individual
                                     </label>
                                 <label>
-                                    <input type="radio" value="Organisation" name="category" />
+                                    <input type="radio" value="Organisation" name="category" onChange={e => this.setState({ role: e.target.value })} checked={this.state.role === "Organisation"} />
                                     Organisation
                                     </label>
-                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
-                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} pattern="[6789][0-9]{9}" required />
+                                <Input label="E-mail" icon={<FontAwesomeIcon icon={faEnvelope} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                                <Input label="Phone Number" icon={<FontAwesomeIcon icon={faMobile} />} onChange={e => this.setState({ phone: e.target.value })} value={this.state.phone} pattern="[6789][0-9]{9}" required />
                                 <Input label="Amount" type="number" min="1" icon={<FontAwesomeIcon icon={faWallet} />} required />
                                 <h5>(Amount in terms of INR)</h5>
                                 <Input label="Pay" type="submit" onClick={this.submit} />
@@ -80,8 +87,8 @@ class Donation extends React.Component {
                     <p>
                         WE are committed to respecting and protecting the privacy of donors. All information concerning donors, including their names, contact information, the amount of their gift, etc., shall be kept strictly confidential by the Board of Directors
                         unless permission is obtained from donors to release such information. WE will not sell, share or trade our donors’ names or personal
-                        information with any other entity, nor send mailings to our donors on behalf of other organizations. We trust you on your donation since it is a QR scan code.
-                        </p>
+                        information with any other entity, nor send mails to our donors on behalf of other organizations. We trust you on your donation since it is a QR scan code.
+                    </p>
                 </Card>
             </div>
         )
