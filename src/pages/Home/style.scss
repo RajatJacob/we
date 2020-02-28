@@ -25,6 +25,23 @@
         .Card {
             background: #000000CC;
             color: white;
+
+        }
+    }
+.Feed {
+        display: inline-block;
+        grid-gap: 1em;
+    
+
+        .Card {
+           background: black;
+            color: white;
+            width:60%;
+            padding: 0.5em;
+            border-radius: 1em;
+            display: inline-block;
+            min-height: 200px;
+
         }
     }
 

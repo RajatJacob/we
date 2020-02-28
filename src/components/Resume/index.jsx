@@ -37,6 +37,7 @@ export default class Resume extends React.Component
          College/School
          <input  name={"csname"+i} type="text" required="required" onChange={this.handleChange}/>
          </label><br/>
+
     
          </>)
          return a
@@ -58,7 +59,9 @@ export default class Resume extends React.Component
     
          </>)
          return a
+
       }
+
 
 this.handleSubmit=this.handleSubmit.bind(this);
 this.baseState = this.state;
@@ -90,7 +93,7 @@ this.baseState = this.state;
       )
          
 
-        // window.location.href("www.google.com");
+        //window.location.href("www.google.com");
       
       event.preventDefault();
    };

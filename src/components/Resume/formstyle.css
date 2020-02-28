@@ -47,7 +47,7 @@
 
 .form-style input:focus,
 .form-style textarea:focus  {
-	outline: 2px solid aqua;
+	outline : 2px solid #0088b2;
 }
 
 .form-style input[type="text"],

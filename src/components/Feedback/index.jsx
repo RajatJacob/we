@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Redirect} from 'react-router-dom';
 import './styleform.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 
@@ -13,7 +14,8 @@ export default class Feedback extends React.Component
       this.state = {
          form: {
 
-         }
+         },
+         Submitted:false
 
 
       };
@@ -38,7 +40,8 @@ this.baseState = this.state;
 	const {
          firestore
       } = this.context;
-      alert('Submitted');
+      
+      //this.setState({Submitted: true})
       firestore.collection("Feedback").add(
          this.state.form
       )
@@ -46,6 +49,8 @@ this.baseState = this.state;
    };
 	render()
 	{
+		if(this.state.Submitted)
+        return <Redirect to = "/" />
 		return(
 			<form class="form-style" onSubmit={this.handleSubmit}>
 			<h1 align="left">Feedback</h1>
@@ -53,14 +58,14 @@ this.baseState = this.state;
 			<div class="inner-wrap">
 			<label>
 			First Name 
-			<input   name="fname" type="text" onChange={this.handleChange}/>
+			<input   name="fname" type="text" required="required" onChange={this.handleChange}/>
 			</label>
 			
          </div><br/>
 			<div class="inner-wrap">
 			<label>
 			Feedback
-			<textArea name="feedback" class="input1" rows="10" columns="40" required="required"onChange={this.handleChange} />
+			<textArea name="feedback" class="input1" rows="10" columns="40" required="required" onChange={this.handleChange} />
 			</label>
 			<br/>
 			

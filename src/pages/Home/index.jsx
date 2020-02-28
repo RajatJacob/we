@@ -30,6 +30,7 @@ class Home extends React.Component {
 	componentDidMount() {
 		this.getInfo()
 	}
+	
 
 
 	render() {
@@ -50,6 +51,10 @@ class Home extends React.Component {
 							<div className="member">
 								<h3>Rajat Abraham Jacob</h3>
 								1841039
+							</div>
+							<div className="member">
+								<h3>Sanskar Aggarwal</h3>
+								1841046
 							</div>
 							<div className="member">
 								<h3>Vansikaa A</h3>
@@ -82,19 +87,31 @@ class Home extends React.Component {
 				</div>
 				<div className="background center" id="top" />
 				<div className="background center" id="rural">
+
+					
 					<Card>
+
 						<h1>Feedback</h1>
+						<div class="Feed">
 						{	
+							
 							this.state.feedback.map(
 								f => {
 									return (
+									<div>
 									<Card>
-										{f.feedback}
+										<p>{f.feedback}</p>
+										<p align = "left" > - {f.fname}</p>
 									</Card>
+									</div>
+									
 									)
 								}
 							)
+
 						}
+						</div>
+					
 					</Card>
 				</div>
 			</div>
