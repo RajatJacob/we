@@ -19,7 +19,8 @@ export default class Resume extends React.Component
 
          },
          noOfEdu:0,
-         noOfSki:0
+         noOfSki:0,
+         Submitted: false
 
 
       };
@@ -80,9 +81,10 @@ this.baseState = this.state;
    const {
          firestore, auth
       } = this.context;
-      window.open("https://www.naukri.com/"+this.state.form.jbin.replace(' ','-')+"-jobs")
+      
       console.log(this.state.form)
       alert('Submitted');
+      this.setState({Submitted: true})
       firestore.collection("users").doc(auth.currentUser.uid).update(
          this.state.form
       )
@@ -95,6 +97,8 @@ this.baseState = this.state;
    render()
    {//const {firestore} = this.context;
       //firestore.collection("users").doc(DOCID).
+      if(this.state.Submitted)
+        return <Redirect to = "/view" />
       return(
          <form class="form-style" onSubmit={this.handleSubmit}>
          <h1>Resumé</h1>
@@ -222,9 +226,9 @@ this.baseState = this.state;
          
          </div>
          
-
-         <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-      
+         
+         <input type="submit" value="Submit" onClick={this.handleSubmit} />
+        
          
          </form>
          );

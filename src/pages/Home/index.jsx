@@ -1,10 +1,37 @@
 import React from 'react';
 import './style.scss';
+import {FirebaseContext} from '../../contexts/FirebaseContext'
 import Container from '../../components/Container';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 
 class Home extends React.Component {
+	static contextType = FirebaseContext
+	
+	state = {
+		feedback: []
+	}
+
+	getInfo = () => {
+		const { firestore } = this.context
+		firestore.collection("Feedback").limit(5).get().then(
+			snapshot =>
+			{
+				var f = []
+				snapshot.forEach(
+					doc=>f.push(doc.data())
+				)
+				console.log(f)
+				this.setState({feedback: f, done:true})
+			}
+		)
+	}
+
+	componentDidMount() {
+		this.getInfo()
+	}
+
+
 	render() {
 		return (
 			<div className="Home">
@@ -54,6 +81,22 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background center" id="top" />
+				<div className="background center" id="rural">
+					<Card>
+						<h1>Feedback</h1>
+						{	
+							this.state.feedback.map(
+								f => {
+									return (
+									<Card>
+										{f.feedback}
+									</Card>
+									)
+								}
+							)
+						}
+					</Card>
+				</div>
 			</div>
 		);
 	}

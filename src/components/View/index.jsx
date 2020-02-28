@@ -20,7 +20,7 @@ handleJob(event){
       
       
       window.open("https://www.naukri.com/"+this.state.user.jbin+"-jobs")
-      
+      window.open("https://www.indeed.co.in/"+this.state.user.jbin+"-jobs")
       
     }
 
