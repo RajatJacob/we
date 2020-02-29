@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faHome, /*faSearch,*/ faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 
 class NavigationBar extends React.Component {
@@ -14,7 +14,7 @@ class NavigationBar extends React.Component {
 		const links = (isLoggedIn) ?
 			[
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
-				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
+				//{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
 				{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faBuffer} /> },
 				{ name: "User", url: "/user/" + auth.currentUser.displayName, icon: <FontAwesomeIcon icon={faUser} /> }
 			] : [

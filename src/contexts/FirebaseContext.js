@@ -76,6 +76,148 @@ export default class FirebaseContextProvider extends React.Component {
 						)
 					}
 				)
+			},
+			getFollowers: (uid) => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid) reject({ message: "Invalid UID" })
+						this.state.firestore
+							.collection("users")
+							.where(
+								"following",
+								"array-contains",
+								this.state.firestore
+									.collection("users")
+									.doc(uid)
+							)
+							.get()
+							.then(
+								snapshot => {
+									var followers = []
+									snapshot.forEach(
+										doc => {
+											followers
+												.push(
+													this.state.firestore.collection("users").doc(doc.id)
+												)
+										}
+									)
+									resolve(followers)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			getFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.firestore
+							.collection("users")
+							.doc(this.state.auth.currentUser.uid)
+							.get()
+							.then(
+								doc => {
+									resolve(doc.data().following || [])
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			isFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+									var f = false
+									following.forEach(
+										x => {
+											f = f || x.id === this.state.firestore
+												.collection("users")
+												.doc(uid).id
+										}
+									)
+									resolve(f)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			follow: uid => {
+				var f = []
+				return new Promise(
+					(resolve, reject) => {
+						this.state.isFollowing(uid).then(
+							isFollowing => {
+								if (!uid || !this.state.auth.currentUser)
+									reject(
+										{
+											message: "Invalid UID"
+										}
+									)
+								this.state.getFollowing(this.state.auth.currentUser.uid)
+									.then(
+										following => {
+											f = following
+											if (!isFollowing) {
+												f.push(
+													this.state.firestore.collection("users").doc(uid)
+												)
+											}
+											else {
+												const u = this.state.firestore
+													.collection("users")
+													.doc(uid)
+												f.forEach(
+													(x, i) => {
+														if (x.id === u.id)
+															f.splice(i, 1)
+													}
+												)
+											}
+											resolve(
+												this.state.firestore
+													.collection("users")
+													.doc(this.state.auth.currentUser.uid)
+													.update(
+														{
+															following: f
+														}
+													)
+											)
+										}
+									)
+							}
+						)
+					}
+				)
 			}
 		}
 

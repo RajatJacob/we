@@ -1,36 +1,35 @@
 import React from 'react';
 import './style.scss';
-import {FirebaseContext} from '../../contexts/FirebaseContext'
+import { FirebaseContext } from '../../contexts/FirebaseContext'
 import Container from '../../components/Container';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 
 class Home extends React.Component {
 	static contextType = FirebaseContext
-	
+
 	state = {
 		feedback: []
 	}
 
-	getInfo = () => {
+	getFeedbackInfo = () => {
 		const { firestore } = this.context
-		firestore.collection("Feedback").limit(5).get().then(
-			snapshot =>
-			{
+		firestore.collection("Feedback").limit(2).get().then(
+			snapshot => {
 				var f = []
 				snapshot.forEach(
-					doc=>f.push(doc.data())
+					doc => f.push(doc.data())
 				)
 				console.log(f)
-				this.setState({feedback: f, done:true})
+				this.setState({ feedback: f, done: true })
 			}
 		)
 	}
 
 	componentDidMount() {
-		this.getInfo()
+		this.getFeedbackInfo()
 	}
-	
+
 
 
 	render() {
@@ -77,6 +76,14 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background" id="bottom" />
+				<div className="background center" id="rural">
+					<Card>
+						<h1>Change the Future for Women and Girls</h1>
+						Around the world, women and girls face incredible challenges to their safety, success, and human rights.
+						With the right support and resources they have the potential to make lasting strides.
+						<Button to="/donation">Donate</Button>
+					</Card>
+				</div>
 				<div className="content">
 					<Container>
 						<h1>Our Mission</h1>
@@ -88,30 +95,30 @@ class Home extends React.Component {
 				<div className="background center" id="top" />
 				<div className="background center" id="rural">
 
-					
+
 					<Card>
 
 						<h1>Feedback</h1>
 						<div class="Feed">
-						{	
-							
-							this.state.feedback.map(
-								f => {
-									return (
-									<div>
-									<Card>
-										<p>{f.feedback}</p>
-										<p align = "left" > - {f.fname}</p>
-									</Card>
-									</div>
-									
-									)
-								}
-							)
+							{
 
-						}
+								this.state.feedback.map(
+									f => {
+										return (
+											<div>
+												<Card>
+													<p>{f.feedback}</p>
+													<p align="left" > - {f.fname}</p>
+												</Card>
+											</div>
+
+										)
+									}
+								)
+
+							}
 						</div>
-					
+
 					</Card>
 				</div>
 			</div>
