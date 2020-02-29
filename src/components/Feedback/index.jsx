@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Redirect} from 'react-router-dom';
 import './styleform.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
-
+import { storage }  from '../../contexts/FirebaseContext';
 
 
 export default class Feedback extends React.Component
@@ -38,7 +38,8 @@ this.baseState = this.state;
    };
 	handleSubmit(event){
 	event.preventDefault();
-	if(!this.validateForm()) return;
+	if(this.validateForm()) return;
+	
 	const {
          firestore
       } = this.context;
@@ -48,14 +49,17 @@ this.baseState = this.state;
          this.state.form
       )
       
+
+      
    };
+   
    validateForm = ()  => {
   var x = document.forms["feedback"]["fname"].value;
   var y = document.forms["feedback"]["feedback"].value;
 
   if (x == ""||y=="") {
     alert("Required field must be filled out");
-    return false;} 
+    return true;} 
    else
    {this.setState({Submitted: true})
   }

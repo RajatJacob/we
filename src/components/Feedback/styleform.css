@@ -31,7 +31,7 @@
 }
 
 .form-style h1{
-	background: #f4f4f4;
+	background: #2A88AD;
 	padding: 20px 30px 15px 30px;
 	margin: -30px -30px 30px -30px;
 	border-radius: 10px 10px 0 0;
@@ -57,7 +57,7 @@
 .form-style input[type="email"],
 .form-style input[type="url"],
 .form-style textarea,
-.form-style select {
+ {
 	display: block;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;

@@ -6,7 +6,7 @@ import {FirebaseContext} from '../../contexts/FirebaseContext';
 import EducationSelecter from '../EducationSelecter'
 import JobSelector from '../JobSelector'
 import SkillSelector from '../SkillSelector'
-import { storage } from '../../contexts/FirebaseContext';
+import { storage }  from '../../contexts/FirebaseContext';
 
 export default class Resume extends React.Component
 {
@@ -81,7 +81,7 @@ this.baseState = this.state;
       this.setState(f);
    };
    handleSubmit(event){
-    if(!this.validateForm()) return;
+    if(this.validateForm()) return;
    const {
          firestore, auth
       } = this.context;
@@ -117,7 +117,7 @@ this.baseState = this.state;
   var j = document.forms["resume"]["contactnumber"].value;
   if (x == ""||y == ""||z == ""||a == ""||b == ""||c == ""||d == ""||e == ""||f == ""||g == ""||h == ""||j == "") {
     alert("Required field must be filled out");
-    return false;
+    return true;
 
   }
   else{
@@ -213,18 +213,14 @@ this.baseState = this.state;
          <div class="inner-wrap">
          <label>
          Jobs Interested in 
-         <JobSelector name="jbin" required="required" onChange={this.handleChange}/>
+         <JobSelector name="jbin" required="required"  onChange={this.handleChange}/>
        
 
 
          
          </label>
     <br/>
-    <label>
-         Upload Your Passport size Picture
-         <input type="file" name="photo" onChange={this.fileSelectedHandler}/>
-         </label>
-         <br/>
+    
          </div>
          <br/>
          
