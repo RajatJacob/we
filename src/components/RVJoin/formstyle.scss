@@ -1,0 +1,66 @@
+
+
+
+.RVJoin {
+  	
+  	.background {
+    background: black;
+    background-image: url("../../images/merger1.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  
+ 
+  	.Card {
+    		background: #000000cc;
+    		height: 800px;
+  		}
+  
+  
+	.buttonlike{
+
+		a{
+			color:white;
+  			
+			margin-left: 20px;
+			background: #2A88AD ;
+			padding: 8px 20px 8px 20px;
+			border-radius: 5px;
+			
+			-webkit-border-radius: 5px;
+			-webkit-border-width: 5px;
+			-moz-border-radius: 5px;
+			-moz-border-width: 5px;
+			text-align: left;
+			text-decoration: none;
+			color:white;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'Bitter', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #257C9E;
+			font-size: 20px;
+			font-weight: bolder;
+			min-width: 50px;
+			    display: -webkit-box;
+    		-webkit-box-pack: center;
+			align-content : left;}
+
+  		}
+  		a:hover{
+		background: #ffffff22;
+		-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+
+
+ }
+

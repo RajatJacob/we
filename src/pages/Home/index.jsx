@@ -99,7 +99,7 @@ class Home extends React.Component {
 					<Card>
 
 						<h1>Feedback</h1>
-						<div class="Feed">
+						<div class="feedback">
 							{
 
 								this.state.feedback.map(

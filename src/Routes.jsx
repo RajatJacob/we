@@ -9,6 +9,7 @@ import Container from './components/Container';
 import Resume from './components/Resume';
 import View from './components/View';
 import Feedback from './components/Feedback';
+import RVJoin from './components/RVJoin';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
@@ -38,6 +39,7 @@ export default class Routes extends React.Component {
 					<Route exact path="/courses" component={VocationalCourses} />
 					<Route exact path="/Resume" component={Resume} />
 					<Route exact path="/View" component={View} />
+					<Route exact path="/RVJoin" component={RVJoin} />
 					<Route exact path="/Feedback" component={Feedback} />
 					<Route exact path="/donation" component={Donation} />
 					<Route exact path="/payment" component={Payment} />
