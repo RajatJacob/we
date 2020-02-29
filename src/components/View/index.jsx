@@ -47,7 +47,7 @@ console.log(auth.currentUser)
   
 
 	render() 
-	{
+	{var a = this.state.user.contactemail;
 		return(<>
               <table  cellpadding="3px"  width="100%">
               <tr>
@@ -85,12 +85,13 @@ console.log(auth.currentUser)
                 <tr>
                 <td>
                 <hr/>
+
                 <h3 align="left" class="colorrs">Past Experience</h3><hr/><br/>
                    <h4 align="left"><i>{this.state.user.inter}</i> <br/>
                       </h4><hr/>
                     <h3 align="left" class="colorrs">Reference Person</h3><hr/><br/>
                     <h4 align="left"><i>{this.state.user.contactpersontitle} {this.state.user.contactperson} </i></h4> <br/>
-                    <h4 align="left"><a href="mailto:{this.state.user.contactemail}"><i>{this.state.user.contactemail} </i></a></h4> <br/>
+                    <h4 align="left"><a href={"mailto:"+a}><i>{this.state.user.contactemail} </i></a></h4> <br/>
                      
 
 
