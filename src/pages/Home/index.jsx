@@ -120,6 +120,12 @@ class Home extends React.Component {
 						</div>
 
 					</Card>
+					<br/>
+					<Card>
+						
+						
+							<Button to="/feedback">Give us your valuable feedback!</Button>
+					</Card>
 				</div>
 			</div>
 		);
