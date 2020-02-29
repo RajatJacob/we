@@ -34,13 +34,14 @@
     
 
         .Card {
-           background: black;
+           background: #000000CC;
             color: white;
-            width:60%;
+            width:100%;
             padding: 0.5em;
             border-radius: 1em;
             display: inline-block;
             min-height: 200px;
+
 
         }
     }
@@ -70,7 +71,7 @@
             margin: 1em;
 
             @media screen and (orientation: landscape) {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
 
             @media screen and (orientation: portrait) {

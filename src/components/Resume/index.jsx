@@ -81,29 +81,56 @@ this.baseState = this.state;
       this.setState(f);
    };
    handleSubmit(event){
+    if(!this.validateForm()) return;
    const {
          firestore, auth
       } = this.context;
       
       console.log(this.state.form)
       alert('Submitted');
-      this.setState({Submitted: true})
+      
+      
       firestore.collection("users").doc(auth.currentUser.uid).update(
          this.state.form
       )
+
          
 
         //window.location.href("www.google.com");
       
       event.preventDefault();
    };
+
+  validateForm = ()  => {
+  var x = document.forms["resume"]["fname"].value;
+  var y = document.forms["resume"]["lname"].value;
+  var z = document.forms["resume"]["date"].value;
+  var a = document.forms["resume"]["nationality"].value;
+  var b = document.forms["resume"]["fsname"].value;
+  var c = document.forms["resume"]["Addline1"].value;
+  var d = document.forms["resume"]["Addline2"].value;
+  var e = document.forms["resume"]["City"].value;
+  var f = document.forms["resume"]["State"].value;
+  var g = document.forms["resume"]["PinCode"].value;
+  var h = document.forms["resume"]["Country"].value;
+  var i = document.forms["resume"]["inter"].value;
+  var j = document.forms["resume"]["contactnumber"].value;
+  if (x == ""||y == ""||z == ""||a == ""||b == ""||c == ""||d == ""||e == ""||f == ""||g == ""||h == ""||j == "") {
+    alert("Required field must be filled out");
+    return false;
+
+  }
+  else{
+    this.setState({Submitted: true})
+  }
+}
    render()
    {//const {firestore} = this.context;
       //firestore.collection("users").doc(DOCID).
       if(this.state.Submitted)
         return <Redirect to = "/view" />
       return(
-         <form class="form-style" onSubmit={this.handleSubmit}>
+         <form name="resume" class="form-style" onSubmit={this.handleSubmit}>
          <h1>Resumé</h1>
          <br/>
          <div class="inner-wrap">
@@ -217,12 +244,12 @@ this.baseState = this.state;
          <br/>
          <label>
          Contact Email
-         <input  name="contactemail" type="email" onChange={this.handleChange}/>
+         <input  name="contactemail" type="email"  onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Contact 
-         <input  name="contactnumber" type="tel"   onChange={this.handleChange}/>
+         <input  name="contactnumber" type="tel"  required="required" onChange={this.handleChange}/>
          </label>
          <br/>
       

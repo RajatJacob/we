@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import './styleform.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 
-import { storage } from '../../contexts/FirebaseContext';
+
 
 export default class Feedback extends React.Component
 {
@@ -37,22 +37,35 @@ this.baseState = this.state;
       this.setState(f);
    };
 	handleSubmit(event){
+	event.preventDefault();
+	if(!this.validateForm()) return;
 	const {
          firestore
       } = this.context;
       
-      //this.setState({Submitted: true})
+      
       firestore.collection("Feedback").add(
          this.state.form
       )
-      event.preventDefault();
+      
    };
+   validateForm = ()  => {
+  var x = document.forms["feedback"]["fname"].value;
+  var y = document.forms["feedback"]["feedback"].value;
+
+  if (x == ""||y=="") {
+    alert("Required field must be filled out");
+    return false;} 
+   else
+   {this.setState({Submitted: true})
+  }
+}
 	render()
 	{
 		if(this.state.Submitted)
         return <Redirect to = "/" />
 		return(
-			<form class="form-style" onSubmit={this.handleSubmit}>
+			<form name="feedback" class="form-style" onSubmit={this.handleSubmit}>
 			<h1 align="left">Feedback</h1>
 			<br/>
 			<div class="inner-wrap">
