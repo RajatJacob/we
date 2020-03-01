@@ -76,7 +76,7 @@ export default class Post extends React.Component {
 		var timeStr = ""
 		Object.keys(time).forEach(
 			x => {
-				timeStr = time[x] === 0 ? timeStr : time[x] + x
+				timeStr = time[x] === 0 ? timeStr : time[x].toFixed(0) + x
 			}
 		)
 		this.setState(
