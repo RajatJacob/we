@@ -8,7 +8,7 @@ import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
 import VocationalCourses from './pages/VocationalCourses';
-import Computer from './pages/VocationalCourses/BasicComputer';
+/*import Computer from './pages/VocationalCourses/BasicComputer';
 import Sanitation from './pages/VocationalCourses/Sanitation';
 import Bakery from './pages/VocationalCourses/Bakery';
 import Elderly from './pages/VocationalCourses/Elderly';
@@ -16,7 +16,8 @@ import Haircare from './pages/VocationalCourses/Haircare';
 import Childhood from './pages/VocationalCourses/Childhood';
 import Ayurveda from './pages/VocationalCourses/Ayurveda';
 import English from './pages/VocationalCourses/English';
-import Design from './pages/VocationalCourses/Design';
+import Design from './pages/VocationalCourses/Design';*/
+import Courses from './components/Courses';
  
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -43,23 +44,25 @@ export default class Routes extends React.Component {
 					<Route path="/user/:username" component={UserProfile} />
 					<Route exact path="/logout" component={Logout} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
-					<Route exact path="/VocationalCourses" component={VocationalCourses} />
-					<Route exact path="/Computer" component={Computer} />
-					<Route exact path="/Sanitation" component={Sanitation} />
-					<Route exact path="/Bakery" 
+					<Route exact path="/Courses" component={VocationalCourses} />
+					{/*<Route exact path="/Courses/Computer" component={Computer} />
+					<Route exact path="/Courses/Sanitation" component={Sanitation} />
+					<Route exact path="/Courses/Bakery" 
 					component={Bakery} />
-					<Route exact path="/Elderly" 
+					<Route exact path="/Courses/Elderly" 
 					component={Elderly} />
-					<Route exact path="/Haircare" 
+					<Route exact path="/Courses/Haircare" 
 					component={Haircare} />
-					<Route exact path="/Childhood" 
+					<Route exact path="/Courses/Childhood" 
 					component={Childhood} />
-					<Route exact path="/Design" 
+					<Route exact path="/Courses/Design" 
 					component={Design} />
-					<Route exact path="/Ayurveda" 
+					<Route exact path="/Courses/Ayurveda" 
 					component={Ayurveda} />
-					<Route exact path="/English" 
-					component={English} />
+					<Route exact path="/Courses/English" 
+					component={English} />*/}
+					<Route path="/Courses/:coursename" 
+					component={Courses} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

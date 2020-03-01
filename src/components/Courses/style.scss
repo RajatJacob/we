@@ -1,9 +1,167 @@
+.Courses{
+	padding-top: 10vh;
+	background-color: white;
+}
+#footer{
+	background-color: rgb(60, 90, 154);
+	margin-bottom: 0%;
+	margin-top: 0%;
+	text-align: center;
+	
+	p{
+		padding: 5px;
+		margin-bottom: 0px;
+		color: white;
+		margin-top: 0px;
+		text-align: center;
+		
+	}
+}
+
+.list{
+	text-align: justify;
+	margin-right: 8%;
+}
+.para{
+	margin-left: 0%;
+	text-align: justify;
+	margin-right: 10px;
+	.intro{
+		text-align: justify;
+		width: 70%;
+		font-size: 16px;
+		font-style: times;
+	}
+}
+.modules{
+	
+	h2{
+		font-family: Bree Serif;
+		text-align: left;
+		margin-left: 3%;
+	}
+}
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+	visibility: hidden;
+	
+	background-color: #555;
+	color:black;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	width: 240px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	
+	margin-left: -210px;
+	opacity: 0;
+	transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: white transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+  }
+.mod{
+	
+	margin-bottom: 0%;
+
+}
+.moddiv{
+	margin-top: 5%;
+	height: 50%;
+	background-color: #b9bdc0;
+	font-size: 16px;
+}
+.modlist{
+	text-align: justify;
+	margin-right: 4%;
+	margin-left: 2%;
+	font-size: 16px;
+
+}
+.Introduction{
+	padding-left:15px;
+	padding-bottom: 0px;
+	margin-left:2%;
+	margin-bottom: 0%;
+	font-family: Bree Serif;
+}
+
+.intro{
+	text-align: justify;
+}
+
+.sidebar
+{ 
+float: right;
+width: 300px;
+height: auto;
+padding: 0;
+margin-top: 3%;
+margin-right: 2%;
+margin-bottom: 2%;
+margin-left: 2%;
+border-color: black;
+background-color: rgb(168, 199, 228);
+border-radius: 5%;
+}
+.sidebar_item{
+	h3{
+		font-family: Bree Serif;
+	}
+}
+.App a, .App a:visited {
+    color: white;
+}
+.side{
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	font-style: italic;
+}
+.vid {
+    margin-top: 4%;
+    margin-left: -8%;
+    width: 60%;
+    height: 350px;
+}
+h2{
+	margin-left: 3%;
+	padding: 5px;
+}
 .heading{
 	text-align: left;
 	font-size: 30px;
-	margin-left: 200px;
-	padding-top: 10px;
+	margin-left: 5%;
+	margin-top: 4%;
+	padding-top: 2%;
 	border-color: #4f98ca;
+	font-family: Bree Serif;
+	font-style: italic;
+	
+
 	margin-block-start: 0em;
 	border-left: 6px black;
 	color:black;
@@ -19,11 +177,21 @@
 	font-style: normal;
 }
 table{
-	background-color:rgb(128, 65, 107);
+	background-color:rgb(60, 90, 154);
 	position: fixed;
-	height: 10%;
+	top: 0;
+	height: 10vh;
 	
 }
+.sidelist{
+	color: black;
+	text-align: left;
+	padding-right: 3px;
+	margin-left: 0px;
+	font-style: normal;
+//	background-color: rgba(13, 137, 194, 0.384);
+
+ }
 .col{
 	margin-left: 0px;
 }
@@ -37,17 +205,33 @@ table{
 	margin-left: 30px;
 	padding: 10px;
 }
-.button{
-	height: 15%;
-	width:80px;
-	font-size: 1em;
-	margin-right: 20px;
-	background-color: cornflowerblue;
-	margin-left: 0px;
-	border-radius: 4px;	
+.learn{
+	text-align: justify;
+	margin-left: 40px;
+	margin-right: 30px;
+	padding:0px;
+	width: 70%;
+	font-size: 16px;
+
 }
-.button:hover{
+
+.Courses .Button{
+	
+	width:75%;
+	text-align: center;
+	font-size: 1em;
+	
+	padding:0.25em;
+	background-color: green;
+
+	
+}
+.Courses .Button:hover{
 	background-color:grey ;
+	
+}
+.Courses .Button.enroll{
+	background-color: cornflowerblue;
 }
 .btn {
     display: inline-block;

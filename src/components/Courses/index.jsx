@@ -1,34 +1,240 @@
 import React from 'react';
-
 import './style.scss';
-import Popup from '../../components/Popup';
+import {FirebaseContext} from '../../contexts/FirebaseContext';
+import Button from '../../components/Button';
+import Alert from '../../components/Alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import Popup from '../../components/Popup'
 
+export default class Courses extends React.Component{
+	static contextType = FirebaseContext;
+	state={
+		isEnrolled: this.state
+	}
 
-const Courses = props =>{
-return(
-	<div>
-	<table width="100%" cellPadding="5px">
-	<tr>
-	
-	<td width="70%"><h1 className="heading">{props.name}</h1></td>
-	<td width="10%"><a className="course" href="/VocationalCourses" className="link" >Courses</a></td>
-	<td width="20%" className="td"><Popup/></td>
-	</tr>
-	</table>
+	getIsEnrolled = (coursename) => {
+		const {isEnrolled} = this.context
+		isEnrolled(coursename).then(
+			e=>{
+				this.setState({isEnrolled: e})
+			}
+		)
+	}
 
-	<div>
-	<br/>
-	<br/><br/>
-	<br/>	
-	<img src={props.imgsrc} alt={props.name} height="500px" width="100%"></img>
-	</div>
-	<div className="introduction">
-	<h2 className="intro">Introduction</h2>
-	
-	
-	</div>
-	</div>
-	);
+	enroll = e => {
+		e.preventDefault()
+		const {enroll} = this.context;
+		enroll(this.state.title)
+		.then(
+			() => {
+				//alert("Enrolled successfully")
+				//this.setState({Popup:true})
+			}
+		)
+		.catch(
+			err=> {
+				alert(err);
+				//<Link to='/login'></Link>
+			}
+		)
+		.finally(
+			() => {
+				
+				this.getIsEnrolled(this.state.title)
+			}
+		)
+	}
 
+	getCourseData = () =>
+	{
+		console.log(this.props.match.url);
+		const {firestore, storage}=this.context;
+		firestore
+		.collection("courses")
+		.where('link', '==', this.props.match.url)
+		.limit(1)
+		.get()
+		.then(
+			snapshot => {
+				snapshot.forEach(
+					doc => {
+						if(doc.exists) {
+							const data = doc.data()
+							console.log(data)
+							storage.refFromURL(data.subimage).getDownloadURL().then(
+								url => {
+									data.subimage = url
+									storage.refFromURL(data.video).getDownloadURL().then(
+										url => {
+											data.video = url
+											this.setState(
+												{
+													title: data.title,
+													intro: data.intro,
+													modules: data.modules,
+													subimage: data.subimage,
+													usefullinks: data.usefullinks,
+													facts: data.facts,
+													modulespara: data.modulespara,
+													video: data.video
+												}
+											)
+										}
+									)
+								}
+							)
+							console.log(this.state);
+						}
+						else console.log("No doc")
+					}
+				)
+			}
+		)
+	}
+
+	init = () => {
+		this.getIsEnrolled(this.props.match.params.coursename)
+		this.getCourseData()
+	}
+
+	componentDidMount() {
+		this.init()
+	}
+
+	componentDidUpdate() {
+		//this.init()
+	}
+
+	render() {
+		console.log(this.state)
+		return(
+
+			<div className="Courses">
+				<table width="100%" >
+					<tr>
+					<td width="70%"><h1 className="heading">{this.state.title}</h1>
+					</td>
+					<td width="10%"><a className="course" href="/Courses">Courses</a></td>
+					<td width="20%" className="td">
+					
+						<Button className={this.state.isEnrolled?"enroll":""}  onClick={this.enroll}>
+						{
+							this.state.isEnrolled?
+							"Unenroll":
+							"Enroll"
+						}
+						<div class="tooltip">?
+  <span class="tooltiptext"><br/><br/>Please enroll to view the full content</span>
+</div>
+						</Button>
+		
+						
+					</td>
+					</tr>
+				</table>
+				<div className="image">
+					<img src={this.state.subimage} alt={this.state.title} height="500px" width="100%"></img>
+				</div>
+						<Popup/>
+					<div class="sidebar">
+						<div class="sidebar_item">
+						<h3>Facts</h3>
+						<ul>
+						{
+							this.state.facts ?
+							this.state.facts.map(
+								f => {
+									return <li className="list">{f}</li>
+								}
+							):null
+						}
+						</ul>
+            			</div>
+					</div>
+
+				<h2 className="Introduction" align="left">Introduction</h2>
+				<div className="para">
+					<div className="intro">
+						{
+							this.state.intro ?
+							this.state.intro.map(
+								x => {
+									return <p>{x}</p>
+								}
+							) : null
+						}
+					</div>
+				</div>
+
+				{
+					this.state.isEnrolled ?
+					<div className="hide">
+					<div className="video">
+						<video className="vid" controls>
+						<source src={this.state.video} type="video/mp4"></source>
+						Your browser does not support the video tag.
+						</video>
+					</div>
+					<div class="sidebar">
+					<div class="sidebar_item">
+						<h3>Useful Links</h3>
+						<ul className="sidelist">
+						{
+							this.state.usefullinks ? 
+								this.state.usefullinks.map(
+									l => {
+										return (<li className="link"><Link to={l.href}>{l.name}</Link></li>)
+									}
+								):null
+						}
+						</ul>
+					</div>
+				</div>
+					
+						{/*<Alert type="info" title="Course">
+						{this.state.title}
+							<FontAwesomeIcon icon={faCircleNotch} spin />
+				</Alert>*/}
+							
+						<div className="modules">
+						
+							<h2>Importance in today's world</h2>
+							{
+								this.state.modulespara ?
+								this.state.modulespara.map(
+									mp => {
+										return (<p className="learn">{mp}</p>)
+										
+									}
+								):null
+								
+							}
+							<div className="moddiv">
+							<br/>
+							<h2>Modules covered in the course</h2>
+							<ul className="mod">
+								{
+									this.state.modules ? 
+									this.state.modules.map(
+										m => {
+											return (<li className="modlist">{m}<br/></li>)
+										}
+									):null
+								}
+							</ul>
+							<br/>
+						</div>
+						</div>
+						</div>
+						:null
+						}
+					<div id="footer">
+						<p>Copyright © 2020 Women Empowerment. All Rights Reserved.</p>
+					</div>
+				</div>
+			);
+	}
 }
-export default Courses;
+

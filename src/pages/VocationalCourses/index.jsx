@@ -2,9 +2,6 @@ import React from 'react';
 import Cards from '../../components/CourseCard';
 import Container from '../../components/Container';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
-
-
-//import img10 from '../../images/calendar.png';
 import './style.scss';
 
 export default class VocationalCourses extends React.Component {
@@ -65,7 +62,7 @@ export default class VocationalCourses extends React.Component {
 							<div >
 							<Cards image={x.image}
 							title={x.title}
-							content={x.content}
+							content={x.description}
 							label={x.label}
 							link={x.link} />
 								</div>

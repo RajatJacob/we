@@ -28,7 +28,7 @@ button {
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #faab30;
+    background-color:rgb(60, 90, 154);
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -68,7 +68,7 @@ p {
 }
 
 .color {
-    background-color: #faab30;
+    background-color:rgb(60, 90, 154);
     height: 5%;
 }
 
@@ -94,7 +94,7 @@ p {
 }
 
 .card-flow-front {
-    background-color: #faab30;
+    background-color:  rgb(60, 90, 154);
 }
 
 .card-body {
@@ -110,6 +110,10 @@ p {
     width: 50%;
     bottom: 10px;
     border: 3px solid #8AC007;
+}
+.title{
+    color: white;
+    font-weight: bold;
 }
 
 .weeks {

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class Button extends React.Component {
 	render() {
 		const b = (
-			<div className="Button" onClick={this.props.onClick}>
+			<div className={"Button "+this.props.className} onClick={this.props.onClick}>
 				{
 					this.props.icon ?
 						<span className="icon">

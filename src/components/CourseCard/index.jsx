@@ -13,7 +13,7 @@ const Cards = props => {
 						<div className='card-flow-front'>
 							<img src={props.image} alt={props.name} className="card-img" />
 
-							<h5 className="title">{props.title}</h5>
+							<h4 className="title">{props.title}</h4>
 
 						</div>
 						<div className='card-body'>
