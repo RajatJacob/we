@@ -40,31 +40,36 @@ export default class CreatePost extends React.Component {
 		if (this.state.caption) post["caption"] = this.state.caption
 		if (this.state.content) post["content"] = this.state.content
 		post["timestamp"] = firestoreTimestamp.now()
-		const ext = this.state.img.value.substring(this.state.img.value.lastIndexOf('.'))
-		const fileName = Date.now().toString() + ext
-		const storageRef = storage.ref()
-		const imgRef = storageRef
-			.child("posts")
-			.child(auth.currentUser.uid)
-			.child(fileName)
-		imgRef
-			.put(this.state.img.file)
-			.then(
-				snapshot => {
-					snapshot.ref.getDownloadURL().then(
-						imgRef.getDownloadURL().then(
-							url => {
-								post["img"] = url
-							}
-						)
-							.finally(
-								() => {
-									this.post(post)
+		if (!this.state.img.file) {
+			this.post(post)
+		}
+		else {
+			const ext = this.state.img.value ? this.state.img.value.substring(this.state.img.value.lastIndexOf('.')) : null
+			const fileName = Date.now().toString() + ext
+			const storageRef = storage.ref()
+			const imgRef = storageRef
+				.child("posts")
+				.child(auth.currentUser.uid)
+				.child(fileName)
+			imgRef
+				.put(this.state.img.file)
+				.then(
+					snapshot => {
+						snapshot.ref.getDownloadURL().then(
+							imgRef.getDownloadURL().then(
+								url => {
+									post["img"] = url
 								}
 							)
-					)
-				}
-			)
+								.finally(
+									() => {
+										this.post(post)
+									}
+								)
+						)
+					}
+				)
+		}
 	}
 
 	render() {
