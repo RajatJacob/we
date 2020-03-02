@@ -1,7 +1,7 @@
 .Organisation {
     .background {
-     // background: black;
-     // background-image: url("../../images/donation.jpg");
+      background: black;
+       background-image: url("../../images/joining.jpg");
       background-attachment: fixed;
       background-size: cover;
       position: fixed;
@@ -11,27 +11,14 @@
       right: 0;
       z-index: -1;
     }
-    .Container{
-        font-size: 20px;
-
-    }
+     .Container{
+         font-size: 18px;
+     }
     .Button
     {
-        width:90%;
-        margin-left: 70%;
+        width:90%;   
     }
     .Card {
-        background:  #00000034;
+        background:  #ffffff99;
       }
-    .GridContainer{
-     
-        //height: 150%;
-            width: 50%;
-            margin-left: 10%;
-            height: 50%;
-           margin-top:1%;
-    }
-
-    
-
 }
