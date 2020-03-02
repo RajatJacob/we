@@ -3,6 +3,7 @@ import './style.scss';
 import Container from '../../components/Container';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
+import GridContainer from '../../components/GridContainer';
 
 class Home extends React.Component {
 	render() {
@@ -45,13 +46,16 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background" id="bottom" />
-				<div className="background center" id="rural">
-					<Card>
-						<h1>Change the Future for Women and Girls</h1>
-						Around the world, women and girls face incredible challenges to their safety, success, and human rights.
-						With the right support and resources they have the potential to make lasting strides.
+				<Card>
+					<h1>Change the Future for Women and Girls</h1>
+					Around the world, women and girls face incredible challenges to their safety, success, and human rights.
+					With the right support and resources they have the potential to make lasting strides.
+						<GridContainer>
+						<Button to="/Organisation">Join Us</Button>
 						<Button to="/donation">Donate</Button>
-					</Card>
+					</GridContainer>
+				</Card>
+				<div className="background center" id="rural">
 				</div>
 				<div className="content">
 					<Container>
