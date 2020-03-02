@@ -57,9 +57,17 @@ export default class UserItem extends React.Component {
 										</div>
 								}
 							</div>
-							{
-								"@" + this.state.user.username
-							}
+							<div className="user">
+								{
+									this.state.user.name ?
+										<span className="name">
+											{this.state.user.name}
+										</span> : null
+								}
+								{
+									<span className="username">{"@" + this.state.user.username}</span>
+								}
+							</div>
 						</Link>
 						:
 						<Loader />
