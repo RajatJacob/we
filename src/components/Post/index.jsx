@@ -142,6 +142,16 @@ export default class Post extends React.Component {
 		)
 	}
 
+	linkify = text => {
+		var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+		var regex = new RegExp(expression);
+		let parts = text.split(regex)
+		for (let i = 1; i < parts.length; i += 2) {
+			parts[i] = <a className="contentLink" key={'link' + i} href={parts[i]} target="_blank" rel="noopener noreferrer">{parts[i]}</a>
+		}
+		return parts
+	}
+
 	init = () => {
 		this.getPostData()
 	}
@@ -223,7 +233,7 @@ export default class Post extends React.Component {
 					(this.state.post.title || this.state.post.content) ?
 						<Container>
 							<h3>{this.state.post.title}</h3>
-							{this.state.post.content}
+							{this.linkify(this.state.post.content || "")}
 						</Container> : null
 				}
 				<div className="reactions">

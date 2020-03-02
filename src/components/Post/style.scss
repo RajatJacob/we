@@ -171,4 +171,13 @@
             }
         }
     }
+
+    a.contentLink {
+        color: $primaryColor;
+        transition: all 500ms ease;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
