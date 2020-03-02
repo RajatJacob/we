@@ -16,7 +16,6 @@ export default class UserItem extends React.Component {
 			done: false
 		}
 	}
-
 	componentDidMount() {
 		this.init()
 	}
