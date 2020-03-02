@@ -131,7 +131,9 @@ export default class Post extends React.Component {
 
 	delete = () => {
 		const { firestore } = this.context
-		firestore.doc(this.props.post).delete()
+		firestore.doc(this.props.post).delete().then(
+			() => this.setState({ menu: false })
+		)
 	}
 
 	init = () => {
