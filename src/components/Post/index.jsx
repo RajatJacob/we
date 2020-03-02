@@ -148,7 +148,8 @@ export default class Post extends React.Component {
 	}
 
 	render() {
-		return (
+		if (!this.state.post) return null
+		else return (
 			<div className="Post" onDoubleClick={this.like}>
 				<div className="info">
 					{
@@ -164,7 +165,11 @@ export default class Post extends React.Component {
 					<div className="action">
 						{
 							this.state.timeSince ?
-								<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
+								<div className="timeSince" title={
+									new Date(
+										this.state.post.timestamp.seconds * 1000
+									).toString()
+								}>
 									{this.state.timeSince}
 								</div> : null
 						}
