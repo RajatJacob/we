@@ -66,7 +66,6 @@ export default class Feed extends React.Component {
 					}
 				)
 	}
-
 	componentDidMount() {
 		this.getPostList()
 	}
