@@ -39,7 +39,12 @@ export default class UserProfile extends React.Component {
 						unsubscribe:
 							firestore.collection("users")
 								.doc(uid)
-								.onSnapshot(doc => resolve(doc.data()))
+								.onSnapshot(
+									snapshot => {
+										this.setState({ user: snapshot.data() })
+										resolve(snapshot.data())
+									}
+								)
 					}
 				)
 			}
@@ -163,6 +168,10 @@ export default class UserProfile extends React.Component {
 			prevProps.match.params.username !== this.props.match.params.username
 		)
 			this.init()
+	}
+
+	componentWillUnmount() {
+		this.state.unsubscribe()
 	}
 
 	init = () => {
