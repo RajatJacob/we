@@ -1,17 +1,14 @@
 @import "../../global/colors.scss";
 
 .LoginPage {
-  .background {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+    .background {
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
 
-    &#pic {
-      background-image: url("../../images/login.jpg");
+        a {
+            color: white;
+        }
     }
-
-    a {
-      color: white;
-    }
-  }
 }
+

@@ -50,6 +50,14 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background" id="bottom" />
+				<div className="background center" id="rural">
+					<Card>
+						<h1>Change the Future for Women and Girls</h1>
+						Around the world, women and girls face incredible challenges to their safety, success, and human rights.
+						With the right support and resources they have the potential to make lasting strides.
+						<Button to="/donation">Donate</Button>
+					</Card>
+				</div>
 				<div className="content">
 					<Container>
 						<h1>Change the Future for Women and Girls</h1>
