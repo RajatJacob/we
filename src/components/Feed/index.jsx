@@ -3,6 +3,7 @@ import { FirebaseContext } from '../../contexts/FirebaseContext';
 import './style.scss';
 import Post from '../Post';
 import Loader from '../Loader';
+import { Redirect } from 'react-router-dom';
 
 export default class Feed extends React.Component {
 	static contextType = FirebaseContext
@@ -16,6 +17,12 @@ export default class Feed extends React.Component {
 	}
 
 	getPostList = () => {
+		this.setState(
+			{
+				posts: [],
+				done: false
+			}
+		)
 		if (this.props.query === "feed") {
 			const { auth, getFollowing } = this.context
 			getFollowing(auth.currentUser.uid).then(
@@ -60,10 +67,21 @@ export default class Feed extends React.Component {
 				)
 	}
 
+	componentDidMount() {
+		this.getPostList()
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.query !== this.props.query) {
+			this.getPostList()
+		}
+	}
+
 	render() {
 		const { auth } = this.context
-		if (auth.currentUser && !this.state.done)
-			this.getPostList()
+		if (!auth.currentUser) return (
+			<Redirect to="/login" />
+		)
 		return (
 			<div className="Feed">
 				{

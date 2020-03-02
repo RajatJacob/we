@@ -6,10 +6,6 @@ import UserProfile from './pages/UserProfile';
 import Feed from './components/Feed';
 import Card from './components/Card';
 import Container from './components/Container';
-import Resume from './components/Resume';
-import View from './components/View';
-import Feedback from './components/Feedback';
-import RVJoin from './components/RVJoin';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
@@ -17,6 +13,7 @@ import VocationalCourses from './pages/VocationalCourses';
 import Donation from './pages/Donation';
 import Payment from './pages/Payment';
 import Home from './pages/Home';
+import CreatePost from './components/CreatePost';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -33,14 +30,11 @@ export default class Routes extends React.Component {
 							<Feed query="feed" />
 						</Container>
 					</Route>
+					<Route path="/create" component={CreatePost} />
 					<Route path="/user/:username" component={UserProfile} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route exact path="/courses" component={VocationalCourses} />
-					<Route exact path="/Resume" component={Resume} />
-					<Route exact path="/View" component={View} />
-					<Route exact path="/RVJoin" component={RVJoin} />
-					<Route exact path="/Feedback" component={Feedback} />
 					<Route exact path="/donation" component={Donation} />
 					<Route exact path="/payment" component={Payment} />
 					<Route path="*">
