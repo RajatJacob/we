@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import Container from './components/Container';
 import LoginPage from './pages/LoginPage';
 import OrganisationForm from './pages/OrganisationForm';
+import Display from './components/Display';
+import OrganisationFront from './components/Organisation';
 
 export default class Routes extends React.Component {
 	render() {
@@ -24,7 +26,12 @@ export default class Routes extends React.Component {
 					<Route exact path="/OrganisationForm">
 						<OrganisationForm />
 					</Route>
-
+					<Route exact path="/Display">
+						<Display />
+					</Route>
+					<Route exact path="/Organisation">
+						<OrganisationFront />
+					</Route>
 					<Route path="*">
 						<Container>
 							<h1>404</h1>

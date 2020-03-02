@@ -3,7 +3,6 @@ import './styleform.scss';
 import CountrySelector from '../../components/CountrySelector';
 import TextEditor from '../../components/TextEditor';
 import Upload from '../../components/Upload';
-import { storage } from '../../contexts/FirebaseContext';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 
 export default class OrganisationForm extends React.Component {
@@ -111,18 +110,15 @@ export default class OrganisationForm extends React.Component {
 					<label>
 						<div >
 							Description.Tell us about your Organisation
-					 	<TextEditor name={'editor'} onChange={this.handleChange} required="required" />
-						</div>
+							<textArea name={'description'} onChange={this.handleChange} required="required" />
+				
+					 	</div>
 					</label> <br />
 
 					<label>
 						Initiatives / Projects taken earlier
 						 <textArea name={'projects'} onChange={this.handleChange} required="required" />
 					</label> <br />
-					<label>
-						Photo Attachment
-						<Upload name={'file'} />
-					</label><br />
 
 					<label >
 						Views on gender equality

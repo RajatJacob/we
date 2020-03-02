@@ -1,0 +1,43 @@
+
+.Display .background{
+    background-image: url('../../images/joinus.jpg');
+    background-size: cover;
+    background: #000;
+    background-attachment: fixed;
+    width: 200px;
+    height: 400px;
+    object-fit: contain;
+   // position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: -1;
+}
+.Display body{
+    background-attachment: fixed;
+    background-image: url('../../images/joinus.jpg');
+    object-fit: cover;
+    text-align: left;
+    background-size: contain;
+    height: 100%;
+    margin-bottom: 0%;
+   
+}
+.Container{
+    font-size: 20px;
+}
+.Display .text {
+    background: rgba(0,0,0,.47);
+    background: transparent;
+    background-color: pink;
+}
+.text{
+    text-align: left;
+}
+
+img{
+    width:100%;
+    margin-bottom: 0%;
+}
