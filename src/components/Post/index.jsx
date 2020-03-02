@@ -136,7 +136,6 @@ export default class Post extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log(prevProps)
 		if (this.props.post !== prevProps.post)
 			this.init()
 	}
