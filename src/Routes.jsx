@@ -14,6 +14,7 @@ import VocationalCourses from './pages/VocationalCourses';
 import Donation from './pages/Donation';
 import Payment from './pages/Payment';
 import Home from './pages/Home';
+import CreatePost from './components/CreatePost';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -30,6 +31,7 @@ export default class Routes extends React.Component {
 							<Feed query="feed" />
 						</Container>
 					</Route>
+					<Route path="/create" component={CreatePost} />
 					<Route path="/user/:username" component={UserProfile} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
