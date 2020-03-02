@@ -1,7 +1,7 @@
 import React from 'react';
 import './styleform.scss';
 import CountrySelector from '../../components/CountrySelector';
-import TextEditor from '../../components/TextEditor';
+//import TextEditor from '../../components/TextEditor';
 import Upload from '../../components/Upload';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 
