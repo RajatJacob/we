@@ -106,6 +106,12 @@
                 &:hover {
                     background: #FFFFFF22;
                 }
+
+                &.delete {
+                    &:hover {
+                        color: red;
+                    }
+                }
             }
         }
     }
@@ -163,6 +169,15 @@
             .number {
                 text-align: right;
             }
+        }
+    }
+
+    a.contentLink {
+        color: $primaryColor;
+        transition: all 500ms ease;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
