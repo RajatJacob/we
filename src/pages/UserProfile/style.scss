@@ -1,0 +1,101 @@
+@import '../../global/colors.scss';
+
+.UserProfile {
+    $size: 2em;
+    padding: 0;
+    margin-top: $size * 2.5;
+
+    a {
+
+        &,
+        &:hover,
+        &:visited {
+            color: #222222;
+            text-decoration: none;
+
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
+
+    .Banner {
+        .username {
+            background: #FFFFFF22;
+            color: white;
+            border-radius: 0.5em;
+            padding: 0.5em;
+            margin: 0.25em auto;
+            border: 0.125em solid transparent;
+            cursor: pointer;
+
+            &:hover {
+                border-color: white;
+                color: inherit;
+            }
+        }
+    }
+
+    .profilePicture {
+        font-size: $size*2;
+        color: #eee;
+        background: #222;
+        border-radius: 100%;
+        box-shadow: 0 0 0.25em 0 #00000099;
+        height: $size;
+        width: $size;
+        line-height: $size;
+        margin: auto;
+        margin-top: $size / -2;
+        padding: $size / 15;
+        transition: all 500ms ease;
+
+        &:hover {
+            transform: scale(1.005);
+            box-shadow: 0 0 0.5em 0 #00000099;
+        }
+    }
+
+    h2 {
+        padding: 0.5em;
+    }
+
+    .bio {
+        background: #eee;
+        padding: 0.25em;
+        border-radius: 0.4em;
+        font-weight: 500;
+    }
+
+    .tab-container {
+        display: flex;
+        width: 100%;
+        margin: 0;
+        margin-top: 2em;
+
+        .tab {
+            margin: 0;
+            padding: 0.5em;
+            border-radius: 0.5em 0.5em 0 0;
+            border-bottom: 0.25em solid #eee;
+            width: 33.33%;
+
+            @media screen and (orientation: portrait) {
+                padding: 1em 0.25em;
+            }
+
+            &:hover {
+                color: $primaryColor;
+            }
+
+            &.active {
+                color: $primaryColor;
+                border-color: $primaryColor;
+            }
+
+            .number {
+                font-size: 1.5em;
+            }
+        }
+    }
+}
