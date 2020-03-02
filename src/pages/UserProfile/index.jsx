@@ -260,7 +260,15 @@ export default class UserProfile extends React.Component {
 												</Button>
 										}
 										<div className="tab-container">
-											<NavLink to={"/user/" + this.state.user.username} className="tab" activeClassName="active">
+											<NavLink to={this.props.match.url} className="tab" activeClassName="active"
+												isActive={
+													(match, location) => {
+														if (!location) return false;
+														const { pathname } = location;
+														console.log(pathname);
+														return pathname === this.props.match.url;
+													}
+												}>
 												<div className="number">
 													{this.state.posts ? this.state.posts.length : 0}
 												</div>
@@ -294,11 +302,11 @@ export default class UserProfile extends React.Component {
 							</Card>
 							<Container>
 								<Switch>
-									<Route exact path={this.props.match.path} >
+									<Route exact path={this.props.match.url} >
 										<h2>Posts</h2>
 										<Feed query={this.state.feedQuery} />
 									</Route>
-									<Route exact path={this.props.match.path + "/followers"} >
+									<Route exact path={this.props.match.url + "/followers"} >
 										<h2>Followers</h2>
 										{
 											this.state.followers ?
@@ -306,7 +314,7 @@ export default class UserProfile extends React.Component {
 												null
 										}
 									</Route>
-									<Route exact path={this.props.match.path + "/following"} >
+									<Route exact path={this.props.match.url + "/following"} >
 										<h2>Following</h2>
 										{
 											this.state.user.following ?
