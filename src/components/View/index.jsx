@@ -95,9 +95,10 @@ console.log(auth.currentUser)
 
 
                 </td></tr></table>
-              
+              <div class="buttonss">
                 <input type="submit" value = "Print" onClick={window.print} className="print-page"/>&nbsp;&nbsp;&nbsp;
-                <input type="submit" value = "Find Jobs" onClick={() => this.handleJob("{this.state.user.jbin}")}/>
+                <input type="submit" class="buttonss"value = "Find Jobs" onClick={() => this.handleJob("{this.state.user.jbin}")}/>
+                </div>
              <br/>
 			  	
           </>

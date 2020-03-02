@@ -69,7 +69,8 @@ this.baseState = this.state;
 		if(this.state.Submitted)
         return <Redirect to = "/" />
 		return(
-			<form name="feedback" class="form-style" onSubmit={this.handleSubmit}>
+			<div class="feedback">
+			<form name="feedback" class="form-style-1" onSubmit={this.handleSubmit}>
 			<h1 align="left">Feedback</h1>
 			<br/>
 			<div class="inner-wrap">
@@ -89,9 +90,10 @@ this.baseState = this.state;
 			
 			</div>
 			
-
-			<input type="submit" value="Submit" onClick={this.handleSubmit}/>
+			<center>
+			<input type="submit" value="Submit" onClick={this.handleSubmit}/></center>
 			</form>
+			</div>
 			);
 	
 }}

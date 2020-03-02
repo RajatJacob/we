@@ -8,13 +8,14 @@ import JobSelector from '../JobSelector'
 import SkillSelector from '../SkillSelector'
 
 
-export default class Resume extends React.Component
+export default class Edit extends React.Component
 {
 
    static contextType = FirebaseContext;
    constructor(props){
    super(props);
       this.state = {
+            user: {},
          form: {
 
          },
@@ -31,11 +32,11 @@ export default class Resume extends React.Component
          a.push(<>
       <label>
          Education
-         <EducationSelecter name={"education"+i} required="required"  onChange={this.handleChange}/>
+         <EducationSelecter name={"education"+i}  onChange={this.handleChange}/>
          </label> <br/>
          <label>
          College/School
-         <input  name={"csname"+i} type="text" required="required" onChange={this.handleChange}/>
+         <input  name={"csname"+i} type="text" onChange={this.handleChange}/>
          </label><br/>
 
     
@@ -49,7 +50,7 @@ export default class Resume extends React.Component
          a.push(<>
       <label>
          Skills
-         <SkillSelector  name={"skills"+i} required="required" value={this.state.skills} onChange={this.handleChange}/>
+         <SkillSelector  name={"skills"+i} value={this.state.skills} onChange={this.handleChange}/>
       
 
 
@@ -81,14 +82,14 @@ this.baseState = this.state;
       this.setState(f);
    };
    handleSubmit(event){
-    if(this.validateForm()) return;
+    
    const {
          firestore, auth
       } = this.context;
       
       console.log(this.state.form)
       alert('Submitted');
-      
+      this.setState({Submitted: true})
       
       firestore.collection("users").doc(auth.currentUser.uid).update(
          this.state.form
@@ -101,29 +102,27 @@ this.baseState = this.state;
       event.preventDefault();
    };
 
-  validateForm = ()  => {
-  var x = document.forms["resume"]["fname"].value;
-  var y = document.forms["resume"]["lname"].value;
-  var z = document.forms["resume"]["date"].value;
-  var a = document.forms["resume"]["nationality"].value;
-  var b = document.forms["resume"]["fsname"].value;
-  var c = document.forms["resume"]["Addline1"].value;
-  var d = document.forms["resume"]["Addline2"].value;
-  var e = document.forms["resume"]["City"].value;
-  var f = document.forms["resume"]["State"].value;
-  var g = document.forms["resume"]["PinCode"].value;
-  var h = document.forms["resume"]["Country"].value;
- 
-  var j = document.forms["resume"]["contactnumber"].value;
-  if (x === ""||y === ""||z === ""||a === ""||b === ""||c === ""||d === ""||e === ""||f === ""||g === ""||h === ""||j === "") {
-    alert("Required field must be filled out");
-    return true;
+  
+getInfo = () => {
+    const { firestore, auth } = this.context
+    
+    console.log("user")
+console.log(auth.currentUser)
+    if(auth.currentUser.uid)
+    firestore.collection("users").doc(auth.currentUser.uid).get().then(
+      doc =>
+      {
+        this.setState({user: doc.data(), done:true})
+      }
+    )
+  }
+  ///this.handleJob=this.handleJob.bind(this);
 
+  componentDidUpdate() {
+    if(!this.state.done)
+    this.getInfo()
   }
-  else{
-    this.setState({Submitted: true})
-  }
-}
+
    render()
    {//const {firestore} = this.context;
       //firestore.collection("users").doc(DOCID).
@@ -136,17 +135,17 @@ this.baseState = this.state;
          <div class="inner-wrap">
          <label>
          First Name 
-         <input   name="fname" type="text" required="required"  onChange={this.handleChange}/>
+         <input   name="fname" type="text" placeholder={this.state.user.fname}  onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Last Name 
-         <input  name="lname" type="text" required="required"  onChange={this.handleChange}/>
+         <input  name="lname" type="text" placeholder={this.state.user.lname}  onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Date 
-         <input   name="date" type="date" required="required" onChange={this.handleChange}/>
+         <input   name="date" type="date" placeholder={this.state.user.date} onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
@@ -157,21 +156,21 @@ this.baseState = this.state;
          </label><br/>
          <label>
          Nationality 
-         <input   name="nationality" type="text" required="required"  onChange={this.handleChange}/>
+         <input   name="nationality" type="text"  placeholder={this.state.user.nationality} onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Father's/Spouse's name 
-         <input  name="fsname" type="text" required="required" onChange={this.handleChange}/>
+         <input  name="fsname" type="text" placeholder={this.state.user.fsname} onChange={this.handleChange}/>
          </label><br/>
          <label>
          Address
-          <input  name="Addline1" type="text" required="required" placeholder = "Address Line 1" onChange={this.handleChange}/> <br/>
-          <input  name="Addline2" type="text" required="required" placeholder = "Address Line 2" onChange={this.handleChange}/><br/>
-          <input  name="City" type="text" required="required" placeholder = "City" onChange={this.handleChange}/><br/>
-          <input  name="State" type="text" required="required" placeholder = "State" onChange={this.handleChange}/><br/>
-          <input  name="PinCode" type="text" required="required" placeholder = "Pin Code" onChange={this.handleChange}/><br/>
-          <input  name="Country" type="text" required="required" placeholder = "Country" onChange={this.handleChange}/><br/>
+          <input  name="Addline1" type="text"  placeholder={this.state.user.Addline1}  onChange={this.handleChange}/> <br/>
+          <input  name="Addline2" type="text"placeholder={this.state.user.Addline2}  onChange={this.handleChange}/><br/>
+          <input  name="City" type="text" placeholder={this.state.user.City}  onChange={this.handleChange}/><br/>
+          <input  name="State" type="text" placeholder={this.state.user.State}  onChange={this.handleChange}/><br/>
+          <input  name="PinCode" type="text" placeholder={this.state.user.PinCode} onChange={this.handleChange}/><br/>
+          <input  name="Country" type="text" placeholder={this.state.user.Country}  onChange={this.handleChange}/><br/>
           
           </label>
 
@@ -204,7 +203,7 @@ this.baseState = this.state;
     <br/><br/>
     <label>
          Internships/Past Experience
-         <textArea class="input1" name="inter" rows="4" columns="40"   onChange={this.handleChange} />
+         <textArea class="input1" name="inter" rows="4" columns="40" placeholder={this.state.user.inter}   onChange={this.handleChange} />
          </label>
          <br/>
          </div>
@@ -213,7 +212,7 @@ this.baseState = this.state;
          <div class="inner-wrap">
          <label>
          Jobs Interested in 
-         <JobSelector name="jbin" required="required"  onChange={this.handleChange}/>
+         <JobSelector name="jbin" placeholder={this.state.user.jbin}  onChange={this.handleChange}/>
        
 
 
@@ -234,18 +233,18 @@ this.baseState = this.state;
             <option value="Miss">Miss</option><br/>
          </select>
          
-         <input  name="contactperson" type="text"  onChange={this.handleChange}/>
+         <input  name="contactperson" type="text" placeholder={this.state.user.contactperson}  onChange={this.handleChange}/>
          
          </label>
          <br/>
          <label>
          Contact Email
-         <input  name="contactemail" type="email"  onChange={this.handleChange}/>
+         <input  name="contactemail" type="email"  placeholder={this.state.user.contactemail} onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Contact 
-         <input  name="contactnumber" type="tel"  required="required" onChange={this.handleChange}/>
+         <input  name="contactnumber" type="tel" placeholder={this.state.user.contactnumber}   onChange={this.handleChange}/>
          </label>
          <br/>
       

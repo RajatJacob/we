@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { FirebaseContext } from './contexts/FirebaseContext';
@@ -14,7 +15,11 @@ import Donation from './pages/Donation';
 import Payment from './pages/Payment';
 import Home from './pages/Home';
 import CreatePost from './components/CreatePost';
-
+import Feedback from './components/Feedback';
+import Resume from './components/Resume';
+import View from './components/View';
+import RVJoin from './components/RVJoin';
+import Edit from './components/Edit';
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
 	render() {
@@ -34,6 +39,11 @@ export default class Routes extends React.Component {
 					<Route path="/user/:username" component={UserProfile} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
+					<Route path="/Edit" component={Edit} />
+					<Route path="/resume" component={Resume} />
+					<Route path="/RVJoin" component={RVJoin} />
+					<Route path="/View" component={View} />
+					<Route path="/Feedback" component={Feedback} />
 					<Route exact path="/courses" component={VocationalCourses} />
 					<Route exact path="/donation" component={Donation} />
 					<Route exact path="/payment" component={Payment} />
@@ -47,4 +57,5 @@ export default class Routes extends React.Component {
 			</div>
 		);
 	}
+
 }
