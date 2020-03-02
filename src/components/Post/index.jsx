@@ -24,38 +24,45 @@ export default class Post extends React.Component {
 
 	getPostData = () => {
 		const { firestore } = this.context
-		firestore
-			.doc(this.props.post)
-			.onSnapshot(
-				snapshot => {
-					this.setState(
-						{
-							post: snapshot.data(),
-							authorId: this.props.post.split('/')[1]
-						}
-					)
-					this.getAuthorData()
-					this.getTimeSincePost()
-				}
-			)
+		this.setState(
+			{
+				unsubscribe:
+					firestore
+						.doc(this.props.post)
+						.onSnapshot(
+							snapshot => {
+								console.log(snapshot.data())
+								this.setState(
+									{
+										post: snapshot.data(),
+										authorId: this.props.post.split('/')[1]
+									}
+								)
+								this.getAuthorData()
+								this.getTimeSincePost()
+							}
+						)
+			}
+		)
 	}
 
 	getAuthorData = () => {
 		const { firestore, auth } = this.context
-		firestore
-			.collection("users")
-			.doc(this.state.authorId)
-			.get()
-			.then(
-				snapshot => {
-					this.setState(
-						{
-							author: snapshot.data(),
-							self: this.state.authorId === auth.currentUser.uid
-						}
-					)
-				}
-			)
+		if (this.state.authorId)
+			firestore
+				.collection("users")
+				.doc(this.state.authorId)
+				.get()
+				.then(
+					snapshot => {
+						this.setState(
+							{
+								author: snapshot.data(),
+								self: this.state.authorId === auth.currentUser.uid
+							}
+						)
+					}
+				)
 	}
 
 	getTimeSincePost = () => {
@@ -147,6 +154,10 @@ export default class Post extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.post !== prevProps.post)
 			this.init()
+	}
+
+	componentWillUnmount() {
+		this.state.unsubscribe()
 	}
 
 	render() {
