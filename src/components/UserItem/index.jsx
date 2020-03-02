@@ -2,7 +2,6 @@ import React from 'react';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { Link } from 'react-router-dom';
-import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Loader from '../Loader';
@@ -23,6 +22,7 @@ export default class UserItem extends React.Component {
 	}
 
 	init = () => {
+		const { auth } = this.context
 		if (!this.state.done)
 			this.props.user
 				.get()
@@ -30,23 +30,24 @@ export default class UserItem extends React.Component {
 					doc => {
 						if (doc.exists) {
 							this.setState(
-								{ user: doc.data(), done: true }
+								{ uid: doc.id, user: doc.data(), done: true, self: auth.currentUser.uid === doc.id }
 							)
 						}
 					}
 				)
 				.finally(
-					() => this.setState({ done: true })
+					() => {
+						this.setState({ done: true })
+					}
 				)
 	}
 
 	render() {
-		const { isFollowing } = this.context;
 		return (
 			<div className="UserItem">
 				{
 					this.state.done ?
-						<>
+						<Link to={("/user/" + this.state.user.username) || null} >
 							<div className="photo">
 								{
 									this.state.user.photoURL ?
@@ -56,17 +57,11 @@ export default class UserItem extends React.Component {
 										</div>
 								}
 							</div>
-							<Link to={("/user/" + this.state.user.username) || null} >
-								{
-									"@" + this.state.user.username
-								}
-							</Link>
-							<Button>
-								{
-									isFollowing(this.state.user.uid) ? "Unfollow" : "Follow"
-								}
-							</Button>
-						</> :
+							{
+								"@" + this.state.user.username
+							}
+						</Link>
+						:
 						<Loader />
 				}
 			</div>
