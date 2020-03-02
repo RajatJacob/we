@@ -138,7 +138,6 @@ export default class UserProfile extends React.Component {
 		this.getFollowers(uid)
 			.then(
 				followers => {
-					console.log(followers)
 					this.setState(
 						{
 							followers: followers,

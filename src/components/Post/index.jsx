@@ -31,7 +31,6 @@ export default class Post extends React.Component {
 						.doc(this.props.post)
 						.onSnapshot(
 							snapshot => {
-								console.log(snapshot.data())
 								this.setState(
 									{
 										post: snapshot.data(),
