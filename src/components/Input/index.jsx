@@ -30,7 +30,7 @@ export default class Input extends React.Component {
 						<span className="icon">{this.props.icon || null}</span>
 					</div>
 				}
-				<input onChange={this.props.onChange} placeholder={this.props.label || ""} type={this.state.type || "text"} value={this.props.type === "submit" ? this.props.label : this.props.value} />
+				<input onChange={this.props.onChange} placeholder={this.props.label || ""} type={this.state.type || "text"} pattern={this.props.pattern} min={this.props.min} value={this.props.type === "submit" ? this.props.label : this.props.value} required={this.props.required} />
 				{
 					this.props.type === "password"
 						?

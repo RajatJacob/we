@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import Container from '../Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 
 export default class Post extends React.Component {
 	static contextType = FirebaseContext
@@ -13,9 +14,12 @@ export default class Post extends React.Component {
 		super(props)
 		this.state = {
 			post: {},
-			authorId: this.props.post.split('/')[1]
+			menu: false
 		}
-		this.prevProp = null
+	}
+
+	toggleMenu = e => {
+		this.setState({ menu: !this.state.menu })
 	}
 
 	getPostData = () => {
@@ -26,7 +30,8 @@ export default class Post extends React.Component {
 				snapshot => {
 					this.setState(
 						{
-							post: snapshot.data()
+							post: snapshot.data(),
+							authorId: this.props.post.split('/')[1]
 						}
 					)
 					this.getAuthorData()
@@ -36,7 +41,7 @@ export default class Post extends React.Component {
 	}
 
 	getAuthorData = () => {
-		const { firestore } = this.context
+		const { firestore, auth } = this.context
 		firestore
 			.collection("users")
 			.doc(this.state.authorId)
@@ -44,7 +49,8 @@ export default class Post extends React.Component {
 				snapshot => {
 					this.setState(
 						{
-							author: snapshot.data()
+							author: snapshot.data(),
+							self: this.state.authorId === auth.currentUser.uid
 						}
 					)
 				}
@@ -69,7 +75,7 @@ export default class Post extends React.Component {
 		var timeStr = ""
 		Object.keys(time).forEach(
 			x => {
-				timeStr = time[x] === 0 ? timeStr : time[x] + x
+				timeStr = time[x] === 0 ? timeStr : time[x].toFixed(0) + x
 			}
 		)
 		this.setState(
@@ -79,16 +85,65 @@ export default class Post extends React.Component {
 		)
 	}
 
-	componentDidMount() {
-		if (this.props.post !== this.prevProp) {
-			this.prevProp = this.props.post
-			this.getPostData()
+	doesLike = () => {
+		const { auth, firestore } = this.context
+		const u = firestore
+			.collection("users")
+			.doc(
+				auth.currentUser.uid
+			)
+		var l = false
+		if (this.state.post.likedBy)
+			this.state.post.likedBy.forEach(
+				x => l = l || x.id === u.id
+			)
+		return l
+	}
+
+	like = () => {
+		const { firestore, auth } = this.context
+		const u = firestore.collection("users").doc(auth.currentUser.uid)
+		var l = this.state.post.likedBy || []
+		var i
+		if (this.doesLike()) { //unlike
+			if (this.state.post.likedBy)
+				do {
+					i = l.indexOf(u)
+					l.splice(i, 1)
+				} while (i !== -1)
 		}
+		else // like
+			l.push(
+				firestore
+					.collection("users")
+					.doc(auth.currentUser.uid)
+			)
+		firestore
+			.doc(this.props.post)
+			.update(
+				{
+					likedBy: l
+				}
+			)
+	}
+
+	init = () => {
+		this.getPostData()
+	}
+
+	componentDidMount() {
+		this.init()
+	}
+
+	componentDidUpdate(prevProps) {
+		console.log(prevProps)
+		if (this.props.post !== prevProps.post)
+			this.init()
 	}
 
 	render() {
 		return (
-			<div className="Post">
+			<div className="Post" onDoubleClick={this.like}>
 				<div className="info">
 					{
 						this.state.author ?
@@ -100,13 +155,31 @@ export default class Post extends React.Component {
 							</Link> :
 							null
 					}
-					{
-						this.state.timeSince ?
-							<div className="timeSince">
-								{this.state.timeSince}
-							</div> : null
-					}
+					<div className="action">
+						{
+							this.state.timeSince ?
+								<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
+									{this.state.timeSince}
+								</div> : null
+						}
+						{
+							this.state.self ?
+								<span className="toggleMenu" onClick={this.toggleMenu}>
+									<FontAwesomeIcon icon={faEllipsisV} />
+								</span> : null
+						}
+					</div>
 				</div>
+				{
+					this.state.self ?
+						<div className={this.state.menu ? "active menu" : "menu"}>
+							<ul>
+								<li>Edit</li>
+								<li>Delete</li>
+							</ul>
+						</div> :
+						null
+				}
 				{
 					this.state.post.img ?
 						<div className="picture">
@@ -131,13 +204,21 @@ export default class Post extends React.Component {
 						</Container> : null
 				}
 				<div className="reactions">
-					<div>
-						<span class="icon">
-							<FontAwesomeIcon icon={faHeart} />
+					<div onClick={this.like} className={this.doesLike() ? "liked" : undefined}>
+						<span className="number">
+							{
+								this.state.post.likedBy ? this.state.post.likedBy.length : 0
+							}
 						</span>
-						Like
+						<span className="icon">
+							<FontAwesomeIcon icon={
+								this.doesLike() ?
+									faHeart :
+									farHeart
+							} />
+						</span>
 					</div>
-					<div>
+					{/*<div>
 						<span class="icon">
 							<FontAwesomeIcon icon={faComment} />
 						</span>
@@ -148,7 +229,7 @@ export default class Post extends React.Component {
 							<FontAwesomeIcon icon={faShare} />
 						</span>
 						Share
-					</div>
+					</div>*/}
 				</div>
 			</div >
 		)

@@ -32,9 +32,11 @@
 
         &:hover {
             color: $primaryColor;
+            background: #111111;
         }
 
         &.active {
+            background: #111111;
             color: lighten($primaryColor, 10%);
             border-color: lighten($primaryColor, 10%);
         }

@@ -1,6 +1,4 @@
-import React, {
-	createContext
-} from 'react';
+import React, { createContext } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
 import 'firebase/auth';
@@ -28,7 +26,9 @@ export default class FirebaseContextProvider extends React.Component {
 		this.state = {
 			firebase: firebase,
 			firestore: firebase.firestore(),
+			firestoreTimestamp: firebase.firestore.Timestamp,
 			auth: firebase.auth(),
+			storage: firebase.storage(),
 			isLoggedIn: false,
 			getUserRefByUsername: (username) => this.state.firestore
 				.collection("users")
@@ -81,41 +81,40 @@ export default class FirebaseContextProvider extends React.Component {
 				)
 			},
 			getFollowers: (uid) => {
-				if (uid)
-					return new Promise(
-						(resolve, reject) => {
-
-							this.state.firestore
-								.collection("users")
-								.where(
-									"following",
-									"array-contains",
-									this.state.firestore
-										.collection("users")
-										.doc(uid)
-								)
-								.get()
-								.then(
-									snapshot => {
-										var followers = []
-										snapshot.forEach(
-											doc => {
-												followers
-													.push(
-														this.state.firestore.collection("users").doc(doc.id)
-													)
-											}
-										)
-										resolve(followers)
-									}
-								)
-								.catch(
-									err => {
-										reject(err)
-									}
-								)
-						}
-					)
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid) reject({ message: "Invalid UID" })
+						this.state.firestore
+							.collection("users")
+							.where(
+								"following",
+								"array-contains",
+								this.state.firestore
+									.collection("users")
+									.doc(uid)
+							)
+							.get()
+							.then(
+								snapshot => {
+									var followers = []
+									snapshot.forEach(
+										doc => {
+											followers
+												.push(
+													this.state.firestore.collection("users").doc(doc.id)
+												)
+										}
+									)
+									resolve(followers)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
 			},
 			getFollowing: uid => {
 				return new Promise(
@@ -132,7 +131,7 @@ export default class FirebaseContextProvider extends React.Component {
 							.get()
 							.then(
 								doc => {
-									resolve(doc.data().following)
+									resolve(doc.data().following || [])
 								}
 							)
 							.catch(
@@ -155,14 +154,15 @@ export default class FirebaseContextProvider extends React.Component {
 						this.state.getFollowing(this.state.auth.currentUser.uid)
 							.then(
 								following => {
-									resolve(
-										following
-											.includes(
-												this.state.firestore
-													.collection("users")
-													.doc(uid)
-											)
+									var f = false
+									following.forEach(
+										x => {
+											f = f || x.id === this.state.firestore
+												.collection("users")
+												.doc(uid).id
+										}
 									)
+									resolve(f)
 								}
 							)
 							.catch(
@@ -174,20 +174,51 @@ export default class FirebaseContextProvider extends React.Component {
 				)
 			},
 			follow: uid => {
+				var f = []
 				return new Promise(
 					(resolve, reject) => {
-						if (!uid || !this.state.auth.currentUser)
-							reject(
-								{
-									message: "Invalid UID"
-								}
-							)
-						this.state.getFollowing(this.state.auth.currentUser.uid)
-							.then(
-								following => {
-
-								}
-							)
+						this.state.isFollowing(uid).then(
+							isFollowing => {
+								if (!uid || !this.state.auth.currentUser)
+									reject(
+										{
+											message: "Invalid UID"
+										}
+									)
+								this.state.getFollowing(this.state.auth.currentUser.uid)
+									.then(
+										following => {
+											f = following
+											if (!isFollowing) {
+												f.push(
+													this.state.firestore.collection("users").doc(uid)
+												)
+											}
+											else {
+												const u = this.state.firestore
+													.collection("users")
+													.doc(uid)
+												f.forEach(
+													(x, i) => {
+														if (x.id === u.id)
+															f.splice(i, 1)
+													}
+												)
+											}
+											resolve(
+												this.state.firestore
+													.collection("users")
+													.doc(this.state.auth.currentUser.uid)
+													.update(
+														{
+															following: f
+														}
+													)
+											)
+										}
+									)
+							}
+						)
 					}
 				)
 			}
@@ -224,14 +255,12 @@ export default class FirebaseContextProvider extends React.Component {
 	}
 
 	render() {
-		return ( <
-			FirebaseContext.Provider value = {
-				{
-					...this.state
-				}
-			} > {
-				this.props.children
-			} < /FirebaseContext.Provider>
+		return (
+			<FirebaseContext.Provider value={
+				{ ...this.state }
+			}>
+				{this.props.children}
+			</FirebaseContext.Provider>
 		)
 	}
 }

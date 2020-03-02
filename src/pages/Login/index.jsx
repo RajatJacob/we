@@ -10,6 +10,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
 import { Redirect, Link } from 'react-router-dom';
+import './style.scss';
 
 export default class Login extends React.Component {
 	static contextType = FirebaseContext;
@@ -52,7 +53,7 @@ export default class Login extends React.Component {
 			<Redirect to="/feed" />
 		)
 		return (
-			<div className="LoginPage">
+			<div className="LoginPage" id="hi">
 				<Card noContainer>
 					<GridContainer split>
 						<Container>

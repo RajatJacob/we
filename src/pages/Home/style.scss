@@ -1,70 +1,70 @@
-@import '../../global/colors.scss';
+@import "../../global/colors.scss";
 
 .Home {
-    background-color: black;
+  background-color: black;
 
-    .background {
-        height: 100vh;
-        background: #555555;
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
+  .background {
+    height: 100vh;
+    background: #555555;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 
-        &#top {
-            background-image: url('../../images/background.jpg');
-        }
-
-        &#rural {
-            background-image: url('../../images/rural.jpg');
-        }
-
-        &#bottom {
-            background-image: url('../../images/background2.jpg');
-        }
-
-        .Card {
-            background: #000000CC;
-            color: white;
-        }
+    &#top {
+      background-image: url("../../images/background.jpg");
     }
 
-    .banner {
-        color: $primaryColor;
+    &#rural {
+      background-image: url("../../images/rural.jpg");
+    }
+
+    &#bottom {
+      background-image: url("../../images/background2.jpg");
+    }
+
+    .Card {
+      background: #000000cc;
+      color: white;
+    }
+  }
+
+  .banner {
+    color: $primaryColor;
+    padding: 0.5em;
+    text-align: right;
+    font-size: 7em;
+    font-weight: 900;
+  }
+
+  #courses {
+    margin: 5em;
+    padding: 2em;
+    border-radius: 1em;
+    background: #ffffffcc;
+  }
+
+  .content {
+    color: white;
+    padding: 2em;
+
+    #team {
+      display: grid;
+      grid-gap: 1em;
+      margin: 1em;
+
+      @media screen and (orientation: landscape) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media screen and (orientation: portrait) {
+        grid-template-columns: auto;
+      }
+
+      .member {
         padding: 0.5em;
-        text-align: right;
-        font-size: 7em;
-        font-weight: 900;
-    }
-
-    #courses {
-        margin: 5em;
-        padding: 2em;
         border-radius: 1em;
-        background: #FFFFFFCC;
+        background: #ffffff22;
+      }
     }
-
-    .content {
-        color: white;
-        padding: 2em;
-
-        #team {
-            display: grid;
-            grid-gap: 1em;
-            margin: 1em;
-
-            @media screen and (orientation: landscape) {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            @media screen and (orientation: portrait) {
-                grid-template-columns: auto;
-            }
-
-            .member {
-                padding: 0.5em;
-                border-radius: 1em;
-                background: #FFFFFF22;
-            }
-        }
-    }
+  }
 }

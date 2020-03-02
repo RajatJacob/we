@@ -19,6 +19,11 @@ a.ButtonLink {
         box-shadow: 0 0.5em 0.25em 0.05em #00000022;
     }
 
+    &.active {
+        background: mix($primaryColor, white, 50%);
+        color: $primaryColor;
+    }
+
     &,
     * {
         color: white;
