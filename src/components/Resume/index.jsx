@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import {Redirect} from 'react-router-dom';
 import './formstyle.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 import EducationSelecter from '../EducationSelecter'
 import JobSelector from '../JobSelector'
 import SkillSelector from '../SkillSelector'
-import { storage }  from '../../contexts/FirebaseContext';
+
 
 export default class Resume extends React.Component
 {
@@ -113,9 +113,9 @@ this.baseState = this.state;
   var f = document.forms["resume"]["State"].value;
   var g = document.forms["resume"]["PinCode"].value;
   var h = document.forms["resume"]["Country"].value;
-  var i = document.forms["resume"]["inter"].value;
+ 
   var j = document.forms["resume"]["contactnumber"].value;
-  if (x == ""||y == ""||z == ""||a == ""||b == ""||c == ""||d == ""||e == ""||f == ""||g == ""||h == ""||j == "") {
+  if (x === ""||y === ""||z === ""||a === ""||b === ""||c === ""||d === ""||e === ""||f === ""||g === ""||h === ""||j === "") {
     alert("Required field must be filled out");
     return true;
 

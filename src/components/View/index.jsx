@@ -1,11 +1,9 @@
 
 import React from 'react';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
-import ReactDOM from 'react-dom';
+
 import './style.css';
-import Card  from "../Card";
-import Button from "../Button";
-import { storage } from '../../contexts/FirebaseContext';
+
 
 export default class View extends React.Component {
 	static contextType = FirebaseContext;

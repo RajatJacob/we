@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import {Redirect} from 'react-router-dom';
 import './styleform.css';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
-import { storage }  from '../../contexts/FirebaseContext';
+
 
 
 export default class Feedback extends React.Component
@@ -57,7 +57,7 @@ this.baseState = this.state;
   var x = document.forms["feedback"]["fname"].value;
   var y = document.forms["feedback"]["feedback"].value;
 
-  if (x == ""||y=="") {
+  if (x === ""||y==="") {
     alert("Required field must be filled out");
     return true;} 
    else
