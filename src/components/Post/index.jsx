@@ -14,10 +14,8 @@ export default class Post extends React.Component {
 		super(props)
 		this.state = {
 			post: {},
-			authorId: this.props.post.split('/')[1],
 			menu: false
 		}
-		this.prevProp = null
 	}
 
 	toggleMenu = e => {
@@ -32,7 +30,8 @@ export default class Post extends React.Component {
 				snapshot => {
 					this.setState(
 						{
-							post: snapshot.data()
+							post: snapshot.data(),
+							authorId: this.props.post.split('/')[1]
 						}
 					)
 					this.getAuthorData()
@@ -128,11 +127,17 @@ export default class Post extends React.Component {
 			)
 	}
 
+	init = () => {
+		this.getPostData()
+	}
+
 	componentDidMount() {
-		if (this.props.post !== this.prevProp) {
-			this.prevProp = this.props.post
-			this.getPostData()
-		}
+		this.init()
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.post !== prevProps.post)
+			this.init()
 	}
 
 	render() {
