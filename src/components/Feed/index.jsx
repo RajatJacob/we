@@ -28,7 +28,6 @@ export default class Feed extends React.Component {
 		if (this.props.query === "feed") {
 			getFollowing(auth.currentUser.uid).then(
 				following => {
-					console.log(following)
 					following.forEach(
 						f => {
 							var p = []
