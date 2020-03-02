@@ -26,6 +26,10 @@ class Home extends React.Component {
 								1841039
 							</div>
 							<div className="member">
+								<h3>Sanskar Aggarwal</h3>
+								1841046
+							</div>
+							<div className="member">
 								<h3>Vansikaa A</h3>
 								1841061
 							</div>
@@ -46,15 +50,17 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background" id="bottom" />
-				<Card>
-					<h1>Change the Future for Women and Girls</h1>
-					Around the world, women and girls face incredible challenges to their safety, success, and human rights.
-					With the right support and resources they have the potential to make lasting strides.
+				<div className="content">
+					<Container>
+						<h1>Change the Future for Women and Girls</h1>
+						Around the world, women and girls face incredible challenges to their safety, success, and human rights.
+						With the right support and resources they have the potential to make lasting strides.
 						<GridContainer>
-						<Button to="/Organisation">Join Us</Button>
-						<Button to="/donation">Donate</Button>
-					</GridContainer>
-				</Card>
+							<Button to="/Organisation">Join Us</Button>
+							<Button to="/donation">Donate</Button>
+						</GridContainer>
+					</Container>
+				</div>
 				<div className="background center" id="rural">
 				</div>
 				<div className="content">
