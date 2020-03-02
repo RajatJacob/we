@@ -33,8 +33,7 @@ export default class Feed extends React.Component {
 							f
 								.collection("posts")
 								.orderBy("timestamp", "desc")
-								.get()
-								.then(
+								.onSnapshot(
 									snapshot => {
 										snapshot.forEach(
 											x => {
@@ -53,8 +52,7 @@ export default class Feed extends React.Component {
 		else if (this.props.query)
 			this.props.query
 				.orderBy('timestamp', 'desc')
-				.get()
-				.then(
+				.onSnapshot(
 					snapshot => {
 						var p = []
 						snapshot.forEach(

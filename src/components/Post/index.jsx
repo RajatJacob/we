@@ -45,7 +45,8 @@ export default class Post extends React.Component {
 		firestore
 			.collection("users")
 			.doc(this.state.authorId)
-			.onSnapshot(
+			.get()
+			.then(
 				snapshot => {
 					this.setState(
 						{
@@ -58,6 +59,7 @@ export default class Post extends React.Component {
 	}
 
 	getTimeSincePost = () => {
+		if (!this.state.post) return
 		var t = this.state.post.timestamp ? (Math.floor(Date.now()) / 1000 - this.state.post.timestamp.seconds) : 0
 		var time = {}
 		time.s = t
@@ -127,6 +129,11 @@ export default class Post extends React.Component {
 			)
 	}
 
+	delete = () => {
+		const { firestore } = this.context
+		firestore.doc(this.props.post).delete()
+	}
+
 	init = () => {
 		this.getPostData()
 	}
@@ -174,7 +181,7 @@ export default class Post extends React.Component {
 						<div className={this.state.menu ? "active menu" : "menu"}>
 							<ul>
 								<li>Edit</li>
-								<li>Delete</li>
+								<li className="Delete" onClick={this.delete}>Delete</li>
 							</ul>
 						</div> :
 						null

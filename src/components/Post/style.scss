@@ -106,6 +106,12 @@
                 &:hover {
                     background: #FFFFFF22;
                 }
+
+                &.delete {
+                    &:hover {
+                        color: red;
+                    }
+                }
             }
         }
     }
