@@ -137,7 +137,7 @@ export default class Courses extends React.Component{
 				<div className="image">
 					<img src={this.state.subimage} alt={this.state.title} height="500px" width="100%"></img>
 				</div>
-						<Popup/>
+					
 					<div class="sidebar">
 						<div class="sidebar_item">
 						<h3>Facts</h3>
