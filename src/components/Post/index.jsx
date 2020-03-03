@@ -218,7 +218,7 @@ export default class Post extends React.Component {
 						<div className="picture">
 							{
 								this.state.post.img ?
-									<img src={this.state.post.img} alt={this.state.post.caption || this.state.post.title || null} /> :
+									<img src={this.state.post.img} alt={this.state.post.caption || this.state.post.title || "Photo"} /> :
 									null
 							}
 							{
