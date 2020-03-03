@@ -2,8 +2,10 @@ import React from 'react';
 import './styleform.scss';
 import CountrySelector from '../../components/CountrySelector';
 //import TextEditor from '../../components/TextEditor';
-import Upload from '../../components/Upload';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import Input from '../../components/Input';
+import { Redirect } from 'react-router-dom';
+
 
 export default class OrganisationForm extends React.Component {
 	static contextType = FirebaseContext;
@@ -46,6 +48,7 @@ export default class OrganisationForm extends React.Component {
 		firestore.collection("organisation").add(
 			this.state.form
 		)
+
 		event.preventDefault();
 	};
 
@@ -109,24 +112,29 @@ export default class OrganisationForm extends React.Component {
 				<div className="inner-wrap" >
 					<label>
 						<div >
-							Description.Tell us about your Organisation
+							Description.Tell us about your Organisation    
+							<div class="tooltip"> 𝒊 
+								<span class="tooltiptext">The principles of your organisation and mention how it can contribute to our family.</span>
+						  	</div>   		    
 							<textArea name={'description'} onChange={this.handleChange} required="required" />
-				
 					 	</div>
 					</label> <br />
 
 					<label>
-						Initiatives / Projects taken earlier
+						Initiatives / Projects taken earlier &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						<div class="tooltip"> 𝒊 
+							<span class="tooltiptext">Mention major and minor projects initiated by your organisation.</span>
+						</div>   		    
 						 <textArea name={'projects'} onChange={this.handleChange} required="required" />
 					</label> <br />
 
 					<label >
-						Views on gender equality
+						Views on gender equality		    
 						<textArea name={'gender'} onChange={this.handleChange} required="required" />
 					</label > <br />
 				</div>
-
-				<input type="submit" value="Submit" onClick={this.handleUpload} />
+				<Input label="SUBMIT" type="submit" onClick={this.handleSubmit}  Link to={'/Display'}/>
+				{/*<input type="submit" value="Submit" onClick={this.handleUpload} />*/}
 
 			</form>
 		);
