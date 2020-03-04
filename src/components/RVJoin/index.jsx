@@ -24,9 +24,9 @@ class RVJoin extends React.Component {
                   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                   <a href="/resume"  align="left" >CREATE A RESUME</a><br/>
                   <br/>
-                  <a href="/resume/edit"  align="left" >EDIT YOUR RESUME</a><br/>
+                  <a href="/edit"  align="left" >EDIT YOUR RESUME</a><br/>
                   <br/>
-                  <a href="/resume/view" >VIEW RESUME</a>
+                  <a href="/view" >VIEW RESUME</a>
                   </div>
                  </Card>
                  

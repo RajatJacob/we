@@ -87,7 +87,7 @@ this.baseState = this.state;
       } = this.context;
       
       console.log(this.state.form)
-      console.log('Submitted');
+      alert('Submitted');
       
       
       firestore.collection("users").doc(auth.currentUser.uid).update(
@@ -116,7 +116,7 @@ this.baseState = this.state;
  
   var j = document.forms["resume"]["contactnumber"].value;
   if (x === ""||y === ""||z === ""||a === ""||b === ""||c === ""||d === ""||e === ""||f === ""||g === ""||h === ""||j === "") {
-    
+    alert("Required field must be filled out");
     return true;
 
   }
@@ -128,7 +128,7 @@ this.baseState = this.state;
    {//const {firestore} = this.context;
       //firestore.collection("users").doc(DOCID).
       if(this.state.Submitted)
-        return <Redirect to = "/resume/view" />
+        return <Redirect to = "/view" />
       return(
          <form name="resume" class="form-style-2" onSubmit={this.handleSubmit}>
          <h1>Resumé</h1>
