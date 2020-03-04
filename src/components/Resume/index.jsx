@@ -145,7 +145,7 @@ this.baseState = this.state;
          </label>
          <br/>
          <label>
-         Date of Birth
+         Date 
          <input   name="date" type="date" required="required" onChange={this.handleChange}/>
          </label>
          <br/>

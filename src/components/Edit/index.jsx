@@ -144,13 +144,15 @@ console.log(auth.currentUser)
          </label>
          <br/>
          <label>
-         Date of Birth
-         <input   name="date" type="text" placeholder={this.state.user.date} onChange={this.handleChange}/>
+         Date 
+         <input   name="date" type="date" placeholder={this.state.user.date} onChange={this.handleChange}/>
          </label>
          <br/>
          <label>
          Gender
-         <input   name="gender" type="text"  placeholder={this.state.user.gender} onChange={this.handleChange}/>
+         M<input  name="gender" type="radio" id="radios-0" value="Male"   onChange={this.handleChange}/>
+         F<input  name="gender" type="radio" id="radios-1" value="Female"   onChange={this.handleChange}/>
+         Others<input  name="gender" type="radio" id="radios-2"   value="Others" onChange={this.handleChange}/>
          </label><br/>
          <label>
          Nationality 
@@ -210,7 +212,7 @@ console.log(auth.currentUser)
          <div class="inner-wrap">
          <label>
          Jobs Interested in 
-         <input  name="jbin" type="text" placeholder={this.state.user.jbin} onChange={this.handleChange}/>
+         <JobSelector name="jbin" placeholder={this.state.user.jbin}  onChange={this.handleChange}/>
        
 
 
@@ -224,7 +226,12 @@ console.log(auth.currentUser)
          <div class="inner-wrap">
          <label>
          Reference Person
-         <input  name="contactpersontitle" type="text" placeholder={this.state.user.contactpersontitle} onChange={this.handleChange}/>
+         <select class="dropdown" name="contactpersontitle"   onChange={this.handleChange}>
+            <option >Select</option>
+            <option value="Mr.">Mr</option><br/>
+            <option value="Mrs.">Mrs</option><br/>
+            <option value="Miss">Miss</option><br/>
+         </select>
          
          <input  name="contactperson" type="text" placeholder={this.state.user.contactperson}  onChange={this.handleChange}/>
          
