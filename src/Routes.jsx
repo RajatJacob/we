@@ -40,9 +40,10 @@ export default class Routes extends React.Component {
 					<Route exact path="/courses" component={VocationalCourses} />
 					<Route exact path="/donation" component={Donation} />
 					<Route exact path="/Organisation" component={Organisation} />
-					<Route exact path="/OrganisationForm" component={OrganisationForm} />
+					<Route exact path="/Organisation/Register" component={OrganisationForm} />
+					<Route exact path="/Organisation/Register/Registered" component={Display} />
 					<Route exact path="/payment" component={Payment} />
-					<Route exact path="/display" component={Display} />
+					<Route exact path="/Organisation/Register/Registered" component={Display} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

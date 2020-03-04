@@ -14,7 +14,7 @@ export default class Organisation extends React.Component{
             <div className="Organisation">
             
             <div className="background">
-            
+            </div>
             <Card><GridContainer>
            <Container>
           
@@ -23,7 +23,7 @@ export default class Organisation extends React.Component{
             </p>
             </Container>
             <Container>
-            <Button Link to={'/OrganisationForm'}>Form</Button>
+            <Button Link to={'Organisation/Register'}>Form</Button>
             </Container>
             </GridContainer>
             </Card>
@@ -37,7 +37,7 @@ export default class Organisation extends React.Component{
             </Card>
             </Container>
            
-            </div>
+           
             </div>
 
         );

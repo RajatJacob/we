@@ -5,7 +5,7 @@ import Button from '../Button';
 import Link from 'react-router-dom';
 
 import Container from '../Container';
-import GridContainer from '../GridContainer';
+
 
  
 export default class Display extends React.Component
@@ -14,7 +14,6 @@ export default class Display extends React.Component
     {
         return(
             <div className="Display">
-           
             <div className="background">
             <Container>
             <Button Link to={'/Organisation'} >Back</Button>

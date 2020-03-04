@@ -14,9 +14,8 @@ export default class OrganisationForm extends React.Component {
 		this.state = {
 			form: {
 
-			}
-
-
+			},
+			submitted: false
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,12 +43,15 @@ export default class OrganisationForm extends React.Component {
 		const {
 			firestore
 		} = this.context;
-		alert('Submitted');
+		event.preventDefault();
+		console.log(this.state.form)
 		firestore.collection("organisation").add(
 			this.state.form
+		).then(
+			() => { 
+				this.setState({submitted: true})
+			}
 		)
-
-		event.preventDefault();
 	};
 
 
@@ -63,7 +65,9 @@ export default class OrganisationForm extends React.Component {
 	// 	});
 	// }
 	render() {
-
+		if(this.state.submitted) return (
+			<Redirect to="Register/Registered" />
+		)
 		return (
 			<form className="form-style" onSubmit={this.handleSubmit} >
 				<h1> Organisation Form </h1> <br />
@@ -133,7 +137,7 @@ export default class OrganisationForm extends React.Component {
 						<textArea name={'gender'} onChange={this.handleChange} required="required" />
 					</label > <br />
 				</div>
-				<Input label="SUBMIT" type="submit" onClick={this.handleSubmit}  Link to={'/Display'}/>
+				<Input label="SUBMIT" type="submit" onClick={this.handleSubmit}/>
 				{/*<input type="submit" value="Submit" onClick={this.handleUpload} />*/}
 
 			</form>
