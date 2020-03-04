@@ -127,7 +127,7 @@ console.log(auth.currentUser)
    {//const {firestore} = this.context;
       //firestore.collection("users").doc(DOCID).
       if(this.state.Submitted)
-        return <Redirect to = "/view" />
+        return <Redirect to = "/resume/view" />
       return(
          <form name="resume" class="form-style-2" onSubmit={this.handleSubmit}>
          <h1>Resumé</h1>

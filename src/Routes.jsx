@@ -39,10 +39,10 @@ export default class Routes extends React.Component {
 					<Route path="/user/:username" component={UserProfile} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
-					<Route path="/Edit" component={Edit} />
-					<Route path="/resume" component={Resume} />
+					<Route exact path="/resume/Edit" component={Edit} />
+					<Route exact path="/resume" component={Resume} />
 					<Route path="/RVJoin" component={RVJoin} />
-					<Route path="/View" component={View} />
+					<Route exact path="/resume/View" component={View} />
 					<Route path="/Feedback" component={Feedback} />
 					<Route exact path="/courses" component={VocationalCourses} />
 					<Route exact path="/donation" component={Donation} />
