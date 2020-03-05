@@ -7,7 +7,7 @@ import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Alert from '../../components/Alert';
-
+import UserList from '../../components/UserList';
 
 export default class Search extends React.Component {
 
@@ -17,17 +17,35 @@ export default class Search extends React.Component {
         super(props)
         this.state = {
             search: "",
+            result: [],
             alert: null,
             proceed: false
         }
     }
 
-    search = text => {
+    search = e => {
+        e.preventDefault();
+        this.setState({ search: e.target.value, result: [] })
+        const text = e.target.value
         const { firestore } = this.context
         firestore
             .collection("users")
             .where("username", ">=", text)
-            .where("username", "<=", text + "")
+            .where("username", "<=", text + '\uf8ff')
+            .get()
+            .then(
+                snapshot => {
+                    var result = [];
+                    snapshot.forEach(
+                        x => {
+                            result.push(firestore.doc(x.ref.path))
+                            this.setState({ result: result })
+                        }
+                    )
+                    console.log(this.state.result)
+                }
+            )
+
     }
 
     render() {
@@ -37,7 +55,8 @@ export default class Search extends React.Component {
                 </div>
                 <Card>
                     <Container>
-                        <Input label="Search" icon={<FontAwesomeIcon icon={faSearch} />} onChange={e => this.setState({ search: e.target.value })} value={this.state.search} required />
+                        <Input label="Search" icon={<FontAwesomeIcon icon={faSearch} />} onChange={this.search
+                        } value={this.state.search} required />
                         {
                             this.state.alert ?
                                 <Alert type={this.state.alert.type} title={this.state.alert.title}>
@@ -45,6 +64,7 @@ export default class Search extends React.Component {
                                 </Alert> :
                                 null
                         }
+                        <UserList users={this.state.result} />
                     </Container>
                 </Card>
 
