@@ -1,28 +1,24 @@
-
 .Card {
-    background: white;
-    color: #222222;
-    
-    border-radius: 0.5em;
-    
-    margin: 1em;
-    border: 10px;
-
-    
-    
+  background: white;
+  color: #222222;
+  border-radius: 0.5em;
+  margin: 1em;
+  border: 10px;
 }
 
-body{
-    background: white;
-
+body {
+  background: white;
 }
-.colorr{
+
+.colorr {
   color: white;
 }
-.colorrs{
-  color:#003878;
+
+.colorrs {
+  color: #003878;
 }
-.col{
+
+.col {
   background-color: #002b5c;
   height: 30px;
   padding-left: 1px;
@@ -32,37 +28,35 @@ body{
 }
 
 input[type="button"],
-input[type="submit"]{
-    background: #2A88AD;
-    padding: 8px 20px 8px 20px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-    /*font: normal 30px 'Bitter', serif;*/
-    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    border: 1px solid #257C9E;
-    font-size: 15px;
-    width: 100px
+input[type="submit"] {
+  background: #2a88ad;
+  padding: 8px 20px 8px 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  /*font: normal 30px 'Bitter', serif;*/
+  -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  border: 1px solid #257c9e;
+  font-size: 15px;
+  width: 100px;
 }
 input[type="button"],
-input[type="submit"]:hover{
-    background: #2A6881;
-    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-    cursor: pointer;
+input[type="submit"]:hover {
+  background: #2a6881;
+  -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+  -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+  cursor: pointer;
 }
 
-input:focus,
-  {
-    outline: 2px solid aqua;
+input:focus {
+  outline: 2px solid aqua;
 }
-
 
 @media print {
   .page {
@@ -73,17 +67,15 @@ input:focus,
     background: initial !important;
     box-shadow: none !important;
     padding-left: 5em;
-    //page-break-after: always;
-  }
-  
-  .NavigationBar{
-    display: none;
-
-  }
-  input{
-    display: none;
+    page-break-after: always;
   }
 
+  .NavigationBar {
+    display: none;
+  }
+  input {
+    display: none;
+  }
 }
 
 .pdf {
@@ -99,15 +91,6 @@ input:focus,
 
 .tab:last-of-type {
   page-break-after: avoid;
-}
-
-div.page-break {
-  
-}
-
-
-h1 {
-  
 }
 
 h1,
