@@ -24,40 +24,48 @@ export default class Post extends React.Component {
 
 	getPostData = () => {
 		const { firestore } = this.context
-		firestore
-			.doc(this.props.post)
-			.onSnapshot(
-				snapshot => {
-					this.setState(
-						{
-							post: snapshot.data(),
-							authorId: this.props.post.split('/')[1]
-						}
-					)
-					this.getAuthorData()
-					this.getTimeSincePost()
-				}
-			)
+		this.setState(
+			{
+				unsubscribe:
+					firestore
+						.doc(this.props.post)
+						.onSnapshot(
+							snapshot => {
+								this.setState(
+									{
+										post: snapshot.data(),
+										authorId: this.props.post.split('/')[1]
+									}
+								)
+								this.getAuthorData()
+								this.getTimeSincePost()
+							}
+						)
+			}
+		)
 	}
 
 	getAuthorData = () => {
 		const { firestore, auth } = this.context
-		firestore
-			.collection("users")
-			.doc(this.state.authorId)
-			.onSnapshot(
-				snapshot => {
-					this.setState(
-						{
-							author: snapshot.data(),
-							self: this.state.authorId === auth.currentUser.uid
-						}
-					)
-				}
-			)
+		if (this.state.authorId)
+			firestore
+				.collection("users")
+				.doc(this.state.authorId)
+				.get()
+				.then(
+					snapshot => {
+						this.setState(
+							{
+								author: snapshot.data(),
+								self: this.state.authorId === auth.currentUser.uid
+							}
+						)
+					}
+				)
 	}
 
 	getTimeSincePost = () => {
+		if (!this.state.post) return
 		var t = this.state.post.timestamp ? (Math.floor(Date.now()) / 1000 - this.state.post.timestamp.seconds) : 0
 		var time = {}
 		time.s = t
@@ -127,6 +135,23 @@ export default class Post extends React.Component {
 			)
 	}
 
+	delete = () => {
+		const { firestore } = this.context
+		firestore.doc(this.props.post).delete().then(
+			() => this.setState({ menu: false })
+		)
+	}
+
+	linkify = text => {
+		var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+		var regex = new RegExp(expression);
+		let parts = text.split(regex)
+		for (let i = 1; i < parts.length; i += 2) {
+			parts[i] = <a className="contentLink" key={'link' + i} href={parts[i]} target="_blank" rel="noopener noreferrer">{parts[i]}</a>
+		}
+		return parts
+	}
+
 	init = () => {
 		this.getPostData()
 	}
@@ -136,13 +161,17 @@ export default class Post extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log(prevProps)
 		if (this.props.post !== prevProps.post)
 			this.init()
 	}
 
+	componentWillUnmount() {
+		this.state.unsubscribe()
+	}
+
 	render() {
-		return (
+		if (!this.state.post) return null
+		else return (
 			<div className="Post" onDoubleClick={this.like}>
 				<div className="info">
 					{
@@ -158,7 +187,11 @@ export default class Post extends React.Component {
 					<div className="action">
 						{
 							this.state.timeSince ?
-								<div className="timeSince" title={new Date(this.state.post.timestamp.seconds * 1000).toString()}>
+								<div className="timeSince" title={
+									new Date(
+										this.state.post.timestamp.seconds * 1000
+									).toString()
+								}>
 									{this.state.timeSince}
 								</div> : null
 						}
@@ -175,7 +208,7 @@ export default class Post extends React.Component {
 						<div className={this.state.menu ? "active menu" : "menu"}>
 							<ul>
 								<li>Edit</li>
-								<li>Delete</li>
+								<li className="Delete" onClick={this.delete}>Delete</li>
 							</ul>
 						</div> :
 						null
@@ -185,7 +218,7 @@ export default class Post extends React.Component {
 						<div className="picture">
 							{
 								this.state.post.img ?
-									<img src={this.state.post.img} alt={this.state.post.caption || this.state.post.title || null} /> :
+									<img src={this.state.post.img} alt={this.state.post.caption || this.state.post.title || "Photo"} /> :
 									null
 							}
 							{
@@ -200,7 +233,7 @@ export default class Post extends React.Component {
 					(this.state.post.title || this.state.post.content) ?
 						<Container>
 							<h3>{this.state.post.title}</h3>
-							{this.state.post.content}
+							{this.linkify(this.state.post.content || "")}
 						</Container> : null
 				}
 				<div className="reactions">

@@ -39,7 +39,12 @@ export default class UserProfile extends React.Component {
 						unsubscribe:
 							firestore.collection("users")
 								.doc(uid)
-								.onSnapshot(doc => resolve(doc.data()))
+								.onSnapshot(
+									snapshot => {
+										this.setState({ user: snapshot.data() })
+										resolve(snapshot.data())
+									}
+								)
 					}
 				)
 			}
@@ -138,7 +143,6 @@ export default class UserProfile extends React.Component {
 		this.getFollowers(uid)
 			.then(
 				followers => {
-					console.log(followers)
 					this.setState(
 						{
 							followers: followers,
@@ -163,6 +167,10 @@ export default class UserProfile extends React.Component {
 			prevProps.match.params.username !== this.props.match.params.username
 		)
 			this.init()
+	}
+
+	componentWillUnmount() {
+		this.state.unsubscribe()
 	}
 
 	init = () => {
@@ -205,95 +213,109 @@ export default class UserProfile extends React.Component {
 			<div className="UserProfile">
 				{
 					this.state.done ?
-						<Card noContainer>
-							{
-								this.state.alert === "noUser" ?
-									<Container>
-										<Alert type="danger" title="Invalid user!" />
-									</Container> :
-									<Banner>
-										{
-											this.state.user.photoURL ?
-												<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
-												<div className="profilePicture">
-													<FontAwesomeIcon icon={faUser} />
-												</div>
-										}
-										<h1>
-											{this.state.user.name}
-										</h1>
-										<Link className="username" to={"/user/" + this.state.user.username}>
-											{
-												"@" + (this.state.user.username || "")
-											}
-										</Link>
-									</Banner>
-							}
-							<Container>
+						<>
+							<Card noContainer>
 								{
-									this.state.user.bio ?
-										<div className="bio">
+									this.state.alert === "noUser" ?
+										<Container>
+											<Alert type="danger" title="Invalid user!" />
+										</Container> :
+										<Banner>
 											{
-												this.state.user.bio
+												this.state.user.photoURL ?
+													<img src={this.state.user.photoURL} alt="" className="profilePicture" /> :
+													<div className="profilePicture">
+														<FontAwesomeIcon icon={faUser} />
+													</div>
 											}
-										</div> :
-										null
+											<h1>
+												{this.state.user.name}
+											</h1>
+											<Link className="username" to={"/user/" + this.state.user.username}>
+												{
+													"@" + (this.state.user.username || "")
+												}
+											</Link>
+										</Banner>
 								}
 								<Container>
 									{
-										this.state.self ?
-											<Button to={
-												this.props.match.url + "/settings"
-											} icon={<FontAwesomeIcon icon={faCog} />}>
-												Settings
-									</Button> :
-											<Button active={this.state.followChange} onClick={
-												this.follow
-											} >
+										this.state.user.bio ?
+											<div className="bio">
 												{
-													this.state.isFollowing ?
-														"Unfollow" :
-														"Follow"
+													this.state.user.bio
 												}
-											</Button>
+											</div> :
+											null
 									}
-									<div className="tab-container">
-										<NavLink to={"/user/" + this.state.user.username} className="tab" activeClassName="active">
-											<div className="number">
-												{this.state.posts ? this.state.posts.length : 0}
-											</div>
-											<div className="title">
-												{
-													this.state.posts ? this.state.posts.length === 1 ? "Post" :
-														"Posts" : "Posts"
-												}
-											</div>
-										</NavLink>
-										<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
-											<div className="number">
-												{this.state.followers ? this.state.followers.length : 0}
-											</div>
-											<div className="title">
-												{
-													this.state.followers ? this.state.followers.length === 1 ? "Follower" :
-														"Followers" : "Followers"
-												}
-											</div>
-										</NavLink>
-										<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
-											<div className="number">
-												{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
-											</div>
-											<div className="title">Following</div>
-										</NavLink>
-									</div>
+									<Container>
+										{
+											this.state.self ?
+												<Button
+													to={
+														this.props.match.url + "/settings"
+													}
+													icon={<FontAwesomeIcon icon={faCog} />}>
+													Settings
+											</Button> :
+												<Button active={this.state.followChange} onClick={
+													this.follow
+												} >
+													{
+														this.state.isFollowing ?
+															"Unfollow" :
+															"Follow"
+													}
+												</Button>
+										}
+										<div className="tab-container">
+											<NavLink to={this.props.match.url} className="tab" activeClassName="active"
+												isActive={
+													(match, location) => {
+														if (!location) return false;
+														const { pathname } = location;
+														console.log(pathname);
+														return pathname === this.props.match.url;
+													}
+												}>
+												<div className="number">
+													{this.state.posts ? this.state.posts.length : 0}
+												</div>
+												<div className="title">
+													{
+														this.state.posts ? this.state.posts.length === 1 ? "Post" :
+															"Posts" : "Posts"
+													}
+												</div>
+											</NavLink>
+											<NavLink to={this.props.match.url + "/followers"} className="tab" activeClassName="active">
+												<div className="number">
+													{this.state.followers ? this.state.followers.length : 0}
+												</div>
+												<div className="title">
+													{
+														this.state.followers ? this.state.followers.length === 1 ? "Follower" :
+															"Followers" : "Followers"
+													}
+												</div>
+											</NavLink>
+											<NavLink to={this.props.match.url + "/following"} className="tab" activeClassName="active">
+												<div className="number">
+													{this.state.user ? this.state.user.following ? this.state.user.following.length : 0 : 0}
+												</div>
+												<div className="title">Following</div>
+											</NavLink>
+										</div>
+									</Container>
 								</Container>
+							</Card>
+							<Container>
 								<Switch>
-									<Route exact path={this.props.match.path} >
+									<Route exact path={this.props.match.url} >
 										<h2>Posts</h2>
 										<Feed query={this.state.feedQuery} />
 									</Route>
-									<Route exact path={this.props.match.path + "/followers"} >
+									<Route exact path={this.props.match.url + "/followers"} >
 										<h2>Followers</h2>
 										{
 											this.state.followers ?
@@ -301,7 +323,7 @@ export default class UserProfile extends React.Component {
 												null
 										}
 									</Route>
-									<Route exact path={this.props.match.path + "/following"} >
+									<Route exact path={this.props.match.url + "/following"} >
 										<h2>Following</h2>
 										{
 											this.state.user.following ?
@@ -320,7 +342,7 @@ export default class UserProfile extends React.Component {
 									</Route>
 								</Switch>
 							</Container>
-						</Card> :
+						</> :
 						<Loader />
 				}
 			</div >

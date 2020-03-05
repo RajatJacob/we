@@ -78,7 +78,7 @@ export default class CreatePost extends React.Component {
 			<Redirect to="/login" />
 		)
 		if (this.state.done) return (
-			<Redirect to="/feed" />
+			<Redirect to={"/user/" + auth.currentUser.displayName} />
 		)
 		return (
 			<div className="CreatePost">

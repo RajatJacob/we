@@ -106,6 +106,12 @@
                 &:hover {
                     background: #FFFFFF22;
                 }
+
+                &.delete {
+                    &:hover {
+                        color: red;
+                    }
+                }
             }
         }
     }
@@ -117,6 +123,14 @@
 
         img {
             width: 100%;
+            height: auto;
+            position: relative;
+            display: block;
+            font-weight: 600;
+            line-height: 5em;
+            text-align: center;
+            color: white;
+            background-color: #222222;
         }
 
         .caption {
@@ -163,6 +177,15 @@
             .number {
                 text-align: right;
             }
+        }
+    }
+
+    a.contentLink {
+        color: $primaryColor;
+        transition: all 500ms ease;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

@@ -1,20 +1,38 @@
 .UserItem {
     padding: 0.5em;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: all 500ms ease;
+
+    &:hover {
+        background: #00000011;
+    }
 
     .profilePicture {
-        width: 3em;
-        height: 3em;
-        line-height: 3em;
+        width: 5em;
+        height: 5em;
+        line-height: 5em;
         font-size: 2em;
         padding: 0.05em;
         margin: 0.5em auto;
         border-radius: 100%;
     }
 
-    .Button {
-        transform: scale(0.5);
+    .user {
+        &>* {
+            display: block;
+        }
+
+        .name {
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        .username {
+            font-size: 0.95em;
+            font-weight: 200;
+        }
     }
 }
