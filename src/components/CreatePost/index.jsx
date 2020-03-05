@@ -82,6 +82,7 @@ export default class CreatePost extends React.Component {
 		)
 		return (
 			<div className="CreatePost">
+				<div className="background"></div>
 				<Card>
 					<h1>New Post</h1>
 					<Container>
