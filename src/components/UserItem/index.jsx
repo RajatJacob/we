@@ -9,37 +9,39 @@ import Loader from '../Loader';
 export default class UserItem extends React.Component {
 	static contextType = FirebaseContext;
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			user: {},
-			done: false
-		}
+	state = {
+		user: {},
+		done: false
 	}
 
 	componentDidMount() {
 		this.init()
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.user !== this.props.user)
+			this.init()
+	}
+
 	init = () => {
 		const { auth } = this.context
-		if (!this.state.done)
-			this.props.user
-				.get()
-				.then(
-					doc => {
-						if (doc.exists) {
-							this.setState(
-								{ uid: doc.id, user: doc.data(), done: true, self: auth.currentUser.uid === doc.id }
-							)
-						}
+		this.setState({ done: false })
+		this.props.user
+			.get()
+			.then(
+				doc => {
+					if (doc.exists) {
+						this.setState(
+							{ uid: doc.id, user: doc.data(), done: true, self: auth.currentUser.uid === doc.id }
+						)
 					}
-				)
-				.finally(
-					() => {
-						this.setState({ done: true })
-					}
-				)
+				}
+			)
+			.finally(
+				() => {
+					this.setState({ done: true })
+				}
+			)
 	}
 
 	render() {
@@ -57,9 +59,17 @@ export default class UserItem extends React.Component {
 										</div>
 								}
 							</div>
-							{
-								"@" + this.state.user.username
-							}
+							<div className="user">
+								{
+									this.state.user.name ?
+										<span className="name">
+											{this.state.user.name}
+										</span> : null
+								}
+								{
+									<span className="username">{"@" + this.state.user.username}</span>
+								}
+							</div>
 						</Link>
 						:
 						<Loader />
