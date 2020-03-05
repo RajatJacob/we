@@ -5,6 +5,11 @@ import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import Feed from './components/Feed';
 import Card from './components/Card';
+import Edit from './components/Edit';
+import Resume from './components/Resume';
+import Feedback from './components/Feedback';
+import RVJoin from './components/RVJoin';
+import View from './components/View';
 import Container from './components/Container';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
@@ -35,6 +40,11 @@ export default class Routes extends React.Component {
 					<Route path="/logout" component={Logout} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route exact path="/courses" component={VocationalCourses} />
+					<Route exact path="/resume/Edit" component={Edit} />
+					<Route exact path="/resume" component={Resume} />
+					<Route path="/RVJoin" component={RVJoin} />
+					<Route exact path="/resume/View" component={View} />
+					<Route path="/Feedback" component={Feedback} />
 					<Route exact path="/donation" component={Donation} />
 					<Route exact path="/payment" component={Payment} />
 					<Route path="*">
