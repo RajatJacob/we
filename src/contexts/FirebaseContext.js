@@ -26,7 +26,7 @@ export default class FirebaseContextProvider extends React.Component {
 		this.state = {
 			firebase: firebase,
 			firestore: firebase.firestore(),
-			storage: firebase.storage(),
+			firestoreTimestamp: firebase.firestore.Timestamp,
 			auth: firebase.auth(),
 			storage: firebase.storage(),
 			isLoggedIn: false,
@@ -142,26 +142,172 @@ export default class FirebaseContextProvider extends React.Component {
 						)
 					}
 				)
+			},
+			getFollowers: (uid) => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid) reject({ message: "Invalid UID" })
+						this.state.firestore
+							.collection("users")
+							.where(
+								"following",
+								"array-contains",
+								this.state.firestore
+									.collection("users")
+									.doc(uid)
+							)
+							.get()
+							.then(
+								snapshot => {
+									var followers = []
+									snapshot.forEach(
+										doc => {
+											followers
+												.push(
+													this.state.firestore.collection("users").doc(doc.id)
+												)
+										}
+									)
+									resolve(followers)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			getFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.firestore
+							.collection("users")
+							.doc(this.state.auth.currentUser.uid)
+							.get()
+							.then(
+								doc => {
+									resolve(doc.data().following || [])
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			isFollowing: uid => {
+				return new Promise(
+					(resolve, reject) => {
+						if (!uid || !this.state.auth.currentUser)
+							reject(
+								{
+									message: "Invalid UID"
+								}
+							)
+						this.state.getFollowing(this.state.auth.currentUser.uid)
+							.then(
+								following => {
+									var f = false
+									following.forEach(
+										x => {
+											f = f || x.id === this.state.firestore
+												.collection("users")
+												.doc(uid).id
+										}
+									)
+									resolve(f)
+								}
+							)
+							.catch(
+								err => {
+									reject(err)
+								}
+							)
+					}
+				)
+			},
+			follow: uid => {
+				var f = []
+				return new Promise(
+					(resolve, reject) => {
+						this.state.isFollowing(uid).then(
+							isFollowing => {
+								if (!uid || !this.state.auth.currentUser)
+									reject(
+										{
+											message: "Invalid UID"
+										}
+									)
+								this.state.getFollowing(this.state.auth.currentUser.uid)
+									.then(
+										following => {
+											f = following
+											if (!isFollowing) {
+												f.push(
+													this.state.firestore.collection("users").doc(uid)
+												)
+											}
+											else {
+												const u = this.state.firestore
+													.collection("users")
+													.doc(uid)
+												f.forEach(
+													(x, i) => {
+														if (x.id === u.id)
+															f.splice(i, 1)
+													}
+												)
+											}
+											resolve(
+												this.state.firestore
+													.collection("users")
+													.doc(this.state.auth.currentUser.uid)
+													.update(
+														{
+															following: f
+														}
+													)
+											)
+										}
+									)
+							}
+						)
+					}
+				)
 			}
 		}
 
 		this.state.auth.onAuthStateChanged(
 			u => {
+				var data = {}
+				var username, name, photoURL
 				this.setState({ isLoggedIn: (u) ? true : false })
 				if (u) {
 					let dbu = {}
 					this.state.firestore.collection("users").doc(u.uid).get().then(
 						doc => {
 							dbu = doc.data()
-						}
-					)
-					u.updateProfile({
-						displayName: dbu.displayName || u.displayName.toLowerCase().replace(" ", "-")
-					}).then(
-						() => {
-							this.state.firestore.collection("users").doc(u.uid).update(
-								{
-									username: dbu.displayName || u.displayName || ""
+							u.updateProfile({
+								displayName: dbu.displayName || u.displayName.toLowerCase().replace(" ", "-")
+							}).then(
+								() => {
+									username = dbu.username || u.displayName || ""
+									name = dbu.name || username
+									photoURL = u.photoURL
+									if (username) data["username"] = username
+									if (name) data["name"] = name
+									if (photoURL) data["photoURL"] = photoURL
+									this.state.firestore.collection("users").doc(u.uid).update(data)
 								}
 							)
 						}

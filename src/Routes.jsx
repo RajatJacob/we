@@ -1,66 +1,57 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { FirebaseContext } from './contexts/FirebaseContext';
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
+import Feed from './components/Feed';
 import Card from './components/Card';
+import Edit from './components/Edit';
+import Resume from './components/Resume';
+import Feedback from './components/Feedback';
+import RVJoin from './components/RVJoin';
+import View from './components/View';
+import Container from './components/Container';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import ForgotPassword from './pages/ForgotPassword';
 import VocationalCourses from './pages/VocationalCourses';
-/*import Computer from './pages/VocationalCourses/BasicComputer';
-import Sanitation from './pages/VocationalCourses/Sanitation';
-import Bakery from './pages/VocationalCourses/Bakery';
-import Elderly from './pages/VocationalCourses/Elderly';
-import Haircare from './pages/VocationalCourses/Haircare';
-import Childhood from './pages/VocationalCourses/Childhood';
-import Ayurveda from './pages/VocationalCourses/Ayurveda';
-import English from './pages/VocationalCourses/English';
-import Design from './pages/VocationalCourses/Design';*/
+import Donation from './pages/Donation';
+import Payment from './pages/Payment';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import CreatePost from './components/CreatePost';
 import Courses from './components/Courses';
  
+
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
 	render() {
-		const { auth } = this.context
 		return (
 			<div className="Content">
 				<Switch>
-					<Route exact path="/">
-						<Card>
-							<h1>Home</h1>
-						</Card>
+					<Route exact path="/" component={Home} />
+					<Route path="/signup" component={SignUp} />
+					<Route path="/login" component={Login} />
+					<Route path="/feed">
+						<Container>
+							<h1>Feed</h1>
+							<Feed query="feed" />
+						</Container>
 					</Route>
-					<Route exact path="/user">
-						{
-							auth.currentUser ?
-								<Redirect to={"/user/" + auth.currentUser.displayName} /> :
-								<Redirect to="/login" />
-
-						}
-					</Route>
-					<Route exact path="/signup" component={SignUp} />
-					<Route exact path="/login" component={Login} />
+					<Route path="/create" component={CreatePost} />
 					<Route path="/user/:username" component={UserProfile} />
-					<Route exact path="/logout" component={Logout} />
-					<Route exact path="/forgotpassword" component={ForgotPassword} />
+					<Route path="/logout" component={Logout} />
+					<Route path="/forgotpassword" component={ForgotPassword} />
+					<Route exact path="/courses" component={VocationalCourses} />
+					<Route exact path="/resume/Edit" component={Edit} />
+					<Route exact path="/resume" component={Resume} />
+					<Route path="/RVJoin" component={RVJoin} />
+					<Route exact path="/resume/View" component={View} />
+					<Route path="/Feedback" component={Feedback} />
+					<Route exact path="/donation" component={Donation} />
+					<Route exact path="/payment" component={Payment} />
+					<Route exact path="/search" component={Search} />
 					<Route exact path="/Courses" component={VocationalCourses} />
-					{/*<Route exact path="/Courses/Computer" component={Computer} />
-					<Route exact path="/Courses/Sanitation" component={Sanitation} />
-					<Route exact path="/Courses/Bakery" 
-					component={Bakery} />
-					<Route exact path="/Courses/Elderly" 
-					component={Elderly} />
-					<Route exact path="/Courses/Haircare" 
-					component={Haircare} />
-					<Route exact path="/Courses/Childhood" 
-					component={Childhood} />
-					<Route exact path="/Courses/Design" 
-					component={Design} />
-					<Route exact path="/Courses/Ayurveda" 
-					component={Ayurveda} />
-					<Route exact path="/Courses/English" 
-					component={English} />*/}
 					<Route path="/Courses/:coursename" 
 					component={Courses} />
 					<Route path="*">

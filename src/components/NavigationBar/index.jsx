@@ -3,20 +3,21 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faUser, faKey, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 
 class NavigationBar extends React.Component {
 	static contextType = FirebaseContext;
 
 	render() {
-		const { isLoggedIn } = this.context;
+		const { isLoggedIn, auth } = this.context;
 		const links = (isLoggedIn) ?
 			[
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Search", url: "/search", icon: <FontAwesomeIcon icon={faSearch} /> },
+				{ name: "Create", url: "/create", icon: <FontAwesomeIcon icon={faPlus} /> },
 				{ name: "Feed", url: "/feed", icon: <FontAwesomeIcon icon={faBuffer} /> },
-				{ name: "User", url: "/user", icon: <FontAwesomeIcon icon={faUser} /> }
+				{ name: "User", url: "/user/" + auth.currentUser.displayName, icon: <FontAwesomeIcon icon={faUser} /> }
 			] : [
 				{ name: "Home", url: "/", icon: <FontAwesomeIcon icon={faHome} /> },
 				{ name: "Login", url: "/login", icon: <FontAwesomeIcon icon={faKey} /> }
