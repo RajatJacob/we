@@ -65,7 +65,7 @@ export default class Search extends React.Component {
                 <Card>
                     {
                         this.state.result.length === 0 ?
-                            "No Results :)" :
+                            <b>No Results :)</b> :
                             <UserList users={this.state.result} />
                     }
                 </Card>
