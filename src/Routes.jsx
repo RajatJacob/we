@@ -17,6 +17,7 @@ import CreatePost from './components/CreatePost';
 import Organisation from './components/Organisation';
 import Display from './components/Display';
 import OrganisationForm from './pages/OrganisationForm';
+import DisplayOrg from './components/DisplayOrg';
 
 export default class Routes extends React.Component {
 	static contextType = FirebaseContext
@@ -43,7 +44,7 @@ export default class Routes extends React.Component {
 					<Route exact path="/Organisation/Register" component={OrganisationForm} />
 					<Route exact path="/Organisation/Register/Registered" component={Display} />
 					<Route exact path="/payment" component={Payment} />
-					<Route exact path="/Organisation/Register/Registered" component={Display} />
+					<Route exact path="/Organisation/Family" component={DisplayOrg} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

@@ -1,0 +1,46 @@
+.DisplayOrg{
+    // @media screen and (max-width: 600px) {
+    //     .column {
+    //       width: 100%;
+    //       display: block;
+    //       margin-bottom: 20px;
+    //     }}
+        .background{
+          background-image: url('../../images/team.png');
+          background-attachment: fixed;
+          background-size: cover;
+          position: fixed;
+          object-fit: contain;
+         top: 0;
+         bottom: 0;
+         left: 0;
+         right: 0;
+          z-index: -1;
+      }
+       .Container{
+         font-size: 20px;
+      //    margin-top:4.5%;
+        .Button{
+            width: 18%;
+            text-align: center;
+        }
+    }
+    
+    .info{
+      display: inline;
+    }
+    .Card {
+        background: #00000099;
+        color: whitesmoke;
+        
+      }
+      .heading{
+        //font-style: italic;
+        padding-bottom: 0px;
+        color: whitesmoke;
+        font-family: Bans-Serif;
+        
+      }
+      
+}
+

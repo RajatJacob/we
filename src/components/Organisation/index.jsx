@@ -6,6 +6,7 @@ import Link from 'react-router-dom';
 import GridContainer from '../GridContainer';
 import Container from '../Container';
 
+
 export default class Organisation extends React.Component{
 
     render()
@@ -24,6 +25,7 @@ export default class Organisation extends React.Component{
             </Container>
             <Container>
             <Button Link to={'Organisation/Register'}>Form</Button>
+            <Button Link to={'Organisation/Family'}>Family</Button>
             </Container>
             </GridContainer>
             </Card>
