@@ -1,6 +1,8 @@
+@import "../../global/colors.scss";
+
 .Search {
   .background {
-    background: #80badb;
+    background: mix($primaryColor, #000000, 50%);
     position: fixed;
     top: 0;
     bottom: 0;
