@@ -1,11 +1,37 @@
 import React from 'react';
 import './style.scss';
+import { FirebaseContext } from '../../contexts/FirebaseContext'
 import Container from '../../components/Container';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
-import GridContainer from '../../components/GridContainer';
 
 class Home extends React.Component {
+	static contextType = FirebaseContext
+
+	state = {
+		feedback: []
+	}
+
+	getFeedbackInfo = () => {
+		const { firestore } = this.context
+		firestore.collection("Feedback").limit(2).get().then(
+			snapshot => {
+				var f = []
+				snapshot.forEach(
+					doc => f.push(doc.data())
+				)
+				console.log(f)
+				this.setState({ feedback: f, done: true })
+			}
+		)
+	}
+
+	componentDidMount() {
+		this.getFeedbackInfo()
+	}
+
+
+
 	render() {
 		return (
 			<div className="Home">
@@ -60,19 +86,6 @@ class Home extends React.Component {
 				</div>
 				<div className="content">
 					<Container>
-						<h1>Change the Future for Women and Girls</h1>
-						Around the world, women and girls face incredible challenges to their safety, success, and human rights.
-						With the right support and resources they have the potential to make lasting strides.
-						<GridContainer>
-							<Button to="/Organisation">Join Us</Button>
-							<Button to="/donation">Donate</Button>
-						</GridContainer>
-					</Container>
-				</div>
-				<div className="background center" id="rural">
-				</div>
-				<div className="content">
-					<Container>
 						<h1>Our Mission</h1>
 						This website will serve as an anchor for all women by remaining steadfast in publishing premium,
                         multimedia content so that it uplifts deeper understanding and connection,
@@ -80,6 +93,37 @@ class Home extends React.Component {
 					</Container>
 				</div>
 				<div className="background center" id="top" />
+				<div className="background center" id="rural">
+
+
+					<Card>
+
+						<h1>Feedback</h1>
+						<div class="feedback">
+							{
+
+								this.state.feedback.map(
+									f => {
+										return (
+											<div>
+												<Card>
+													<p>{f.feedback}</p>
+													<p align="left" > - {f.fname}</p>
+												</Card>
+											</div>
+
+										)
+									}
+								)
+
+							}
+						</div>
+						<Button to="/feedback">Give us your valuable feedback!</Button>
+
+					</Card>
+					<br/>
+					
+				</div>
 			</div>
 		);
 	}
