@@ -1,7 +1,29 @@
+@import "../../global/variables.scss";
+
 .Courses{
+	position: relative;
 	padding-top: 10vh;
 	background-color: white;
-}
+	@media screen and (orientation:portrait){
+		padding-bottom: $navSize;	
+		
+	}
+	@media only screen and (max-width: 600px) {
+		background-color: blue($color: #000000);
+
+	}
+	@media screen and (orientation: portrait){
+	.sidebar {
+    margin-left: -7px;
+    margin-right: 8%;
+	}
+	.video{
+		margin-top: -100px;
+		width:350px;
+		height:300px;
+		margin-bottom: 20%;
+	}
+}}
 #footer{
 	background-color: rgb(60, 90, 154);
 	margin-bottom: 0%;
@@ -49,20 +71,18 @@
   
   .tooltip .tooltiptext {
 	visibility: hidden;
-	
-	background-color: #555;
+	background-color: rgb(38, 102, 175);
 	color:black;
 	text-align: center;
 	border-radius: 6px;
 	padding: 5px 0;
 	width: 240px;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
+  	top: 100%;
+  	left: 50%;
+ 	margin-left: -60px;
 	position: absolute;
 	z-index: 1;
 	bottom: 125%;
-	
 	margin-left: -210px;
 	opacity: 0;
 	transition: opacity 0.3s;
@@ -73,6 +93,7 @@
 	position: absolute;
 	top: 100%;
 	left: 50%;
+	background-color: rgb(38, 102, 175);
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
@@ -82,6 +103,7 @@
   .tooltip:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
+	background-color: rgb(38, 102, 175);
   }
 .mod{
 	
@@ -126,13 +148,17 @@ margin-left: 2%;
 border-color: black;
 background-color: rgb(168, 199, 228);
 border-radius: 5%;
+@media screen and (orientation:portrait){
+	//padding-bottom: $navSize;	
+	margin-left: 20px;
+}
 }
 .sidebar_item{
 	h3{
 		font-family: Bree Serif;
 	}
 }
-.App a, .App a:visited {
+.Courses a, .Courses a:visited {
     color: white;
 }
 .side{
@@ -142,7 +168,7 @@ border-radius: 5%;
 	font-style: italic;
 }
 .vid {
-    margin-top: 4%;
+    margin-top: 20px;
     margin-left: -8%;
     width: 60%;
     height: 350px;
@@ -160,11 +186,9 @@ h2{
 	border-color: #4f98ca;
 	font-family: Bree Serif;
 	font-style: italic;
-	
-
 	margin-block-start: 0em;
 	border-left: 6px black;
-	color:black;
+	color: whitesmoke;
 }
 .App .Content {
 	padding: 0em 0;
@@ -267,6 +291,6 @@ a:link{
 	font-style: normal;
 }
 a:link:hover{
-	text-decoration: underline;
-	color: grey;
+	text-decoration: none;
+	color: black;;
 }

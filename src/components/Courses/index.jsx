@@ -2,11 +2,10 @@ import React from 'react';
 import './style.scss';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 import Button from '../../components/Button';
-import Alert from '../../components/Alert';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+//import Alert from '../../components/Alert';
 import { Link } from 'react-router-dom';
-import Popup from '../../components/Popup'
+
+
 
 export default class Courses extends React.Component{
 	static contextType = FirebaseContext;
@@ -29,8 +28,6 @@ export default class Courses extends React.Component{
 		enroll(this.state.title)
 		.then(
 			() => {
-				//alert("Enrolled successfully")
-				//this.setState({Popup:true})
 			}
 		)
 		.catch(
