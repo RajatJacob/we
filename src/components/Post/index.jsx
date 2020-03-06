@@ -207,7 +207,6 @@ export default class Post extends React.Component {
 					this.state.self ?
 						<div className={this.state.menu ? "active menu" : "menu"}>
 							<ul>
-								<li>Edit</li>
 								<li className="Delete" onClick={this.delete}>Delete</li>
 							</ul>
 						</div> :
