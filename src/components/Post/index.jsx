@@ -117,7 +117,7 @@ export default class Post extends React.Component {
 			if (this.state.post.likedBy)
 				do {
 					i = l.indexOf(u)
-					l.splice(i, 1)
+					if (i !== -1) l.splice(i, 1)
 				} while (i !== -1)
 		}
 		else // like
