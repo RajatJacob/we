@@ -6,6 +6,7 @@ export default class Button extends React.Component {
 	render() {
 		var className = "Button"
 		className += this.props.active ? " active" : ""
+		className += this.props.className ? " "+this.props.className : ""
 		const b = (
 			<div className={className} onClick={this.props.onClick}>
 				{

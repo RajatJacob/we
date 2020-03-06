@@ -2,6 +2,8 @@ import React from 'react';
 import './style.scss';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 import Button from '../../components/Button';
+import Alert from '../Alert';
+import { auth } from 'firebase';
 //import Alert from '../../components/Alert';
 //import { Link } from 'react-router-dom';
 
@@ -17,6 +19,12 @@ export default class Courses extends React.Component{
 			e=>{
 				//alert(e)
 				this.setState({isEnrolled: e})
+			}
+		)
+		.catch(
+			err=>{
+				//alert(err);
+				
 			}
 		)
 	}
@@ -93,6 +101,7 @@ export default class Courses extends React.Component{
 	}
 
 	render() {
+		const {auth} = this.context
 		console.log(this.state)
 		return(
 
@@ -103,18 +112,22 @@ export default class Courses extends React.Component{
 					</td>
 					<td width="10%"><a className="course" href="/Courses">Courses</a></td>
 					<td width="20%" className="td">
-					
+					{
+						auth.currentUser?
 						<Button className={this.state.isEnrolled?"enroll":""}  onClick={()=>this.enroll()}>
 						{
 							this.state.isEnrolled?
 							"Unenroll":
 							"Enroll"
 						}
-						<div class="tooltip">?
-  <span class="tooltiptext"><br/><br/>Please enroll to view the full content</span>
-</div>
-						</Button>
-		
+						<div className="tooltip">?
+							<span className="tooltiptext">
+							  <p className="full">Please enroll to view the full content</p>
+							</span>
+						</div>
+						</Button>:
+						<Button to="/login">Login</Button>
+					}
 						
 					</td>
 					</tr>
@@ -170,7 +183,7 @@ export default class Courses extends React.Component{
 							this.state.usefullinks ? 
 								this.state.usefullinks.map(
 									l => {
-										return (<li className="link"><a href={l.href}>{l.name}</a></li>)
+										return (<li className="link"><a className="points" href={l.href}>{l.name}</a></li>)
 									}
 								):null
 						}

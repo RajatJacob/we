@@ -8,10 +8,6 @@
 		padding-bottom: $navSize;	
 		
 	}
-	@media only screen and (max-width: 600px) {
-		background-color: blue($color: #000000);
-
-	}
 	@media screen and (orientation: portrait){
 	.sidebar {
     margin-left: 7px;
@@ -24,6 +20,12 @@
 		margin-right: 10px;
 		height:300px;
 		margin-bottom: 20%;
+	}
+	.course{
+		display: none;
+	}
+	.tooltip{
+		display: none;
 	}
 }}
 #footer{
@@ -68,12 +70,11 @@
 .tooltip {
 	position: relative;
 	display: inline-block;
-	border-bottom: 1px dotted black;
   }
   
   .tooltip .tooltiptext {
 	visibility: hidden;
-	background-color: rgb(38, 102, 175);
+	background-color: grayscale($color: #000080);
 	color:black;
 	text-align: center;
 	border-radius: 6px;
@@ -86,16 +87,16 @@
 	z-index: 1;
 	bottom: 125%;
 	margin-left: -210px;
+	margin-top:20px;
 	opacity: 0;
 	transition: opacity 0.3s;
   }
   
   .tooltip .tooltiptext::after {
-	content: "";
 	position: absolute;
 	top: 100%;
 	left: 50%;
-	background-color: rgb(38, 102, 175);
+	background-color: grayscale($color: #000080);
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
@@ -105,7 +106,8 @@
   .tooltip:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
-	background-color: rgb(38, 102, 175);
+	background-color: grayscale($color: #000080);
+
   }
 .mod{
 	
@@ -160,9 +162,8 @@ border-radius: 5%;
 		font-family: Bree Serif;
 	}
 }
-.Courses a, .Courses a:visited {
-    color: white;
-}
+
+
 .side{
 	padding-right: 20px;
 	padding-left: 20px;
@@ -215,8 +216,6 @@ table{
 	padding-right: 3px;
 	margin-left: 0px;
 	font-style: normal;
-//	background-color: rgba(13, 137, 194, 0.384);
-
  }
 .col{
 	margin-left: 0px;
@@ -240,6 +239,10 @@ table{
 	font-size: 16px;
 
 }
+.full{
+	padding:10px;
+	background-color: grayscale($color: #000080);
+}
 
 .Courses .Button{
 	
@@ -249,39 +252,24 @@ table{
 	
 	padding:0.25em;
 	background-color: green;
-
 	
-}
-.Courses .Button:hover{
+	&:hover{
 	background-color:grey ;
-	
-}
-.Courses .Button.enroll{
-	background-color: cornflowerblue;
-}
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    background-color: blue($color: #000000);
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-	width: 20%;
-	height: 50%;
+	}
 
-	margin-bottom: 1.2%;
-	margin-left: 82%;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	&.enroll{
+		background-color: cornflowerblue;
+		.tooltip{
+			display: none;
+		}
+	}
 }
-a:link{
+
+.points{
+	color: black;
+}
+
+.Courses a{
 	text-decoration: none;
 	font-size: 20px;
 	color: black;
@@ -292,7 +280,11 @@ a:link{
 	margin-bottom: 1.2%;
 	font-style: normal;
 }
-a:link:hover{
+.Courses a,
+.Courses a:visited{
 	text-decoration: none;
-	color: black;;
+	color: white;
+}
+.Courses a:hover{
+	text-decoration: underline;
 }

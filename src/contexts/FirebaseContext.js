@@ -105,7 +105,7 @@ export default class FirebaseContextProvider extends React.Component {
 										.doc(this.state.auth.currentUser.uid)
 										.update({coursesEnrolled: courses})
 										.then(
-											x => resolve(x)
+											x =>resolve(x)
 										)
 										.catch(
 											err=> reject(err)
