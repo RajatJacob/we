@@ -3,42 +3,30 @@ import './style.scss';
 import {FirebaseContext} from '../../contexts/FirebaseContext';
 import Button from '../../components/Button';
 //import Alert from '../../components/Alert';
-import { Link } from 'react-router-dom';
-
-
+//import { Link } from 'react-router-dom';
 
 export default class Courses extends React.Component{
 	static contextType = FirebaseContext;
 	state={
-		isEnrolled: this.state
+		isEnrolled: undefined
 	}
 
 	getIsEnrolled = (coursename) => {
 		const {isEnrolled} = this.context
 		isEnrolled(coursename).then(
 			e=>{
+				//alert(e)
 				this.setState({isEnrolled: e})
 			}
 		)
 	}
 
-	enroll = e => {
-		e.preventDefault()
+	enroll = () => {
+		//alert("Enrolling")
 		const {enroll} = this.context;
 		enroll(this.state.title)
-		.then(
-			() => {
-			}
-		)
-		.catch(
-			err=> {
-				alert(err);
-				//<Link to='/login'></Link>
-			}
-		)
 		.finally(
 			() => {
-				
 				this.getIsEnrolled(this.state.title)
 			}
 		)
@@ -100,8 +88,8 @@ export default class Courses extends React.Component{
 		this.init()
 	}
 
-	componentDidUpdate() {
-		//this.init()
+	componentDidUpdate(prevProps) {
+		if(prevProps.match.params.coursename !== this.props.match.params.coursename) this.init()
 	}
 
 	render() {
@@ -116,7 +104,7 @@ export default class Courses extends React.Component{
 					<td width="10%"><a className="course" href="/Courses">Courses</a></td>
 					<td width="20%" className="td">
 					
-						<Button className={this.state.isEnrolled?"enroll":""}  onClick={this.enroll}>
+						<Button className={this.state.isEnrolled?"enroll":""}  onClick={()=>this.enroll()}>
 						{
 							this.state.isEnrolled?
 							"Unenroll":
@@ -176,24 +164,19 @@ export default class Courses extends React.Component{
 					</div>
 					<div class="sidebar">
 					<div class="sidebar_item">
-						<h3>Useful Links</h3>
+						<h3>Course Links</h3>
 						<ul className="sidelist">
 						{
 							this.state.usefullinks ? 
 								this.state.usefullinks.map(
 									l => {
-										return (<li className="link"><Link to={l.href}>{l.name}</Link></li>)
+										return (<li className="link"><a href={l.href}>{l.name}</a></li>)
 									}
 								):null
 						}
 						</ul>
 					</div>
 				</div>
-					
-						{/*<Alert type="info" title="Course">
-						{this.state.title}
-							<FontAwesomeIcon icon={faCircleNotch} spin />
-				</Alert>*/}
 							
 						<div className="modules">
 						
