@@ -14,7 +14,8 @@ export default class UserProfileSettings extends React.Component {
 			username: "",
 			name: ""
 		},
-		alert: null
+		alert: null,
+		saved: false
 	}
 
 	save = e => {
@@ -31,7 +32,8 @@ export default class UserProfileSettings extends React.Component {
 		).then(
 			() => {
 				this.setState({
-					alert: <Alert type="success">Updated!</Alert>
+					alert: <Alert type="success">Updated!</Alert>,
+					saved: true
 				})
 			}
 		).catch(
@@ -72,7 +74,8 @@ export default class UserProfileSettings extends React.Component {
 								{
 									user: {
 										name: e.target.value
-									}
+									},
+									saved: false
 								}
 							)} />
 
@@ -81,7 +84,8 @@ export default class UserProfileSettings extends React.Component {
 								{
 									user: {
 										username: e.target.value
-									}
+									},
+									saved: false
 								}
 							)
 						} />
@@ -90,11 +94,12 @@ export default class UserProfileSettings extends React.Component {
 								{
 									user: {
 										bio: e.target.value
-									}
+									},
+									saved: false
 								}
 							)
 						} />
-						<Input label="Save" type="submit" onClick={this.save} />
+						<Input label={this.state.saved ? "Saved" : "Save"} type="submit" onClick={this.save} />
 					</form>
 					<Button to="/logout" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>Logout</Button>
 				</Container>
