@@ -32,11 +32,12 @@ export default class Edit extends React.Component
          a.push(<>
       <label>
          Education
-         <EducationSelecter name={"education"+i}  onChange={this.handleChange}/>
+         <EducationSelecter name={"education"+i+3}  onChange={this.handleChange}/>
          </label> <br/>
          <label>
          College/School
-         <input  name={"csname"+i} type="text" onChange={this.handleChange}/>
+         <input  name={"csname"+i+3} type="text"  onChange={this.handleChange}/>
+
          </label><br/>
 
     
@@ -50,7 +51,7 @@ export default class Edit extends React.Component
          a.push(<>
       <label>
          Skills
-         <SkillSelector  name={"skills"+i} value={this.state.skills} onChange={this.handleChange}/>
+         <SkillSelector  name={"skills"+i+4} value={this.state.skills} onChange={this.handleChange}/>
       
 
 
@@ -178,6 +179,37 @@ console.log(auth.currentUser)
          <div class="inner-wrap">
          
          <br/>
+
+         <label>
+         Education
+         <input name={"education"+0} type="text" 
+         placeholder={this.state.user["education"+0]} onChange={this.handleChange}/>
+         </label> <br/>
+         <label>
+         College/School
+         <input  name={"csname"+0} type="text" placeholder={this.state.user["csname"+0]} onChange={this.handleChange}/>
+
+         </label><br/>
+          <label>
+         Education
+         <input name={"education"+1} type="text" 
+         placeholder={this.state.user["education"+1]} onChange={this.handleChange}/>
+         </label> <br/>
+         <label>
+         College/School
+         <input  name={"csname"+1} type="text" placeholder={this.state.user["csname"+1]} onChange={this.handleChange}/>
+
+         </label><br/>
+          <label>
+         Education
+         <input name={"education"+2} type="text" 
+         placeholder={this.state.user["education"+2]} onChange={this.handleChange}/>
+         </label> <br/>
+         <label>
+         College/School
+         <input  name={"csname"+2} type="text" placeholder={this.state.user["csname"+2]} onChange={this.handleChange}/>
+
+         </label><br/>
          
          {
         this.eduPush()  
@@ -189,6 +221,43 @@ console.log(auth.currentUser)
       }}>Add Education</button>
            
     <br/><br/>
+
+    <label>
+         Skills
+         <input    name={"skills"+0} type="text" value={this.state.skills} placeholder={this.state.user["skills"+0]} onChange={this.handleChange}/>
+      
+
+
+         
+         </label>
+    <br/>
+    <label>
+         Skills
+         <input type="text" placeholder={this.state.user["skills"+1]}  name={"skills"+1} value={this.state.skills} onChange={this.handleChange}/>
+      
+
+
+         
+         </label>
+    <br/>
+    <label>
+         Skills
+         <input type="text" placeholder={this.state.user["skills"+2]}  name={"skills"+2} value={this.state.skills} onChange={this.handleChange}/>
+      
+
+
+         
+         </label>
+    <br/>
+    <label>
+         Skills
+         <input type="text" placeholder={this.state.user["skills"+3]}  name={"skills"+3} value={this.state.skills} onChange={this.handleChange}/>
+      
+
+
+         
+         </label>
+    <br/>
     
      {
         this.skiPush()  

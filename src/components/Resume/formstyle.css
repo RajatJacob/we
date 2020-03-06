@@ -107,7 +107,7 @@
 	color: #fff;
 	margin-top: -3px;
 }
-.buttonnn{
+
 
 .form-style-2 input[type="button"], 
 .form-style-2 input[type="submit"]{
@@ -131,7 +131,7 @@
 	-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
 	-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
 	box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-}}
+}
 .form-style-2 .privacy-policy{
 	float: right;
 	width: 250px;
