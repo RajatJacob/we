@@ -94,12 +94,8 @@ export default class Post extends React.Component {
 	}
 
 	doesLike = () => {
-		const { auth, firestore } = this.context
-		const u = firestore
-			.collection("users")
-			.doc(
-				auth.currentUser.uid
-			)
+		const { auth } = this.context
+		const u = auth.currentUser.uid
 		var l = false
 		if (this.state.post.likedBy)
 			this.state.post.likedBy.forEach(
@@ -110,22 +106,18 @@ export default class Post extends React.Component {
 
 	like = () => {
 		const { firestore, auth } = this.context
-		const u = firestore.collection("users").doc(auth.currentUser.uid)
+		const u = auth.currentUser.uid
 		var l = this.state.post.likedBy || []
-		var i
+		var i = 0
 		if (this.doesLike()) { //unlike
 			if (this.state.post.likedBy)
-				do {
+				while (i !== -1) {
 					i = l.indexOf(u)
 					if (i !== -1) l.splice(i, 1)
-				} while (i !== -1)
+				}
 		}
 		else // like
-			l.push(
-				firestore
-					.collection("users")
-					.doc(auth.currentUser.uid)
-			)
+			l.push(auth.currentUser.uid)
 		firestore
 			.doc(this.props.post)
 			.update(
