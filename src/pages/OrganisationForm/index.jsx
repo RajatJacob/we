@@ -1,7 +1,6 @@
 import React from 'react';
 import './styleform.scss';
 import CountrySelector from '../../components/CountrySelector';
-//import TextEditor from '../../components/TextEditor';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Input from '../../components/Input';
 import { Redirect } from 'react-router-dom';

@@ -1,0 +1,39 @@
+.Baking{
+	
+	margin:0 auto;
+	opacity: 1.5;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-image: url('../../../images/bakeryback.jpeg');
+	background-attachment: fixed;
+	background-size: cover;}
+	
+body{
+	
+		background-color: white;
+
+	}
+	
+
+
+.Bake{
+	margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); 
+  color: black;
+}
+.Bake p {
+ /* margin: 5%;*/
+  font-weight: bold;
+  color: #000000;
+}
+
+.Bake ul{
+  font-weight: bold;
+  color: #000000;
+}
+

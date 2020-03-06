@@ -1,0 +1,25 @@
+.Haircare{
+	background-image: url('../../../images/haircareback.jpeg');
+	background-attachment: fixed;
+	background-size: cover;
+	
+	.img{opacity: 0.5;}
+}
+.Hair{
+	margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); 
+  color: black;
+}
+.Hair p {
+ /* margin: 5%;*/
+  font-weight: bold;
+  color: black;
+}
+
+.Hair{
+  font-weight: bold;
+  color: #000000;
+}

@@ -1,0 +1,71 @@
+
+.Computer{
+	background-image: url('../../../images/computerback.jpeg');
+	background-attachment: fixed;
+	background-size: cover;
+	
+	.img{opacity: 0.5;}
+}
+.Comp{
+	margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); 
+  color: black;
+}
+.Comp p {
+ /* margin: 5%;*/
+  font-weight: bold;
+  color: black;
+}
+
+.Comp{
+  font-weight: bold;
+  color: #000000;
+}
+a:link {
+  color: light blue;
+  font-style: italic; 
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+.info{
+	color: black;
+	text-align: left;
+	margin-left: 20px;
+	padding-left:  20px;
+	padding-right: 20px;
+}
+
+ol{
+	color: black;
+	text-align: left;
+	padding-right: 3px;
+	margin-left: 20px;
+
+}
+ul{
+	color: black;
+	text-align: left;
+	padding-right: 3px;
+	margin-left: 20px;
+
+}
+li{
+	padding-left: 10px;
+}

@@ -20,6 +20,7 @@ import Payment from './pages/Payment';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import CreatePost from './components/CreatePost';
+import Courses from './components/Courses';
 import Organisation from './components/Organisation';
 import Display from './components/Display';
 import OrganisationForm from './pages/OrganisationForm';
@@ -57,6 +58,9 @@ export default class Routes extends React.Component {
 					<Route exact path="/payment" component={Payment} />
 					<Route exact path="/Organisation/Family" component={DisplayOrg} />
 					<Route exact path="/search" component={Search} />
+					<Route exact path="/Courses" component={VocationalCourses} />
+					<Route path="/Courses/:coursename" 
+					component={Courses} />
 					<Route path="*">
 						<Card>
 							<h1>404</h1>

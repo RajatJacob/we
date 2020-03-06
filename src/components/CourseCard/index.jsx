@@ -1,18 +1,19 @@
 import React from 'react';
 import './style.scss';
 import img10 from '../../images/calendar.png';
+import Button from '../../components/Button';
 
 const Cards = props => {
 	return (
 		<container>
-			<div>
+			
 
 				<div className="card">
 					<div className='card-flow'>
 						<div className='card-flow-front'>
-							<img src={props.imgsrc} alt="props.name" className="card-img" />
+							<img src={props.image} alt={props.name} className="card-img" />
 
-							<h5 className="title">{props.title}</h5>
+							<h4 className="title">{props.title}</h4>
 
 						</div>
 						<div className='card-body'>
@@ -25,14 +26,14 @@ const Cards = props => {
 								<p className="weeklabel">{props.label}</p>
 							</div>
 							<footer>
-								<p><button type="button">Learn</button></p>
+								<Button to={props.link}>Learn</Button>
 							</footer>
 						</div>
 					</div>
 				</div>
 				<br />
 				<br />
-			</div>
+			
 		</container>
 	);
 }

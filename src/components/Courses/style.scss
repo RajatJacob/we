@@ -1,0 +1,292 @@
+@import "../../global/variables.scss";
+
+.Courses{
+	position: relative;
+	padding-top: 10vh;
+	background-color: white;
+	@media screen and (orientation:portrait){
+		padding-bottom: $navSize;	
+		
+	}
+	@media screen and (orientation: portrait){
+	.sidebar {
+    margin-left: 7px;
+    margin-right: 8%;
+	}
+	.vid{
+		margin-top: -40px;
+		width:350px;
+		margin-left: 10px;
+		margin-right: 10px;
+		height:300px;
+		margin-bottom: 20%;
+	}
+	.course{
+		display: none;
+	}
+	.tooltip{
+		display: none;
+	}
+}}
+#footer{
+	background-color: rgb(60, 90, 154);
+	margin-bottom: 0%;
+	margin-top: 0%;
+	text-align: center;
+	
+	p{
+		padding: 5px;
+		margin-bottom: 0px;
+		color: white;
+		margin-top: 0px;
+		text-align: center;
+		
+	}
+}
+
+.list{
+	text-align: justify;
+	margin-right: 8%;
+}
+.para{
+	margin-left: 0%;
+	text-align: justify;
+	margin-right: 10px;
+	.intro{
+		text-align: justify;
+		width: 70%;
+		font-size: 16px;
+		font-style: times;
+	}
+}
+.modules{
+	
+	h2{
+		font-family: Bree Serif;
+		text-align: left;
+		margin-left: 3%;
+	}
+}
+.Courses{
+.tooltip {
+    position: relative;
+    padding-left: 0%;
+    display: inline-block;
+}}
+  
+  .tooltip .tooltiptext {
+	visibility: hidden;
+	background-color: grayscale($color: #000080);
+	color:black;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	width: 240px;
+  	top: 100%;
+  	left: 50%;
+ 	margin-left: -60px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	margin-left: -210px;
+	margin-top:20px;
+	opacity: 0;
+	transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	background-color: grayscale($color: #000080);
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: white transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+	background-color: grayscale($color: #000080);
+
+  }
+.mod{
+	
+	margin-bottom: 0%;
+
+}
+.moddiv{
+	margin-top: 5%;
+	height: 50%;
+	background-color: #b9bdc0;
+	font-size: 16px;
+}
+.modlist{
+	text-align: justify;
+	margin-right: 4%;
+	margin-left: 2%;
+	font-size: 16px;
+
+}
+.Introduction{
+	padding-left:15px;
+	padding-bottom: 0px;
+	margin-left:2%;
+	margin-bottom: 0%;
+	font-family: Bree Serif;
+}
+
+.intro{
+	text-align: justify;
+}
+
+.sidebar
+{ 
+float: right;
+width: 300px;
+height: auto;
+padding: 0;
+margin-top: 3%;
+margin-right: 2%;
+margin-bottom: 2%;
+margin-left: 2%;
+border-color: black;
+background-color: rgb(168, 199, 228);
+border-radius: 5%;
+@media screen and (orientation:portrait){
+	//padding-bottom: $navSize;	
+	margin-left: 20px;
+}
+}
+.sidebar_item{
+	h3{
+		font-family: Bree Serif;
+	}
+}
+
+
+.side{
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	font-style: italic;
+}
+.vid {
+    margin-top: 20px;
+    margin-left: -8%;
+    width: 60%;
+    height: 350px;
+}
+h2{
+	margin-left: 3%;
+	padding: 5px;
+}
+.heading{
+	text-align: left;
+	font-size: 30px;
+	margin-left: 5%;
+	margin-top: 4%;
+	padding-top: 2%;
+	border-color: #4f98ca;
+	font-family: Bree Serif;
+	font-style: italic;
+	margin-block-start: 0em;
+	border-left: 6px black;
+	color: whitesmoke;
+}
+.App .Content {
+	padding: 0em 0;
+	margin-bottom: 0px;
+}
+.td{
+	text-align: left;
+}
+.course{
+	font-style: normal;
+}
+table{
+	background-color:rgb(60, 90, 154);
+	position: fixed;
+	top: 0;
+	height: 10vh;
+	
+}
+.sidelist{
+	color: black;
+	text-align: left;
+	padding-right: 3px;
+	margin-left: 0px;
+	font-style: normal;
+ }
+.col{
+	margin-left: 0px;
+}
+.img{
+	width: "80%";
+	height: 400px;
+	
+}
+.intro{
+	text-align: left;
+	margin-left: 30px;
+	padding: 10px;
+}
+.learn{
+	text-align: justify;
+	margin-left: 40px;
+	margin-right: 30px;
+	padding:0px;
+	width: 70%;
+	font-size: 16px;
+
+}
+.full{
+	padding:10px;
+	background-color: grayscale($color: #000080);
+}
+
+.Courses .Button{
+	
+	width:90%;
+	text-align: center;
+	font-size: 1em;
+	
+	padding:0.25em;
+	background-color: green;
+	
+	&:hover{
+	background-color:grey ;
+	}
+
+	&.enroll{
+		background-color: cornflowerblue;
+		.tooltip{
+			display: none;
+		}
+	}
+}
+
+.points{
+	color: black;
+}
+
+.Courses a{
+	text-decoration: none;
+	font-size: 20px;
+	color: black;
+	font-weight: normal;
+	font-style: normal;
+	text-align: center;
+	margin-right: 0;
+	margin-bottom: 1.2%;
+	font-style: normal;
+}
+.Courses a,
+.Courses a:visited{
+	text-decoration: none;
+	color: white;
+}
+.Courses a:hover{
+	text-decoration: underline;
+}

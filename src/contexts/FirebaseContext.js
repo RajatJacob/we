@@ -54,6 +54,69 @@ export default class FirebaseContextProvider extends React.Component {
 					})
 				return p
 			},
+			isEnrolled: (coursename)=>
+			{
+				var courses = []
+				return new Promise(
+					(resolve, reject) => {
+						if(!this.state.auth.currentUser) reject("Not logged in")
+						else this.state.firestore
+						.collection("users")
+						.doc(this.state.auth.currentUser.uid)
+						.get()
+						.then(
+							doc => {
+								if(doc.exists) {
+									courses = doc.data().coursesEnrolled || []
+									resolve(courses.indexOf(coursename) !== -1)
+								}
+								else resolve(false)
+							}
+						)
+					}
+				)
+			},
+			enroll: (coursename)=>{
+				return new Promise(
+					(resolve, reject) => {
+						var courses = []
+						if(!this.state.auth.currentUser) reject("Not logged in")
+						else this.state.firestore
+						.collection("users")
+						.doc(this.state.auth.currentUser.uid)
+						.get()
+						.then(
+							doc =>{
+								if(doc.exists) courses = doc.data().coursesEnrolled || []
+								this.state.isEnrolled(coursename)
+								.then(
+									e => {
+										var i = -1
+										if(e) 
+										do {
+											i = courses.indexOf(coursename)
+											courses.splice(i, 1)
+										}while(i!==-1)
+										else {
+											courses.push(coursename)
+										}
+										this.state.firestore
+										.collection("users")
+										.doc(this.state.auth.currentUser.uid)
+										.update({coursesEnrolled: courses})
+										.then(
+											x =>resolve(x)
+										)
+										.catch(
+											err=> reject(err)
+										)
+									}
+								)
+							}
+						)
+					}
+				)	
+			},
 			loginWithGoogle: (ob) => {
 				const provider = new firebase.auth.GoogleAuthProvider()
 				this.state.login(this.state.auth.signInWithPopup(provider), ob).then(
