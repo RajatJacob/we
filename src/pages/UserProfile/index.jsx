@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import Banner from '../../components/Banner';
 import Container from '../../components/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faUser, faFile } from '@fortawesome/free-solid-svg-icons';
 import UserProfileSettings from '../../components/UserProfileSettings';
 import UserList from '../../components/UserList';
 import Feed from '../../components/Feed';
@@ -210,7 +210,7 @@ export default class UserProfile extends React.Component {
 			)
 		}
 		return (
-			<div className="UserProfile">
+			<div className="UserProfile" >
 				{
 					this.state.done ?
 						<>
@@ -251,13 +251,21 @@ export default class UserProfile extends React.Component {
 									<Container>
 										{
 											this.state.self ?
-												<Button
-													to={
-														this.props.match.url + "/settings"
-													}
-													icon={<FontAwesomeIcon icon={faCog} />}>
-													Settings
-											</Button> :
+												<div className="split">
+													<Button
+														to="/rvjoin"
+														icon={<FontAwesomeIcon icon={faFile} />}
+													>
+														Résumé
+													</Button>
+													<Button
+														to={
+															this.props.match.url + "/settings"
+														}
+														icon={<FontAwesomeIcon icon={faCog} />}>
+														Settings
+													</Button>
+												</div> :
 												<Button active={this.state.followChange} onClick={
 													this.follow
 												} >

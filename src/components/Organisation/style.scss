@@ -1,0 +1,28 @@
+.Organisation {
+    position: relative;
+    .background {
+      background: black;
+       background-image: url("../../images/joining.jpg");
+      background-attachment: fixed;
+      background-size: cover;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+    }
+     .Container{
+         font-size: 18px;
+     }
+    .Button
+    {
+        width:90%;   
+    }
+    .Card {
+        background:  #ffffffdd;
+      }
+      .Button{
+        text-align: center;
+      }
+}

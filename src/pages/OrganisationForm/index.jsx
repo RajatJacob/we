@@ -1,10 +1,10 @@
 import React from 'react';
 import './styleform.scss';
 import CountrySelector from '../../components/CountrySelector';
- //import TextEditor from '../../components/TextEditor';
-import Upload from '../../components/Upload';
-import { storage } from '../../contexts/FirebaseContext';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
+import Input from '../../components/Input';
+import { Redirect } from 'react-router-dom';
+
 
 export default class OrganisationForm extends React.Component {
 	static contextType = FirebaseContext;
@@ -13,21 +13,20 @@ export default class OrganisationForm extends React.Component {
 		this.state = {
 			form: {
 
-			}
-
-
+			},
+			submitted: false
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleUpload = this.handleUpload.bind(this);
+		// this.handleUpload = this.handleUpload.bind(this);
 		this.baseState = this.state;
 
 	}
-	// fileSelectedHandler = event => {
-	// 	this.setState({
-	// 		selectedFile: event.target.files[0]
-	// 	})
-	// };
+	fileSelectedHandler = event => {
+		this.setState({
+			selectedFile: event.target.files[0]
+		})
+	};
 
 	handleChange = ({
 		target
@@ -43,23 +42,31 @@ export default class OrganisationForm extends React.Component {
 		const {
 			firestore
 		} = this.context;
-		alert('Submitted');
+		event.preventDefault();
+		console.log(this.state.form)
 		firestore.collection("organisation").add(
 			this.state.form
+		).then(
+			() => { 
+				this.setState({submitted: true})
+			}
 		)
-		event.preventDefault();
 	};
-	handleUpload=()=>{
-		const {file} =this.state;
-	const upload=storage.ref('files/${file.name}').put(file);
-	upload.on('state_chnaged',progress,error,complete);
-	}
-	
 
-	
-	
+
+	// handleUpload = () => {
+	// 	const { file } = this.state;
+	// 	const uploadTask = storage.ref('files/${file.name}').put(file);
+	// 	uploadTask.on('state_changed', (snapshot) => { }, (error) => { console.Consolelog(error); }, () => {
+	// 		storage.ref('files').child(file.name).getDownloadURL().then(url => {
+	// 			console.log(url);
+	// 		})
+	// 	});
+	// }
 	render() {
-
+		if(this.state.submitted) return (
+			<Redirect to="Register/Registered" />
+		)
 		return (
 			<form className="form-style" onSubmit={this.handleSubmit} >
 				<h1> Organisation Form </h1> <br />
@@ -108,27 +115,29 @@ export default class OrganisationForm extends React.Component {
 				<div className="inner-wrap" >
 					<label>
 						<div >
-							Description.Tell us about your Organisation
-					 	
-						 </div>
+							Description.Tell us about your Organisation    
+							<div class="tooltip"> 𝒊 
+								<span class="tooltiptext">The principles of your organisation and mention how it can contribute to our family.</span>
+						  	</div>   		    
+							<textArea name={'description'} onChange={this.handleChange} required="required" />
+					 	</div>
 					</label> <br />
 
 					<label>
-						Initiatives / Projects taken earlier
+						Initiatives / Projects taken earlier &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						<div class="tooltip"> 𝒊 
+							<span class="tooltiptext">Mention major and minor projects initiated by your organisation.</span>
+						</div>   		    
 						 <textArea name={'projects'} onChange={this.handleChange} required="required" />
 					</label> <br />
-					<label>
-						Photo Attachment
-						<Upload name={'file'} />
-					</label><br />
 
 					<label >
-						Views on gender equality
+						Views on gender equality		    
 						<textArea name={'gender'} onChange={this.handleChange} required="required" />
 					</label > <br />
 				</div>
-
-				<input type="submit" value="Submit" onClick={this.handleUpload} />
+				<Input label="SUBMIT" type="submit" onClick={this.handleSubmit}/>
+				{/*<input type="submit" value="Submit" onClick={this.handleUpload} />*/}
 
 			</form>
 		);

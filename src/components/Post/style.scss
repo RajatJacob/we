@@ -77,7 +77,8 @@
     }
 
     .menu {
-        height: 0;
+        display: none;
+        height: 2em;
         background: $primaryColor;
         background: mix(#00000088, $primaryColor, 80%);
         color: transparent;
@@ -85,8 +86,12 @@
         transition: all 500ms ease, color 500ms ease 100ms;
 
         &.active {
-            height: 2em;
+            display: block;
             color: white;
+
+            ul li:hover {
+                background: red;
+            }
         }
 
         ul {
@@ -101,17 +106,8 @@
                 padding: 0.5em;
                 font-size: 0.75em;
                 transition: all 500ms ease;
+                font-weight: 800;
                 cursor: pointer;
-
-                &:hover {
-                    background: #FFFFFF22;
-                }
-
-                &.delete {
-                    &:hover {
-                        color: red;
-                    }
-                }
             }
         }
     }
@@ -181,6 +177,7 @@
     }
 
     a.contentLink {
+        padding: 0.5em;
         color: $primaryColor;
         transition: all 500ms ease;
 

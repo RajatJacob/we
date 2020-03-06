@@ -40,9 +40,6 @@
 
     &.submit {
         @extend .Button;
-
-        input {
-            padding: 0;
-        }
+        padding: 0;
     }
 }
