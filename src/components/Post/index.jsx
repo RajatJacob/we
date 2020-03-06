@@ -99,7 +99,7 @@ export default class Post extends React.Component {
 		var l = false
 		if (this.state.post.likedBy)
 			this.state.post.likedBy.forEach(
-				x => l = l || x.id === u.id
+				x => l = l || x === u
 			)
 		return l
 	}
