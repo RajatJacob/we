@@ -40,5 +40,6 @@
 
     &.submit {
         @extend .Button;
+        padding: 0;
     }
 }
