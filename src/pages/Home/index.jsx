@@ -100,21 +100,22 @@ class Home extends React.Component {
 				<div className="content">
 					<Container>
 						<h1>Feedback</h1>
-						<div class="feedback">
+						<div className="feedback">
 							{
 								this.state.feedback.map(
 									f => {
 										return (
-											<div className="mm">
+											<Card>
 												<p>{f.feedback}</p>
 												<p align="left" > - {f.fname}</p>
-											</div>
+											</Card>
 										)
 									}
 								)
 							}
 						</div>
-						<Button to="/feedback">Give us your valuable feedback!</Button>
+						<h3>Give your valuable feedback!</h3>
+						<Button to="/feedback">Your feedback</Button>
 					</Container>
 				</div>
 				<div className="background center" id="rural">

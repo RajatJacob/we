@@ -66,20 +66,19 @@
         background: #ffffff22;
       }
     }
-    .mm {
-      display: grid;
-      padding: 0.5em;
-      border-radius: 1em;
-      background: #ffffff22;
+  }
+  .feedback {
+    display: grid;
+    @media screen and (orientation: landscape) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (orientation: portrait) {
+      grid-template-columns: auto;
+    }
+    .Card {
+      background-color: #ffffff55;
       color: white;
-
-      @media screen and (orientation: landscape) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @media screen and (orientation: portrait) {
-        grid-template-columns: auto;
-      }
     }
   }
 }
