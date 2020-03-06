@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.scss'
 import Card from '../../components/Card';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Alert from '../../components/Alert';
@@ -44,21 +45,24 @@ export default class ForgotPassword extends React.Component {
 	render() {
 
 		return (
-			<Card>
-				<h3>Reset Password</h3>
-				We will send an email with a link to reset your password.
+			<div className="ForgotPassword">
+				<div className="background"></div>
+				<Card>
+					<h3>Reset Password</h3>
+					We will send an email with a link to reset your password.
 				<form onSubmit={this.submit}>
-					<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
-					<Input label="Send" type="submit" />
-				</form>
-				{
-					this.state.alert ?
-						<Alert type={this.state.alert.type} title={this.state.alert.title}>
-							{this.state.alert.message}
-						</Alert> :
-						null
-				}
-			</Card>
+						<Input label="E-mail" icon={<FontAwesomeIcon icon={faUser} />} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
+						<Input label="Send" type="submit" />
+					</form>
+					{
+						this.state.alert ?
+							<Alert type={this.state.alert.type} title={this.state.alert.title}>
+								{this.state.alert.message}
+							</Alert> :
+							null
+					}
+				</Card>
+			</div>
 		)
 	}
 }

@@ -1,9 +1,16 @@
 @import "../../global/colors.scss";
 
 .LoginPage {
-    .background {
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-    }
+  background: mix($primaryColor, #ffffff, 50%);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  .background {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
 }

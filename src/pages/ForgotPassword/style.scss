@@ -1,0 +1,13 @@
+@import "../../global/colors.scss";
+
+.ForgotPassword {
+  .background {
+    background: mix($primaryColor, #ffffff, 50%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+}

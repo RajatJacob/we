@@ -32,7 +32,14 @@ export default class CreatePost extends React.Component {
 
 	submit = e => {
 		e.preventDefault()
-		if (this.state.uploading) return
+		if (
+			this.state.uploading ||
+			(
+				!this.state.title &&
+				!this.state.content &&
+				!this.state.caption
+			)
+		) return
 		const { firestoreTimestamp, storage, auth } = this.context
 		var post = {}
 		this.setState({ uploading: true })
@@ -82,6 +89,7 @@ export default class CreatePost extends React.Component {
 		)
 		return (
 			<div className="CreatePost">
+				<div className="background"></div>
 				<Card>
 					<h1>New Post</h1>
 					<Container>

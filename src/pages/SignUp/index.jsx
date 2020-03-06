@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.scss';
 import Card from '../../components/Card';
 import Container from '../../components/Container';
 import Input from '../../components/Input';
@@ -95,6 +96,7 @@ export default class SignUp extends React.Component {
 		)
 		return (
 			<div className="SignUp">
+				<div className="background"></div>
 				<Card noContainer>
 					<GridContainer>
 						<Container>
