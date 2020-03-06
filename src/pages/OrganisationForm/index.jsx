@@ -5,6 +5,7 @@ import CountrySelector from '../../components/CountrySelector';
 import { FirebaseContext } from '../../contexts/FirebaseContext';
 import Input from '../../components/Input';
 import { Redirect } from 'react-router-dom';
+import Container from '../../components/Container';
 
 
 export default class OrganisationForm extends React.Component {
@@ -69,6 +70,7 @@ export default class OrganisationForm extends React.Component {
 			<Redirect to="Register/Registered" />
 		)
 		return (
+			<Container>
 			<form className="form-style" onSubmit={this.handleSubmit} >
 				<h1> Organisation Form </h1> <br />
 				<div className="inner-wrap" >
@@ -141,6 +143,7 @@ export default class OrganisationForm extends React.Component {
 				{/*<input type="submit" value="Submit" onClick={this.handleUpload} />*/}
 
 			</form>
+			</Container>
 		);
 	}
 }
